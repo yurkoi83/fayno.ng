@@ -1,0 +1,88 @@
+services:
+  php-fpm:
+    container_name: fpm-${APP_NAME}
+    build:
+      context: docker/php-fpm
+    volumes:
+      - ./:/var/www
+    environment:
+      - PHP_IDE_CONFIG="serverName=Docker"
+      - XDG_CONFIG_HOME=/var/www
+      - QUEUE_CONNECTION=${QUEUE_CONNECTION}
+      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_PORT=${REDIS_PORT}
+      - DUSK_DRIVER_URL="http://selenium:4444/wd/hub"
+    depends_on:
+      - data
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - internal
+
+  nginx:
+    container_name: nginx-${APP_NAME}
+    build:
+      context: docker/nginx
+    volumes:
+      - ./:/var/www
+      - ./storage/app/public/:/var/www/public/storage/
+    ports:
+      - 8037:80
+    depends_on:
+      - php-fpm
+    networks:
+      - internal
+
+  data:
+    image: mysql:8.0
+    container_name: fayno-data
+    restart: always
+    ports:
+      - 3308:3306 #for local phpstorm access
+    networks:
+      - internal
+    environment:
+      - MYSQL_DATABASE=${DB_DATABASE}
+      - MYSQL_USER=${DB_USERNAME}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+    #        - MYSQL_ALLOW_EMPTY_PASSWORD=true
+    volumes:
+      - ./docker/mysql/datadir:/var/lib/mysql:rw
+      - ./docker/mysql/mysql-entrypoint-wrapper.sh:/docker-mysql-entrypoint-wrapper.sh:ro
+    entrypoint: ['/docker-mysql-entrypoint-wrapper.sh']
+
+  node:
+    container_name: node-${APP_NAME}
+    build:
+      context: docker/node
+    volumes:
+      - ./:/var/www
+      - /var/www/node_modules
+    ports:
+      - 5173:5173
+    command: sh -c "npm install && npm run dev -- --host"
+    environment:
+      - NODE_ENV=development
+    networks:
+      - internal
+
+
+  redis:
+    container_name: redis
+    image: redis:latest
+    platform: linux/amd64
+    ports:
+      - '6379:6379'
+    volumes:
+      - ./docker/redis/data:/data
+    networks:
+      - internal
+
+networks:
+  internal:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.212.0/28
