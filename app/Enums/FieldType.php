@@ -1,18 +1,4 @@
 <?php
-/*
- * LaraClassifier - Classified Ads Web Application
- * Copyright (c) BeDigit. All Rights Reserved
- *
- * Website: https://bedigit.com
- * Author: Mayeul Akpovi (BeDigit)
- *
- * LICENSE
- * -------
- * This software is provided under a license agreement and may only be used or copied
- * in accordance with its terms, including the inclusion of the above copyright notice.
- * As this software is sold exclusively on CodeCanyon,
- * please review the full license details here: https://codecanyon.net/licenses/standard
- */
 
 namespace App\Enums;
 
@@ -36,7 +22,7 @@ enum FieldType: string
 	case Date = 'date';
 	case DateTime = 'date_time';
 	case DateRange = 'date_range';
-	
+
 	/**
 	 * Human label shown in the admin "Type" dropdown.
 	 */
@@ -59,7 +45,7 @@ enum FieldType: string
 			self::DateRange        => 'Date Range',
 		};
 	}
-	
+
 	/**
 	 * [value => label] map (declaration order) used to build the <select> options.
 	 *
@@ -71,7 +57,7 @@ enum FieldType: string
 			->mapWithKeys(fn (self $type) => [$type->value => $type->label()])
 			->all();
 	}
-	
+
 	/**
 	 * Field types that hold a list of options (select / radio / checkbox group).
 	 *
@@ -81,7 +67,7 @@ enum FieldType: string
 	{
 		return [self::Select, self::Radio, self::CheckboxMultiple];
 	}
-	
+
 	/**
 	 * Backing values of the option-based field types.
 	 *
@@ -91,7 +77,7 @@ enum FieldType: string
 	{
 		return array_map(fn (self $type) => $type->value, self::withOptions());
 	}
-	
+
 	/**
 	 * Whether this type holds a list of options.
 	 */
@@ -99,7 +85,7 @@ enum FieldType: string
 	{
 		return in_array($this, self::withOptions(), true);
 	}
-	
+
 	/**
 	 * Field types whose value is an uploaded file stored on disk.
 	 *
@@ -109,7 +95,7 @@ enum FieldType: string
 	{
 		return [self::File, self::Image];
 	}
-	
+
 	/**
 	 * Backing values of the upload-based field types.
 	 *
@@ -119,7 +105,7 @@ enum FieldType: string
 	{
 		return array_map(fn (self $type) => $type->value, self::uploads());
 	}
-	
+
 	/**
 	 * Whether this type stores an uploaded file on disk.
 	 */

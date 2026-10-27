@@ -1,7 +1,5 @@
 <?php
 
-use App\Http\Controllers\Api\ListingController as ApiListingController;
-use App\Http\Controllers\Web\Front\Listing\CreateOrEdit\Create\ListingController as WebMsCreateListingController;
 use Illuminate\Http\Request;
 
 /**
@@ -72,23 +70,4 @@ function setPaginationBaseUrl($paginatedCollection)
 	}
 
 	return $paginatedCollection;
-}
-
-function isListingCreationRequest(): bool
-{
-	if (isApiRoute()) {
-		$isListingCreationRequest = (routeActionHas(ApiListingController::class . '@store'));
-	} else {
-		$isNewEntryUri = (
-			request()->segment(1) == 'listings'
-			&& request()->segment(2) == 'create'
-		);
-
-		$isListingCreationRequest = (
-			$isNewEntryUri
-			|| routeActionHas(getClassNamespaceName(WebMsCreateListingController::class))
-		);
-	}
-
-	return $isListingCreationRequest;
 }
