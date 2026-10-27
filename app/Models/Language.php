@@ -119,8 +119,6 @@ class Language extends BaseModel
 		MenuItem::class,
 		Field::class,
 		MetaTag::class,
-		Plan::class,
-		ReportType::class,
 	];
 
 	/**
