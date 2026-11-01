@@ -95,7 +95,7 @@ return [
         'web',
         \Laravel\Nova\Http\Middleware\HandleInertiaRequests::class,
         'nova:serving',
-        \App\Nova\ForgetCachedPermissions::class,
+        \App\Nova\Users\ForgetCachedPermissions::class,
     ],
 
     'api_middleware' => [

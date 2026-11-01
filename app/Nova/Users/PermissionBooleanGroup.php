@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Nova;
+namespace App\Nova\Users;
 
 use Illuminate\Support\Collection;
 use Laravel\Nova\Fields\BooleanGroup;
 use Laravel\Nova\Http\Requests\NovaRequest;
-use Spatie\Permission\Models\Role as RoleModel;
+use Spatie\Permission\Models\Permission as PermissionModel;
 use Spatie\Permission\PermissionRegistrar;
 use Spatie\Permission\Traits\HasPermissions;
 
-class RoleBooleanGroup extends BooleanGroup
+class PermissionBooleanGroup extends BooleanGroup
 {
     public function __construct($name, $attribute = null, callable $resolveCallback = null, $labelAttribute = null)
     {
@@ -17,15 +17,15 @@ class RoleBooleanGroup extends BooleanGroup
             $name,
             $attribute,
             $resolveCallback ?? static function (Collection $permissions) {
-            return $permissions->mapWithKeys(function (RoleModel $role) {
-                return [$role->name => true];
+            return $permissions->mapWithKeys(function (PermissionModel $permission) {
+                return [$permission->name => true];
             });
         }
         );
 
-        $roleClass = app(PermissionRegistrar::class)->getRoleClass();
+        $permissionClass = app(PermissionRegistrar::class)->getPermissionClass();
 
-        $options = $roleClass::get()->pluck($labelAttribute ?? 'name', 'name')->toArray();
+        $options = $permissionClass::get()->pluck($labelAttribute ?? 'name', 'name')->toArray();
 
         $this->options($options);
     }
@@ -42,19 +42,13 @@ class RoleBooleanGroup extends BooleanGroup
             return;
         }
 
-        $model->roles()->detach();
-
-        collect(json_decode($request[$requestAttribute], true))
+        $values = collect(json_decode($request[$requestAttribute], true))
             ->filter(static function (bool $value) {
                 return $value;
             })
             ->keys()
-            ->map(static function ($roleName) use ($model) {
-                $roleClass = app(PermissionRegistrar::class)->getRoleClass();
-                $role = $roleClass::where('name', $roleName)->first();
-                $model->assignRole($role);
+            ->toArray();
 
-                return $roleName;
-            });
+        $model->syncPermissions($values);
     }
 }

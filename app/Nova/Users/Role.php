@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Nova;
+namespace App\Nova\Users;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -11,7 +11,7 @@ use Laravel\Nova\Fields\MorphToMany;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Nova;
-use Laravel\Nova\Resource;
+use App\Nova\Resource;
 use Spatie\Permission\PermissionRegistrar;
 
 class Role extends Resource
@@ -41,20 +41,13 @@ class Role extends Resource
 
     public static $with = ['permissions'];
 
+    public static $group = 'Доступ и пользователи';
+
 //    public static function getModel()
 //    {
 //        return new self::$model;
 //    }
 
-    /**
-     * Get the logical group associated with the resource.
-     *
-     * @return string
-     */
-    public static function group(): string
-    {
-        return __('nova::navigation.users');
-    }
 
     /**
      * Determine if this resource is available for navigation.
@@ -157,4 +150,15 @@ class Role extends Resource
     {
         return [];
     }
+
+    /**
+     * Get the logical group associated with the resource.
+     *
+     * @return string
+     */
+//    public static function group(): string
+//    {
+//        return 'Доступ и пользователи';
+//    }
+
 }

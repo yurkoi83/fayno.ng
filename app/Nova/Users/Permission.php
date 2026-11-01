@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Nova;
+namespace App\Nova\Users;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -16,6 +16,7 @@ use Spatie\Permission\PermissionRegistrar;
 
 class Permission extends Resource
 {
+
     /**
      * The model the resource corresponds to.
      *
@@ -41,6 +42,8 @@ class Permission extends Resource
 
     public static $with = ['roles'];
 
+    public static $group = 'Доступ и пользователи';
+
     public static function getModel()
     {
         return app(PermissionRegistrar::class)->getPermissionClass();
@@ -53,7 +56,7 @@ class Permission extends Resource
      */
     public static function group(): string
     {
-        return __('nova::navigation.users');
+        return 'Доступ и пользователи';
     }
 
     /**

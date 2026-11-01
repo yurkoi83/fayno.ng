@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Nova;
+namespace App\Nova\Users;
 
-use Spatie\Permission\PermissionRegistrar;
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
 use Closure;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Spatie\Permission\PermissionRegistrar;
 
 class ForgetCachedPermissions
 {

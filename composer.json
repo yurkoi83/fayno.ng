@@ -12,6 +12,8 @@
         "php": "^8.3",
         "cviebrock/eloquent-sluggable": "^13.0",
         "inertiajs/inertia-laravel": "^3.0",
+        "jaybizzle/crawler-detect": "^1.4",
+        "jaybizzle/laravel-crawler-detect": "^2.1",
         "laravel-notification-channels/twilio": "^4.2",
         "laravel/framework": "^13.17",
         "laravel/nova": "^5.0",

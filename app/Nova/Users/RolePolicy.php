@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Nova;
+namespace App\Nova\Users;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class PermissionPolicy
+class RolePolicy
 {
     use HandlesAuthorization;
 

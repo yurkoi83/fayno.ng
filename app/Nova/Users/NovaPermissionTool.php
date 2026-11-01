@@ -1,5 +1,5 @@
 <?php
-namespace App\Nova;
+namespace App\Nova\Users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Nova\Nova;

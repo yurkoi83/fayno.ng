@@ -5,7 +5,7 @@ namespace App\Nova;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Resource as NovaResource;
-use Laravel\Scout\Builder as ScoutBuilder;
+//use Laravel\Scout\Builder as ScoutBuilder;
 
 abstract class Resource extends NovaResource
 {
@@ -20,10 +20,10 @@ abstract class Resource extends NovaResource
     /**
      * Build a Scout search query for the given resource.
      */
-    public static function scoutQuery(NovaRequest $request, ScoutBuilder $query): ScoutBuilder
-    {
-        return $query;
-    }
+//    public static function scoutQuery(NovaRequest $request, ScoutBuilder $query): ScoutBuilder
+//    {
+//        return $query;
+//    }
 
     /**
      * Build a "detail" query for the given resource.
