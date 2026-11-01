@@ -22,7 +22,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         Nova::serving(function (ServingNova $event) {
             Nova::style(
                 'fayno-theme',
-                Vite::asset('resources/admin/css/fayno.css')
+                Vite::asset('resources/css/admin/fayno.css')
             );
         });
     }

@@ -1,37 +1,28 @@
 
 /*
 |--------------------------------------------------------------------------
-| Fayno Camp Admin Theme
+| Fayno Camp — Laravel Nova Theme
 |--------------------------------------------------------------------------
 */
 
+/* Brand colors */
+
 :root {
-    /* Brand */
     --fayno-primary: #287a55;
     --fayno-primary-hover: #206344;
     --fayno-primary-light: #eaf4ee;
 
-    /* Backgrounds */
     --fayno-background: #f5f7f5;
     --fayno-surface: #ffffff;
     --fayno-surface-secondary: #f9fbf9;
 
-    /* Text */
     --fayno-text: #26352d;
     --fayno-text-secondary: #64746a;
     --fayno-text-muted: #89958d;
 
-    /* Borders */
     --fayno-border: #e5ebe6;
     --fayno-border-strong: #d5dfd7;
 
-    /* Status */
-    --fayno-success: #287a55;
-    --fayno-warning: #d99a32;
-    --fayno-danger: #d9534f;
-    --fayno-info: #4385b8;
-
-    /* UI */
     --fayno-radius-sm: 8px;
     --fayno-radius: 12px;
     --fayno-radius-lg: 16px;
@@ -50,9 +41,304 @@ body {
     color: var(--fayno-text);
 }
 
-/* Selection */
+button,
+input,
+select,
+textarea {
+    font-family: inherit;
+}
 
 ::selection {
     background: var(--fayno-primary-light);
     color: var(--fayno-primary);
 }
+
+/* Light theme surfaces */
+
+.bg-white {
+    background-color: var(--fayno-surface);
+}
+
+.bg-gray-50,
+.bg-gray-100 {
+    background-color: var(--fayno-background);
+}
+
+/* Borders */
+
+.border-gray-100,
+.border-gray-200 {
+    border-color: var(--fayno-border);
+}
+
+/* Brand links and active elements */
+
+.text-primary,
+.text-primary-500,
+.text-primary-600 {
+    color: var(--fayno-primary);
+}
+
+/* Buttons */
+
+.bg-primary,
+.bg-primary-500,
+.bg-primary-600 {
+    background-color: var(--fayno-primary);
+}
+
+.bg-primary:hover,
+.bg-primary-500:hover,
+.bg-primary-600:hover {
+    background-color: var(--fayno-primary-hover);
+}
+
+/* Cards */
+
+.rounded-lg,
+.rounded-xl {
+    border-radius: var(--fayno-radius);
+}
+
+/* Form controls */
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--fayno-primary);
+}
+
+/* Smooth transitions */
+
+a,
+button {
+    transition:
+        color 0.15s ease,
+        background-color 0.15s ease,
+        border-color 0.15s ease;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Fayno Camp — Sidebar
+|--------------------------------------------------------------------------
+*/
+
+/* Sidebar background */
+.sidebar {
+    background: #ffffff;
+    border-right: 1px solid var(--fayno-border);
+}
+
+/* Sidebar menu */
+.sidebar-menu {
+    padding: 16px 12px;
+}
+
+/* Menu links */
+.sidebar-menu a {
+    border-radius: 9px;
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+}
+
+/* Menu item text */
+.sidebar-item-title {
+    color: #64746a;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
+}
+
+/* Hover */
+.sidebar-menu a:hover {
+    background-color: #f0f6f1;
+}
+
+.sidebar-menu a:hover .sidebar-item-title {
+    color: var(--fayno-primary);
+}
+
+/* Active menu item */
+.sidebar-menu a.router-link-active,
+.sidebar-menu a[aria-current="page"] {
+    background-color: var(--fayno-primary-light);
+    color: var(--fayno-primary);
+}
+
+.sidebar-menu a.router-link-active .sidebar-item-title,
+.sidebar-menu a[aria-current="page"] .sidebar-item-title {
+    color: var(--fayno-primary);
+    font-weight: 800;
+}
+
+/* Menu group headings */
+.sidebar-menu .text-xs,
+.sidebar-menu .uppercase {
+    color: #89958d;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+}
+
+/* Sidebar icons */
+.sidebar-menu svg {
+    transition: color 0.2s ease;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Fayno Camp — Topbar
+|--------------------------------------------------------------------------
+*/
+
+/* Header */
+header {
+    background: #ffffff;
+    border-bottom: 1px solid var(--fayno-border);
+}
+
+/* Search field */
+header input {
+    background-color: #f5f7f5;
+    border: 1px solid transparent;
+    border-radius: 10px;
+}
+
+header input:focus {
+    background-color: #ffffff;
+    border-color: var(--fayno-primary);
+    outline: none;
+}
+
+/* Header links and buttons */
+header button,
+header a {
+    transition: color 0.2s ease;
+}
+
+header button:hover,
+header a:hover {
+    color: var(--fayno-primary);
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Fayno Camp — Cards
+|--------------------------------------------------------------------------
+*/
+
+.bg-white.rounded-lg,
+.bg-white.rounded-xl {
+    border: 1px solid var(--fayno-border);
+    border-radius: var(--fayno-radius);
+    box-shadow: var(--fayno-shadow);
+}
+
+/*
+|--------------------------------------------------------------------------
+| Fayno Camp — Tables
+|--------------------------------------------------------------------------
+*/
+
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+}
+
+table thead th {
+    background: #f8faf8;
+    color: var(--fayno-text-secondary);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.045em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--fayno-border);
+}
+
+table tbody td {
+    color: var(--fayno-text);
+    border-bottom: 1px solid var(--fayno-border);
+}
+
+table tbody tr {
+    transition: background-color 0.15s ease;
+}
+
+table tbody tr:hover {
+    background-color: #f8fbf8;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Fayno Camp — Form fields
+|--------------------------------------------------------------------------
+*/
+
+input:not([type="checkbox"]):not([type="radio"]),
+select,
+textarea {
+    border-color: var(--fayno-border-strong);
+    border-radius: var(--fayno-radius-sm);
+    color: var(--fayno-text);
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--fayno-primary) !important;
+    box-shadow: 0 0 0 3px rgba(40, 122, 85, 0.10) !important;
+    outline: none;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Fayno Camp — Buttons
+|--------------------------------------------------------------------------
+*/
+
+button,
+[role="button"] {
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+button.bg-primary,
+button[class*="bg-primary"] {
+    background-color: var(--fayno-primary) !important;
+    border-color: var(--fayno-primary) !important;
+}
+
+button.bg-primary:hover,
+button[class*="bg-primary"]:hover {
+    background-color: var(--fayno-primary-hover) !important;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Fayno Camp — Badges
+|--------------------------------------------------------------------------
+*/
+
+.rounded-full {
+    font-weight: 700;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Fayno Camp — Focus
+|--------------------------------------------------------------------------
+*/
+
+:focus-visible {
+    outline: 2px solid var(--fayno-primary);
+    outline-offset: 2px;
+}
+
