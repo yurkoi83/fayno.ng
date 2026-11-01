@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --fayno-primary: #287a55;
+    --fayno-primary-hover: #216747;
+    --fayno-background: #f5f7f5;
+    --fayno-surface: #ffffff;
+    --fayno-text: #26352d;
+    --fayno-muted: #7a887f;
+    --fayno-border: #e5ebe6;
+    --fayno-radius: 12px;
+}
+
+body {
+    font-family: 'Nunito', sans-serif;
+    color: var(--fayno-text);
+}
+
+body {
+    background-color: var(--fayno-background);
+}
+
+.fayno-card {
+    background: var(--fayno-surface);
+    border: 1px solid var(--fayno-border);
+    border-radius: var(--fayno-radius);
+}

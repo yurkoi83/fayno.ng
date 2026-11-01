@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Gate;
 use Laravel\Fortify\Features;
 use Laravel\Nova\Nova;
 use Laravel\Nova\NovaApplicationServiceProvider;
+use Illuminate\Support\Facades\Vite;
+use Laravel\Nova\Events\ServingNova;
 
 class NovaServiceProvider extends NovaApplicationServiceProvider
 {
@@ -17,7 +19,12 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     {
         parent::boot();
 
-        //
+        Nova::serving(function (ServingNova $event) {
+            Nova::style(
+                'fayno-theme',
+                Vite::asset('resources/admin/css/fayno.css')
+            );
+        });
     }
 
     /**
