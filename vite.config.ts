@@ -12,7 +12,7 @@ export default defineConfig({
             input: [
                 'resources/css/app.css',
                 'resources/js/app.ts',
-                'resources/admin/css/fayno.css',
+                'resources/css/admin/fayno.css',
             ],
             refresh: true,
             fonts: [

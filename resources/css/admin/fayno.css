@@ -1,27 +1,58 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap');
+
+/*
+|--------------------------------------------------------------------------
+| Fayno Camp Admin Theme
+|--------------------------------------------------------------------------
+*/
 
 :root {
+    /* Brand */
     --fayno-primary: #287a55;
-    --fayno-primary-hover: #216747;
+    --fayno-primary-hover: #206344;
+    --fayno-primary-light: #eaf4ee;
+
+    /* Backgrounds */
     --fayno-background: #f5f7f5;
     --fayno-surface: #ffffff;
+    --fayno-surface-secondary: #f9fbf9;
+
+    /* Text */
     --fayno-text: #26352d;
-    --fayno-muted: #7a887f;
+    --fayno-text-secondary: #64746a;
+    --fayno-text-muted: #89958d;
+
+    /* Borders */
     --fayno-border: #e5ebe6;
+    --fayno-border-strong: #d5dfd7;
+
+    /* Status */
+    --fayno-success: #287a55;
+    --fayno-warning: #d99a32;
+    --fayno-danger: #d9534f;
+    --fayno-info: #4385b8;
+
+    /* UI */
+    --fayno-radius-sm: 8px;
     --fayno-radius: 12px;
+    --fayno-radius-lg: 16px;
+
+    --fayno-shadow:
+        0 2px 10px rgba(38, 53, 45, 0.04);
+
+    --fayno-shadow-hover:
+        0 6px 20px rgba(38, 53, 45, 0.08);
 }
+
+/* Typography */
 
 body {
     font-family: 'Nunito', sans-serif;
     color: var(--fayno-text);
 }
 
-body {
-    background-color: var(--fayno-background);
-}
+/* Selection */
 
-.fayno-card {
-    background: var(--fayno-surface);
-    border: 1px solid var(--fayno-border);
-    border-radius: var(--fayno-radius);
+::selection {
+    background: var(--fayno-primary-light);
+    color: var(--fayno-primary);
 }
