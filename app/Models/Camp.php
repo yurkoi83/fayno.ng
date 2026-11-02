@@ -53,6 +53,7 @@ class Camp extends BaseModel
         'description',
         'min_age',
         'max_age',
+        'active',
     ];
 
 
