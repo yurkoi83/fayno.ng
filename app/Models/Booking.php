@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Casts\DateTimeCast;
 use App\Models\Traits\Common\AppendsTrait;
 use App\Observers\BookingObserver;
 use Illuminate\Database\Eloquent\Relations\{BelongsTo, HasMany};
@@ -25,6 +26,7 @@ class Booking extends BaseModel
      * @var bool
      */
     public $timestamps = false;
+
     /**
      * The attributes that aren't mass assignable.
      *
@@ -42,7 +44,7 @@ class Booking extends BaseModel
         'status',
         'total_amount',
         'currency',
-        'confirmed_at'
+        'confirmed_at',
     ];
 
     /*
@@ -57,7 +59,13 @@ class Booking extends BaseModel
      */
     protected function casts(): array
     {
-        return ['total_amount' => 'decimal:2', 'confirmed_at' => 'datetime'];
+        return [
+            'total_amount' => 'decimal:2',
+            'confirmed_at' => DateTimeCast::class,
+            'created_at' => DateTimeCast::class,
+            'updated_at' => DateTimeCast::class,
+
+        ];
     }
 
     /*

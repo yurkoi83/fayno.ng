@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 class Camp extends BaseModel
 {
     use AppendsTrait, Sluggable, SluggableScopeHelpers;
+
     /**
      * The table associated with the model.
      *
@@ -37,7 +38,6 @@ class Camp extends BaseModel
      * @var array<int, string>
      */
     protected $guarded = ['id'];
-
 
     /**
      * The attributes that are mass assignable.
