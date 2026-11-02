@@ -30,7 +30,7 @@ class Camp extends BaseModel
      *
      * @var bool
      */
-    public $timestamps = false;
+//    public $timestamps = false;
 
     /**
      * The attributes that aren't mass assignable.
