@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Traits\Common\AppendsTrait;
 use App\Observers\BookingObserver;
 use Illuminate\Database\Eloquent\Relations\{BelongsTo, HasMany};
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 
 #[ObservedBy([BookingObserver::class])]
 class Booking extends BaseModel

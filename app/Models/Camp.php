@@ -10,6 +10,7 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 
 #[ScopedBy([ActiveScope::class])]
 #[ObservedBy([BookingObserver::class])]
@@ -22,7 +23,7 @@ class Camp extends BaseModel
      *
      * @var string
      */
-    protected $table = 'Camps';
+    protected $table = 'camps';
 
     /**
      * Indicates if the model should be timestamped.
