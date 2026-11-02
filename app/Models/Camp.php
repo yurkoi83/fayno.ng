@@ -5,7 +5,7 @@ namespace App\Models;
 use App\Casts\DateTimeCast;
 use App\Models\Scopes\ActiveScope;
 use App\Models\Traits\Common\AppendsTrait;
-use App\Observers\BookingObserver;
+use App\Observers\CampObserver;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
@@ -13,8 +13,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 
 #[ScopedBy([ActiveScope::class])]
-#[ObservedBy([BookingObserver::class])]
-
+#[ObservedBy([CampObserver::class])]
 class Camp extends BaseModel
 {
     use AppendsTrait, Sluggable, SluggableScopeHelpers;
