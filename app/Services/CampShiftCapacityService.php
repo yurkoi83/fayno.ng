@@ -12,6 +12,8 @@ class CampShiftCapacityService
 	/**
 	 * Count places reserved by orders that have not been rejected
 	 * and bookings that have not been cancelled.
+	 *
+	 * An order camper without a booking still occupies a place.
 	 */
 	public function bookedPlaces(CampShift $shift): int
 	{
@@ -20,14 +22,22 @@ class CampShiftCapacityService
 				->where('camp_shift_id', $shift->getKey())
 				->where('status', '!=', OrderStatus::REJECTED->value)
 			)
-			->whereHas('booking', fn ($query) => $query
-				->where('status', '!=', BookingStatus::CANCELLED->value)
-			)
+			->where(function ($query) {
+				$query
+					->whereDoesntHave('booking')
+					->orWhereHas('booking', fn ($query) => $query
+						->where('status', '!=', BookingStatus::CANCELLED->value)
+					);
+			})
 			->count();
 	}
 
 	public function hasCapacity(CampShift $shift, int $additionalPlaces = 1): bool
 	{
+		if ($additionalPlaces < 0) {
+			return false;
+		}
+
 		return $this->bookedPlaces($shift) + $additionalPlaces <= (int) $shift->capacity;
 	}
 
