@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Enums\BookingStatus;
+use App\Enums\CampShiftStatus;
 use App\Enums\OrderStatus;
 use App\Models\Camp;
 use App\Models\CampShift;
@@ -73,7 +74,7 @@ class OrderService
 				]);
 			}
 
-			if ($shift->status !== 'published') {
+			if ($shift->status !== CampShiftStatus::ACTIVE->value) {
 				throw ValidationException::withMessages([
 					'camp_shift_id' => __('The selected camp shift is not open for booking.'),
 				]);
