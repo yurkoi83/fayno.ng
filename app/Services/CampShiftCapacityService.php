@@ -4,16 +4,15 @@ namespace App\Services;
 
 use App\Enums\BookingStatus;
 use App\Enums\OrderStatus;
+use App\Enums\PaymentStatus;
 use App\Models\CampShift;
 use App\Models\OrderCamper;
 
 class CampShiftCapacityService
 {
 	/**
-	 * Count places reserved by orders that are neither new, processing nor rejected,
-	 * with bookings that have not been cancelled.
-	 *
-	 * An order camper without a booking still occupies a place.
+	 * Count places for orders that are not new, processing or rejected,
+	 * and have a booking with at least one successful payment.
 	 */
 	public function bookedPlaces(CampShift $shift): int
 	{
@@ -26,13 +25,12 @@ class CampShiftCapacityService
 					OrderStatus::REJECTED->value,
 				])
 			)
-			->where(function ($query) {
-				$query
-					->whereDoesntHave('booking')
-					->orWhereHas('booking', fn ($query) => $query
-						->where('status', '!=', BookingStatus::CANCELLED->value)
-					);
-			})
+			->whereHas('booking', fn ($query) => $query
+				->where('status', '!=', BookingStatus::CANCELLED->value)
+				->whereHas('payments', fn ($query) => $query
+					->where('status', PaymentStatus::PAID->value)
+				)
+			)
 			->count();
 	}
 
