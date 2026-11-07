@@ -520,3 +520,177 @@ button[class*="bg-primary"]:hover {
         white-space: normal;
     }
 }
+
+/*
+|--------------------------------------------------------------------------
+| Fayno Camp — Dashboard occupancy
+|--------------------------------------------------------------------------
+*/
+
+.fayno-occupancy {
+    padding: 24px;
+}
+
+.fayno-occupancy__heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 22px;
+}
+
+.fayno-occupancy__heading h2 {
+    margin: 0;
+    color: var(--fayno-text);
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.fayno-occupancy__heading p {
+    margin: 4px 0 0;
+    color: var(--fayno-text-muted);
+    font-size: 12px;
+}
+
+.fayno-occupancy__total {
+    display: flex;
+    flex-direction: column;
+    color: var(--fayno-primary);
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 1.2;
+    text-align: right;
+    white-space: nowrap;
+}
+
+.fayno-occupancy__total small {
+    margin-top: 4px;
+    color: var(--fayno-text-muted);
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.fayno-occupancy__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.fayno-occupancy__item {
+    min-width: 0;
+    padding: 18px;
+    border: 1px solid var(--fayno-border);
+    border-radius: var(--fayno-radius);
+    background: var(--fayno-surface-secondary);
+}
+
+.fayno-occupancy__item-heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.fayno-occupancy__item-heading strong {
+    color: var(--fayno-text);
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.fayno-occupancy__item-heading p {
+    margin: 3px 0;
+    color: var(--fayno-text-secondary);
+    font-size: 12px;
+}
+
+.fayno-occupancy__item-heading small {
+    color: var(--fayno-text-muted);
+    font-size: 11px;
+}
+
+.fayno-occupancy__item-heading > b {
+    color: var(--fayno-primary);
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.fayno-occupancy__bar {
+    overflow: hidden;
+    height: 8px;
+    margin: 16px 0 12px;
+    border-radius: 999px;
+    background: #e8eee9;
+}
+
+.fayno-occupancy__bar span {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: var(--fayno-primary);
+    transition: width 0.25s ease;
+}
+
+.fayno-occupancy__legend {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 18px;
+    color: var(--fayno-text-muted);
+    font-size: 11px;
+}
+
+.fayno-occupancy__legend span {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.fayno-occupancy__legend b {
+    color: var(--fayno-text);
+    font-weight: 800;
+}
+
+.fayno-occupancy__dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+}
+
+.fayno-occupancy__dot--booked {
+    background: var(--fayno-primary);
+}
+
+.fayno-occupancy__dot--free {
+    background: #cbd6ce;
+}
+
+.fayno-occupancy__empty {
+    padding: 20px 0;
+    border-top: 1px solid var(--fayno-border);
+    color: var(--fayno-text-muted);
+    font-size: 13px;
+}
+
+@media (max-width: 900px) {
+    .fayno-occupancy__grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .fayno-occupancy {
+        padding: 16px;
+    }
+
+    .fayno-occupancy__heading {
+        flex-direction: column;
+    }
+
+    .fayno-occupancy__total {
+        text-align: left;
+    }
+
+    .fayno-occupancy__legend {
+        gap: 8px 12px;
+    }
+}
