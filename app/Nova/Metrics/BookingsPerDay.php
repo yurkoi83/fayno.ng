@@ -13,7 +13,7 @@ class BookingsPerDay extends Trend
      */
     public function calculate(NovaRequest $request)
     {
-        return $this->countByDays($request, Booking::class)
+        return $this->countByMonths($request, Booking::class)
             ->showSumValue();
     }
 
@@ -23,8 +23,8 @@ class BookingsPerDay extends Trend
     public function ranges(): array
     {
         return [
-            7 => '7 дней',
-            30 => '30 дней',
+            6 => '6 месяцев',
+            12 => '12 месяцев',
         ];
     }
 
