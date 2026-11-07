@@ -55,7 +55,7 @@ class Applications extends Card
             ->get()
             ->map(fn (Order $order) => [
                 ...$this->formatOrder($order),
-                'waiting' => $order->created_at?->diffForHumans(),
+                'waiting' => $order->created_at?->locale('ru')->diffForHumans(),
             ])
             ->all();
     }
