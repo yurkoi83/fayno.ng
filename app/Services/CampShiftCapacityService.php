@@ -10,8 +10,8 @@ use App\Models\OrderCamper;
 class CampShiftCapacityService
 {
 	/**
-	 * Count places reserved by orders that have moved beyond processing
-	 * and have not been rejected, with bookings that have not been cancelled.
+	 * Count places reserved by orders that are neither new, processing nor rejected,
+	 * with bookings that have not been cancelled.
 	 *
 	 * An order camper without a booking still occupies a place.
 	 */
@@ -21,6 +21,7 @@ class CampShiftCapacityService
 			->whereHas('order', fn ($query) => $query
 				->where('camp_shift_id', $shift->getKey())
 				->whereNotIn('status', [
+					OrderStatus::NEW->value,
 					OrderStatus::PROCESSING->value,
 					OrderStatus::REJECTED->value,
 				])
