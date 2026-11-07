@@ -342,3 +342,181 @@ button[class*="bg-primary"]:hover {
     outline-offset: 2px;
 }
 
+
+
+/*
+|--------------------------------------------------------------------------
+| Fayno Camp — Dashboard applications
+|--------------------------------------------------------------------------
+*/
+
+.fayno-applications {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+    padding: 24px;
+}
+
+.fayno-applications__section {
+    min-width: 0;
+}
+
+.fayno-applications__heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+.fayno-applications__heading h2 {
+    margin: 0;
+    color: var(--fayno-text);
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.fayno-applications__heading p {
+    margin: 4px 0 0;
+    color: var(--fayno-text-muted);
+    font-size: 12px;
+}
+
+.fayno-applications__count {
+    display: inline-flex;
+    min-width: 28px;
+    height: 28px;
+    align-items: center;
+    justify-content: center;
+    padding: 0 8px;
+    border-radius: 999px;
+    background: var(--fayno-primary-light);
+    color: var(--fayno-primary);
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.fayno-applications__count--warning {
+    background: #fff3e6;
+    color: #b96a19;
+}
+
+.fayno-applications__list {
+    display: flex;
+    flex-direction: column;
+}
+
+.fayno-application {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 14px 0;
+    border-top: 1px solid var(--fayno-border);
+}
+
+.fayno-application__main {
+    min-width: 0;
+}
+
+.fayno-application__title {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+
+.fayno-application__title strong {
+    color: var(--fayno-text);
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.fayno-application__main p {
+    margin: 5px 0 2px;
+    color: var(--fayno-text);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.fayno-application__main small,
+.fayno-application time {
+    color: var(--fayno-text-muted);
+    font-size: 11px;
+}
+
+.fayno-application time {
+    flex: 0 0 auto;
+    white-space: nowrap;
+}
+
+.fayno-application__waiting {
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+}
+
+.fayno-application__waiting strong {
+    color: #b96a19;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.fayno-status {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 8px;
+    border-radius: 999px;
+    background: #eef2ef;
+    color: #64746a;
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.fayno-status--new,
+.fayno-status--unanswered {
+    background: #fff3e6;
+    color: #b96a19;
+}
+
+.fayno-status--confirmed {
+    background: var(--fayno-primary-light);
+    color: var(--fayno-primary);
+}
+
+.fayno-status--rejected {
+    background: #fceeed;
+    color: #b94b42;
+}
+
+.fayno-applications__empty {
+    padding: 18px 0;
+    border-top: 1px solid var(--fayno-border);
+    color: var(--fayno-text-muted);
+    font-size: 13px;
+}
+
+@media (max-width: 900px) {
+    .fayno-applications {
+        grid-template-columns: 1fr;
+        gap: 28px;
+    }
+}
+
+@media (max-width: 600px) {
+    .fayno-applications {
+        padding: 16px;
+    }
+
+    .fayno-application {
+        align-items: flex-start;
+    }
+
+    .fayno-application > time {
+        max-width: 90px;
+        text-align: right;
+        white-space: normal;
+    }
+}
