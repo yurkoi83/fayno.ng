@@ -97,7 +97,7 @@ class DashboardDemoSeeder extends Seeder
 					'booking_status' => BookingStatus::PENDING,
 					'payment_status' => PaymentStatus::PENDING,
 					'payment_amount' => 100,
-					'responded_days_ago' => null,
+					'responded_days_ago' => 2,
 					'created_days_ago' => 3,
 					'shift' => 1,
 				],
@@ -114,7 +114,7 @@ class DashboardDemoSeeder extends Seeder
 					'booking_status' => BookingStatus::PENDING,
 					'payment_status' => PaymentStatus::PAID,
 					'payment_amount' => 100,
-					'responded_days_ago' => null,
+					'responded_days_ago' => 1,
 					'created_days_ago' => 2,
 					'shift' => 1,
 				],
@@ -254,11 +254,13 @@ class DashboardDemoSeeder extends Seeder
 			]
 		);
 
-		// Keep the demo dates stable when the seeder is run again.
-		DB::table('orders')->where('id', $order->getKey())->update([
-			'created_at' => $orderCreatedAt,
-			'updated_at' => $orderCreatedAt,
-		]);
+		// Set relative demo dates only when the order is created for the first time.
+		if ($order->wasRecentlyCreated) {
+			DB::table('orders')->where('id', $order->getKey())->update([
+				'created_at' => $orderCreatedAt,
+				'updated_at' => $orderCreatedAt,
+			]);
+		}
 
 		$orderCamper = OrderCamper::firstOrCreate(
 			[
