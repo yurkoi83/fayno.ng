@@ -23,13 +23,13 @@ class BookingsPerDay extends Trend
     public function ranges(): array
     {
         return [
-            6 => '6 месяцев',
-            12 => '12 месяцев',
+            6 => '6 ' . __('nova::resources.Months'),
+            12 => '12 ' . __('nova::resources.Months'),
         ];
     }
 
     public function name(): string
     {
-        return 'Динамика бронирований';
+        return __('nova::resources.Booking dynamics');
     }
 }
