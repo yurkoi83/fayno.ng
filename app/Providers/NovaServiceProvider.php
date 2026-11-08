@@ -49,14 +49,14 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             return [
                 MenuItem::dashboard(\App\Nova\Dashboards\Main::class),
                 MenuItem::resource(\App\Nova\Camps\Camp::class),
-                MenuItem::resource(\App\Nova\Camps\CampShift::class),
                 MenuItem::resource(\App\Nova\Bookings\Order::class),
-                MenuItem::resource(\App\Nova\Bookings\Booking::class),
                 MenuItem::resource(\App\Nova\People\Camper::class),
                 MenuItem::resource(\App\Nova\People\Customer::class),
                 MenuItem::resource(\App\Nova\Finance\Payment::class),
-                MenuItem::resource(\App\Nova\Page::class),
-                MenuItem::resource(\App\Nova\Menu::class),
+                MenuSection::make('Контент', [
+                    MenuItem::resource(\App\Nova\Page::class),
+                    MenuItem::resource(\App\Nova\Menu::class),
+                ])->icon('document-text')->collapsable(),
                 MenuItem::resource(\App\Nova\Settings\Setting::class),
                 MenuSection::make('Доступ и пользователи', [
                     MenuItem::resource(\App\Nova\Users\User::class),
