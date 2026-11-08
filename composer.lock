@@ -9515,7 +9515,8 @@
                 "issues": "https://github.com/laravel/nova-devtool/issues",
                 "source": "https://github.com/laravel/nova-devtool/tree/v1.10.0"
             },
-            "time": "2026-06-23T11:06:01+00:00"
+            "time": "2026-06-23T11:06:01+00:00",
+            "published-time": "2026-06-23T11:07:00+00:00"
         },
         {
             "name": "laravel/pail",
@@ -12100,5 +12101,5 @@
         "php": "^8.3"
     },
     "platform-dev": {},
-    "plugin-api-version": "2.9.0"
+    "plugin-api-version": "2.11.0"
 }
