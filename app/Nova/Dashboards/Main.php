@@ -2,13 +2,7 @@
 
 namespace App\Nova\Dashboards;
 
-use App\Nova\Cards\Applications;
-use App\Nova\Cards\CampShiftOccupancy;
-use App\Nova\Metrics\TotalBookings;
-use App\Nova\Metrics\TotalCampers;
-use App\Nova\Metrics\TotalCamps;
-use App\Nova\Metrics\TotalPayments;
-use App\Nova\Metrics\BookingsPerDay;
+use App\Nova\Cards\DashboardOverview;
 use Laravel\Nova\Dashboards\Main as Dashboard;
 
 class Main extends Dashboard
@@ -21,13 +15,7 @@ class Main extends Dashboard
     public function cards(): array
     {
         return [
-            (new TotalBookings)->width('1/4'),
-            (new TotalCampers)->width('1/4'),
-            (new TotalCamps)->width('1/4'),
-            (new TotalPayments)->width('1/4'),
-            (new BookingsPerDay)->width('2/3'),
-            (new CampShiftOccupancy)->width('1/3'),
-            new Applications,
+            new DashboardOverview,
         ];
     }
 }
