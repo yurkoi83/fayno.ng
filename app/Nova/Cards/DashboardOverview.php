@@ -35,6 +35,7 @@ class DashboardOverview extends Card
                 'lastMonths' => __('nova::resources.Last 10 months'),
                 'occupancy' => __('nova::resources.Camp occupancy'),
                 'activeShifts' => __('nova::resources.Active shifts'),
+                'places' => __('nova::resources.Places'),
                 'noActiveShifts' => __('nova::resources.No active shifts'),
                 'latestBookings' => __('nova::resources.Latest bookings'),
                 'camper' => __('nova::resources.Camper'),
