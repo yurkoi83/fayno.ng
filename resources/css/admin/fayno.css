@@ -761,7 +761,8 @@ button[class*="bg-primary"]:hover {
         "parent camp status"
         "children children finance"
         "comment comment manager"
-        "history history payments";
+        "history history payments"
+        "internal internal internal";
     gap: 16px;
     align-items: start;
 }
@@ -783,6 +784,7 @@ button[class*="bg-primary"]:hover {
 [dusk="orders-detail-component"] [dusk="fayno-order-manager-panel"] { grid-area: manager; }
 [dusk="orders-detail-component"] [dusk="fayno-order-history-panel"] { grid-area: history; }
 [dusk="orders-detail-component"] [dusk="fayno-order-payments-panel"] { grid-area: payments; }
+[dusk="orders-detail-component"] [dusk="fayno-order-internal-panel"] { grid-area: internal; }
 
 [dusk="orders-detail-component"] [dusk^="fayno-order-"] > .flex.items-center {
     min-height: 28px;
@@ -827,7 +829,8 @@ button[class*="bg-primary"]:hover {
             "status finance"
             "children children"
             "comment manager"
-            "history payments";
+            "history payments"
+            "internal internal";
     }
 }
 
@@ -844,7 +847,8 @@ button[class*="bg-primary"]:hover {
             "comment"
             "manager"
             "history"
-            "payments";
+            "payments"
+            "internal";
         gap: 12px;
     }
 }
