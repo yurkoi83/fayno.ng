@@ -16,7 +16,7 @@ use Laravel\Nova\Fields\Text;
 
 class Order extends Resource
 {
-    public static $model = \\App\\Models\\Order::class;
+    public static $model = \App\Models\Order::class;
     public static $title = 'number';
     public static $search = ['id', 'number', 'status'];
     public static $group = 'Бронювання';
