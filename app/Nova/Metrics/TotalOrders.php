@@ -14,11 +14,11 @@ class TotalOrders extends Value
     public function calculate(NovaRequest $request)
     {
         return $this->result(Order::query()->count())
-            ->suffix(' заявок');
+            ->suffix(' ' . __('nova::resources.Applications count suffix'));
     }
 
     public function name(): string
     {
-        return 'Всего заявок';
+        return __('nova::resources.Applications');
     }
 }
