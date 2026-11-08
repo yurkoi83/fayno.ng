@@ -13,7 +13,7 @@ use Laravel\Nova\Fields\Text;
 
 class Booking extends Resource
 {
-    public static $model = \\App\\Models\\Booking::class;
+    public static $model = \App\Models\Booking::class;
     public static $title = 'id';
     public static $search = ['id', 'status'];
     public static $group = 'Бронювання';
@@ -31,7 +31,7 @@ class Booking extends Resource
             Number::make(__('nova::resources.Amount'), 'total_amount')->step(0.01)->sortable(),
             Text::make(__('nova::resources.Currency'), 'currency'),
             DateTime::make(__('nova::resources.Confirmed at'), 'confirmed_at')->nullable(),
-            HasMany::make(__('nova::resources.Payments'), 'payments', \\App\\Nova\\Finance\\Payment::class),
+            HasMany::make(__('nova::resources.Payments'), 'payments', \App\Nova\Finance\Payment::class),
         ];
     }
 }
