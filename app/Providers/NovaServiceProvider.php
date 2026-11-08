@@ -26,7 +26,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
 
             Nova::script(
                 'fayno-admin',
-                asset('js/fayno-admin.js')
+                asset('js/fayno-admin.js') . '?v=' . filemtime(public_path('js/fayno-admin.js'))
             );
         });
     }
