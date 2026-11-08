@@ -20,23 +20,23 @@ class Order extends Resource
     public static $search = ['id', 'number', 'status'];
     public static $group = 'Бронювання';
 
-    public static function label(): string { return 'Бронювання'; }
-    public static function singularLabel(): string { return 'Заявка'; }
+    public static function label(): string { return __('nova::navigation.bookings'); }
+    public static function singularLabel(): string { return __('nova::resources.Order'); }
 
     public function fields(Request $request): array
     {
         return [
             ID::make()->sortable(),
-            Text::make('Номер', 'number')->sortable()->rules('required'),
-            BelongsTo::make('Батьки', 'customer', Customer::class)->searchable(),
-            BelongsTo::make('Зміна', 'campShift', CampShift::class)->searchable(),
-            Text::make('Статус', 'status')->sortable(),
-            Text::make('Джерело', 'source')->hideFromIndex(),
-            Text::make('Місто виїзду', 'departure_city')->hideFromIndex(),
-            BelongsTo::make('Відповідальний', 'assignedTo', User::class)->nullable()->searchable(),
-            DateTime::make('Відповіли', 'responded_at')->nullable()->hideFromIndex(),
-            Textarea::make('Коментар', 'comment')->alwaysShow()->hideFromIndex(),
-            Textarea::make('Нотатки адміністратора', 'admin_notes')->alwaysShow()->hideFromIndex(),
+            Text::make(__('nova::resources.Number'), 'number')->sortable()->rules('required'),
+            BelongsTo::make(__('nova::resources.Parent'), 'customer', Customer::class)->searchable(),
+            BelongsTo::make(__('nova::resources.Camp shift'), 'campShift', CampShift::class)->searchable(),
+            Text::make(__('nova::resources.Status'), 'status')->sortable(),
+            Text::make(__('nova::resources.Source'), 'source')->hideFromIndex(),
+            Text::make(__('nova::resources.Departure city'), 'departure_city')->hideFromIndex(),
+            BelongsTo::make(__('nova::resources.Assigned to'), 'assignedTo', User::class)->nullable()->searchable(),
+            DateTime::make(__('nova::resources.Responded at'), 'responded_at')->nullable()->hideFromIndex(),
+            Textarea::make(__('nova::resources.Comment'), 'comment')->alwaysShow()->hideFromIndex(),
+            Textarea::make(__('nova::resources.Admin notes'), 'admin_notes')->alwaysShow()->hideFromIndex(),
         ];
     }
 }
