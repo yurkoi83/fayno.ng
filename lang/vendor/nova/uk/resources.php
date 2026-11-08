@@ -2,6 +2,9 @@
 
 return [
     'Places' => 'місць',
+    'Of' => 'із',
+    'Brand tagline' => 'Дитинство, що надихає на більше',
+    'Page' => 'Сторінка',
     'Manage bookings and programs in one place' => 'Керуйте бронюваннями та програмами в одному місці',
     'Months' => 'місяців',
     'Dates' => 'Дати',
@@ -72,7 +75,7 @@ return [
     'Payments' => 'Платежі',
     'Setting' => 'Налаштування',
     'Settings' => 'Налаштування',
-    'Name' => 'Назва',
+    'Name' => 'Ім’я',
     'Slug' => 'ЧПУ',
     'Country' => 'Країна',
     'City' => 'Місто',
