@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'Password' => 'Пароль',
     'Places' => 'місць',
     'Of' => 'із',
     'Brand tagline' => 'Дитинство, що надихає на більше',
