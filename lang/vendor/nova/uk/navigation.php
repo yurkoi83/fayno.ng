@@ -12,7 +12,6 @@ return [
     'transfers' => 'Трансфери',
     'content' => 'Контент',
     'reports' => 'Звіти',
-    'settings' => 'Налаштування',
     'access' => 'Доступ і користувачі',
 
     'users_roles_permission' => 'Користувачі, Ролі, Дозволи',
