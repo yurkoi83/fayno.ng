@@ -4,6 +4,7 @@ namespace App\Nova\Bookings;
 
 use App\Nova\Resource;
 use App\Nova\Camps\CampShift;
+use App\Nova\People\Customer;
 use App\Nova\Users\User;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
