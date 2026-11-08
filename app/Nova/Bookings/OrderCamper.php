@@ -2,12 +2,14 @@
 
 namespace App\Nova\Bookings;
 
+use App\Enums\Gender;
 use App\Nova\Resource;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\HasOne;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Fields\Panel;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 
@@ -21,23 +23,31 @@ class OrderCamper extends Resource
     {
         return [
             ID::make()->sortable(),
-            BelongsTo::make(__('nova::resources.Order'), 'order', Order::class)->searchable(),
-            BelongsTo::make(__('nova::resources.Camper'), 'camper', \App\Nova\People\Camper::class)->searchable(),
 
-            Text::make(__('nova::resources.Child full name'), fn () => $this->camper
-                ? trim(implode(' ', array_filter([
-                    $this->camper->last_name,
-                    $this->camper->first_name,
-                    $this->camper->middle_name,
-                ])))
-                : null),
-            Text::make(__('nova::resources.Birth date'), fn () => $this->camper?->birth_date?->format('d.m.Y')),
-            Text::make(__('nova::resources.Gender'), fn () => $this->camper?->gender_id),
-            Textarea::make(__('nova::resources.Notes'), fn () => $this->camper?->notes),
+            Panel::make(__('nova::resources.Child details'), [
+                BelongsTo::make(__('nova::resources.Camper'), 'camper', \App\Nova\People\Camper::class)->searchable(),
+                Text::make(__('nova::resources.Child full name'), fn () => $this->camper
+                    ? trim(implode(' ', array_filter([
+                        $this->camper->last_name,
+                        $this->camper->first_name,
+                        $this->camper->middle_name,
+                    ])))
+                    : null),
+                Text::make(__('nova::resources.Birth date'), fn () => $this->camper?->birth_date?->format('d.m.Y')),
+                Text::make(__('nova::resources.Age'), fn () => $this->camper?->birth_date
+                    ? $this->camper->birth_date->age.' '.__('nova::resources.Years')
+                    : null),
+                Text::make(__('nova::resources.Gender'), fn () => $this->camper
+                    ? (Gender::find($this->camper->gender_id)['label'] ?? null)
+                    : null),
+                Textarea::make(__('nova::resources.Notes'), fn () => $this->camper?->notes)->onlyOnDetail(),
+            ]),
 
-            Number::make(__('nova::resources.Price'), 'price')->step(0.01),
-            Number::make(__('nova::resources.Discount'), 'discount')->step(0.01),
-            Text::make(__('nova::resources.Currency'), 'currency'),
+            Panel::make(__('nova::resources.Cost'), [
+                Number::make(__('nova::resources.Price'), 'price')->step(0.01),
+                Number::make(__('nova::resources.Discount'), 'discount')->step(0.01),
+                Text::make(__('nova::resources.Currency'), 'currency'),
+            ]),
 
             HasOne::make(__('nova::resources.Individual booking'), 'booking', Booking::class),
         ];
