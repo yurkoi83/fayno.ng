@@ -97,7 +97,7 @@ class Order extends Resource
                 Text::make(__('nova::resources.Source'), 'source')->hideFromIndex(),
                 Text::make(__('nova::resources.Departure city'), 'departure_city')->hideFromIndex(),
                 Textarea::make(__('nova::resources.Admin notes'), 'admin_notes')->alwaysShow()->hideFromIndex(),
-            ])->withAttribute('fayno-order-internal')->collapsable(),
+            ])->withAttribute('fayno-order-internal')->collapsedByDefault(),
         ];
     }
 
