@@ -24,7 +24,7 @@ class Camp extends Resource
     {
         return [
             ID::make()->sortable(),
-            Text::make(__('nova::resources.Name'), 'name')->sortable()->rules('required', 'max:255'),
+            Text::make(__('nova::resources.Camp name'), 'name')->sortable()->rules('required', 'max:255'),
             Text::make(__('nova::resources.Slug'), 'slug')->hideFromIndex(),
             Text::make(__('nova::resources.Country'), 'country'),
             Text::make(__('nova::resources.City'), 'city')->sortable(),
