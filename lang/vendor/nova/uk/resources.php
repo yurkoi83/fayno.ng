@@ -1,6 +1,10 @@
 <?php
 
 return [
+    'Places' => 'місць',
+    'Manage bookings and programs in one place' => 'Керуйте бронюваннями та програмами в одному місці',
+    'Months' => 'місяців',
+    'Dates' => 'Дати',
 
     'Pages' => 'Сторінки',
     'Menus' => 'Меню',
