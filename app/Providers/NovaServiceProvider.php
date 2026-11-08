@@ -34,34 +34,34 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         );
 
         Nova::resources([
-            \\App\\Nova\\Camps\\Camp::class,
-            \\App\\Nova\\Camps\\CampShift::class,
-            \\App\\Nova\\Bookings\\Order::class,
-            \\App\\Nova\\Bookings\\Booking::class,
-            \\App\\Nova\\Bookings\\OrderCamper::class,
-            \\App\\Nova\\People\\Camper::class,
-            \\App\\Nova\\People\\Customer::class,
-            \\App\\Nova\\Finance\\Payment::class,
-            \\App\\Nova\\Settings\\Setting::class,
+            \App\Nova\Camps\Camp::class,
+            \App\Nova\Camps\CampShift::class,
+            \App\Nova\Bookings\Order::class,
+            \App\Nova\Bookings\Booking::class,
+            \App\Nova\Bookings\OrderCamper::class,
+            \App\Nova\People\Camper::class,
+            \App\Nova\People\Customer::class,
+            \App\Nova\Finance\Payment::class,
+            \App\Nova\Settings\Setting::class,
         ]);
 
         Nova::mainMenu(function (Request $request) {
             return [
-                MenuItem::dashboard(\\App\\Nova\\Dashboards\\Main::class),
-                MenuItem::resource(\\App\\Nova\\Camps\\Camp::class),
-                MenuItem::resource(\\App\\Nova\\Camps\\CampShift::class),
-                MenuItem::resource(\\App\\Nova\\Bookings\\Order::class),
-                MenuItem::resource(\\App\\Nova\\Bookings\\Booking::class),
-                MenuItem::resource(\\App\\Nova\\People\\Camper::class),
-                MenuItem::resource(\\App\\Nova\\People\\Customer::class),
-                MenuItem::resource(\\App\\Nova\\Finance\\Payment::class),
-                MenuItem::resource(\\App\\Nova\\Page::class),
-                MenuItem::resource(\\App\\Nova\\Menu::class),
-                MenuItem::resource(\\App\\Nova\\Settings\\Setting::class),
+                MenuItem::dashboard(\App\Nova\Dashboards\Main::class),
+                MenuItem::resource(\App\Nova\Camps\Camp::class),
+                MenuItem::resource(\App\Nova\Camps\CampShift::class),
+                MenuItem::resource(\App\Nova\Bookings\Order::class),
+                MenuItem::resource(\App\Nova\Bookings\Booking::class),
+                MenuItem::resource(\App\Nova\People\Camper::class),
+                MenuItem::resource(\App\Nova\People\Customer::class),
+                MenuItem::resource(\App\Nova\Finance\Payment::class),
+                MenuItem::resource(\App\Nova\Page::class),
+                MenuItem::resource(\App\Nova\Menu::class),
+                MenuItem::resource(\App\Nova\Settings\Setting::class),
                 MenuSection::make('Доступ и пользователи', [
-                    MenuItem::resource(\\App\\Nova\\Users\\User::class),
-                    MenuItem::resource(\\App\\Nova\\Users\\Role::class),
-                    MenuItem::resource(\\App\\Nova\\Users\\Permission::class),
+                    MenuItem::resource(\App\Nova\Users\User::class),
+                    MenuItem::resource(\App\Nova\Users\Role::class),
+                    MenuItem::resource(\App\Nova\Users\Permission::class),
                 ])->icon('user-group')->collapsable(),
             ];
         });
