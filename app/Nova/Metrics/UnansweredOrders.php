@@ -20,11 +20,11 @@ class UnansweredOrders extends Value
             ->count();
 
         return $this->result($count)
-            ->suffix(' заявок');
+            ->suffix(' ' . __('nova::resources.Applications count suffix'));
     }
 
     public function name(): string
     {
-        return 'Заявки без ответа';
+        return __('nova::resources.Applications without response');
     }
 }
