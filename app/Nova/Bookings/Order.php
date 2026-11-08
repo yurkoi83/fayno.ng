@@ -20,7 +20,7 @@ class Order extends Resource
     public static $search = ['id', 'number', 'status'];
     public static $group = 'Бронювання';
 
-    public static function label(): string { return 'Заявки'; }
+    public static function label(): string { return 'Бронювання'; }
     public static function singularLabel(): string { return 'Заявка'; }
 
     public function fields(Request $request): array
