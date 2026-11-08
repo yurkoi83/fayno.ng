@@ -3,10 +3,13 @@
 namespace App\Providers;
 
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Fortify\Features;
 use Laravel\Nova\Events\ServingNova;
 use Laravel\Nova\Nova;
+use Laravel\Nova\Menu\MenuItem;
+use Laravel\Nova\Menu\MenuSection;
 use Laravel\Nova\NovaApplicationServiceProvider;
 
 class NovaServiceProvider extends NovaApplicationServiceProvider
@@ -17,6 +20,24 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     public function boot(): void
     {
         parent::boot();
+
+        Nova::mainMenu(function (Request $request) {
+            return [
+                MenuSection::make('Главная', [
+                    MenuItem::dashboard(\App\Nova\Dashboards\Main::class),
+                ])->icon('chart-bar'),
+
+                MenuSection::make('Контент', [
+                    MenuItem::resource(\App\Nova\Menu::class),
+                ])->icon('document-text')->collapsable(),
+
+                MenuSection::make('Доступ и пользователи', [
+                    MenuItem::resource(\App\Nova\Users\User::class),
+                    MenuItem::resource(\App\Nova\Users\Role::class),
+                    MenuItem::resource(\App\Nova\Users\Permission::class),
+                ])->icon('user-group')->collapsable(),
+            ];
+        });
 
         Nova::serving(function (ServingNova $event) {
             Nova::style(
