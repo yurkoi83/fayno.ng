@@ -20,7 +20,7 @@ use Laravel\Nova\Panel;
 
 class Order extends Resource
 {
-    public static $model = \\App\\Models\\Order::class;
+    public static $model = \App\Models\Order::class;
     public static $title = 'number';
     public static $search = ['id', 'number', 'status'];
     public static $group = 'Бронювання';
@@ -32,6 +32,10 @@ class Order extends Resource
     {
         return [
             ID::make()->sortable()->hideFromDetail(),
+
+            Panel::make('Заявка № '.$this->number)
+                ->withAttribute('fayno-order-header')
+                ->withToolbar(),
 
             Panel::make(__('nova::resources.Parent details'), [
                 BelongsTo::make(__('nova::resources.Parent'), 'customer', Customer::class)->searchable(),
