@@ -3,9 +3,10 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "build": "vp build",
-        "build:ssr": "vp build && vp build --ssr",
+        "build": "vp build && vp build --config vite.nova.config.ts",
+        "build:ssr": "vp build && vp build --config vite.nova.config.ts && vp build --ssr",
         "dev": "vp dev",
+        "dev:nova": "vp build --config vite.nova.config.ts --watch",
         "check": "vp check",
         "check:fix": "vp check --fix",
         "types:check": "vue-tsc --noEmit"
