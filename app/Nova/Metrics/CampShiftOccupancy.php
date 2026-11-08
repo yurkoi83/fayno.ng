@@ -37,6 +37,6 @@ class CampShiftOccupancy extends Value
 
     public function name(): string
     {
-        return 'Заполненность активных смен';
+        return __('nova::resources.Camp occupancy');
     }
 }

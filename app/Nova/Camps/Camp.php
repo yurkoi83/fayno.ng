@@ -17,22 +17,22 @@ class Camp extends Resource
     public static $search = ['id', 'name', 'city'];
     public static $group = 'Табори';
 
-    public static function label(): string { return 'Табори'; }
-    public static function singularLabel(): string { return 'Табір'; }
+    public static function label(): string { return __('nova::navigation.camps'); }
+    public static function singularLabel(): string { return __('nova::resources.Camp'); }
 
     public function fields(Request $request): array
     {
         return [
             ID::make()->sortable(),
-            Text::make('Назва', 'name')->sortable()->rules('required', 'max:255'),
-            Text::make('Slug', 'slug')->hideFromIndex(),
-            Text::make('Країна', 'country'),
-            Text::make('Місто', 'city')->sortable(),
-            Text::make('Адреса', 'address')->hideFromIndex(),
-            Number::make('Мін. вік', 'min_age')->min(0)->max(18),
-            Number::make('Макс. вік', 'max_age')->min(0)->max(18),
-            Boolean::make('Активний', 'active'),
-            Textarea::make('Опис', 'description')->alwaysShow()->hideFromIndex(),
+            Text::make(__('nova::resources.Camp name'), 'name')->sortable()->rules('required', 'max:255'),
+            Text::make(__('nova::resources.Slug'), 'slug')->hideFromIndex(),
+            Text::make(__('nova::resources.Country'), 'country'),
+            Text::make(__('nova::resources.City'), 'city')->sortable(),
+            Text::make(__('nova::resources.Address'), 'address')->hideFromIndex(),
+            Number::make(__('nova::resources.Min age'), 'min_age')->min(0)->max(18),
+            Number::make(__('nova::resources.Max age'), 'max_age')->min(0)->max(18),
+            Boolean::make(__('nova::resources.Active'), 'active'),
+            Textarea::make(__('nova::resources.Description'), 'description')->alwaysShow()->hideFromIndex(),
         ];
     }
 }

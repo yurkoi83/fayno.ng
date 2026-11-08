@@ -23,6 +23,16 @@ class CampShiftOccupancy extends Card
         $capacityService = app(CampShiftCapacityService::class);
 
         $this->withMeta([
+            'translations' => [
+                'title' => __('nova::resources.Camp occupancy'),
+                'description' => __('nova::resources.Occupied and available places in active shifts'),
+                'occupied' => __('nova::resources.Places occupied'),
+                'camp' => __('nova::resources.Camp'),
+                'booked' => __('nova::resources.Occupied'),
+                'available' => __('nova::resources.Available'),
+                'total' => __('nova::resources.Total'),
+                'empty' => __('nova::resources.No active shifts'),
+            ],
             'shifts' => CampShift::query()
                 ->with('camp')
                 ->where('status', CampShiftStatus::ACTIVE->value)

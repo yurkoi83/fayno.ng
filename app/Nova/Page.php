@@ -33,6 +33,9 @@ class Page extends Resource
 
     public static $group = 'Контент';
 
+    public static function label(): string { return __('nova::resources.Pages'); }
+    public static function singularLabel(): string { return __('nova::resources.Page'); }
+
     /**
      * Get the fields displayed by the resource.
      *

@@ -2,12 +2,12 @@
     <div class="fayno-occupancy">
         <div class="fayno-occupancy__heading">
             <div>
-                <h2>Заполненность лагерей</h2>
-                <p>Занятые и свободные места по активным сменам</p>
+                <h2>{{ card.translations.title }}</h2>
+                <p>{{ card.translations.description }}</p>
             </div>
             <span class="fayno-occupancy__total">
                 {{ totalBooked }} / {{ totalCapacity }}
-                <small>мест занято</small>
+                <small>{{ card.translations.occupied }}</small>
             </span>
         </div>
 
@@ -19,7 +19,7 @@
             >
                 <div class="fayno-occupancy__item-heading">
                     <div>
-                        <strong>{{ shift.camp || 'Лагерь' }}</strong>
+                        <strong>{{ shift.camp || card.translations.camp }}</strong>
                         <p>{{ shift.name }}</p>
                         <small v-if="shift.startsAt || shift.endsAt">
                             {{ shift.startsAt }} — {{ shift.endsAt }}
@@ -33,14 +33,14 @@
                 </div>
 
                 <div class="fayno-occupancy__legend">
-                    <span><i class="fayno-occupancy__dot fayno-occupancy__dot--booked"></i>Занято: <b>{{ shift.booked }}</b></span>
-                    <span><i class="fayno-occupancy__dot fayno-occupancy__dot--free"></i>Свободно: <b>{{ shift.available }}</b></span>
-                    <span>Всего: <b>{{ shift.capacity }}</b></span>
+                    <span><i class="fayno-occupancy__dot fayno-occupancy__dot--booked"></i>{{ card.translations.booked }}: <b>{{ shift.booked }}</b></span>
+                    <span><i class="fayno-occupancy__dot fayno-occupancy__dot--free"></i>{{ card.translations.available }}: <b>{{ shift.available }}</b></span>
+                    <span>{{ card.translations.total }}: <b>{{ shift.capacity }}</b></span>
                 </div>
             </article>
         </div>
 
-        <p v-else class="fayno-occupancy__empty">Нет активных смен</p>
+        <p v-else class="fayno-occupancy__empty">{{ card.translations.empty }}</p>
     </div>
 </template>
 

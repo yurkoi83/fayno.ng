@@ -18,20 +18,20 @@ class Camper extends Resource
     public static $search = ['id', 'first_name', 'last_name'];
     public static $group = 'Учасники';
 
-    public static function label(): string { return 'Учасники'; }
-    public static function singularLabel(): string { return 'Учасник'; }
+    public static function label(): string { return __('nova::navigation.campers'); }
+    public static function singularLabel(): string { return __('nova::resources.Camper'); }
 
     public function fields(Request $request): array
     {
         return [
             ID::make()->sortable(),
-            BelongsTo::make('Батьки', 'customer', Customer::class)->searchable(),
-            Text::make('Прізвище', 'last_name')->sortable()->rules('required'),
-            Text::make('Ім’я', 'first_name')->sortable()->rules('required'),
-            Text::make('По батькові', 'middle_name')->nullable()->hideFromIndex(),
-            Date::make('Дата народження', 'birth_date')->sortable(),
-            Number::make('Стать (ID)', 'gender_id')->nullable()->hideFromIndex(),
-            Textarea::make('Нотатки', 'notes')->alwaysShow()->hideFromIndex(),
+            BelongsTo::make(__('nova::resources.Parent'), 'customer', Customer::class)->searchable(),
+            Text::make(__('nova::resources.Last name'), 'last_name')->sortable()->rules('required'),
+            Text::make(__('nova::resources.First name'), 'first_name')->sortable()->rules('required'),
+            Text::make(__('nova::resources.Middle name'), 'middle_name')->nullable()->hideFromIndex(),
+            Date::make(__('nova::resources.Birth date'), 'birth_date')->sortable(),
+            Number::make(__('nova::resources.Gender'), 'gender_id')->nullable()->hideFromIndex(),
+            Textarea::make(__('nova::resources.Notes'), 'notes')->alwaysShow()->hideFromIndex(),
         ];
     }
 }

@@ -23,6 +23,6 @@ class TotalPayments extends Value
 
     public function name(): string
     {
-        return 'Поступившие оплаты';
+        return __('nova::resources.Received payments');
     }
 }

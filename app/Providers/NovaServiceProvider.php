@@ -47,18 +47,18 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
 
         Nova::mainMenu(function (Request $request) {
             return [
-                MenuItem::dashboard(\App\Nova\Dashboards\Main::class),
-                MenuItem::resource(\App\Nova\Camps\Camp::class),
-                MenuItem::resource(\App\Nova\Bookings\Order::class),
-                MenuItem::resource(\App\Nova\People\Camper::class),
-                MenuItem::resource(\App\Nova\People\Customer::class),
-                MenuItem::resource(\App\Nova\Finance\Payment::class),
-                MenuSection::make('Контент', [
-                    MenuItem::resource(\App\Nova\Page::class),
-                    MenuItem::resource(\App\Nova\Menu::class),
+                MenuItem::dashboard(\App\Nova\Dashboards\Main::class)->name(__('nova::navigation.overview')),
+                MenuItem::resource(\App\Nova\Camps\Camp::class)->name(__('nova::navigation.camps')),
+                MenuItem::resource(\App\Nova\Bookings\Order::class)->name(__('nova::navigation.bookings')),
+                MenuItem::resource(\App\Nova\People\Camper::class)->name(__('nova::navigation.campers')),
+                MenuItem::resource(\App\Nova\People\Customer::class)->name(__('nova::navigation.parents')),
+                MenuItem::resource(\App\Nova\Finance\Payment::class)->name(__('nova::navigation.payments')),
+                MenuSection::make(__('nova::navigation.content'), [
+                    MenuItem::resource(\App\Nova\Page::class)->name(__('nova::resources.Pages')),
+                    MenuItem::resource(\App\Nova\Menu::class)->name(__('nova::resources.Menus')),
                 ])->icon('document-text')->collapsable(),
-                MenuItem::resource(\App\Nova\Settings\Setting::class),
-                MenuSection::make('Доступ и пользователи', [
+                MenuItem::resource(\App\Nova\Settings\Setting::class)->name(__('nova::navigation.settings')),
+                MenuSection::make(__('nova::navigation.access'), [
                     MenuItem::resource(\App\Nova\Users\User::class),
                     MenuItem::resource(\App\Nova\Users\Role::class),
                     MenuItem::resource(\App\Nova\Users\Permission::class),

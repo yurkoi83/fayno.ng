@@ -1,6 +1,19 @@
 <?php
 
 return [
+
+    // Fayno Camp sidebar
+    'overview' => 'Огляд',
+    'camps' => 'Табори',
+    'bookings' => 'Бронювання',
+    'campers' => 'Учасники',
+    'parents' => 'Батьки',
+    'payments' => 'Платежі',
+    'transfers' => 'Трансфери',
+    'content' => 'Контент',
+    'reports' => 'Звіти',
+    'access' => 'Доступ і користувачі',
+
     'users_roles_permission' => 'Користувачі, Ролі, Дозволи',
     'list' => 'Список',
     'users' => 'Користувачі',

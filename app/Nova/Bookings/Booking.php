@@ -18,18 +18,18 @@ class Booking extends Resource
     public static $group = 'Бронювання';
     public static $displayInNavigation = false;
 
-    public static function label(): string { return 'Бронювання'; }
-    public static function singularLabel(): string { return 'Бронювання'; }
+    public static function label(): string { return __('nova::resources.Bookings'); }
+    public static function singularLabel(): string { return __('nova::resources.Bookings'); }
 
     public function fields(Request $request): array
     {
         return [
             ID::make()->sortable(),
-            BelongsTo::make('Учасник у заявці', 'orderCamper', OrderCamper::class)->searchable(),
-            Text::make('Статус', 'status')->sortable(),
-            Number::make('Сума', 'total_amount')->step(0.01)->sortable(),
-            Text::make('Валюта', 'currency'),
-            DateTime::make('Підтверджено', 'confirmed_at')->nullable(),
+            BelongsTo::make(__('nova::resources.Camper in order'), 'orderCamper', OrderCamper::class)->searchable(),
+            Text::make(__('nova::resources.Status'), 'status')->sortable(),
+            Number::make(__('nova::resources.Amount'), 'total_amount')->step(0.01)->sortable(),
+            Text::make(__('nova::resources.Currency'), 'currency'),
+            DateTime::make(__('nova::resources.Confirmed at'), 'confirmed_at')->nullable(),
         ];
     }
 }

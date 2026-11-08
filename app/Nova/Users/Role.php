@@ -41,7 +41,7 @@ class Role extends Resource
 
     public static $with = ['permissions'];
 
-    public static $group = 'Доступ и пользователи';
+    public static $group = 'Доступ і користувачі';
 
 //    public static function getModel()
 //    {

@@ -12,7 +12,7 @@ class Main extends Dashboard
      */
     public function label(): string
     {
-        return 'Огляд';
+        return __('nova::navigation.overview');
     }
 
     /**

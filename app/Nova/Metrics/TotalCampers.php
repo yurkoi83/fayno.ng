@@ -14,11 +14,11 @@ class TotalCampers extends Value
     public function calculate(NovaRequest $request)
     {
         return $this->result(Camper::query()->count())
-            ->suffix(' участников');
+            ->suffix(' ' . __('nova::resources.Participants count suffix'));
     }
 
     public function name(): string
     {
-        return 'Участники';
+        return __('nova::resources.Participants');
     }
 }

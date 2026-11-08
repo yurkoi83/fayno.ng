@@ -16,16 +16,16 @@ class Setting extends Resource
     public static $search = ['id', 'group', 'key'];
     public static $group = 'Налаштування';
 
-    public static function label(): string { return 'Налаштування'; }
-    public static function singularLabel(): string { return 'Налаштування'; }
+    public static function label(): string { return __('nova::navigation.settings'); }
+    public static function singularLabel(): string { return __('nova::navigation.settings'); }
 
     public function fields(Request $request): array
     {
         return [
             ID::make()->sortable(),
-            Text::make('Група', 'group')->sortable()->rules('required'),
-            Text::make('Ключ', 'key')->sortable()->rules('required'),
-            Textarea::make('Значення (JSON)', 'value')->alwaysShow(),
+            Text::make(__('nova::resources.Group'), 'group')->sortable()->rules('required'),
+            Text::make(__('nova::resources.Key'), 'key')->sortable()->rules('required'),
+            Textarea::make(__('nova::resources.Value (JSON)'), 'value')->alwaysShow(),
         ];
     }
 }

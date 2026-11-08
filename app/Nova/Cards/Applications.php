@@ -21,6 +21,16 @@ class Applications extends Card
 
         $this->withMeta([
             'recentOrders' => $this->recentOrders(),
+            'translations' => [
+                'recentTitle' => __('nova::resources.Applications'),
+                'recentDescription' => __('nova::resources.Recently received applications from parents'),
+                'unansweredTitle' => __('nova::resources.Applications without response'),
+                'unansweredDescription' => __('nova::resources.Require administrator attention'),
+                'noCustomer' => __('nova::resources.Client not specified'),
+                'noApplications' => __('nova::resources.No applications yet'),
+                'noUnanswered' => __('nova::resources.No applications awaiting response'),
+                'noResponse' => __('nova::resources.No response'),
+            ],
             'unansweredOrders' => $this->unansweredOrders(),
         ]);
     }
@@ -55,7 +65,7 @@ class Applications extends Card
             ->get()
             ->map(fn (Order $order) => [
                 ...$this->formatOrder($order),
-                'waiting' => $order->created_at?->locale('ru')->diffForHumans(),
+                'waiting' => $order->created_at?->locale('uk')->diffForHumans(),
             ])
             ->all();
     }
@@ -83,13 +93,13 @@ class Applications extends Card
     private function statusLabel(string $status): string
     {
         return match ($status) {
-            OrderStatus::NEW->value => 'Новая',
-            OrderStatus::PROCESSING->value => 'В обработке',
-            OrderStatus::WAITING_CUSTOMER->value => 'Ожидает клиента',
-            OrderStatus::CONTRACT_SENT->value => 'Договор отправлен',
-            OrderStatus::AWAITING_PAYMENT->value => 'Ожидает оплаты',
-            OrderStatus::CONFIRMED->value => 'Подтверждена',
-            OrderStatus::REJECTED->value => 'Отклонена',
+            OrderStatus::NEW->value => __('nova::resources.New'),
+            OrderStatus::PROCESSING->value => __('nova::resources.In progress'),
+            OrderStatus::WAITING_CUSTOMER->value => __('nova::resources.Waiting for customer'),
+            OrderStatus::CONTRACT_SENT->value => __('nova::resources.Contract sent'),
+            OrderStatus::AWAITING_PAYMENT->value => __('nova::resources.Awaiting payment'),
+            OrderStatus::CONFIRMED->value => __('nova::resources.Confirmed'),
+            OrderStatus::REJECTED->value => __('nova::resources.Rejected'),
             default => $status,
         };
     }
