@@ -32,6 +32,22 @@ class Menu extends Resource
     ];
 
     /**
+     * Get the plural label for the resource.
+     */
+    public static function label(): string
+    {
+        return 'Меню';
+    }
+
+    /**
+     * Get the singular label for the resource.
+     */
+    public static function singularLabel(): string
+    {
+        return 'Меню';
+    }
+
+    /**
      * Get the fields displayed by the resource.
      *
      * @return array<int, \Laravel\Nova\Fields\Field>
