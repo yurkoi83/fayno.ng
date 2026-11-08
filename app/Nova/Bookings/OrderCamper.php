@@ -13,7 +13,7 @@ use Laravel\Nova\Fields\Textarea;
 
 class OrderCamper extends Resource
 {
-    public static $model = \\App\\Models\\OrderCamper::class;
+    public static $model = \App\Models\OrderCamper::class;
     public static $title = 'id';
     public static $displayInNavigation = false;
 
@@ -22,7 +22,7 @@ class OrderCamper extends Resource
         return [
             ID::make()->sortable(),
             BelongsTo::make(__('nova::resources.Order'), 'order', Order::class)->searchable(),
-            BelongsTo::make(__('nova::resources.Camper'), 'camper', \\App\\Nova\\People\\Camper::class)->searchable(),
+            BelongsTo::make(__('nova::resources.Camper'), 'camper', \App\Nova\People\Camper::class)->searchable(),
 
             Text::make(__('nova::resources.Child full name'), fn () => $this->camper
                 ? trim(implode(' ', array_filter([
