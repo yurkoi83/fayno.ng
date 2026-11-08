@@ -36,7 +36,7 @@ class Menu extends Resource
      */
     public static function label(): string
     {
-        return 'Меню';
+        return __('nova::resources.Menus');
     }
 
     /**
