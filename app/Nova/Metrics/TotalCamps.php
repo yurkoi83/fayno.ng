@@ -14,11 +14,11 @@ class TotalCamps extends Value
     public function calculate(NovaRequest $request)
     {
         return $this->result(Camp::query()->count())
-            ->suffix(' лагерей');
+            ->suffix(' ' . __('nova::resources.Camps count suffix'));
     }
 
     public function name(): string
     {
-        return 'Лагеря';
+        return __('nova::navigation.camps');
     }
 }
