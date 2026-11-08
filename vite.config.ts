@@ -12,8 +12,6 @@ export default defineConfig({
             input: [
                 'resources/css/app.css',
                 'resources/js/app.ts',
-                'resources/css/admin/fayno.css',
-                'resources/js/admin/fayno.js',
             ],
             refresh: true,
             fonts: [
