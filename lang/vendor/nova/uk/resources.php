@@ -2,6 +2,7 @@
 
 return [
     'Password' => 'Пароль',
+    'Internal information' => 'Внутрішня інформація',
     'Duration' => 'Тривалість',
     'Days' => 'днів',
     'Application status' => 'Статус заявки',
