@@ -745,3 +745,100 @@ button[class*="bg-primary"]:hover {
 .fayno-dashboard__empty { padding:16px 0; color:#8190a5; font-size:12px; }
 @media(max-width:1100px) { .fayno-dashboard__stats { grid-template-columns:repeat(2,minmax(0,1fr)); } .fayno-dashboard__middle,.fayno-dashboard__bottom { grid-template-columns:minmax(0,1fr); } }
 @media(max-width:600px) { .fayno-dashboard { padding:14px; } .fayno-dashboard__stats { gap:8px; } .fayno-dashboard__stat { min-height:80px; padding:9px; gap:8px; } .fayno-dashboard__stat-icon { width:34px; height:34px; flex-basis:34px; } .fayno-dashboard__stat strong { font-size:17px; } }
+
+
+/*
+|--------------------------------------------------------------------------
+| Fayno Camp — Order detail layout
+|--------------------------------------------------------------------------
+*/
+
+[dusk="orders-detail-component"] {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr) minmax(280px, .9fr);
+    grid-template-areas:
+        "parent camp status"
+        "children children finance"
+        "comment comment manager"
+        "history history payments";
+    gap: 16px;
+    align-items: start;
+}
+
+[dusk="orders-detail-component"] > [dusk^="fayno-order-"] {
+    min-width: 0;
+    margin-bottom: 0 !important;
+}
+
+[dusk="orders-detail-component"] [dusk="fayno-order-parent-panel"] { grid-area: parent; }
+[dusk="orders-detail-component"] [dusk="fayno-order-camp-panel"] { grid-area: camp; }
+[dusk="orders-detail-component"] [dusk="fayno-order-children-panel"] { grid-area: children; }
+[dusk="orders-detail-component"] [dusk="fayno-order-status-panel"] { grid-area: status; }
+[dusk="orders-detail-component"] [dusk="fayno-order-finance-panel"] { grid-area: finance; }
+[dusk="orders-detail-component"] [dusk="fayno-order-comment-panel"] { grid-area: comment; }
+[dusk="orders-detail-component"] [dusk="fayno-order-manager-panel"] { grid-area: manager; }
+[dusk="orders-detail-component"] [dusk="fayno-order-history-panel"] { grid-area: history; }
+[dusk="orders-detail-component"] [dusk="fayno-order-payments-panel"] { grid-area: payments; }
+
+[dusk="orders-detail-component"] [dusk^="fayno-order-"] > .flex.items-center {
+    min-height: 28px;
+    margin-bottom: 8px;
+}
+
+[dusk="orders-detail-component"] [dusk^="fayno-order-"] > .flex.items-center h1 {
+    color: #183354;
+    font-size: 15px;
+    font-weight: 800;
+}
+
+[dusk="orders-detail-component"] [dusk^="fayno-order-"] .mt-3.py-2.px-6 {
+    overflow: hidden;
+    padding: 10px 16px;
+    border: 1px solid #e4ebf3;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(25, 55, 90, .035);
+}
+
+[dusk="orders-detail-component"] [dusk^="fayno-order-"] .py-4 {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+[dusk="orders-detail-component"] [dusk="fayno-order-status-panel"] .mt-3.py-2.px-6 {
+    border-color: #c8ead5;
+    background: #e9f8ef;
+}
+
+[dusk="orders-detail-component"] [dusk="fayno-order-children-panel"] .mt-3.py-2.px-6 {
+    padding: 8px 12px;
+}
+
+@media (max-width: 1100px) {
+    [dusk="orders-detail-component"] {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        grid-template-areas:
+            "parent camp"
+            "status finance"
+            "children children"
+            "comment manager"
+            "history payments";
+    }
+}
+
+@media (max-width: 700px) {
+    [dusk="orders-detail-component"] {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-areas:
+            "parent"
+            "camp"
+            "status"
+            "finance"
+            "children"
+            "comment"
+            "manager"
+            "history"
+            "payments";
+        gap: 12px;
+    }
+}
