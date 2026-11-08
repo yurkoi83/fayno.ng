@@ -15,7 +15,7 @@ use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Panel;
+use Laravel\Nova\Panel;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Fields\Text;
 
