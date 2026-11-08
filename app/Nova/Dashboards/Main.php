@@ -25,8 +25,8 @@ class Main extends Dashboard
             (new TotalCampers)->width('1/4'),
             (new TotalCamps)->width('1/4'),
             (new TotalPayments)->width('1/4'),
-            (new BookingsPerDay)->width('full'),
-            new CampShiftOccupancy,
+            (new BookingsPerDay)->width('2/3'),
+            (new CampShiftOccupancy)->width('1/3'),
             new Applications,
         ];
     }
