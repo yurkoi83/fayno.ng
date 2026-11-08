@@ -6,6 +6,7 @@ use App\Nova\Resource;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\DateTime;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
@@ -30,6 +31,7 @@ class Booking extends Resource
             Number::make(__('nova::resources.Amount'), 'total_amount')->step(0.01)->sortable(),
             Text::make(__('nova::resources.Currency'), 'currency'),
             DateTime::make(__('nova::resources.Confirmed at'), 'confirmed_at')->nullable(),
+            HasMany::make(__('nova::resources.Payments'), 'payments', \App\Nova\Finance\Payment::class),
         ];
     }
 }

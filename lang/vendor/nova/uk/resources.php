@@ -2,6 +2,16 @@
 
 return [
     'Password' => 'Пароль',
+    'Parent phone' => 'Телефон батьків',
+    'Parent email' => 'Електронна пошта батьків',
+    'Parent city' => 'Місто батьків',
+    'Parent address' => 'Адреса батьків',
+    'Shift dates' => 'Дати зміни',
+    'Children' => 'Діти',
+    'Child full name' => 'ПІБ дитини',
+    'Individual booking' => 'Бронювання дитини',
+    'Price' => 'Вартість',
+    'Discount' => 'Знижка',
     'Places' => 'місць',
     'Of' => 'із',
     'Brand tagline' => 'Дитинство, що надихає на більше',
