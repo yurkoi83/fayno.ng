@@ -21,6 +21,15 @@ class Camper extends Resource
     public static function label(): string { return __('nova::navigation.campers'); }
     public static function singularLabel(): string { return __('nova::resources.Camper'); }
 
+    public function title()
+    {
+        return trim(implode(' ', array_filter([
+            $this->last_name,
+            $this->first_name,
+            $this->middle_name,
+        ])));
+    }
+
     public function fields(Request $request): array
     {
         return [
