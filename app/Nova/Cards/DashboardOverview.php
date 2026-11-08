@@ -24,6 +24,36 @@ class DashboardOverview extends Card
         parent::__construct();
 
         $this->withMeta([
+            'translations' => [
+                'title' => __('nova::resources.Camp overview'),
+                'description' => __('nova::resources.Manage bookings and programs in one place'),
+                'activeCamps' => __('nova::resources.Active camps'),
+                'bookings' => __('nova::resources.Bookings'),
+                'participants' => __('nova::resources.Participants'),
+                'receivedPayments' => __('nova::resources.Received payments'),
+                'bookingDynamics' => __('nova::resources.Booking dynamics'),
+                'lastMonths' => __('nova::resources.Last 10 months'),
+                'occupancy' => __('nova::resources.Camp occupancy'),
+                'activeShifts' => __('nova::resources.Active shifts'),
+                'noActiveShifts' => __('nova::resources.No active shifts'),
+                'latestBookings' => __('nova::resources.Latest bookings'),
+                'camper' => __('nova::resources.Camper'),
+                'campShift' => __('nova::resources.Camp shift'),
+                'dates' => __('nova::resources.Dates'),
+                'status' => __('nova::resources.Status'),
+                'amount' => __('nova::resources.Amount'),
+                'paid' => __('nova::resources.Paid at'),
+                'noBookings' => __('nova::resources.No bookings yet'),
+                'needsAttention' => __('nova::resources.Needs attention'),
+                'unanswered' => __('nova::resources.Applications without response'),
+                'contactParents' => __('nova::resources.Contact parents'),
+                'pendingPayments' => __('nova::resources.Pending payments'),
+                'checkPayments' => __('nova::resources.Check incoming payments'),
+                'notSpecified' => __('nova::resources.Client not specified'),
+                'confirmed' => __('nova::resources.Confirmed'),
+                'cancelled' => __('nova::resources.Cancelled'),
+                'waiting' => __('nova::resources.Waiting'),
+            ],
             'stats' => [
                 'bookings' => Booking::query()->count(),
                 'campers' => Camper::query()->count(),
@@ -66,7 +96,7 @@ class DashboardOverview extends Card
             $date = $from->copy()->addMonths($offset);
 
             return [
-                'label' => $date->locale('ru')->translatedFormat('M'),
+                'label' => $date->locale('uk')->translatedFormat('M'),
                 'value' => (int) ($counts[$date->format('Y-m')]->total ?? 0),
             ];
         })->all();
@@ -111,15 +141,15 @@ class DashboardOverview extends Card
 
                 return [
                     'id' => $booking->getKey(),
-                    'camper' => trim(implode(' ', array_filter([$camper?->first_name, $camper?->last_name]))) ?: 'Участник не указан',
+                    'camper' => trim(implode(' ', array_filter([$camper?->first_name, $camper?->last_name]))) ?: __('nova::resources.Client not specified'),
                     'camp' => $shift?->camp?->name ?? '—',
                     'shift' => $shift?->name ?? '—',
                     'dates' => $shift?->starts_at?->format('d.m.Y').' — '.$shift?->ends_at?->format('d.m.Y'),
                     'status' => $booking->status,
                     'statusLabel' => match ($booking->status) {
-                        BookingStatus::CONFIRMED->value => 'Подтверждено',
-                        BookingStatus::CANCELLED->value => 'Отменено',
-                        default => 'Ожидает',
+                        BookingStatus::CONFIRMED->value => __('nova::resources.Confirmed'),
+                        BookingStatus::CANCELLED->value => __('nova::resources.Cancelled'),
+                        default => __('nova::resources.Waiting'),
                     },
                     'amount' => (float) $booking->total_amount,
                     'paid' => (float) $booking->payments
