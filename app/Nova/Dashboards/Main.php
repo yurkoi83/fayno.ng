@@ -16,6 +16,7 @@ class Main extends Dashboard
     {
         return [
             new DashboardOverview,
+            new \App\Nova\Cards\Applications,
         ];
     }
 }
