@@ -1,3 +1,4 @@
+import '../../css/admin/fayno.css';
 import Applications from './components/Applications.vue';
 import CampShiftOccupancy from './components/CampShiftOccupancy.vue';
 import DashboardOverview from './components/DashboardOverview.vue';
