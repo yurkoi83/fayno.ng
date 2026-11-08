@@ -791,7 +791,7 @@ button[class*="bg-primary"]:hover {
     margin-bottom: 8px;
 }
 
-[dusk="orders-detail-component"] [dusk^="fayno-order-"] > .flex.items-center h1 {
+[dusk="orders-detail-component"] [dusk^="fayno-order-"]:not([dusk="fayno-order-header-panel"]) > .flex.items-center h1 {
     color: #183354;
     font-size: 15px;
     font-weight: 800;
