@@ -757,6 +757,7 @@ button[class*="bg-primary"]:hover {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr) minmax(280px, .9fr);
     grid-template-areas:
+        "header header header"
         "parent camp status"
         "children children finance"
         "comment comment manager"
@@ -770,6 +771,9 @@ button[class*="bg-primary"]:hover {
     margin-bottom: 0 !important;
 }
 
+[dusk="orders-detail-component"] [dusk="fayno-order-header-panel"] { grid-area: header; }
+[dusk="orders-detail-component"] [dusk="fayno-order-header-panel"] h1 { color: #10284b; font-size: 27px; font-weight: 800; }
+[dusk="orders-detail-component"] [dusk="fayno-order-header-panel"] .ml-auto { gap: 8px; }
 [dusk="orders-detail-component"] [dusk="fayno-order-parent-panel"] { grid-area: parent; }
 [dusk="orders-detail-component"] [dusk="fayno-order-camp-panel"] { grid-area: camp; }
 [dusk="orders-detail-component"] [dusk="fayno-order-children-panel"] { grid-area: children; }
@@ -818,6 +822,7 @@ button[class*="bg-primary"]:hover {
     [dusk="orders-detail-component"] {
         grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
         grid-template-areas:
+            "header header"
             "parent camp"
             "status finance"
             "children children"
@@ -830,6 +835,7 @@ button[class*="bg-primary"]:hover {
     [dusk="orders-detail-component"] {
         grid-template-columns: minmax(0, 1fr);
         grid-template-areas:
+            "header"
             "parent"
             "camp"
             "status"
