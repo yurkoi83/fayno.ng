@@ -30,7 +30,7 @@ class OrderCamper extends Resource
                     $this->camper->first_name,
                     $this->camper->middle_name,
                 ])))
-                : null)->onlyOnDetail(),
+                : null),
             Text::make(__('nova::resources.Birth date'), fn () => $this->camper?->birth_date?->format('d.m.Y')),
             Text::make(__('nova::resources.Gender'), fn () => $this->camper?->gender_id),
             Textarea::make(__('nova::resources.Notes'), fn () => $this->camper?->notes),
