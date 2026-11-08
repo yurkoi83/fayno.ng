@@ -17,20 +17,20 @@ class Payment extends Resource
     public static $search = ['id', 'transaction_id', 'status'];
     public static $group = 'Платежі';
 
-    public static function label(): string { return 'Платежі'; }
-    public static function singularLabel(): string { return 'Платіж'; }
+    public static function label(): string { return __('nova::navigation.payments'); }
+    public static function singularLabel(): string { return __('nova::resources.Payment'); }
 
     public function fields(Request $request): array
     {
         return [
             ID::make()->sortable(),
-            BelongsTo::make('Бронювання', 'booking', \App\Nova\Bookings\Booking::class)->searchable(),
-            Number::make('Сума', 'amount')->step(0.01)->sortable()->rules('required', 'numeric', 'min:0'),
-            Text::make('Валюта', 'currency')->rules('required', 'size:3'),
-            Text::make('Статус', 'status')->sortable(),
-            Text::make('Спосіб оплати', 'payment_method')->nullable(),
-            Text::make('ID транзакції', 'transaction_id')->nullable()->hideFromIndex(),
-            DateTime::make('Оплачено', 'paid_at')->nullable(),
+            BelongsTo::make(__('nova::resources.Bookings'), 'booking', \App\Nova\Bookings\Booking::class)->searchable(),
+            Number::make(__('nova::resources.Amount'), 'amount')->step(0.01)->sortable()->rules('required', 'numeric', 'min:0'),
+            Text::make(__('nova::resources.Currency'), 'currency')->rules('required', 'size:3'),
+            Text::make(__('nova::resources.Status'), 'status')->sortable(),
+            Text::make(__('nova::resources.Payment method'), 'payment_method')->nullable(),
+            Text::make(__('nova::resources.Transaction ID'), 'transaction_id')->nullable()->hideFromIndex(),
+            DateTime::make(__('nova::resources.Paid at'), 'paid_at')->nullable(),
         ];
     }
 }
