@@ -2,6 +2,16 @@
 
 return [
     'Password' => 'Пароль',
+    'Internal information' => 'Внутрішня інформація',
+    'Duration' => 'Тривалість',
+    'Days' => 'днів',
+    'Application status' => 'Статус заявки',
+    'Parent comment' => 'Коментар батьків',
+    'Responsible manager' => 'Відповідальний менеджер',
+    'Application timeline' => 'Хронологія заявки',
+    'Last updated' => 'Останнє оновлення',
+    'Response provided' => 'Відповідь надано',
+    'Last payment' => 'Останній платіж',
     'Parent phone' => 'Телефон батьків',
     'Parent email' => 'Електронна пошта батьків',
     'Parent city' => 'Місто батьків',

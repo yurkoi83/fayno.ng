@@ -14,9 +14,9 @@ use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Panel;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Panel;
 
 class Order extends Resource
 {
@@ -31,21 +31,20 @@ class Order extends Resource
     public function fields(Request $request): array
     {
         return [
-            ID::make()->sortable(),
+            ID::make()->sortable()->hideFromDetail(),
 
-            Panel::make(__('nova::resources.Application details'), [
-                Text::make(__('nova::resources.Number'), 'number')->sortable()->rules('required'),
-                Text::make(__('nova::resources.Status'), fn () => $this->statusLabel())->onlyOnDetail(),
-                Text::make(__('nova::resources.Created at'), fn () => $this->created_at?->format('d.m.Y H:i'))->onlyOnDetail(),
-            ]),
+            Panel::make('Заявка № '.$this->number)
+                ->withAttribute('fayno-order-header')
+                ->withToolbar(),
 
             Panel::make(__('nova::resources.Parent details'), [
                 BelongsTo::make(__('nova::resources.Parent'), 'customer', Customer::class)->searchable(),
                 Text::make(__('nova::resources.Parent phone'), fn () => $this->customer?->phone)->onlyOnDetail(),
                 Text::make(__('nova::resources.Parent email'), fn () => $this->customer?->email)->onlyOnDetail(),
-                Text::make(__('nova::resources.Parent city'), fn () => $this->customer?->city)->onlyOnDetail(),
-                Text::make(__('nova::resources.Parent address'), fn () => $this->customer?->address)->onlyOnDetail(),
-            ]),
+                Text::make(__('nova::resources.Parent address'), fn () => $this->customer
+                    ? trim(implode(', ', array_filter([$this->customer->city, $this->customer->address])))
+                    : null)->onlyOnDetail(),
+            ])->withAttribute('fayno-order-parent'),
 
             Panel::make(__('nova::resources.Camp and shift'), [
                 BelongsTo::make(__('nova::resources.Camp shift'), 'campShift', CampShift::class)->searchable(),
@@ -53,26 +52,52 @@ class Order extends Resource
                 Text::make(__('nova::resources.Shift dates'), fn () => $this->campShift
                     ? $this->campShift->starts_at?->format('d.m.Y').' — '.$this->campShift->ends_at?->format('d.m.Y')
                     : null)->onlyOnDetail(),
-            ]),
+                Text::make(__('nova::resources.Duration'), fn () => $this->campShift
+                    ? $this->campShift->starts_at?->diffInDays($this->campShift->ends_at).' '.__('nova::resources.Days')
+                    : null)->onlyOnDetail(),
+            ])->withAttribute('fayno-order-camp'),
 
             Panel::make(__('nova::resources.Children'), [
                 HasMany::make(__('nova::resources.Children'), 'orderCampers', OrderCamper::class),
-            ]),
+            ])->withAttribute('fayno-order-children'),
+
+            Panel::make(__('nova::resources.Application status'), [
+                Text::make(__('nova::resources.Status'), fn () => $this->statusLabel())->onlyOnDetail(),
+                Text::make(__('nova::resources.Created at'), fn () => $this->created_at?->format('d.m.Y H:i'))->onlyOnDetail(),
+            ])->withAttribute('fayno-order-status'),
 
             Panel::make(__('nova::resources.Financial information'), [
                 Text::make(__('nova::resources.Total amount'), fn () => $this->money($this->totalAmount()))->onlyOnDetail(),
                 Text::make(__('nova::resources.Paid'), fn () => $this->money($this->paidAmount()))->onlyOnDetail(),
                 Text::make(__('nova::resources.Balance'), fn () => $this->money(max(0, $this->totalAmount() - $this->paidAmount())))->onlyOnDetail(),
-            ]),
+            ])->withAttribute('fayno-order-finance'),
 
-            Panel::make(__('nova::resources.Processing and comments'), [
+            Panel::make(__('nova::resources.Parent comment'), [
+                Textarea::make(__('nova::resources.Comment'), 'comment')->alwaysShow()->hideFromIndex(),
+            ])->withAttribute('fayno-order-comment'),
+
+            Panel::make(__('nova::resources.Responsible manager'), [
                 BelongsTo::make(__('nova::resources.Assigned to'), 'assignedTo', User::class)->nullable()->searchable(),
                 DateTime::make(__('nova::resources.Responded at'), 'responded_at')->nullable(),
+            ])->withAttribute('fayno-order-manager'),
+
+            Panel::make(__('nova::resources.Application timeline'), [
+                Text::make(__('nova::resources.Created at'), fn () => $this->created_at?->format('d.m.Y H:i'))->onlyOnDetail(),
+                Text::make(__('nova::resources.Last updated'), fn () => $this->updated_at?->format('d.m.Y H:i'))->onlyOnDetail(),
+                Text::make(__('nova::resources.Response provided'), fn () => $this->responded_at?->format('d.m.Y H:i') ?: '—')->onlyOnDetail(),
+            ])->withAttribute('fayno-order-history')->collapsable(),
+
+            Panel::make(__('nova::resources.Payments'), [
+                Text::make(__('nova::resources.Paid'), fn () => $this->money($this->paidAmount()))->onlyOnDetail(),
+                Text::make(__('nova::resources.Awaiting payment'), fn () => $this->money($this->pendingAmount()))->onlyOnDetail(),
+                Text::make(__('nova::resources.Last payment'), fn () => $this->lastPaymentLabel())->onlyOnDetail(),
+            ])->withAttribute('fayno-order-payments'),
+
+            Panel::make(__('nova::resources.Internal information'), [
                 Text::make(__('nova::resources.Source'), 'source')->hideFromIndex(),
                 Text::make(__('nova::resources.Departure city'), 'departure_city')->hideFromIndex(),
-                Textarea::make(__('nova::resources.Comment'), 'comment')->alwaysShow()->hideFromIndex(),
                 Textarea::make(__('nova::resources.Admin notes'), 'admin_notes')->alwaysShow()->hideFromIndex(),
-            ]),
+            ])->withAttribute('fayno-order-internal')->collapsedByDefault(),
         ];
     }
 
@@ -101,6 +126,28 @@ class Order extends Resource
             ->whereHas('booking.orderCamper', fn ($query) => $query->where('order_id', $this->resource->getKey()))
             ->where('status', PaymentStatus::PAID->value)
             ->sum('amount');
+    }
+
+    protected function pendingAmount(): float
+    {
+        return (float) Payment::query()
+            ->whereHas('booking.orderCamper', fn ($query) => $query->where('order_id', $this->resource->getKey()))
+            ->where('status', PaymentStatus::PENDING->value)
+            ->sum('amount');
+    }
+
+    protected function lastPaymentLabel(): string
+    {
+        $payment = Payment::query()
+            ->whereHas('booking.orderCamper', fn ($query) => $query->where('order_id', $this->resource->getKey()))
+            ->latest('paid_at')
+            ->first();
+
+        if (! $payment) {
+            return '—';
+        }
+
+        return trim(($payment->paid_at?->format('d.m.Y H:i') ?? '').' '.$payment->payment_method);
     }
 
     protected function money(float $amount): string
