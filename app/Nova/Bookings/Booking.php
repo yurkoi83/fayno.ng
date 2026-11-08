@@ -16,6 +16,7 @@ class Booking extends Resource
     public static $title = 'id';
     public static $search = ['id', 'status'];
     public static $group = 'Бронювання';
+    public static $displayInNavigation = false;
 
     public static function label(): string { return 'Бронювання'; }
     public static function singularLabel(): string { return 'Бронювання'; }
