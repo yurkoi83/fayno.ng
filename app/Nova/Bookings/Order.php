@@ -73,7 +73,7 @@ class Order extends Resource
             ])->withAttribute('fayno-order-finance'),
 
             Panel::make(__('nova::resources.Parent comment'), [
-                Textarea::make(__('nova::resources.Comment'), 'comment')->alwaysShow()->onlyOnDetail(),
+                Textarea::make(__('nova::resources.Comment'), 'comment')->alwaysShow()->hideFromIndex(),
             ])->withAttribute('fayno-order-comment'),
 
             Panel::make(__('nova::resources.Responsible manager'), [
@@ -92,6 +92,12 @@ class Order extends Resource
                 Text::make(__('nova::resources.Awaiting payment'), fn () => $this->money($this->pendingAmount()))->onlyOnDetail(),
                 Text::make(__('nova::resources.Last payment'), fn () => $this->lastPaymentLabel())->onlyOnDetail(),
             ])->withAttribute('fayno-order-payments'),
+
+            Panel::make(__('nova::resources.Internal information'), [
+                Text::make(__('nova::resources.Source'), 'source')->hideFromIndex(),
+                Text::make(__('nova::resources.Departure city'), 'departure_city')->hideFromIndex(),
+                Textarea::make(__('nova::resources.Admin notes'), 'admin_notes')->alwaysShow()->hideFromIndex(),
+            ])->withAttribute('fayno-order-internal')->collapsable(),
         ];
     }
 
