@@ -33,17 +33,31 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             \App\Nova\Users\PermissionPolicy::class
         );
 
+        Nova::resources([
+            \App\Nova\Camps\Camp::class,
+            \App\Nova\Camps\CampShift::class,
+            \App\Nova\Bookings\Order::class,
+            \App\Nova\Bookings\Booking::class,
+            \App\Nova\Bookings\OrderCamper::class,
+            \App\Nova\People\Camper::class,
+            \App\Nova\People\Customer::class,
+            \App\Nova\Finance\Payment::class,
+            \App\Nova\Settings\Setting::class,
+        ]);
+
         Nova::mainMenu(function (Request $request) {
             return [
-                MenuSection::make('Главная', [
-                    MenuItem::dashboard(\App\Nova\Dashboards\Main::class),
-                ])->icon('chart-bar'),
-
+                MenuItem::dashboard(\App\Nova\Dashboards\Main::class),
+                MenuItem::resource(\App\Nova\Camps\Camp::class),
+                MenuItem::resource(\App\Nova\Bookings\Order::class),
+                MenuItem::resource(\App\Nova\People\Camper::class),
+                MenuItem::resource(\App\Nova\People\Customer::class),
+                MenuItem::resource(\App\Nova\Finance\Payment::class),
                 MenuSection::make('Контент', [
                     MenuItem::resource(\App\Nova\Page::class),
                     MenuItem::resource(\App\Nova\Menu::class),
                 ])->icon('document-text')->collapsable(),
-
+                MenuItem::resource(\App\Nova\Settings\Setting::class),
                 MenuSection::make('Доступ и пользователи', [
                     MenuItem::resource(\App\Nova\Users\User::class),
                     MenuItem::resource(\App\Nova\Users\Role::class),
