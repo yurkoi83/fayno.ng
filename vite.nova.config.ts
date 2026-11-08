@@ -5,6 +5,9 @@ export default defineConfig({
     plugins: [vue()],
     define: {
         'process.env.NODE_ENV': JSON.stringify('production'),
+        'process.env': JSON.stringify({
+            NODE_ENV: 'production',
+        }),
     },
     build: {
         outDir: 'public/js',
