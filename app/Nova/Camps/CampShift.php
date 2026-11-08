@@ -18,23 +18,23 @@ class CampShift extends Resource
     public static $group = 'Табори';
     public static $displayInNavigation = false;
 
-    public static function label(): string { return 'Зміни'; }
-    public static function singularLabel(): string { return 'Зміна'; }
+    public static function label(): string { return __('nova::resources.Camp shifts'); }
+    public static function singularLabel(): string { return __('nova::resources.Camp shift'); }
 
     public function fields(Request $request): array
     {
         return [
             ID::make()->sortable(),
-            BelongsTo::make('Табір', 'camp', Camp::class)->searchable()->sortable(),
-            Text::make('Назва', 'name')->sortable()->rules('required'),
-            Date::make('Початок', 'starts_at')->sortable()->rules('required'),
-            Date::make('Завершення', 'ends_at')->sortable()->rules('required'),
-            Number::make('Місткість', 'capacity')->min(1)->rules('required', 'integer', 'min:1'),
-            Number::make('Звичайна ціна', 'regular_price')->step(0.01)->rules('required', 'numeric', 'min:0'),
-            Number::make('Рання ціна', 'early_price')->step(0.01)->nullable(),
-            Date::make('Раннє бронювання до', 'early_booking_until')->nullable(),
-            Text::make('Валюта', 'currency')->rules('required', 'size:3'),
-            Text::make('Статус', 'status')->sortable()->rules('required'),
+            BelongsTo::make(__('nova::resources.Camp'), 'camp', Camp::class)->searchable()->sortable(),
+            Text::make(__('nova::resources.Name'), 'name')->sortable()->rules('required'),
+            Date::make(__('nova::resources.Start date'), 'starts_at')->sortable()->rules('required'),
+            Date::make(__('nova::resources.End date'), 'ends_at')->sortable()->rules('required'),
+            Number::make(__('nova::resources.Capacity'), 'capacity')->min(1)->rules('required', 'integer', 'min:1'),
+            Number::make(__('nova::resources.Regular price'), 'regular_price')->step(0.01)->rules('required', 'numeric', 'min:0'),
+            Number::make(__('nova::resources.Early price'), 'early_price')->step(0.01)->nullable(),
+            Date::make(__('nova::resources.Early booking until'), 'early_booking_until')->nullable(),
+            Text::make(__('nova::resources.Currency'), 'currency')->rules('required', 'size:3'),
+            Text::make(__('nova::resources.Status'), 'status')->sortable()->rules('required'),
         ];
     }
 }
