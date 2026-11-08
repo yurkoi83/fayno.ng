@@ -14,11 +14,11 @@ class TotalBookings extends Value
     public function calculate(NovaRequest $request)
     {
         return $this->result(Booking::query()->count())
-            ->suffix(' бронирований');
+            ->suffix(' ' . __('nova::resources.Bookings count suffix'));
     }
 
     public function name(): string
     {
-        return 'Бронирования';
+        return __('nova::resources.Bookings');
     }
 }
