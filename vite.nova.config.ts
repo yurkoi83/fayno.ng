@@ -3,6 +3,9 @@ import { defineConfig } from 'vite-plus';
 
 export default defineConfig({
     plugins: [vue()],
+    define: {
+        'process.env.NODE_ENV': JSON.stringify('production'),
+    },
     build: {
         outDir: 'public/js',
         emptyOutDir: false,
@@ -11,6 +14,7 @@ export default defineConfig({
             name: 'FaynoAdmin',
             formats: ['iife'],
             fileName: () => 'fayno-admin.js',
+            cssFileName: 'fayno-admin',
         },
     },
 });
