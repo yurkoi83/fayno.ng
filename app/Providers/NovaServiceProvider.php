@@ -21,6 +21,18 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     {
         parent::boot();
 
+        $registrar = app(\Spatie\Permission\PermissionRegistrar::class);
+
+        Gate::policy(
+            $registrar->getRoleClass(),
+            \App\Nova\Users\RolePolicy::class
+        );
+
+        Gate::policy(
+            $registrar->getPermissionClass(),
+            \App\Nova\Users\PermissionPolicy::class
+        );
+
         Nova::mainMenu(function (Request $request) {
             return [
                 MenuSection::make('Главная', [
