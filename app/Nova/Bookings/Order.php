@@ -2,7 +2,6 @@
 
 namespace App\Nova\Bookings;
 
-use App\Enums\Gender;
 use App\Enums\OrderStatus;
 use App\Enums\PaymentStatus;
 use App\Models\Payment;
@@ -93,20 +92,20 @@ class Order extends Resource
 
     protected function totalAmount(): float
     {
-        return (float) $this->bookings()->sum('total_amount');
+        return (float) $this->resource->bookings()->sum('total_amount');
     }
 
     protected function paidAmount(): float
     {
         return (float) Payment::query()
-            ->whereHas('booking.orderCamper', fn ($query) => $query->where('order_id', $this->getKey()))
+            ->whereHas('booking.orderCamper', fn ($query) => $query->where('order_id', $this->resource->getKey()))
             ->where('status', PaymentStatus::PAID->value)
             ->sum('amount');
     }
 
     protected function money(float $amount): string
     {
-        $currency = $this->orderCampers()->value('currency') ?: 'UAH';
+        $currency = $this->resource->orderCampers()->value('currency') ?: 'UAH';
 
         return number_format($amount, 2, ',', ' ').' '.$currency;
     }
