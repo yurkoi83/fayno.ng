@@ -18,6 +18,7 @@
 /node_modules
 /public/build
 /public/hot
+/public/js/fayno-admin.js
 /public/storage
 /storage/*.key
 /storage/pail
@@ -26,4 +27,3 @@ Homestead.json
 Homestead.yaml
 Thumbs.db
 /docker/mysql/datadir
-/docker/redis/data
