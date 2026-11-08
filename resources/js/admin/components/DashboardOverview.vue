@@ -27,7 +27,7 @@
                 <div class="fayno-panel__heading"><h2>{{ card.translations.occupancy }}</h2><span>{{ card.translations.activeShifts }}</span></div>
                 <div v-if="card.shifts.length">
                     <div v-for="shift in card.shifts" :key="shift.id" class="fayno-dashboard__shift">
-                        <div class="fayno-dashboard__shift-top"><div><strong>{{ shift.camp }}</strong><small>{{ shift.name }} · {{ shift.booked }} {{ shift.capacity }} {{ card.translations.places }}</small></div><b>{{ shift.percentage }}%</b></div>
+                        <div class="fayno-dashboard__shift-top"><div><strong>{{ shift.camp }}</strong><small>{{ shift.name }} · {{ shift.booked }} {{ card.translations.of }} {{ shift.capacity }} {{ card.translations.places }}</small></div><b>{{ shift.percentage }}%</b></div>
                         <div class="fayno-progress"><span :style="{ width: shift.percentage + '%' }"></span></div>
                     </div>
                 </div>
@@ -60,7 +60,7 @@
                     <div class="fayno-dashboard__alert"><b class="is-red">{{ card.attention.unanswered }}</b><div><strong>{{ card.attention.unanswered }} {{ card.translations.unanswered }}</strong><small>{{ card.translations.contactParents }}</small></div></div>
                     <div class="fayno-dashboard__alert"><b class="is-orange">{{ card.attention.pendingPayments }}</b><div><strong>{{ card.attention.pendingPayments }} {{ card.translations.pendingPayments }}</strong><small>{{ card.translations.checkPayments }}</small></div></div>
                 </article>
-                <article class="fayno-dashboard__banner"><span>FAYNO CAMP</span><strong>Детство, которое вдохновляет на большее</strong></article>
+                <article class="fayno-dashboard__banner"><span>FAYNO CAMP</span><strong>{{ card.translations.tagline }}</strong></article>
             </div>
         </section>
     </div>
