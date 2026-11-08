@@ -694,3 +694,54 @@ button[class*="bg-primary"]:hover {
         gap: 8px 12px;
     }
 }
+
+
+/* Fayno Camp dashboard — reference layout */
+.fayno-dashboard { display:flex; flex-direction:column; gap:16px; padding:24px; color:#10284b; }
+.fayno-dashboard__intro h1 { margin:0; font-size:28px; font-weight:800; color:#10284b; }
+.fayno-dashboard__intro p { margin:3px 0 0; color:#71829c; font-size:13px; }
+.fayno-dashboard__stats { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px; }
+.fayno-dashboard__stat,.fayno-panel { min-width:0; border:1px solid #e4ebf3; border-radius:12px; background:#fff; box-shadow:0 2px 8px rgba(25,55,90,.035); }
+.fayno-dashboard__stat { display:flex; align-items:center; gap:12px; min-height:100px; padding:16px; }
+.fayno-dashboard__stat-icon { display:grid; width:44px; height:44px; flex:0 0 44px; place-items:center; border-radius:50%; background:#e7f6eb; color:#16834b; font-size:23px; font-weight:800; }
+.fayno-dashboard__stat-icon.is-blue { background:#e5f1ff; color:#246dc5; }
+.fayno-dashboard__stat-icon.is-purple { background:#f0eaff; color:#6743c6; }
+.fayno-dashboard__stat-icon.is-orange { background:#fff0d7; color:#c47a12; }
+.fayno-dashboard__stat-label { display:block; color:#61738e; font-size:12px; font-weight:700; }
+.fayno-dashboard__stat strong { display:block; margin-top:4px; color:#10284b; font-size:23px; font-weight:800; }
+.fayno-dashboard__middle,.fayno-dashboard__bottom { display:grid; grid-template-columns:minmax(0,1.85fr) minmax(290px,.95fr); gap:16px; }
+.fayno-panel { padding:18px; }
+.fayno-panel__heading { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:14px; }
+.fayno-panel__heading h2 { margin:0; color:#10284b; font-size:16px; font-weight:800; }
+.fayno-panel__heading span { color:#71829c; font-size:11px; }
+.fayno-chart { display:block; width:100%; height:205px; }
+.fayno-chart__grid { stroke:#e9eff5; stroke-width:1; }
+.fayno-chart__line { fill:none; stroke:#269760; stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round; }
+.fayno-chart__point { fill:#269760; stroke:white; stroke-width:1.5; }
+.fayno-chart__labels { display:flex; justify-content:space-between; color:#71829c; font-size:10px; }
+.fayno-dashboard__shift { padding:11px 0; border-top:1px solid #edf1f5; }
+.fayno-dashboard__shift-top { display:flex; justify-content:space-between; gap:10px; }
+.fayno-dashboard__shift-top strong,.fayno-dashboard__table td strong { display:block; color:#183354; font-size:11px; }
+.fayno-dashboard__shift-top small,.fayno-dashboard__table td small { display:block; margin-top:3px; color:#8190a5; font-size:10px; }
+.fayno-dashboard__shift-top b { color:#10284b; font-size:12px; }
+.fayno-progress { height:7px; margin-top:9px; overflow:hidden; border-radius:20px; background:#edf1f5; }
+.fayno-progress span { display:block; height:100%; border-radius:inherit; background:#299766; }
+.fayno-table-wrap { overflow-x:auto; }
+.fayno-dashboard__table { min-width:620px; width:100%; border-collapse:collapse; }
+.fayno-dashboard__table th { padding:10px 8px; background:#f7f9fb; color:#61738e; font-size:10px; text-align:left; }
+.fayno-dashboard__table td { padding:11px 8px; border-bottom:1px solid #edf1f5; color:#263e60; font-size:11px; vertical-align:middle; }
+.fayno-booking-status { display:inline-block; padding:4px 8px; border-radius:20px; background:#fff1dc; color:#b87516; font-size:10px; white-space:nowrap; }
+.fayno-booking-status.is-confirmed { background:#e8f7ed; color:#18834d; }
+.fayno-booking-status.is-cancelled { background:#fcebea; color:#ba5148; }
+.fayno-dashboard__aside { display:flex; flex-direction:column; gap:14px; }
+.fayno-dashboard__alert { display:flex; align-items:center; gap:12px; padding:12px 0; border-top:1px solid #edf1f5; }
+.fayno-dashboard__alert>b { display:grid; width:40px; height:40px; flex:0 0 40px; place-items:center; border-radius:50%; background:#ffebe9; color:#c83d37; font-size:16px; }
+.fayno-dashboard__alert>b.is-orange { background:#fff0d9; color:#bb7413; }
+.fayno-dashboard__alert strong { display:block; color:#183354; font-size:11px; }
+.fayno-dashboard__alert small { display:block; margin-top:3px; color:#8190a5; font-size:10px; }
+.fayno-dashboard__banner { display:flex; min-height:130px; flex-direction:column; justify-content:flex-end; gap:8px; padding:18px; border-radius:10px; background:linear-gradient(120deg,#123e37,#2c7559 55%,#a8b99a); color:white; }
+.fayno-dashboard__banner span { font-size:10px; font-weight:800; letter-spacing:.15em; }
+.fayno-dashboard__banner strong { max-width:260px; font-size:17px; line-height:1.25; }
+.fayno-dashboard__empty { padding:16px 0; color:#8190a5; font-size:12px; }
+@media(max-width:1100px) { .fayno-dashboard__stats { grid-template-columns:repeat(2,minmax(0,1fr)); } .fayno-dashboard__middle,.fayno-dashboard__bottom { grid-template-columns:minmax(0,1fr); } }
+@media(max-width:600px) { .fayno-dashboard { padding:14px; } .fayno-dashboard__stats { gap:8px; } .fayno-dashboard__stat { min-height:80px; padding:9px; gap:8px; } .fayno-dashboard__stat-icon { width:34px; height:34px; flex-basis:34px; } .fayno-dashboard__stat strong { font-size:17px; } }
