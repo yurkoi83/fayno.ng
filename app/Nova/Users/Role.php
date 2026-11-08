@@ -41,7 +41,7 @@ class Role extends Resource
 
     public static $with = ['permissions'];
 
-    public static $group = 'Доступ и пользователи';
+    public static $group = __('nova::navigation.access');
 
 //    public static function getModel()
 //    {
