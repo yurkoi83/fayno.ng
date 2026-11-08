@@ -16,6 +16,7 @@ class CampShift extends Resource
     public static $title = 'name';
     public static $search = ['id', 'name'];
     public static $group = 'Табори';
+    public static $displayInNavigation = false;
 
     public static function label(): string { return 'Зміни'; }
     public static function singularLabel(): string { return 'Зміна'; }
