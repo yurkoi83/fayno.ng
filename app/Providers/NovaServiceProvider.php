@@ -4,7 +4,6 @@ namespace App\Providers;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Vite;
 use Laravel\Fortify\Features;
 use Laravel\Nova\Events\ServingNova;
 use Laravel\Nova\Nova;
@@ -22,7 +21,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         Nova::serving(function (ServingNova $event) {
             Nova::style(
                 'fayno-theme',
-                Vite::asset('resources/css/admin/fayno.css')
+                asset('js/fayno-admin.css')
             );
 
             Nova::script(
