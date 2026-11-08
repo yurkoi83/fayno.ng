@@ -40,6 +40,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 ])->icon('chart-bar'),
 
                 MenuSection::make('Контент', [
+                    MenuItem::resource(\App\Nova\Page::class),
                     MenuItem::resource(\App\Nova\Menu::class),
                 ])->icon('document-text')->collapsable(),
 
