@@ -4,7 +4,7 @@ namespace App\Nova\Users;
 
 use App\Nova\Resource;
 use Laravel\Nova\Auth\PasswordValidationRules;
-use Laravel\Nova\Fields\Gravatar;
+use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Password;
 use Laravel\Nova\Fields\Text;
@@ -49,7 +49,7 @@ class User extends Resource
         return [
             ID::make()->sortable(),
 
-            Gravatar::make()->maxWidth(50),
+            Image::make(__('nova::resources.Avatar'), 'avatar_path')->disk('public')->path('avatars')->prunable()->maxWidth(50),
 
             Text::make(__('nova::resources.Name'))
                 ->sortable()
