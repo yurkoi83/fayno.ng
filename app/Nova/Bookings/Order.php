@@ -110,7 +110,11 @@ class Order extends Resource
                 Text::make(__('nova::resources.Total amount'), fn () => $this->money($this->totalAmount()))->onlyOnDetail(),
                 Text::make(__('nova::resources.Paid'), fn () => $this->money($this->paidAmount()))->onlyOnDetail(),
                 Text::make(__('nova::resources.Balance'), fn () => $this->money(max(0, $this->totalAmount() - $this->paidAmount())))->onlyOnDetail(),
-                Text::make(__('nova::resources.Payment progress'), fn () => $this->paymentProgress().'%')->onlyOnDetail(),
+                Text::make(__('nova::resources.Payment progress'), fn () => sprintf(
+                    '<div class="fayno-payment-progress"><div class="fayno-payment-progress__track"><span style="width:%d%%"></span></div><strong>%d%%</strong></div>',
+                    $this->paymentProgress(),
+                    $this->paymentProgress(),
+                ))->asHtml()->onlyOnDetail(),
             ])->withAttribute('fayno-order-finance'),
 
             Panel::make(__('nova::resources.Parent comment'), [
@@ -123,10 +127,8 @@ class Order extends Resource
             ])->withAttribute('fayno-order-manager'),
 
             Panel::make(__('nova::resources.Application timeline'), [
-                Text::make(__('nova::resources.Created at'), fn () => $this->created_at?->format('d.m.Y H:i'))->onlyOnDetail(),
-                Text::make(__('nova::resources.Last updated'), fn () => $this->updated_at?->format('d.m.Y H:i'))->onlyOnDetail(),
-                Text::make(__('nova::resources.Response provided'), fn () => $this->responded_at?->format('d.m.Y H:i') ?: '—')->onlyOnDetail(),
-            ])->withAttribute('fayno-order-history')->collapsable(),
+                HasMany::make(__('nova::resources.Status changes'), 'statusHistories', OrderStatusHistory::class),
+            ])->withAttribute('fayno-order-history'),
 
             Panel::make(__('nova::resources.Payments'), [
                 Text::make(__('nova::resources.Paid'), fn () => $this->money($this->paidAmount()))->onlyOnDetail(),
