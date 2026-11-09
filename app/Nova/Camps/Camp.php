@@ -6,6 +6,7 @@ use App\Nova\Resource;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
@@ -26,6 +27,7 @@ class Camp extends Resource
             ID::make()->sortable(),
             Text::make(__('nova::resources.Camp name'), 'name')->sortable()->rules('required', 'max:255'),
             Text::make(__('nova::resources.Slug'), 'slug')->hideFromIndex(),
+            Image::make(__('nova::resources.Photo'), 'photo_path')->disk('public')->path('camps')->prunable()->hideFromIndex(),
             Text::make(__('nova::resources.Country'), 'country'),
             Text::make(__('nova::resources.City'), 'city')->sortable(),
             Text::make(__('nova::resources.Address'), 'address')->hideFromIndex(),
