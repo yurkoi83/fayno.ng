@@ -130,13 +130,11 @@ class Order extends Resource
             ])->withAttribute('fayno-order-manager'),
 
             Panel::make(__('nova::resources.Application timeline'), [
-                HasMany::make(__('nova::resources.Status changes'), 'statusHistories', OrderStatusHistory::class),
+                Text::make(__('nova::resources.Status changes'), fn () => $this->statusHistoryHtml())->asHtml()->onlyOnDetail(),
             ])->withAttribute('fayno-order-history'),
 
             Panel::make(__('nova::resources.Payments'), [
-                Text::make(__('nova::resources.Paid'), fn () => $this->money($this->paidAmount()))->onlyOnDetail(),
-                Text::make(__('nova::resources.Awaiting payment'), fn () => $this->money($this->pendingAmount()))->onlyOnDetail(),
-                Text::make(__('nova::resources.Last payment'), fn () => $this->lastPaymentLabel())->onlyOnDetail(),
+                Text::make(__('nova::resources.Payment history'), fn () => $this->paymentListHtml())->asHtml()->onlyOnDetail(),
             ])->withAttribute('fayno-order-payments'),
 
             Panel::make(__('nova::resources.Internal information'), [
@@ -145,6 +143,79 @@ class Order extends Resource
                 Textarea::make(__('nova::resources.Admin notes'), 'admin_notes')->alwaysShow()->hideFromIndex(),
             ])->withAttribute('fayno-order-internal')->collapsedByDefault(),
         ];
+    }
+
+
+    protected function statusHistoryHtml(): string
+    {
+        $items = $this->resource->statusHistories()->with('changedBy')->latest()->limit(8)->get();
+
+        if ($items->isEmpty()) {
+            return '<p class="fayno-order-empty">'.e(__('nova::resources.No status changes yet')).'</p>';
+        }
+
+        return '<div class="fayno-order-timeline">'. $items->map(function ($item) {
+            $label = $item->from_status
+                ? __('nova::resources.Status changed to').' '.$this->statusLabelFor($item->to_status)
+                : __('nova::resources.Application created').' — '.$this->statusLabelFor($item->to_status);
+            $date = $item->created_at?->format('d.m.Y H:i') ?? '';
+            $actor = $item->changedBy?->name ?? __('nova::resources.System');
+
+            return '<div class="fayno-order-timeline__item">'
+                .'<span class="fayno-order-timeline__dot"></span>'
+                .'<div class="fayno-order-timeline__body">'
+                .'<time>'.e($date).'</time>'
+                .'<strong>'.e($label).'</strong>'
+                .'<small>'.e($actor).'</small>'
+                .($item->comment ? '<p>'.e($item->comment).'</p>' : '')
+                .'</div></div>';
+        })->implode('').'</div>';
+    }
+
+    protected function paymentListHtml(): string
+    {
+        $payments = Payment::query()
+            ->whereHas('booking.orderCamper', fn ($query) => $query->where('order_id', $this->resource->getKey()))
+            ->latest('created_at')
+            ->limit(5)
+            ->get();
+
+        if ($payments->isEmpty()) {
+            return '<p class="fayno-order-empty">'.e(__('nova::resources.No payments yet')).'</p>';
+        }
+
+        return '<div class="fayno-payment-list">'. $payments->map(function ($payment) {
+            $paid = $payment->status === PaymentStatus::PAID->value;
+            $status = $paid ? __('nova::resources.Paid') : match ($payment->status) {
+                PaymentStatus::PENDING->value => __('nova::resources.Awaiting payment'),
+                PaymentStatus::FAILED->value => __('nova::resources.Failed'),
+                PaymentStatus::REFUNDED->value => __('nova::resources.Refunded'),
+                default => (string) $payment->status,
+            };
+            $date = ($payment->paid_at ?? $payment->created_at)?->format('d.m.Y, H:i') ?? '';
+            $method = $payment->payment_method ?: __('nova::resources.Payment');
+            $amount = number_format((float) $payment->amount, 2, ',', ' ').' '.$payment->currency;
+
+            return '<div class="fayno-payment-item">'
+                .'<span class="fayno-payment-item__icon '.($paid ? 'is-paid' : 'is-pending').'">'.($paid ? '✓' : '◷').'</span>'
+                .'<div class="fayno-payment-item__details"><strong>'.e($method).'</strong><small>'.e($date).' · '.e($status).'</small></div>'
+                .'<b>'.e($amount).'</b>'
+                .'</div>';
+        })->implode('').'</div>';
+    }
+
+    protected function statusLabelFor(?string $status): string
+    {
+        return match ($status) {
+            OrderStatus::NEW->value => __('nova::resources.New'),
+            OrderStatus::PROCESSING->value => __('nova::resources.In progress'),
+            OrderStatus::WAITING_CUSTOMER->value => __('nova::resources.Waiting for customer'),
+            OrderStatus::CONTRACT_SENT->value => __('nova::resources.Contract sent'),
+            OrderStatus::AWAITING_PAYMENT->value => __('nova::resources.Awaiting payment'),
+            OrderStatus::CONFIRMED->value => __('nova::resources.Confirmed'),
+            OrderStatus::REJECTED->value => __('nova::resources.Rejected'),
+            default => '',
+        };
     }
 
     protected function statusLabel(): string
