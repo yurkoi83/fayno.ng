@@ -2,7 +2,6 @@
 
 namespace App\Nova\Bookings;
 
-use App\Enums\Gender;
 use App\Nova\Resource;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
@@ -17,6 +16,13 @@ class OrderCamper extends Resource
 {
     public static $model = \App\Models\OrderCamper::class;
     public static $title = 'id';
+
+    public function title()
+    {
+        return $this->camper
+            ? trim(implode(' ', array_filter([$this->camper->last_name, $this->camper->first_name, $this->camper->middle_name])))
+            : (string) $this->id;
+    }
     public static $displayInNavigation = false;
 
     public function fields(Request $request): array
@@ -37,14 +43,12 @@ class OrderCamper extends Resource
                 Text::make(__('nova::resources.Age'), fn () => $this->camper?->birth_date
                     ? $this->camper->birth_date->age.' '.__('nova::resources.Years')
                     : null),
-                Text::make(__('nova::resources.Gender'), fn () => $this->camper
-                    ? (Gender::find($this->camper->gender_id)['label'] ?? null)
-                    : null),
+                Text::make(__('nova::resources.Gender'), fn () => $this->camper?->gender_id)->onlyOnDetail(),
                 Textarea::make(__('nova::resources.Notes'), fn () => $this->camper?->notes)->onlyOnDetail(),
             ]),
 
             Panel::make(__('nova::resources.Cost'), [
-                Number::make(__('nova::resources.Price'), 'price')->step(0.01),
+                Number::make(__('nova::resources.Price'), 'price')->step(0.01)->sortable(),
                 Number::make(__('nova::resources.Discount'), 'discount')->step(0.01),
                 Text::make(__('nova::resources.Currency'), 'currency'),
             ]),
