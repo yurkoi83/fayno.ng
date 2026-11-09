@@ -3,6 +3,13 @@
 return [
     'Password' => 'Пароль',
     'Internal information' => 'Внутрішня інформація',
+    'Status changes' => 'Історія зміни статусів',
+    'Previous status' => 'Попередній статус',
+    'New status' => 'Новий статус',
+    'Changed by' => 'Змінив',
+    'Changed at' => 'Дата зміни',
+    'Photo' => 'Фото',
+    'Avatar' => 'Аватар менеджера',
     'Status description' => 'Опис статусу',
     'Payment progress' => 'Оплачено',
     'New application awaiting review' => 'Заявка очікує на перевірку менеджером',
