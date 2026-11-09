@@ -16,6 +16,13 @@ class OrderCamper extends Resource
 {
     public static $model = \App\Models\OrderCamper::class;
     public static $title = 'id';
+
+    public function title()
+    {
+        return $this->camper
+            ? trim(implode(' ', array_filter([$this->camper->last_name, $this->camper->first_name, $this->camper->middle_name])))
+            : (string) $this->id;
+    }
     public static $displayInNavigation = false;
 
     public function fields(Request $request): array
@@ -31,7 +38,7 @@ class OrderCamper extends Resource
                         $this->camper->first_name,
                         $this->camper->middle_name,
                     ])))
-                    : null)->onlyOnDetail(),
+                    : null),
                 Text::make(__('nova::resources.Birth date'), fn () => $this->camper?->birth_date?->format('d.m.Y')),
                 Text::make(__('nova::resources.Age'), fn () => $this->camper?->birth_date
                     ? $this->camper->birth_date->age.' '.__('nova::resources.Years')
