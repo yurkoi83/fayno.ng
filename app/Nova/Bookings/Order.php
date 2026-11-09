@@ -15,6 +15,7 @@ use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Panel;
@@ -70,6 +71,7 @@ class Order extends Resource
             Panel::make(__('nova::resources.Camp and shift'), [
                 BelongsTo::make(__('nova::resources.Camp shift'), 'campShift', CampShift::class)->searchable(),
                 Text::make(__('nova::resources.Camp'), fn () => $this->campShift?->camp?->name)->onlyOnDetail(),
+                Image::make(__('nova::resources.Photo'), fn () => $this->campShift?->camp?->photo_path)->disk('public')->onlyOnDetail(),
                 Text::make(__('nova::resources.Shift dates'), fn () => $this->campShift
                     ? $this->campShift->starts_at?->format('d.m.Y').' — '.$this->campShift->ends_at?->format('d.m.Y')
                     : null)->onlyOnDetail(),
@@ -123,6 +125,7 @@ class Order extends Resource
 
             Panel::make(__('nova::resources.Responsible manager'), [
                 BelongsTo::make(__('nova::resources.Assigned to'), 'assignedTo', User::class)->nullable()->searchable(),
+                Image::make(__('nova::resources.Avatar'), fn () => $this->assignedTo?->avatar_path)->disk('public')->onlyOnDetail(),
                 DateTime::make(__('nova::resources.Responded at'), 'responded_at')->nullable(),
             ])->withAttribute('fayno-order-manager'),
 
