@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
@@ -39,6 +40,7 @@ class Camper extends Resource
             Text::make(__('nova::resources.First name'), 'first_name')->sortable()->rules('required'),
             Text::make(__('nova::resources.Middle name'), 'middle_name')->nullable()->hideFromIndex(),
             Date::make(__('nova::resources.Birth date'), 'birth_date')->sortable(),
+            Image::make(__('nova::resources.Photo'), 'photo_path')->disk('public')->path('campers')->prunable()->hideFromIndex(),
             Number::make(__('nova::resources.Gender'), 'gender_id')->nullable()->hideFromIndex(),
             Textarea::make(__('nova::resources.Notes'), 'notes')->alwaysShow()->hideFromIndex(),
         ];
