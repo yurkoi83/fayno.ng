@@ -10,6 +10,7 @@ use App\Nova\People\Customer;
 use App\Nova\Resource;
 use App\Nova\Users\User;
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\Badge;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\HasMany;
@@ -33,9 +34,29 @@ class Order extends Resource
         return [
             ID::make()->sortable()->hideFromDetail(),
 
-            Panel::make('Заявка № '.$this->number)
-                ->withAttribute('fayno-order-header')
-                ->withToolbar(),
+            Panel::make('Заявка № '.$this->number, [
+                Badge::make(__('nova::resources.Status'), 'status')
+                    ->labels([
+                        OrderStatus::NEW->value => __('nova::resources.New'),
+                        OrderStatus::PROCESSING->value => __('nova::resources.In progress'),
+                        OrderStatus::WAITING_CUSTOMER->value => __('nova::resources.Waiting for customer'),
+                        OrderStatus::CONTRACT_SENT->value => __('nova::resources.Contract sent'),
+                        OrderStatus::AWAITING_PAYMENT->value => __('nova::resources.Awaiting payment'),
+                        OrderStatus::CONFIRMED->value => __('nova::resources.Confirmed'),
+                        OrderStatus::REJECTED->value => __('nova::resources.Rejected'),
+                    ])
+                    ->map([
+                        OrderStatus::NEW->value => 'warning',
+                        OrderStatus::PROCESSING->value => 'success',
+                        OrderStatus::WAITING_CUSTOMER->value => 'info',
+                        OrderStatus::CONTRACT_SENT->value => 'info',
+                        OrderStatus::AWAITING_PAYMENT->value => 'warning',
+                        OrderStatus::CONFIRMED->value => 'success',
+                        OrderStatus::REJECTED->value => 'danger',
+                    ])
+                    ->withIcons(),
+                Text::make(__('nova::resources.Created at'), fn () => $this->created_at?->format('d.m.Y H:i')),
+            ])->withAttribute('fayno-order-header')->withToolbar(),
 
             Panel::make(__('nova::resources.Parent details'), [
                 BelongsTo::make(__('nova::resources.Parent'), 'customer', Customer::class)->searchable(),
@@ -62,14 +83,34 @@ class Order extends Resource
             ])->withAttribute('fayno-order-children'),
 
             Panel::make(__('nova::resources.Application status'), [
-                Text::make(__('nova::resources.Status'), fn () => $this->statusLabel())->onlyOnDetail(),
-                Text::make(__('nova::resources.Created at'), fn () => $this->created_at?->format('d.m.Y H:i'))->onlyOnDetail(),
+                Badge::make(__('nova::resources.Status'), 'status')
+                    ->labels([
+                        OrderStatus::NEW->value => __('nova::resources.New'),
+                        OrderStatus::PROCESSING->value => __('nova::resources.In progress'),
+                        OrderStatus::WAITING_CUSTOMER->value => __('nova::resources.Waiting for customer'),
+                        OrderStatus::CONTRACT_SENT->value => __('nova::resources.Contract sent'),
+                        OrderStatus::AWAITING_PAYMENT->value => __('nova::resources.Awaiting payment'),
+                        OrderStatus::CONFIRMED->value => __('nova::resources.Confirmed'),
+                        OrderStatus::REJECTED->value => __('nova::resources.Rejected'),
+                    ])
+                    ->map([
+                        OrderStatus::NEW->value => 'success',
+                        OrderStatus::PROCESSING->value => 'success',
+                        OrderStatus::WAITING_CUSTOMER->value => 'warning',
+                        OrderStatus::CONTRACT_SENT->value => 'info',
+                        OrderStatus::AWAITING_PAYMENT->value => 'warning',
+                        OrderStatus::CONFIRMED->value => 'success',
+                        OrderStatus::REJECTED->value => 'danger',
+                    ])
+                    ->withIcons(),
+                Text::make(__('nova::resources.Status description'), fn () => $this->statusDescription())->onlyOnDetail(),
             ])->withAttribute('fayno-order-status'),
 
             Panel::make(__('nova::resources.Financial information'), [
                 Text::make(__('nova::resources.Total amount'), fn () => $this->money($this->totalAmount()))->onlyOnDetail(),
                 Text::make(__('nova::resources.Paid'), fn () => $this->money($this->paidAmount()))->onlyOnDetail(),
                 Text::make(__('nova::resources.Balance'), fn () => $this->money(max(0, $this->totalAmount() - $this->paidAmount())))->onlyOnDetail(),
+                Text::make(__('nova::resources.Payment progress'), fn () => $this->paymentProgress().'%')->onlyOnDetail(),
             ])->withAttribute('fayno-order-finance'),
 
             Panel::make(__('nova::resources.Parent comment'), [
@@ -113,6 +154,27 @@ class Order extends Resource
             OrderStatus::REJECTED->value => __('nova::resources.Rejected'),
             default => (string) $this->status,
         };
+    }
+
+    protected function statusDescription(): string
+    {
+        return match ($this->status) {
+            OrderStatus::NEW->value => __('nova::resources.New application awaiting review'),
+            OrderStatus::PROCESSING->value => __('nova::resources.Application is being processed'),
+            OrderStatus::WAITING_CUSTOMER->value => __('nova::resources.Waiting for parent response'),
+            OrderStatus::CONTRACT_SENT->value => __('nova::resources.Contract sent to parent'),
+            OrderStatus::AWAITING_PAYMENT->value => __('nova::resources.Waiting for payment'),
+            OrderStatus::CONFIRMED->value => __('nova::resources.Application confirmed'),
+            OrderStatus::REJECTED->value => __('nova::resources.Application rejected'),
+            default => '',
+        };
+    }
+
+    protected function paymentProgress(): int
+    {
+        $total = $this->totalAmount();
+
+        return $total > 0 ? min(100, (int) round($this->paidAmount() / $total * 100)) : 0;
     }
 
     protected function totalAmount(): float
