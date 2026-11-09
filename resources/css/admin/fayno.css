@@ -1031,3 +1031,38 @@ button[class*="bg-primary"]:hover {
         font-size: 22px;
     }
 }
+
+
+/* CRM detail — payment progress and status history */
+[dusk="orders-detail-component"] .fayno-payment-progress {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+}
+[dusk="orders-detail-component"] .fayno-payment-progress__track {
+    flex: 1 1 auto;
+    height: 9px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: #dce4f0;
+}
+[dusk="orders-detail-component"] .fayno-payment-progress__track span {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: #15965a;
+}
+[dusk="orders-detail-component"] .fayno-payment-progress strong {
+    flex: 0 0 auto;
+    color: #10284b;
+    font-size: 12px;
+    font-weight: 800;
+}
+[dusk="orders-detail-component"] [dusk="fayno-order-history-panel"] table tbody tr {
+    background: #fff;
+}
+[dusk="orders-detail-component"] [dusk="fayno-order-history-panel"] table tbody td {
+    padding-top: 9px;
+    padding-bottom: 9px;
+}
