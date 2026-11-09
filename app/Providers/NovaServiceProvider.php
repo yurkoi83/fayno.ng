@@ -39,6 +39,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             \App\Nova\Bookings\Order::class,
             \App\Nova\Bookings\Booking::class,
             \App\Nova\Bookings\OrderCamper::class,
+            \App\Nova\Bookings\OrderStatusHistory::class,
             \App\Nova\People\Camper::class,
             \App\Nova\People\Customer::class,
             \App\Nova\Finance\Payment::class,
