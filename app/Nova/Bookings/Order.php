@@ -11,6 +11,7 @@ use App\Nova\Resource;
 use App\Nova\Users\User as UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Laravel\Nova\Fields\Badge;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\HasMany;
@@ -37,10 +38,95 @@ class Order extends Resource
         return __('nova::resources.Order');
     }
 
+    public static function indexQuery(\Laravel\Nova\Http\Requests\NovaRequest $request, \Illuminate\Database\Eloquent\Builder $query): \Illuminate\Database\Eloquent\Builder
+    {
+        return $query->with([
+            'customer',
+            'campShift.camp',
+            'orderCampers.camper',
+            'bookings',
+        ]);
+    }
+
     public function fields(Request $request): array
     {
         return [
-            ID::make()->sortable()->hideFromDetail(),
+            ID::make()->sortable()->hideFromDetail()->hideFromIndex(),
+
+            Text::make('Номер заявки', 'number')
+                ->sortable()
+                ->copyable()
+                ->onlyOnIndex(),
+
+            Text::make('Батьки', function () {
+                $customer = $this->customer;
+
+                return $customer
+                    ? trim(implode(' ', array_filter([
+                        $customer->last_name,
+                        $customer->first_name,
+                        $customer->middle_name,
+                    ])))
+                    : '—';
+            })->onlyOnIndex(),
+
+            Text::make('Учасники', function () {
+                return $this->orderCampers
+                    ->map(function ($item) {
+                        $camper = $item->camper;
+
+                        return $camper
+                            ? trim(implode(' ', array_filter([
+                                $camper->last_name,
+                                $camper->first_name,
+                                $camper->middle_name,
+                            ])))
+                            : null;
+                    })
+                    ->filter()
+                    ->implode(', ') ?: '—';
+            })->onlyOnIndex(),
+
+            Text::make('Табір / зміна', function () {
+                $camp = $this->campShift?->camp?->name;
+                $shift = $this->campShift?->name;
+
+                return collect([$camp, $shift])->filter()->implode(' / ') ?: '—';
+            })->onlyOnIndex(),
+
+            Badge::make('Статус', 'status')
+                ->map([
+                    OrderStatus::NEW->value => 'info',
+                    OrderStatus::PROCESSING->value => 'info',
+                    OrderStatus::WAITING_CUSTOMER->value => 'warning',
+                    OrderStatus::CONTRACT_SENT->value => 'warning',
+                    OrderStatus::AWAITING_PAYMENT->value => 'warning',
+                    OrderStatus::CONFIRMED->value => 'success',
+                    OrderStatus::REJECTED->value => 'danger',
+                ])
+                ->labels([
+                    OrderStatus::NEW->value => 'Нова',
+                    OrderStatus::PROCESSING->value => 'В обробці',
+                    OrderStatus::WAITING_CUSTOMER->value => 'Очікує відповіді',
+                    OrderStatus::CONTRACT_SENT->value => 'Договір надіслано',
+                    OrderStatus::AWAITING_PAYMENT->value => 'Очікує оплати',
+                    OrderStatus::CONFIRMED->value => 'Підтверджена',
+                    OrderStatus::REJECTED->value => 'Відхилена',
+                ])
+                ->sortable()
+                ->onlyOnIndex(),
+
+            Text::make('Сума', function () {
+                $booking = $this->bookings->first();
+                $amount = (float) $this->bookings->sum('total_amount');
+                $currency = $booking?->currency ?: 'UAH';
+
+                return number_format($amount, 0, ',', ' ').' '.$currency;
+            })->onlyOnIndex(),
+
+            DateTime::make('Дата заявки', 'created_at')
+                ->sortable()
+                ->onlyOnIndex(),
 
             Panel::make('', [
                 Text::make(' ', fn () => $this->detailHtml())
