@@ -46,9 +46,9 @@ class Order extends Resource
                 Text::make(' ', fn () => $this->detailHtml())
                     ->asHtml()
                     ->onlyOnDetail(),
-            ])->withToolbar(),
+            ]),
 
-            Panel::make(__('nova::resources.Application details'), [
+            Panel::make('Деталі заявки', [
                 BelongsTo::make(__('nova::resources.Parent'), 'customer', CustomerResource::class)
                     ->searchable()
                     ->onlyOnForms(),
@@ -99,7 +99,6 @@ class Order extends Resource
         $paymentsQuery = Payment::query()
             ->whereHas('booking.orderCamper', fn ($query) => $query->where('order_id', $order->getKey()));
         $paid = (float) (clone $paymentsQuery)->where('status', PaymentStatus::PAID->value)->sum('amount');
-        $pending = (float) (clone $paymentsQuery)->where('status', PaymentStatus::PENDING->value)->sum('amount');
         $payments = (clone $paymentsQuery)->with('booking')->latest('created_at')->limit(5)->get();
         $balance = max(0, $total - $paid);
         $progress = $total > 0 ? min(100, (int) round($paid / $total * 100)) : 0;
@@ -145,7 +144,7 @@ class Order extends Resource
         $html .= '<section class="fayno-crm-card fayno-crm-children">'
             . $this->cardHeading('●', __('nova::resources.Children'), '<span class="fayno-crm-count">'.$children->count().' '.__('nova::resources.Children').'</span>');
         if ($children->isEmpty()) {
-            $html .= '<p class="fayno-crm-muted">'.e(__('nova::resources.No children added')).'</p>';
+            $html .= '<p class="fayno-crm-muted">'.e('Дітей ще не додано').'</p>';
         } else {
             $html .= '<div class="fayno-crm-child-grid">';
             foreach ($children as $item) {
@@ -208,19 +207,19 @@ class Order extends Resource
             . '<div class="fayno-crm-money-row"><span>'.e(__('nova::resources.Balance')).'</span><strong class="is-balance">'.e($this->money($balance, $currency)).'</strong></div>'
             . '<div class="fayno-crm-progress"><span style="width:'.$progress.'%"></span></div>'
             . '<div class="fayno-crm-progress-label"><strong>'.$progress.'%</strong><span>'.e(__('nova::resources.Payment progress')).'</span></div>'
-            . '<a class="fayno-crm-link" href="/nova/resources/payments">'.e(__('nova::resources.Go to payments')).' →</a>'
+            . '<a class="fayno-crm-link" href="/nova/resources/payments">'.e('Перейти до оплат').' →</a>'
             . '</section>';
 
         $html .= '<section class="fayno-crm-card fayno-crm-manager">'
             . '<span class="fayno-crm-eyebrow">'.e(__('nova::resources.Responsible manager')).'</span>'
             . '<div class="fayno-crm-person">';
         $html .= $managerPhoto ? '<img src="'.e($managerPhoto).'" alt="">' : '<span class="fayno-crm-person__avatar">'.e(mb_substr($manager?->name ?: '—', 0, 1)).'</span>';
-        $html .= '<div><strong>'.e($manager?->name ?: '—').'</strong><small>'.e(__('nova::resources.Responsible manager')).'</small></div></div>'
+        $html .= '<div><strong>'.e($manager?->name ?: '—').'</strong><small>'.e('Менеджер').'</small></div></div>'
             . '<div class="fayno-crm-manager__response"><span>'.e(__('nova::resources.Responded at')).'</span><strong>'.e($order->responded_at?->format('d.m.Y H:i') ?: '—').'</strong></div>'
             . '</section>';
 
         $html .= '<section class="fayno-crm-card fayno-crm-payments">'
-            . $this->cardHeading('▣', __('nova::resources.Payments'), '<a href="/nova/resources/payments">'.e(__('nova::resources.All payments')).' →</a>');
+            . $this->cardHeading('▣', __('nova::resources.Payments'), '<a href="/nova/resources/payments">'.e('Усі платежі').' →</a>');
         if ($payments->isEmpty()) {
             $html .= '<p class="fayno-crm-muted">'.e(__('nova::resources.No payments yet')).'</p>';
         } else {
