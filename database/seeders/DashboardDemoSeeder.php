@@ -247,12 +247,10 @@ class DashboardDemoSeeder extends Seeder
         );
 
         $camper = Camper::updateOrCreate(
+            ['customer_id' => $customer->getKey()],
             [
-                'customer_id' => $customer->getKey(),
                 'first_name' => $data['camper_first_name'],
                 'last_name' => $data['camper_last_name'],
-            ],
-            [
                 'birth_date' => now()->subYears($data['age'])->subMonths(4)->toDateString(),
             ]
         );
