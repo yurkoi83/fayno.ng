@@ -1,28 +1,28 @@
 <?php
 
-namespace App\\Nova\\Bookings;
+namespace App\Nova\Bookings;
 
-use App\\Enums\\OrderStatus;
-use App\\Enums\\PaymentStatus;
-use App\\Models\\Payment;
-use App\\Nova\\Camps\\CampShift as CampShiftResource;
-use App\\Nova\\People\\Customer as CustomerResource;
-use App\\Nova\\Resource;
-use App\\Nova\\Users\\User as UserResource;
-use Illuminate\\Http\\Request;
-use Illuminate\\Support\\Facades\\Storage;
-use Laravel\\Nova\\Fields\\BelongsTo;
-use Laravel\\Nova\\Fields\\DateTime;
-use Laravel\\Nova\\Fields\\HasMany;
-use Laravel\\Nova\\Fields\\ID;
-use Laravel\\Nova\\Fields\\Select;
-use Laravel\\Nova\\Fields\\Textarea;
-use Laravel\\Nova\\Fields\\Text;
-use Laravel\\Nova\\Panel;
+use App\Enums\OrderStatus;
+use App\Enums\PaymentStatus;
+use App\Models\Payment;
+use App\Nova\Camps\CampShift as CampShiftResource;
+use App\Nova\People\Customer as CustomerResource;
+use App\Nova\Resource;
+use App\Nova\Users\User as UserResource;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\DateTime;
+use Laravel\Nova\Fields\HasMany;
+use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Select;
+use Laravel\Nova\Fields\Textarea;
+use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Panel;
 
 class Order extends Resource
 {
-    public static $model = \\App\\Models\\Order::class;
+    public static $model = \App\Models\Order::class;
     public static $title = 'number';
     public static $search = ['id', 'number', 'status'];
     public static $group = 'Бронювання';
