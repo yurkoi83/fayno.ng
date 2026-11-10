@@ -3306,3 +3306,210 @@ button[class*="bg-primary"]:hover {
         min-width: 108px !important;
     }
 }
+
+
+/*
+|--------------------------------------------------------------------------
+| Camper detail — reference alignment pass (img_18)
+|--------------------------------------------------------------------------
+*/
+
+/* Apply the lavender CRM canvas to the actual Nova content column. */
+#nova [dusk="content"] div[class*="lg:ml-60"]:has([dusk="campers-detail-component"]) {
+    background: #f4f5ff !important;
+}
+
+#nova [dusk="campers-detail-component"] [dusk="ComputedField"]:has(.fayno-camper) {
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+}
+
+.fayno-camper {
+    gap: 20px !important;
+    font-family: "Nunito", sans-serif !important;
+    color: #172e53 !important;
+}
+
+/* The profile is a single white surface; the age chip sits in its top-right corner. */
+.fayno-camper__profile {
+    position: relative !important;
+    min-height: 148px !important;
+    padding: 18px 150px 18px 18px !important;
+    border: 1px solid #e6eaf5 !important;
+    border-radius: 12px !important;
+    background: #fff !important;
+    box-shadow: 0 2px 8px rgba(34, 54, 96, .035) !important;
+}
+
+.fayno-camper__age {
+    position: absolute !important;
+    top: 16px !important;
+    right: 16px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    min-height: 38px !important;
+    padding: 7px 14px !important;
+    border: 0 !important;
+    border-radius: 999px !important;
+    background: #e1f7eb !important;
+    color: #15965b !important;
+    font-size: 13px !important;
+    font-weight: 900 !important;
+    white-space: nowrap !important;
+}
+
+.fayno-camper__age .fayno-camper__icon {
+    width: 17px !important;
+    height: 17px !important;
+    stroke-width: 2.4 !important;
+}
+
+.fayno-camper__age strong {
+    font-weight: 900 !important;
+}
+
+.fayno-camper__edit {
+    position: absolute !important;
+    right: 17px !important;
+    bottom: 14px !important;
+    padding: 7px 10px !important;
+    font-size: 11px !important;
+}
+
+/* Reference cards: tighter gutters, matching two-column proportions and dimensions. */
+.fayno-camper__grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.12fr) !important;
+    gap: 12px !important;
+}
+
+.fayno-camper-card {
+    min-height: 199px !important;
+    padding: 11px 18px 15px !important;
+    border: 1px solid #e6eaf5 !important;
+    border-radius: 11px !important;
+    background: #fff !important;
+    box-shadow: 0 2px 8px rgba(34, 54, 96, .03) !important;
+}
+
+.fayno-camper-card__heading {
+    gap: 11px !important;
+    margin-bottom: 13px !important;
+}
+
+.fayno-camper-card__heading > span:first-child {
+    width: 42px !important;
+    height: 42px !important;
+    flex-basis: 42px !important;
+    border-radius: 10px !important;
+    background: #2878e8 !important;
+    color: #fff !important;
+}
+
+.fayno-camper-card__heading > span:first-child .fayno-camper__icon {
+    width: 22px !important;
+    height: 22px !important;
+    stroke-width: 2.4 !important;
+}
+
+.fayno-camper__grid > .fayno-camper-card:nth-child(2) .fayno-camper-card__heading > span:first-child {
+    background: #20a66b !important;
+}
+
+.fayno-camper-card--history .fayno-camper-card__heading > span:first-child {
+    background: #9652d7 !important;
+}
+
+.fayno-camper-card__heading h2 {
+    color: #172e53 !important;
+    font-size: 17px !important;
+    font-weight: 900 !important;
+}
+
+.fayno-camper__details {
+    gap: 10px !important;
+}
+
+.fayno-camper__detail {
+    align-items: center !important;
+    gap: 10px !important;
+}
+
+.fayno-camper__detail-icon {
+    width: 19px !important;
+    height: 20px !important;
+    flex-basis: 19px !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    color: #58769f !important;
+}
+
+.fayno-camper__detail-icon .fayno-camper__icon {
+    width: 17px !important;
+    height: 17px !important;
+    stroke-width: 2.1 !important;
+}
+
+.fayno-camper__detail > div {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: baseline !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    padding: 0 !important;
+}
+
+.fayno-camper__detail small {
+    min-width: 126px !important;
+    color: #71839f !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+}
+
+.fayno-camper__detail strong {
+    color: #1c3459 !important;
+    font-size: 13px !important;
+    font-weight: 850 !important;
+}
+
+.fayno-camper-card--history {
+    grid-column: 1 / -1 !important;
+    min-height: 174px !important;
+    padding: 13px 12px 12px !important;
+}
+
+.fayno-camper-card--history .fayno-camper-card__heading {
+    margin-bottom: 10px !important;
+}
+
+.fayno-camper__table thead th {
+    padding: 9px 12px !important;
+    background: #f1f4fa !important;
+    color: #71839f !important;
+    font-size: 10px !important;
+    font-weight: 900 !important;
+    text-transform: none !important;
+}
+
+.fayno-camper__table tbody td {
+    padding: 10px 12px !important;
+    font-size: 12px !important;
+}
+
+@media (max-width: 760px) {
+    .fayno-camper__profile {
+        padding: 60px 16px 16px !important;
+    }
+
+    .fayno-camper__age {
+        top: 12px !important;
+        right: 12px !important;
+    }
+
+    .fayno-camper__edit {
+        position: static !important;
+        margin: 12px 0 0 0 !important;
+    }
+}
