@@ -180,15 +180,15 @@ class Camper extends Resource
     protected function iconSvg(string $name): string
     {
         $paths = [
-            'user-round' => '<circle cx="12" cy="8" r="4"/><path d="M5 21a7 7 0 0 1 14 0"/>',
-            'users-round' => '<path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M20 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>',
+            'user-round' => '<circle cx="12" cy="7.5" r="4" fill="currentColor" stroke="none"/><path d="M4 21a8 8 0 0 1 16 0" fill="currentColor" stroke="none"/>',
+            'users-round' => '<circle cx="9" cy="7" r="4" fill="currentColor" stroke="none"/><path d="M2 21a7 7 0 0 1 14 0" fill="currentColor" stroke="none"/><circle cx="17" cy="8" r="3" fill="currentColor" stroke="none"/><path d="M16 15a6 6 0 0 1 6 6h-4a7 7 0 0 0-2-6Z" fill="currentColor" stroke="none"/>',
             'calendar-days' => '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18"/>',
             'cake' => '<path d="M20 10H4a2 2 0 0 0-2 2v8h20v-8a2 2 0 0 0-2-2Z"/><path d="M12 2v3M8 5v2m8-2v2M2 16c2 0 2-2 5-2s3 2 5 2 3-2 5-2 3 2 5 2"/>',
             'hash' => '<path d="M4 9h16M4 15h16M10 3 8 21m8-18-2 18"/>',
             'phone' => '<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.2 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72l.45 3.1a2 2 0 0 1-.57 1.7L7.1 10.4a16 16 0 0 0 6 6l1.88-1.89a2 2 0 0 1 1.7-.57l3.1.45a2 2 0 0 1 1.72 2.53z"/>',
             'mail' => '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>',
             'map-pin' => '<path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/>',
-            'tent' => '<path d="m3 21 9-18 9 18M3 21h18M12 3l-3 18m6 0-3-18"/>',
+            'tent' => '<path d="m12 2 10 19H2L12 2Zm0 6-4.5 13h9L12 8Z" fill="currentColor" stroke="none"/>',
             'pencil' => '<path d="m16 4 4 4L8 20H4v-4L16 4Z"/><path d="m14 6 4 4"/>',
         ];
 
