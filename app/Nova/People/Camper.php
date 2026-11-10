@@ -53,7 +53,8 @@ class Camper extends Resource
                 Image::make(__('nova::resources.Photo'), 'photo_path')->disk('public')->path('campers')->prunable()->hideFromIndex(),
                 Number::make(__('nova::resources.Gender'), 'gender_id')->nullable()->hideFromIndex(),
                 Textarea::make(__('nova::resources.Notes'), 'notes')->alwaysShow()->hideFromIndex(),
-            ])->onlyOnForms(),
+            ]),
+
         ];
     }
 
