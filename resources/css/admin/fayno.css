@@ -2281,8 +2281,9 @@ button[class*="bg-primary"]:hover {
     }
 }
 
-/* The CRM has its own action buttons; hide Nova's duplicate toolbar above its header. */
-#nova [dusk="orders-detail-component"] [dusk="fayno-crm-layout-panel"] > div:first-child {
+/* The CRM has its own action buttons; hide Nova's native action toolbar.
+   Target the actual direct toolbar child of the panel containing the CRM. */
+#nova [dusk="orders-detail-component"] [dusk$="-panel"]:has(.fayno-crm) > div[class~="md:flex"][class~="items-center"][class~="mb-3"] {
     display: none !important;
 }
 
