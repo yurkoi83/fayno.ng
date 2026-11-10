@@ -32,7 +32,7 @@ class DashboardDemoSeeder extends Seeder
     {
         DB::transaction(function () {
             $camp = Camp::firstOrCreate(
-                ['slug' => 'demo-fayno-camp'],
+                ['slug' => 'FC-fayno-camp'],
                 [
                     'name' => 'Fayno Camp — демо',
                     'country' => 'Украина',
@@ -82,8 +82,8 @@ class DashboardDemoSeeder extends Seeder
 
             $scenarios = [
                 [
-                    'number' => 'DEMO-2026-001',
-                    'first_name' => 'Александр',
+                    'number' => 'FC-2026-001',
+                    'first_name' => 'Олександр',
                     'last_name' => 'Мельник',
                     'email' => 'demo.parent.001@example.com',
                     'phone' => '+380501110001',
@@ -99,7 +99,7 @@ class DashboardDemoSeeder extends Seeder
                     'shift' => 1,
                 ],
                 [
-                    'number' => 'DEMO-2026-002',
+                    'number' => 'FC-2026-002',
                     'first_name' => 'Елена',
                     'last_name' => 'Коваль',
                     'email' => 'demo.parent.002@example.com',
@@ -116,8 +116,8 @@ class DashboardDemoSeeder extends Seeder
                     'shift' => 1,
                 ],
                 [
-                    'number' => 'DEMO-2026-003',
-                    'first_name' => 'Ирина',
+                    'number' => 'FC-2026-003',
+                    'first_name' => 'Ірина',
                     'last_name' => 'Шевченко',
                     'email' => 'demo.parent.003@example.com',
                     'phone' => '+380501110003',
@@ -133,7 +133,7 @@ class DashboardDemoSeeder extends Seeder
                     'shift' => 1,
                 ],
                 [
-                    'number' => 'DEMO-2026-004',
+                    'number' => 'FC-2026-004',
                     'first_name' => 'Дмитрий',
                     'last_name' => 'Бондарь',
                     'email' => 'demo.parent.004@example.com',
@@ -150,7 +150,7 @@ class DashboardDemoSeeder extends Seeder
                     'shift' => 1,
                 ],
                 [
-                    'number' => 'DEMO-2026-005',
+                    'number' => 'FC-2026-005',
                     'first_name' => 'Оксана',
                     'last_name' => 'Ткаченко',
                     'email' => 'demo.parent.005@example.com',
@@ -167,7 +167,7 @@ class DashboardDemoSeeder extends Seeder
                     'shift' => 1,
                 ],
                 [
-                    'number' => 'DEMO-2026-006',
+                    'number' => 'FC-2026-006',
                     'first_name' => 'Наталья',
                     'last_name' => 'Романюк',
                     'email' => 'demo.parent.006@example.com',
@@ -184,7 +184,7 @@ class DashboardDemoSeeder extends Seeder
                     'shift' => 2,
                 ],
                 [
-                    'number' => 'DEMO-2026-007',
+                    'number' => 'FC-2026-007',
                     'first_name' => 'Сергей',
                     'last_name' => 'Мороз',
                     'email' => 'demo.parent.007@example.com',
@@ -201,7 +201,7 @@ class DashboardDemoSeeder extends Seeder
                     'shift' => 2,
                 ],
                 [
-                    'number' => 'DEMO-2026-008',
+                    'number' => 'FC-2026-008',
                     'first_name' => 'Мария',
                     'last_name' => 'Лисенко',
                     'email' => 'demo.parent.008@example.com',
@@ -242,7 +242,7 @@ class DashboardDemoSeeder extends Seeder
                 'first_name' => $data['first_name'],
                 'last_name' => $data['last_name'],
                 'phone' => $data['phone'],
-                'city' => 'Киев',
+                'city' => 'Київ',
             ]
         );
 
@@ -266,7 +266,7 @@ class DashboardDemoSeeder extends Seeder
                 'camp_shift_id' => $shift->getKey(),
                 'status' => $data['status']->value,
                 'source' => 'website',
-                'departure_city' => 'Киев',
+                'departure_city' => 'Київ',
                 'comment' => 'Демо-заявка для проверки дашборда',
                 'assigned_to' => $manager->getKey(),
                 'responded_at' => $data['responded_days_ago'] === null
@@ -313,7 +313,7 @@ class DashboardDemoSeeder extends Seeder
 
         if ($data['payment_status'] !== null) {
             Payment::firstOrCreate(
-                ['transaction_id' => 'DEMO-PAY-' . str_replace('-', '', $data['number'])],
+                ['transaction_id' => 'FC-PAY-' . str_replace('-', '', $data['number'])],
                 [
                     'booking_id' => $booking->getKey(),
                     'amount' => $data['payment_amount'],
@@ -345,7 +345,7 @@ class DashboardDemoSeeder extends Seeder
             $path = $this->downloadDiceBearAvatar(
                 'adventurer-neutral',
                 'fayno-camper-'.$camper->getKey(),
-                'demo-avatars/children/'.$camper->getKey().'.svg',
+                'FC-avatars/children/'.$camper->getKey().'.svg',
                 'cfe8ff'
             );
 
@@ -360,7 +360,7 @@ class DashboardDemoSeeder extends Seeder
             $path = $this->downloadDiceBearAvatar(
                 'lorelei',
                 'fayno-manager-'.$manager->getKey(),
-                'demo-avatars/managers/'.$manager->getKey().'.svg',
+                'FC-avatars/managers/'.$manager->getKey().'.svg',
                 'd9f2eb'
             );
 
