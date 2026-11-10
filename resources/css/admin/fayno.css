@@ -2070,3 +2070,58 @@ button[class*="bg-primary"]:hover {
     .fayno-crm-action { flex: 1 1 auto; }
     .fayno-crm__heading h1 { font-size: 22px; }
 }
+
+
+/* Match the reference: Nova's duplicate resource title must not compete with CRM title */
+[dusk="orders-detail-component"] h1[dusk$="-detail-heading"] {
+    display: none !important;
+}
+
+/* Remove the extra Nova panel shell around the custom CRM screen */
+[dusk="orders-detail-component"] [dusk$="-panel"]:has(.fayno-crm) .relative.overflow-hidden.bg-white {
+    overflow: visible !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+[dusk="orders-detail-component"] [dusk$="-panel"]:has(.fayno-crm) .relative.overflow-hidden.bg-white > .mt-3.py-2.px-6 {
+    padding: 0 !important;
+}
+
+/* Reference palette: each CRM section has its own meaningful icon color */
+.fayno-crm-parent .fayno-crm-card__icon {
+    background: #e7f0ff;
+    color: #246dc5;
+}
+.fayno-crm-camp .fayno-crm-card__icon {
+    background: #eeeaff;
+    color: #6650bd;
+}
+.fayno-crm-children .fayno-crm-card__icon {
+    background: #e4f6ec;
+    color: #15965a;
+}
+.fayno-crm-comment .fayno-crm-card__icon {
+    background: #e5efff;
+    color: #2472d8;
+}
+.fayno-crm-history .fayno-crm-card__icon {
+    background: #edf0f6;
+    color: #263e60;
+}
+.fayno-crm-finance .fayno-crm-card__icon,
+.fayno-crm-payments .fayno-crm-card__icon {
+    background: #edf0f6;
+    color: #263e60;
+}
+.fayno-crm-status__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.fayno-crm__heading {
+    border-bottom: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 22px !important;
+}
