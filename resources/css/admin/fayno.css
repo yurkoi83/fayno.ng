@@ -2125,3 +2125,98 @@ button[class*="bg-primary"]:hover {
     padding-top: 0 !important;
     padding-bottom: 22px !important;
 }
+
+
+/* Fayno Nova shell: target the real Nova sidebar wrapper, not the CRM aside. */
+#nova [dusk="content"] > div[class*="lg:absolute"][class*="w-60"] {
+    position: fixed !important;
+    z-index: 30;
+    top: 56px !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    width: 240px !important;
+    min-height: calc(100vh - 56px);
+    overflow-y: auto;
+    padding: 28px 12px 32px !important;
+    border-right: 1px solid rgba(255, 255, 255, .08);
+    background: #17243b !important;
+    color: #d8e1ee !important;
+}
+
+#nova [dusk="sidebar-menu"] {
+    width: 100% !important;
+    color: #c3cfdf !important;
+}
+
+#nova [dusk="sidebar-menu"] a,
+#nova [dusk="sidebar-menu"] button,
+#nova [dusk="sidebar-menu"] [role="button"] {
+    color: #c3cfdf !important;
+    border-radius: 9px;
+    transition: background-color .18s ease, color .18s ease;
+}
+
+#nova [dusk="sidebar-menu"] a:hover,
+#nova [dusk="sidebar-menu"] button:hover,
+#nova [dusk="sidebar-menu"] [role="button"]:hover {
+    color: #fff !important;
+    background: rgba(255, 255, 255, .08) !important;
+}
+
+#nova [dusk="sidebar-menu"] a[aria-current="page"],
+#nova [dusk="sidebar-menu"] a.router-link-exact-active,
+#nova [dusk="sidebar-menu"] a.router-link-active {
+    color: #fff !important;
+    background: #287a55 !important;
+    font-weight: 800;
+}
+
+#nova [dusk="sidebar-menu"] svg {
+    color: currentColor !important;
+}
+
+/* Fayno branded top navigation. Keep Nova controls and interactions intact. */
+#nova header {
+    position: relative;
+    z-index: 40;
+    height: 56px;
+    border-bottom: 1px solid rgba(255, 255, 255, .08);
+    background: #17243b !important;
+    color: #fff !important;
+    box-shadow: 0 2px 10px rgba(16, 40, 75, .12);
+}
+
+#nova header a,
+#nova header button {
+    color: #e5edf7 !important;
+}
+
+#nova header a:hover,
+#nova header button:hover {
+    color: #fff !important;
+}
+
+#nova header a.text-red-500 {
+    display: none !important;
+}
+
+#nova header input {
+    border-color: rgba(255, 255, 255, .16) !important;
+    background: rgba(255, 255, 255, .09) !important;
+    color: #fff !important;
+}
+
+#nova header input::placeholder {
+    color: #b8c5d7 !important;
+}
+
+#nova header svg {
+    color: currentColor;
+}
+
+@media (max-width: 1023px) {
+    #nova [dusk="content"] > div[class*="lg:absolute"][class*="w-60"] {
+        position: static !important;
+        display: none !important;
+    }
+}
