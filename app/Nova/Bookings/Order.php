@@ -181,7 +181,7 @@ class Order extends Resource
 
         if ($order->comment) {
             $html .= '<section class="fayno-crm-card fayno-crm-comment">'
-                . $this->cardHeading('users-round', __('nova::resources.Parent comment'))
+                . $this->cardHeading('message-square', __('nova::resources.Parent comment'))
                 . '<p>'.nl2br(e($order->comment)).'</p></section>';
         }
 
@@ -209,7 +209,7 @@ class Order extends Resource
 
         $html .= '<aside class="fayno-crm__aside">';
         $html .= '<section class="fayno-crm-card fayno-crm-status is-'.e($statusClass).'">'
-            . '<div class="fayno-crm-status__icon">✓</div><div><strong>'.e($statusLabel).'</strong><p>'.e($statusDescription).'</p></div></section>';
+            . '<div class="fayno-crm-status__icon">'.$this->iconSvg('check').'</div><div><strong>'.e($statusLabel).'</strong><p>'.e($statusDescription).'</p></div></section>';
 
         $html .= '<section class="fayno-crm-card fayno-crm-finance">'
             . $this->cardHeading('wallet', __('nova::resources.Financial information'))
@@ -258,6 +258,7 @@ class Order extends Resource
             'tent' => '<path d="m3 21 9-18 9 18M3 21h18M12 3l-3 18m6 0-3-18"/>',
             'calendar-days' => '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18M8 15h.01M12 15h.01M16 15h.01M8 18h.01M12 18h.01"/>',
             'clock-3' => '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+            'message-square' => '<path d="M21 11.5a8.5 8.5 0 0 1-9 8.5 9 9 0 0 1-4-.9L3 21l1.9-4.5A8.5 8.5 0 1 1 21 11.5Z"/><path d="M8 11h8M8 15h5"/>',
             'users-round' => '<path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M20 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>',
             'history' => '<path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5M12 7v5l3 2"/>',
             'wallet' => '<rect x="3" y="5" width="18" height="15" rx="2"/><path d="M3 8h18M16 14h.01"/>',
