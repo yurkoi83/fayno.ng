@@ -42,7 +42,7 @@ class Order extends Resource
         return [
             ID::make()->sortable()->hideFromDetail(),
 
-            Panel::make('fayno-crm-layout', [
+            Panel::make('', [
                 Text::make(' ', fn () => $this->detailHtml())
                     ->asHtml()
                     ->onlyOnDetail(),
@@ -117,6 +117,7 @@ class Order extends Resource
         $statusClass = $this->statusClass((string) $order->status);
 
         $html = '<div class="fayno-crm">';
+        $html .= '<div class="fayno-crm__heading"><div><h1>Заявка № '.e($order->number ?: $order->getKey()).'</h1><p>Створено '.e($order->created_at?->format('d.m.Y H:i') ?: '—').'</p></div><span class="fayno-crm-order-status is-'.e($statusClass).'">'.e($statusLabel).'</span></div>';
         $html .= '<div class="fayno-crm__main">';
 
         $html .= '<section class="fayno-crm-card fayno-crm-parent">'
