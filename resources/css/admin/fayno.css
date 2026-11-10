@@ -2269,7 +2269,7 @@ button[class*="bg-primary"]:hover {
     gap: 16px !important;
 }
 .fayno-crm__breadcrumbs {
-    margin-bottom: 8px !important;
+    margin-bottom: 3px !important;
 }
 
 @media (max-width: 1023px) {
