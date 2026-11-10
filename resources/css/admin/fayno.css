@@ -2269,7 +2269,7 @@ button[class*="bg-primary"]:hover {
     gap: 16px !important;
 }
 .fayno-crm__breadcrumbs {
-    margin-bottom: 3px !important;
+    margin-bottom: 8px !important;
 }
 
 @media (max-width: 1023px) {
@@ -2281,13 +2281,9 @@ button[class*="bg-primary"]:hover {
     }
 }
 
-/* Order detail: remove the unused Nova toolbar gap above the CRM breadcrumbs. */
+/* The CRM has its own action buttons; hide Nova's duplicate toolbar above its header. */
 #nova [dusk="orders-detail-component"] [dusk="fayno-crm-layout-panel"] > div:first-child {
-    min-height: 0 !important;
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
+    display: none !important;
 }
 
 /* Order detail: keep Nova action buttons, but collapse the empty spacing around its toolbar. */
