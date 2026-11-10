@@ -110,7 +110,11 @@ class Order extends Resource
         $parentAddress = $customer
             ? trim(implode(', ', array_filter([$customer->city, $customer->address])))
             : '';
-        $campPhoto = $camp?->photo_path ? Storage::disk('public')->url($camp->photo_path) : null;
+        $campPhoto = $camp?->photo_path
+            ? Storage::disk('public')->url($camp->photo_path)
+            : (str_contains(mb_strtolower((string) $camp?->name), 'zakopane')
+                ? 'https://fayno.camp/wp-content/uploads/9-3-300x200.jpg'
+                : null);
         $managerPhoto = $manager?->avatar_path ? Storage::disk('public')->url($manager->avatar_path) : null;
         $statusLabel = $this->statusLabel((string) $order->status);
         $statusDescription = $this->statusDescription((string) $order->status);
