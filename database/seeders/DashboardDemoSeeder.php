@@ -283,6 +283,10 @@ class DashboardDemoSeeder extends Seeder
             ]);
         }
 
+        if (! $order->assigned_to) {
+            $order->forceFill(['assigned_to' => $manager->getKey()])->save();
+        }
+
         $orderCamper = OrderCamper::firstOrCreate(
             [
                 'order_id' => $order->getKey(),
