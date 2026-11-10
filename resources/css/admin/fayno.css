@@ -2337,6 +2337,13 @@ button[class*="bg-primary"]:hover {
 |--------------------------------------------------------------------------
 */
 
+/* Hide Nova's duplicate detail title/actions and the default fields panel.
+   The custom Fayno camper card contains the complete read-only presentation. */
+[dusk="campers-detail-component"] > .mb-8:has(.fayno-camper) > div:first-child,
+[dusk="campers-detail-component"] > [dusk="ucasnik-panel"] {
+    display: none !important;
+}
+
 [dusk="campers-detail-component"] [dusk="ComputedField"]:has(.fayno-camper) {
     display: block !important;
     width: 100% !important;
