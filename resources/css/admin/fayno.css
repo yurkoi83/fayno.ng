@@ -1825,7 +1825,7 @@ button[class*="bg-primary"]:hover {
     display: none !important;
 }
 
-[dusk="orders-detail-component"] [dusk="fayno-crm-layout-panel"] > .md\\:flex.items-center {
+[dusk="orders-detail-component"] [dusk="fayno-crm-layout-panel"] > div:first-child {
     justify-content: flex-end !important;
     min-height: 24px;
     margin-bottom: 8px !important;
