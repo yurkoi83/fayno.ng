@@ -2329,3 +2329,429 @@ button[class*="bg-primary"]:hover {
 #nova [dusk="orders-detail-component"] [dusk$="-panel"]:has(.fayno-crm) > div[class~="md:flex"][class~="items-center"][class~="mb-3"] {
     margin-bottom: 0 !important;
 }
+
+
+/*
+|--------------------------------------------------------------------------
+| Fayno Camp — Camper profile
+|--------------------------------------------------------------------------
+*/
+
+[dusk="campers-detail-component"] [dusk="ComputedField"]:has(.fayno-camper) {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+[dusk="campers-detail-component"] [dusk="ComputedField"]:has(.fayno-camper) > div:first-child {
+    display: none !important;
+}
+
+[dusk="campers-detail-component"] [dusk="ComputedField"]:has(.fayno-camper) > div:last-child,
+[dusk="campers-detail-component"] [dusk="ComputedField"]:has(.fayno-camper) > div:last-child > div {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+}
+
+.fayno-camper {
+    display: flex;
+    width: 100%;
+    min-width: 0;
+    flex-direction: column;
+    gap: 18px;
+    color: #10284b;
+}
+
+.fayno-camper__header {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 16px;
+    padding: 2px 0 4px;
+}
+
+.fayno-camper__breadcrumbs {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 9px;
+    color: #8190a5;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.fayno-camper__breadcrumbs a {
+    color: #2875d0;
+    text-decoration: none;
+}
+
+.fayno-camper__breadcrumbs a:hover {
+    color: #185cae;
+}
+
+.fayno-camper__profile {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    min-width: 0;
+}
+
+.fayno-camper__avatar {
+    display: grid;
+    width: 76px;
+    height: 76px;
+    flex: 0 0 76px;
+    place-items: center;
+    overflow: hidden;
+    border: 4px solid #fff;
+    border-radius: 50%;
+    background: #e5efff;
+    box-shadow: 0 2px 12px rgba(25, 55, 90, .12);
+    color: #2867b1;
+    font-size: 23px;
+    font-weight: 900;
+}
+
+.fayno-camper__avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.fayno-camper__identity {
+    min-width: 0;
+    flex: 1 1 auto;
+}
+
+.fayno-camper__name-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+
+.fayno-camper__name-row h1 {
+    margin: 0;
+    color: #10284b;
+    font-size: 25px;
+    font-weight: 850;
+    line-height: 1.25;
+}
+
+.fayno-camper__age {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 10px;
+    border-radius: 999px;
+    background: #e5f7eb;
+    color: #16834b;
+    font-size: 11px;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.fayno-camper__identity > p {
+    margin: 5px 0 7px;
+    color: #8190a5;
+    font-size: 12px;
+}
+
+.fayno-camper__identity > p span {
+    padding: 0 4px;
+}
+
+.fayno-camper__parent-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #2875d0;
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.fayno-camper__parent-link:hover {
+    color: #185cae;
+}
+
+.fayno-camper__icon {
+    display: block;
+    width: 17px;
+    height: 17px;
+    flex: 0 0 17px;
+}
+
+.fayno-camper__edit {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border: 1px solid #dce6f2;
+    border-radius: 9px;
+    background: #fff;
+    color: #246dc5;
+    font-size: 12px;
+    font-weight: 800;
+    text-decoration: none;
+    box-shadow: 0 2px 8px rgba(25, 55, 90, .04);
+}
+
+.fayno-camper__edit:hover {
+    border-color: #b8d1ef;
+    background: #f6f9fe;
+}
+
+.fayno-camper__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    gap: 16px;
+}
+
+.fayno-camper-card {
+    min-width: 0;
+    padding: 19px;
+    border: 1px solid #e1e8f2;
+    border-radius: 13px;
+    background: #fff;
+    box-shadow: 0 2px 9px rgba(25, 55, 90, .045);
+}
+
+.fayno-camper-card--history {
+    grid-column: 1 / -1;
+}
+
+.fayno-camper-card__heading {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 17px;
+}
+
+.fayno-camper-card__heading > span:first-child {
+    display: grid;
+    width: 35px;
+    height: 35px;
+    flex: 0 0 35px;
+    place-items: center;
+    border-radius: 11px;
+    background: #e8f2ff;
+    color: #246dc5;
+}
+
+.fayno-camper-card__heading h2 {
+    margin: 0;
+    color: #10284b;
+    font-size: 15px;
+    font-weight: 850;
+}
+
+.fayno-camper__count {
+    display: inline-flex;
+    min-width: 26px;
+    height: 26px;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    padding: 0 8px;
+    border-radius: 999px;
+    background: #e8f2ff;
+    color: #246dc5;
+    font-size: 11px;
+    font-weight: 850;
+}
+
+.fayno-camper__details {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.fayno-camper__detail {
+    display: flex;
+    align-items: flex-start;
+    gap: 11px;
+    min-width: 0;
+}
+
+.fayno-camper__detail-icon {
+    display: grid;
+    width: 34px;
+    height: 34px;
+    flex: 0 0 34px;
+    place-items: center;
+    border-radius: 10px;
+    background: #f2f6fc;
+    color: #71829c;
+}
+
+.fayno-camper__detail > div {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 3px;
+    padding-top: 1px;
+}
+
+.fayno-camper__detail small {
+    color: #8190a5;
+    font-size: 11px;
+}
+
+.fayno-camper__detail strong {
+    color: #263e60;
+    font-size: 13px;
+    font-weight: 750;
+    overflow-wrap: anywhere;
+}
+
+.fayno-camper__parent-name {
+    display: inline-block;
+    margin: -2px 0 16px;
+    color: #246dc5;
+    font-size: 14px;
+    font-weight: 850;
+    text-decoration: none;
+}
+
+.fayno-camper__notes {
+    margin-top: 17px;
+    padding: 13px 14px;
+    border-radius: 10px;
+    background: #f5f8fc;
+}
+
+.fayno-camper__notes strong {
+    color: #526783;
+    font-size: 11px;
+    font-weight: 850;
+}
+
+.fayno-camper__notes p {
+    margin: 5px 0 0;
+    color: #263e60;
+    font-size: 12px;
+    line-height: 1.55;
+}
+
+.fayno-camper__empty {
+    margin: 0;
+    padding: 12px 0 3px;
+    color: #8190a5;
+    font-size: 13px;
+}
+
+.fayno-camper__table-wrap {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.fayno-camper__table {
+    width: 100%;
+    min-width: 680px;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.fayno-camper__table thead th {
+    padding: 11px 12px;
+    background: #f6f8fc;
+    color: #8190a5;
+    font-size: 10px;
+    font-weight: 850;
+    letter-spacing: .045em;
+    text-align: left;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.fayno-camper__table thead th:first-child {
+    border-radius: 8px 0 0 8px;
+}
+
+.fayno-camper__table thead th:last-child {
+    border-radius: 0 8px 8px 0;
+}
+
+.fayno-camper__table tbody td {
+    padding: 13px 12px;
+    border-bottom: 1px solid #edf1f6;
+    color: #526783;
+    font-size: 12px;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.fayno-camper__table tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+.fayno-camper__table tbody td:first-child a {
+    color: #246dc5;
+    font-weight: 850;
+    text-decoration: none;
+}
+
+.fayno-camper__table tbody td strong {
+    display: block;
+    color: #263e60;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.fayno-camper__table tbody td small {
+    display: block;
+    margin-top: 4px;
+    color: #8190a5;
+    font-size: 10px;
+}
+
+.fayno-camper__status {
+    display: inline-flex;
+    padding: 5px 9px;
+    border-radius: 999px;
+    background: #edf2f8;
+    color: #526783;
+    font-size: 10px;
+    font-weight: 850;
+}
+
+@media (max-width: 900px) {
+    .fayno-camper__grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .fayno-camper-card--history {
+        grid-column: 1;
+    }
+}
+
+@media (max-width: 600px) {
+    .fayno-camper__profile {
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 13px;
+    }
+
+    .fayno-camper__avatar {
+        width: 62px;
+        height: 62px;
+        flex-basis: 62px;
+    }
+
+    .fayno-camper__name-row h1 {
+        font-size: 20px;
+    }
+
+    .fayno-camper__edit {
+        margin-left: 75px;
+    }
+
+    .fayno-camper-card {
+        padding: 16px;
+    }
+}
