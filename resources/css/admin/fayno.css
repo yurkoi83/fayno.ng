@@ -2281,6 +2281,16 @@ button[class*="bg-primary"]:hover {
     }
 }
 
+/* Order detail: reduce the centered content inset from ~72px to 24px. */
+@media (min-width: 1024px) {
+    #nova [dusk="orders-detail-component"] .fayno-crm {
+        width: calc(100% + 96px) !important;
+        max-width: none !important;
+        margin-left: -48px !important;
+        margin-right: -48px !important;
+    }
+}
+
 /* The CRM has its own action buttons; hide Nova's native action toolbar.
    Target the actual direct toolbar child of the panel containing the CRM. */
 #nova [dusk="orders-detail-component"] [dusk$="-panel"]:has(.fayno-crm) > div[class~="md:flex"][class~="items-center"][class~="mb-3"] {
