@@ -1906,3 +1906,40 @@ button[class*="bg-primary"]:hover {
     .fayno-crm__heading h1 { font-size: 21px; }
     .fayno-crm__main { grid-template-columns: minmax(0, 1fr); }
 }
+
+
+/* Fix Nova ComputedField wrapper around Fayno CRM */
+[dusk="orders-detail-component"] [dusk="ComputedField"]:has(.fayno-crm) {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+[dusk="orders-detail-component"] [dusk="ComputedField"]:has(.fayno-crm) > div:first-child {
+    display: none !important;
+}
+
+[dusk="orders-detail-component"] [dusk="ComputedField"]:has(.fayno-crm) > div:last-child {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 1 1 100% !important;
+    padding: 0 !important;
+}
+
+[dusk="orders-detail-component"] [dusk="ComputedField"]:has(.fayno-crm) > div:last-child > div {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+}
+
+/* CRM must occupy the available content width */
+.fayno-crm {
+    width: 100% !important;
+    min-width: 0 !important;
+}
+
+/* One child should use the full available card width */
+.fayno-crm-child-grid {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)) !important;
+}
