@@ -31,23 +31,23 @@ class DashboardDemoSeeder extends Seeder
     public function run(): void
     {
         DB::transaction(function () {
-            $camp = Camp::firstOrCreate(
+            $camp = Camp::updateOrCreate(
                 ['slug' => 'FC-fayno-camp'],
                 [
                     'name' => 'Fayno Camp — демо',
-                    'country' => 'Украина',
-                    'city' => 'Карпаты',
-                    'address' => 'Демо-адрес',
+                    'country' => 'Україна',
+                    'city' => 'Карпати',
+                    'address' => 'Демо-адреса',
                     'min_age' => 7,
                     'max_age' => 17,
                     'active' => true,
                 ]
             );
 
-            $firstShift = CampShift::firstOrCreate(
-                ['camp_id' => $camp->getKey(), 'name' => 'Демо — летняя смена №1'],
+            $firstShift = CampShift::updateOrCreate(
+                ['camp_id' => $camp->getKey(), 'starts_at' => now()->addMonths(7)->startOfMonth()->toDateString()],
                 [
-                    'starts_at' => now()->addMonths(7)->startOfMonth()->toDateString(),
+                    'name' => 'Демо — літня зміна №1',
                     'ends_at' => now()->addMonths(7)->startOfMonth()->addDays(13)->toDateString(),
                     'capacity' => 35,
                     'regular_price' => 590,
@@ -58,10 +58,10 @@ class DashboardDemoSeeder extends Seeder
                 ]
             );
 
-            $secondShift = CampShift::firstOrCreate(
-                ['camp_id' => $camp->getKey(), 'name' => 'Демо — летняя смена №2'],
+            $secondShift = CampShift::updateOrCreate(
+                ['camp_id' => $camp->getKey(), 'starts_at' => now()->addMonths(8)->startOfMonth()->toDateString()],
                 [
-                    'starts_at' => now()->addMonths(8)->startOfMonth()->toDateString(),
+                    'name' => 'Демо — літня зміна №2',
                     'ends_at' => now()->addMonths(8)->startOfMonth()->addDays(13)->toDateString(),
                     'capacity' => 45,
                     'regular_price' => 620,
@@ -72,7 +72,7 @@ class DashboardDemoSeeder extends Seeder
                 ]
             );
 
-            $manager = User::firstOrCreate(
+            $manager = User::updateOrCreate(
                 ['email' => 'demo.manager@fayno.camp'],
                 [
                     'name' => 'Олена Кравченко',
@@ -100,11 +100,11 @@ class DashboardDemoSeeder extends Seeder
                 ],
                 [
                     'number' => 'FC-2026-002',
-                    'first_name' => 'Елена',
+                    'first_name' => 'Олена',
                     'last_name' => 'Коваль',
                     'email' => 'demo.parent.002@example.com',
                     'phone' => '+380501110002',
-                    'camper_first_name' => 'София',
+                    'camper_first_name' => 'Софія',
                     'camper_last_name' => 'Коваль',
                     'age' => 9,
                     'status' => OrderStatus::AWAITING_PAYMENT,
@@ -121,7 +121,7 @@ class DashboardDemoSeeder extends Seeder
                     'last_name' => 'Шевченко',
                     'email' => 'demo.parent.003@example.com',
                     'phone' => '+380501110003',
-                    'camper_first_name' => 'Артём',
+                    'camper_first_name' => 'Артем',
                     'camper_last_name' => 'Шевченко',
                     'age' => 13,
                     'status' => OrderStatus::WAITING_CUSTOMER,
@@ -134,11 +134,11 @@ class DashboardDemoSeeder extends Seeder
                 ],
                 [
                     'number' => 'FC-2026-004',
-                    'first_name' => 'Дмитрий',
+                    'first_name' => 'Дмитро',
                     'last_name' => 'Бондарь',
                     'email' => 'demo.parent.004@example.com',
                     'phone' => '+380501110004',
-                    'camper_first_name' => 'Даниил',
+                    'camper_first_name' => 'Данило',
                     'camper_last_name' => 'Бондарь',
                     'age' => 10,
                     'status' => OrderStatus::NEW,
@@ -168,7 +168,7 @@ class DashboardDemoSeeder extends Seeder
                 ],
                 [
                     'number' => 'FC-2026-006',
-                    'first_name' => 'Наталья',
+                    'first_name' => 'Наталія',
                     'last_name' => 'Романюк',
                     'email' => 'demo.parent.006@example.com',
                     'phone' => '+380501110006',
@@ -185,11 +185,11 @@ class DashboardDemoSeeder extends Seeder
                 ],
                 [
                     'number' => 'FC-2026-007',
-                    'first_name' => 'Сергей',
+                    'first_name' => 'Сергій',
                     'last_name' => 'Мороз',
                     'email' => 'demo.parent.007@example.com',
                     'phone' => '+380501110007',
-                    'camper_first_name' => 'Ева',
+                    'camper_first_name' => 'Єва',
                     'camper_last_name' => 'Мороз',
                     'age' => 8,
                     'status' => OrderStatus::CONFIRMED,
@@ -202,11 +202,11 @@ class DashboardDemoSeeder extends Seeder
                 ],
                 [
                     'number' => 'FC-2026-008',
-                    'first_name' => 'Мария',
+                    'first_name' => 'Марія',
                     'last_name' => 'Лисенко',
                     'email' => 'demo.parent.008@example.com',
                     'phone' => '+380501110008',
-                    'camper_first_name' => 'Полина',
+                    'camper_first_name' => 'Поліна',
                     'camper_last_name' => 'Лисенко',
                     'age' => 15,
                     'status' => OrderStatus::REJECTED,
@@ -236,7 +236,7 @@ class DashboardDemoSeeder extends Seeder
      */
     private function seedOrder(array $data, CampShift $shift, User $manager): void
     {
-        $customer = Customer::firstOrCreate(
+        $customer = Customer::updateOrCreate(
             ['email' => $data['email']],
             [
                 'first_name' => $data['first_name'],
@@ -246,20 +246,18 @@ class DashboardDemoSeeder extends Seeder
             ]
         );
 
-        $camper = Camper::firstOrCreate(
+        $camper = Camper::updateOrCreate(
+            ['customer_id' => $customer->getKey()],
             [
-                'customer_id' => $customer->getKey(),
                 'first_name' => $data['camper_first_name'],
                 'last_name' => $data['camper_last_name'],
-            ],
-            [
                 'birth_date' => now()->subYears($data['age'])->subMonths(4)->toDateString(),
             ]
         );
 
         $orderCreatedAt = now()->subDays($data['created_days_ago']);
 
-        $order = Order::firstOrCreate(
+        $order = Order::updateOrCreate(
             ['number' => $data['number']],
             [
                 'customer_id' => $customer->getKey(),
@@ -267,7 +265,7 @@ class DashboardDemoSeeder extends Seeder
                 'status' => $data['status']->value,
                 'source' => 'website',
                 'departure_city' => 'Київ',
-                'comment' => 'Демо-заявка для проверки дашборда',
+                'comment' => 'Демо-заявка для перевірки CRM',
                 'assigned_to' => $manager->getKey(),
                 'responded_at' => $data['responded_days_ago'] === null
                     ? null
@@ -287,7 +285,7 @@ class DashboardDemoSeeder extends Seeder
             $order->forceFill(['assigned_to' => $manager->getKey()])->save();
         }
 
-        $orderCamper = OrderCamper::firstOrCreate(
+        $orderCamper = OrderCamper::updateOrCreate(
             [
                 'order_id' => $order->getKey(),
                 'camper_id' => $camper->getKey(),
@@ -299,7 +297,7 @@ class DashboardDemoSeeder extends Seeder
             ]
         );
 
-        $booking = Booking::firstOrCreate(
+        $booking = Booking::updateOrCreate(
             ['order_camper_id' => $orderCamper->getKey()],
             [
                 'status' => $data['booking_status']->value,
@@ -312,7 +310,7 @@ class DashboardDemoSeeder extends Seeder
         );
 
         if ($data['payment_status'] !== null) {
-            Payment::firstOrCreate(
+            Payment::updateOrCreate(
                 ['transaction_id' => 'FC-PAY-' . str_replace('-', '', $data['number'])],
                 [
                     'booking_id' => $booking->getKey(),
@@ -345,7 +343,7 @@ class DashboardDemoSeeder extends Seeder
             $path = $this->downloadDiceBearAvatar(
                 'adventurer-neutral',
                 'fayno-camper-'.$camper->getKey(),
-                'FC-avatars/children/'.$camper->getKey().'.svg',
+                'FC-avatars/діти/'.$camper->getKey().'.svg',
                 'cfe8ff'
             );
 
@@ -360,7 +358,7 @@ class DashboardDemoSeeder extends Seeder
             $path = $this->downloadDiceBearAvatar(
                 'lorelei',
                 'fayno-manager-'.$manager->getKey(),
-                'FC-avatars/managers/'.$manager->getKey().'.svg',
+                'FC-avatars/менеджери/'.$manager->getKey().'.svg',
                 'd9f2eb'
             );
 
