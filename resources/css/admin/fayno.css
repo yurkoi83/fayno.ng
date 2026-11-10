@@ -2220,3 +2220,63 @@ button[class*="bg-primary"]:hover {
         display: none !important;
     }
 }
+
+/*
+|--------------------------------------------------------------------------
+| Fayno Camp — Compact Nova shell and CRM spacing
+|--------------------------------------------------------------------------
+*/
+
+/* Nova reserves 48px on both sides of the content area by default. */
+#nova [dusk="content"] > div > div[class*="lg:ml-60"] {
+    padding: 18px 24px !important;
+    row-gap: 16px !important;
+}
+
+/* Remove the extra 24px inset from Nova's computed-field wrapper. */
+#nova [dusk="orders-detail-component"] [dusk="ComputedField"]:has(.fayno-crm) {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+/* Make the topbar controls align with the tighter content grid. */
+#nova header > div[class*="flex-1"][class*="lg:px-12"] {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+}
+
+/* Replace Nova's default logo with a clean Fayno wordmark in the brand slot. */
+#nova header > div:nth-child(2) {
+    justify-content: center;
+}
+#nova header > div:nth-child(2) > a {
+    display: none !important;
+}
+#nova header > div:nth-child(2)::before {
+    content: "FAYNO CAMP";
+    color: #ffffff;
+    font-family: 'Nunito', sans-serif;
+    font-size: 17px;
+    font-weight: 900;
+    letter-spacing: .08em;
+}
+
+/* Tighten the order heading without changing the card layout. */
+.fayno-crm__heading {
+    padding-bottom: 12px !important;
+    gap: 16px !important;
+}
+.fayno-crm__breadcrumbs {
+    margin-bottom: 8px !important;
+}
+
+@media (max-width: 1023px) {
+    #nova [dusk="content"] > div > div[class*="lg:ml-60"] {
+        padding: 16px !important;
+    }
+    #nova header > div:nth-child(2)::before {
+        font-size: 15px;
+    }
+}
