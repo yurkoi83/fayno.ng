@@ -70,7 +70,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         Nova::serving(function (ServingNova $event) {
             Nova::style(
                 'fayno-theme',
-                asset('js/fayno-admin.css')
+                asset('js/fayno-admin.css') . '?v=' . (file_exists(public_path('js/fayno-admin.css')) ? filemtime(public_path('js/fayno-admin.css')) : time())
             );
 
             Nova::script(
