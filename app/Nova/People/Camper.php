@@ -92,7 +92,7 @@ class Camper extends Resource
         $parentUrl = $customer ? url('/nova/resources/customers/'.$customer->getKey()) : null;
 
         $html = '<div class="fayno-camper">';
-        $html .= '<header class="fayno-camper__header">'
+        $html .= '<div class="fayno-camper__header">'
             . '<nav class="fayno-camper__breadcrumbs"><a href="'.$indexUrl.'">Учасники</a><span>/</span><span>'.e($fullName).'</span></nav>'
             . '<div class="fayno-camper__profile">'
             . '<div class="fayno-camper__avatar">';
