@@ -2125,3 +2125,64 @@ button[class*="bg-primary"]:hover {
     padding-top: 0 !important;
     padding-bottom: 22px !important;
 }
+
+
+/* Fayno CRM: use the full Nova detail canvas instead of Nova's 75% field column. */
+[dusk="orders-detail-component"] > div > div[class~="md:w-3/4"],
+[dusk="orders-detail-component"] > div > div[class~="@sm/peekable:w-3/4"],
+[dusk="orders-detail-component"] > div > div[class~="@md/modal:w-3/4"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 1 1 100% !important;
+    min-width: 0 !important;
+}
+
+/* Fayno brand navigation: dark navy sidebar with the reference's blue active state. */
+.sidebar {
+    width: 240px !important;
+    min-width: 240px !important;
+    background: #17243b !important;
+    border-right: 1px solid #263650 !important;
+    color: #f4f7fc !important;
+}
+
+.sidebar-menu {
+    padding: 24px 12px !important;
+}
+
+.sidebar-menu a {
+    min-height: 48px;
+    border-radius: 9px !important;
+    color: #e7edf7 !important;
+}
+
+.sidebar-item-title,
+.sidebar-menu .sidebar-item-title {
+    color: #e7edf7 !important;
+    font-weight: 600;
+}
+
+.sidebar-menu a:hover {
+    background: #243957 !important;
+}
+
+.sidebar-menu a:hover .sidebar-item-title {
+    color: #ffffff !important;
+}
+
+.sidebar-menu a.router-link-active,
+.sidebar-menu a[aria-current="page"] {
+    background: #2457a6 !important;
+    color: #ffffff !important;
+}
+
+.sidebar-menu a.router-link-active .sidebar-item-title,
+.sidebar-menu a[aria-current="page"] .sidebar-item-title {
+    color: #ffffff !important;
+    font-weight: 800;
+}
+
+.sidebar-menu .text-xs,
+.sidebar-menu .uppercase {
+    color: #aab8cc !important;
+}
