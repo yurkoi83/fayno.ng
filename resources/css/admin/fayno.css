@@ -2280,3 +2280,12 @@ button[class*="bg-primary"]:hover {
         font-size: 15px;
     }
 }
+
+/* Order detail: remove the unused Nova toolbar gap above the CRM breadcrumbs. */
+#nova [dusk="orders-detail-component"] [dusk="fayno-crm-layout-panel"] > div:first-child {
+    min-height: 0 !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
