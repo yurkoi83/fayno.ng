@@ -1943,3 +1943,130 @@ button[class*="bg-primary"]:hover {
 .fayno-crm-child-grid {
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)) !important;
 }
+
+
+/* CRM detail: reference-style header and consistent Lucide-like SVG icons */
+.fayno-crm__heading {
+    display: flex !important;
+    align-items: flex-end !important;
+    justify-content: space-between !important;
+    gap: 24px !important;
+    padding: 4px 0 20px !important;
+    margin: 0 0 2px !important;
+    border-bottom: 1px solid #e7edf4;
+}
+.fayno-crm__heading-main { min-width: 0; flex: 1 1 auto; }
+.fayno-crm__breadcrumbs {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    color: #8291a6;
+    font-size: 11px;
+    font-weight: 700;
+}
+.fayno-crm__breadcrumbs a {
+    color: #287a55;
+    text-decoration: none;
+}
+.fayno-crm__breadcrumbs a:hover { text-decoration: underline; }
+.fayno-crm__title-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px 20px;
+}
+.fayno-crm__title-row > div { min-width: 0; }
+.fayno-crm__heading h1 {
+    margin: 0;
+    color: #10284b;
+    font-size: 27px;
+    font-weight: 800;
+    line-height: 1.2;
+}
+.fayno-crm__heading p {
+    margin: 6px 0 0;
+    color: #71829c;
+    font-size: 12px;
+}
+.fayno-crm__actions {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 9px;
+}
+.fayno-crm-action {
+    display: inline-flex;
+    min-height: 38px;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 13px;
+    border: 1px solid transparent;
+    border-radius: 9px;
+    font-size: 12px;
+    font-weight: 800;
+    text-decoration: none !important;
+    white-space: nowrap;
+}
+.fayno-crm-action--secondary {
+    border-color: #dfe7ef;
+    background: #fff;
+    color: #526783 !important;
+}
+.fayno-crm-action--secondary:hover {
+    border-color: #cbd8e5;
+    background: #f7f9fc;
+}
+.fayno-crm-action--primary {
+    background: #287a55;
+    color: #fff !important;
+}
+.fayno-crm-action--primary:hover {
+    background: #206344;
+}
+.fayno-icon {
+    display: block;
+    width: 17px;
+    height: 17px;
+    flex: 0 0 17px;
+}
+.fayno-crm-card__icon {
+    display: inline-flex;
+    width: 34px;
+    height: 34px;
+    flex: 0 0 34px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: #edf5f0;
+    color: #287a55;
+}
+.fayno-crm-card__icon .fayno-icon { width: 18px; height: 18px; }
+.fayno-crm-line__icon {
+    display: inline-flex;
+    width: 18px;
+    height: 18px;
+    flex: 0 0 18px;
+    align-items: center;
+    justify-content: center;
+    color: #7a8ba1;
+}
+.fayno-crm-line__icon .fayno-icon { width: 16px; height: 16px; }
+.fayno-crm-status__icon .fayno-icon { width: 23px; height: 23px; }
+.fayno-crm-payment__icon .fayno-icon { width: 14px; height: 14px; }
+.fayno-crm-payment__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+@media (max-width: 760px) {
+    .fayno-crm__heading {
+        align-items: flex-start !important;
+        flex-direction: column !important;
+        gap: 15px !important;
+    }
+    .fayno-crm__actions { width: 100%; }
+    .fayno-crm-action { flex: 1 1 auto; }
+    .fayno-crm__heading h1 { font-size: 22px; }
+}
