@@ -125,13 +125,13 @@ class Order extends Resource
             . '<div class="fayno-crm__title-row"><div><h1>Заявка № '.e($order->number ?: $order->getKey()).'</h1><p>Створено '.e($order->created_at?->format('d.m.Y H:i') ?: '—').'</p></div>'
             . '<span class="fayno-crm-order-status is-'.e($statusClass).'">'.e($statusLabel).'</span></div>'
             . '</div><div class="fayno-crm__actions">'
-            . '<a class="fayno-crm-action fayno-crm-action--secondary" href="'.$indexUrl.'">'.$this->iconSvg('arrow-left').' До заявок</a>'
+            . ($customer?->email ? '<a class="fayno-crm-action fayno-crm-action--secondary" href="mailto:'.e($customer->email).'">'.$this->iconSvg('message-square').' Повідомлення</a>' : '')
             . '<a class="fayno-crm-action fayno-crm-action--primary" href="'.$editUrl.'">'.$this->iconSvg('pencil').' Редагувати</a>'
             . '</div></div>';
         $html .= '<div class="fayno-crm__main">';
 
         $html .= '<section class="fayno-crm-card fayno-crm-parent">'
-            . $this->cardHeading('user-round', __('nova::resources.Parent details'))
+            . $this->cardHeading('users-round', __('nova::resources.Parent details'))
             . '<h3>'.e($parentName).'</h3>'
             . '<div class="fayno-crm-lines">'
             . $this->detailLine('phone', $customer?->phone ?: '—')
@@ -140,7 +140,7 @@ class Order extends Resource
             . '</div></section>';
 
         $html .= '<section class="fayno-crm-card fayno-crm-camp">'
-            . $this->cardHeading('tent', __('nova::resources.Camp and shift'));
+            . $this->cardHeading('mountain', __('nova::resources.Camp and shift'));
         if ($campPhoto) {
             $html .= '<img class="fayno-crm-camp__image" src="'.e($campPhoto).'" alt="">';
         }
@@ -253,6 +253,8 @@ class Order extends Resource
         $paths = [
             'user-round' => '<circle cx="12" cy="8" r="4"/><path d="M5 21a7 7 0 0 1 14 0"/>',
             'phone' => '<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.2 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72l.45 3.1a2 2 0 0 1-.57 1.7L7.1 10.4a16 16 0 0 0 6 6l1.88-1.89a2 2 0 0 1 1.7-.57l3.1.45a2 2 0 0 1 1.72 2.53z"/>',
+            'mountain' => '<path d="m3 20 7-13 4 7 2-3 5 9H3Z"/><path d="m8 11 2 2 2-2"/>',
+            'message-square' => '<path d="M21 11.5a8.5 8.5 0 0 1-9 8.5 9 9 0 0 1-4-.9L3 21l1.9-4.5A8.5 8.5 0 1 1 21 11.5Z"/><path d="M8 11h8M8 15h5"/>',
             'mail' => '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>',
             'map-pin' => '<path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/>',
             'tent' => '<path d="m3 21 9-18 9 18M3 21h18M12 3l-3 18m6 0-3-18"/>',
