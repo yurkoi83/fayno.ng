@@ -3051,3 +3051,258 @@ button[class*="bg-primary"]:hover {
         min-width: 112px;
     }
 }
+
+
+/*
+|--------------------------------------------------------------------------
+| Camper detail — match reference geometry, surfaces and icon treatment
+|--------------------------------------------------------------------------
+*/
+
+/* Only the camper detail workspace gets the cool blue-gray canvas. */
+#nova [dusk="content"] > div > div[class*="lg:ml-60"]:has([dusk="campers-detail-component"]) {
+    background: #f3f5ff !important;
+}
+
+#nova [dusk="campers-detail-component"]:has(.fayno-camper) {
+    width: 100%;
+    max-width: 100%;
+}
+
+.fayno-camper {
+    gap: 19px !important;
+    color: #172b4d !important;
+}
+
+/* Breadcrumb sits directly on the page canvas, not inside a card. */
+.fayno-camper__header {
+    gap: 10px !important;
+}
+
+/* Wide, shallow profile card as in the reference. */
+.fayno-camper__profile {
+    min-height: 148px !important;
+    padding: 16px 20px !important;
+    gap: 20px !important;
+    border: 1px solid #e5eaf7 !important;
+    border-radius: 13px !important;
+    background: #fff !important;
+    box-shadow: 0 2px 8px rgba(39, 59, 105, .035) !important;
+}
+
+.fayno-camper__avatar {
+    width: 112px !important;
+    height: 112px !important;
+    flex-basis: 112px !important;
+    border-radius: 50% !important;
+    background: #bcd8ff !important;
+    box-shadow: none !important;
+}
+
+.fayno-camper__identity {
+    align-self: center !important;
+}
+
+.fayno-camper__name-row h1 {
+    font-size: 28px !important;
+    line-height: 1.15 !important;
+    letter-spacing: -.035em !important;
+}
+
+.fayno-camper__identity > p {
+    width: fit-content;
+    margin: 7px 0 7px !important;
+    padding: 5px 12px !important;
+    border-radius: 999px !important;
+    background: #def5e9 !important;
+    color: #168c59 !important;
+    font-size: 12px !important;
+    font-weight: 800 !important;
+}
+
+/* Two equal compact information cards, aligned to the same height. */
+.fayno-camper__grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.12fr) !important;
+    align-items: stretch !important;
+    gap: 12px !important;
+}
+
+.fayno-camper-card {
+    min-height: 199px !important;
+    padding: 11px 18px 15px !important;
+    border: 1px solid #e4e9f5 !important;
+    border-radius: 11px !important;
+    background: #fff !important;
+    box-shadow: 0 2px 7px rgba(39, 59, 105, .035) !important;
+}
+
+.fayno-camper-card__heading {
+    gap: 11px !important;
+    margin-bottom: 12px !important;
+}
+
+.fayno-camper-card__heading > span:first-child {
+    width: 42px !important;
+    height: 42px !important;
+    flex: 0 0 42px !important;
+    border-radius: 10px !important;
+    background: #2878e8 !important;
+    color: #fff !important;
+}
+
+.fayno-camper-card__heading > span:first-child .fayno-camper__icon {
+    width: 22px !important;
+    height: 22px !important;
+    stroke-width: 2.25 !important;
+}
+
+.fayno-camper-card__heading h2 {
+    font-size: 17px !important;
+    font-weight: 900 !important;
+    color: #172e53 !important;
+}
+
+/* Section icon colors: blue / green / purple. */
+.fayno-camper__grid > .fayno-camper-card:nth-child(2) .fayno-camper-card__heading > span:first-child {
+    background: #21a66b !important;
+}
+
+.fayno-camper-card--history .fayno-camper-card__heading > span:first-child {
+    background: #9652d7 !important;
+}
+
+/* Small line icons and tight rows — no pale 34px icon backgrounds. */
+.fayno-camper__details {
+    gap: 10px !important;
+}
+
+.fayno-camper__detail {
+    align-items: center !important;
+    gap: 10px !important;
+}
+
+.fayno-camper__detail-icon {
+    display: inline-flex !important;
+    width: 19px !important;
+    height: 20px !important;
+    flex: 0 0 19px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    color: #58769f !important;
+}
+
+.fayno-camper__detail-icon .fayno-camper__icon {
+    width: 17px !important;
+    height: 17px !important;
+    stroke-width: 2 !important;
+}
+
+.fayno-camper__detail > div {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: baseline !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    padding: 0 !important;
+}
+
+.fayno-camper__detail small {
+    min-width: 132px !important;
+    color: #71839f !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+}
+
+.fayno-camper__detail strong {
+    color: #1c3459 !important;
+    font-size: 13px !important;
+    font-weight: 850 !important;
+}
+
+/* Parent contacts should remain compact and visually balanced. */
+.fayno-camper__parent-name {
+    margin: -1px 0 10px !important;
+    color: #172e53 !important;
+    font-size: 15px !important;
+    font-weight: 900 !important;
+}
+
+/* History is a full-width card below both information cards. */
+.fayno-camper-card--history {
+    grid-column: 1 / -1 !important;
+    min-height: 174px !important;
+    padding: 13px 12px 12px !important;
+}
+
+.fayno-camper-card--history .fayno-camper-card__heading {
+    padding: 0 0 0 2px;
+    margin-bottom: 10px !important;
+}
+
+.fayno-camper-card--history .fayno-camper__count {
+    background: #eee5ff !important;
+    color: #8050c9 !important;
+}
+
+.fayno-camper__table {
+    min-width: 680px !important;
+}
+
+.fayno-camper__table thead th {
+    padding: 9px 12px !important;
+    background: #f1f4fa !important;
+    color: #71839f !important;
+    font-size: 10px !important;
+    font-weight: 900 !important;
+    letter-spacing: 0 !important;
+    text-transform: none !important;
+}
+
+.fayno-camper__table tbody td {
+    padding: 10px 12px !important;
+    font-size: 12px !important;
+}
+
+.fayno-camper__status {
+    padding: 5px 9px !important;
+    background: #dff5e9 !important;
+    color: #168b56 !important;
+    font-size: 10px !important;
+    font-weight: 900 !important;
+}
+
+@media (max-width: 900px) {
+    .fayno-camper__grid {
+        grid-template-columns: minmax(0, 1fr) !important;
+    }
+
+    .fayno-camper-card--history {
+        grid-column: 1 !important;
+    }
+}
+
+@media (max-width: 600px) {
+    .fayno-camper__profile {
+        padding: 14px !important;
+    }
+
+    .fayno-camper__avatar {
+        width: 82px !important;
+        height: 82px !important;
+        flex-basis: 82px !important;
+    }
+
+    .fayno-camper__name-row h1 {
+        font-size: 22px !important;
+    }
+
+    .fayno-camper-card {
+        padding: 14px !important;
+    }
+
+    .fayno-camper__detail small {
+        min-width: 108px !important;
+    }
+}
