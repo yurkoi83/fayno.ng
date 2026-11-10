@@ -116,21 +116,31 @@ class Order extends Resource
         $statusDescription = $this->statusDescription((string) $order->status);
         $statusClass = $this->statusClass((string) $order->status);
 
+        $editUrl = url('/nova/resources/orders/'.$order->getKey().'/edit');
+        $indexUrl = url('/nova/resources/orders');
         $html = '<div class="fayno-crm">';
-        $html .= '<div class="fayno-crm__heading"><div><h1>Заявка № '.e($order->number ?: $order->getKey()).'</h1><p>Створено '.e($order->created_at?->format('d.m.Y H:i') ?: '—').'</p></div><span class="fayno-crm-order-status is-'.e($statusClass).'">'.e($statusLabel).'</span></div>';
+        $html .= '<div class="fayno-crm__heading">'
+            . '<div class="fayno-crm__heading-main">'
+            . '<nav class="fayno-crm__breadcrumbs"><a href="'.$indexUrl.'">Заявки</a><span>/</span><span>'.e($order->number ?: $order->getKey()).'</span></nav>'
+            . '<div class="fayno-crm__title-row"><div><h1>Заявка № '.e($order->number ?: $order->getKey()).'</h1><p>Створено '.e($order->created_at?->format('d.m.Y H:i') ?: '—').'</p></div>'
+            . '<span class="fayno-crm-order-status is-'.e($statusClass).'">'.e($statusLabel).'</span></div>'
+            . '</div><div class="fayno-crm__actions">'
+            . '<a class="fayno-crm-action fayno-crm-action--secondary" href="'.$indexUrl.'">'.$this->iconSvg('arrow-left').' До заявок</a>'
+            . '<a class="fayno-crm-action fayno-crm-action--primary" href="'.$editUrl.'">'.$this->iconSvg('pencil').' Редагувати</a>'
+            . '</div></div>';
         $html .= '<div class="fayno-crm__main">';
 
         $html .= '<section class="fayno-crm-card fayno-crm-parent">'
-            . $this->cardHeading('◉', __('nova::resources.Parent details'))
+            . $this->cardHeading('user-round', __('nova::resources.Parent details'))
             . '<h3>'.e($parentName).'</h3>'
             . '<div class="fayno-crm-lines">'
-            . $this->detailLine('☎', $customer?->phone ?: '—')
-            . $this->detailLine('✉', $customer?->email ?: '—')
-            . ($parentAddress !== '' ? $this->detailLine('⌖', $parentAddress) : '')
+            . $this->detailLine('phone', $customer?->phone ?: '—')
+            . $this->detailLine('mail', $customer?->email ?: '—')
+            . ($parentAddress !== '' ? $this->detailLine('map-pin', $parentAddress) : '')
             . '</div></section>';
 
         $html .= '<section class="fayno-crm-card fayno-crm-camp">'
-            . $this->cardHeading('▲', __('nova::resources.Camp and shift'));
+            . $this->cardHeading('tent', __('nova::resources.Camp and shift'));
         if ($campPhoto) {
             $html .= '<img class="fayno-crm-camp__image" src="'.e($campPhoto).'" alt="">';
         }
@@ -138,12 +148,12 @@ class Order extends Resource
             . '<h3>'.e($camp?->name ?: '—').'</h3>'
             . '<p>'.e($shift?->name ?: '—').'</p>'
             . '<div class="fayno-crm-lines">'
-            . $this->detailLine('▦', $shift ? $shift->starts_at?->format('d.m.Y').' — '.$shift->ends_at?->format('d.m.Y') : '—')
-            . $this->detailLine('◷', $shift ? (string) $shift->starts_at?->diffInDays($shift->ends_at).' '.__('nova::resources.Days') : '—')
+            . $this->detailLine('calendar-days', $shift ? $shift->starts_at?->format('d.m.Y').' — '.$shift->ends_at?->format('d.m.Y') : '—')
+            . $this->detailLine('clock-3', $shift ? (string) $shift->starts_at?->diffInDays($shift->ends_at).' '.__('nova::resources.Days') : '—')
             . '</div></div></section>';
 
         $html .= '<section class="fayno-crm-card fayno-crm-children">'
-            . $this->cardHeading('●', __('nova::resources.Children'), '<span class="fayno-crm-count">'.$children->count().' '.__('nova::resources.Children').'</span>');
+            . $this->cardHeading('users-round', __('nova::resources.Children'), '<span class="fayno-crm-count">'.$children->count().' '.__('nova::resources.Children').'</span>');
         if ($children->isEmpty()) {
             $html .= '<p class="fayno-crm-muted">'.e('Дітей ще не додано').'</p>';
         } else {
@@ -171,13 +181,13 @@ class Order extends Resource
 
         if ($order->comment) {
             $html .= '<section class="fayno-crm-card fayno-crm-comment">'
-                . $this->cardHeading('●', __('nova::resources.Parent comment'))
+                . $this->cardHeading('users-round', __('nova::resources.Parent comment'))
                 . '<p>'.nl2br(e($order->comment)).'</p></section>';
         }
 
         $history = $order->statusHistories()->with('changedBy')->latest()->limit(8)->get();
         $html .= '<section class="fayno-crm-card fayno-crm-history">'
-            . $this->cardHeading('◷', __('nova::resources.Application timeline'));
+            . $this->cardHeading('history', __('nova::resources.Application timeline'));
         if ($history->isEmpty()) {
             $html .= '<p class="fayno-crm-muted">'.e(__('nova::resources.No status changes yet')).'</p>';
         } else {
@@ -202,7 +212,7 @@ class Order extends Resource
             . '<div class="fayno-crm-status__icon">✓</div><div><strong>'.e($statusLabel).'</strong><p>'.e($statusDescription).'</p></div></section>';
 
         $html .= '<section class="fayno-crm-card fayno-crm-finance">'
-            . $this->cardHeading('▣', __('nova::resources.Financial information'))
+            . $this->cardHeading('wallet', __('nova::resources.Financial information'))
             . '<div class="fayno-crm-money-row"><span>'.e(__('nova::resources.Total amount')).'</span><strong>'.e($this->money($total, $currency)).'</strong></div>'
             . '<div class="fayno-crm-money-row"><span>'.e(__('nova::resources.Paid')).'</span><strong class="is-paid">'.e($this->money($paid, $currency)).'</strong></div>'
             . '<div class="fayno-crm-money-row"><span>'.e(__('nova::resources.Balance')).'</span><strong class="is-balance">'.e($this->money($balance, $currency)).'</strong></div>'
@@ -220,14 +230,14 @@ class Order extends Resource
             . '</section>';
 
         $html .= '<section class="fayno-crm-card fayno-crm-payments">'
-            . $this->cardHeading('▣', __('nova::resources.Payments'), '<a href="/nova/resources/payments">'.e('Усі платежі').' →</a>');
+            . $this->cardHeading('credit-card', __('nova::resources.Payments'), '<a href="/nova/resources/payments">'.e('Усі платежі').' →</a>');
         if ($payments->isEmpty()) {
             $html .= '<p class="fayno-crm-muted">'.e(__('nova::resources.No payments yet')).'</p>';
         } else {
             foreach ($payments as $payment) {
                 $isPaid = $payment->status === PaymentStatus::PAID->value;
                 $paymentStatus = $isPaid ? __('nova::resources.Paid') : (string) $payment->status;
-                $html .= '<div class="fayno-crm-payment"><span class="fayno-crm-payment__icon '.($isPaid ? 'is-paid' : '').'">'.($isPaid ? '✓' : '◷').'</span>'
+                $html .= '<div class="fayno-crm-payment"><span class="fayno-crm-payment__icon '.($isPaid ? 'is-paid' : '').'">'.$this->iconSvg($isPaid ? 'check' : 'clock-3').'</span>'
                     . '<div><strong>'.e($payment->payment_method ?: __('nova::resources.Payment')).'</strong><small>'.e(($payment->paid_at ?? $payment->created_at)?->format('d.m.Y, H:i') ?: '').' · '.e($paymentStatus).'</small></div>'
                     . '<b>'.e($this->money((float) $payment->amount, $payment->currency ?: $currency)).'</b></div>';
             }
@@ -238,14 +248,37 @@ class Order extends Resource
         return $html;
     }
 
+    protected function iconSvg(string $name): string
+    {
+        $paths = [
+            'user-round' => '<circle cx="12" cy="8" r="4"/><path d="M5 21a7 7 0 0 1 14 0"/>',
+            'phone' => '<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.2 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72l.45 3.1a2 2 0 0 1-.57 1.7L7.1 10.4a16 16 0 0 0 6 6l1.88-1.89a2 2 0 0 1 1.7-.57l3.1.45a2 2 0 0 1 1.72 2.53z"/>',
+            'mail' => '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>',
+            'map-pin' => '<path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/>',
+            'tent' => '<path d="m3 21 9-18 9 18M3 21h18M12 3l-3 18m6 0-3-18"/>',
+            'calendar-days' => '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18M8 15h.01M12 15h.01M16 15h.01M8 18h.01M12 18h.01"/>',
+            'clock-3' => '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+            'users-round' => '<path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M20 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>',
+            'history' => '<path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5M12 7v5l3 2"/>',
+            'wallet' => '<rect x="3" y="5" width="18" height="15" rx="2"/><path d="M3 8h18M16 14h.01"/>',
+            'credit-card' => '<rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h3"/>',
+            'check' => '<path d="m5 12 4 4L19 6"/>',
+            'pencil' => '<path d="m16 4 4 4L8 20H4v-4L16 4Z"/><path d="m14 6 4 4"/>',
+            'arrow-left' => '<path d="m12 19-7-7 7-7M5 12h14"/>',
+        ];
+
+        $content = $paths[$name] ?? '<circle cx="12" cy="12" r="8"/>';
+        return '<svg class="fayno-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'.$content.'</svg>';
+    }
+
     protected function cardHeading(string $icon, string $title, string $right = ''): string
     {
-        return '<div class="fayno-crm-card__heading"><span class="fayno-crm-card__icon">'.e($icon).'</span><h2>'.e($title).'</h2>'.$right.'</div>';
+        return '<div class="fayno-crm-card__heading"><span class="fayno-crm-card__icon">'.$this->iconSvg($icon).'</span><h2>'.e($title).'</h2>'.$right.'</div>';
     }
 
     protected function detailLine(string $icon, string $value): string
     {
-        return '<div class="fayno-crm-line"><span>'.e($icon).'</span><p>'.e($value).'</p></div>';
+        return '<div class="fayno-crm-line"><span class="fayno-crm-line__icon">'.$this->iconSvg($icon).'</span><p>'.e($value).'</p></div>';
     }
 
     protected function statusLabel(string $status): string
