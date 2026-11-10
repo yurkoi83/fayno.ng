@@ -38,7 +38,7 @@ class Order extends Resource
         return __('nova::resources.Order');
     }
 
-    public static function indexQuery(\Laravel\Nova\Http\Requests\NovaRequest $request, \Illuminate\Database\Eloquent\Builder $query): \Illuminate\Database\Eloquent\Builder
+    public static function indexQuery(\Laravel\Nova\Http\Requests\NovaRequest $request, \Illuminate\Contracts\Database\Eloquent\Builder $query): \Illuminate\Contracts\Database\Eloquent\Builder
     {
         return $query->with([
             'customer',
