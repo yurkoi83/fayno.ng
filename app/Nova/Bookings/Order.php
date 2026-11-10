@@ -171,7 +171,9 @@ class Order extends Resource
                 $age = $camper?->birth_date ? $camper->birth_date->age.' '.__('nova::resources.Years') : '—';
                 $price = number_format((float) $item->price, 0, ',', ' ').' '.($item->currency ?: $currency);
                 $html .= '<article class="fayno-crm-child">';
-                $html .= $photo ? '<img src="'.e($photo).'" alt="">' : '<span class="fayno-crm-child__avatar">'.e(mb_substr($childName, 0, 1)).'</span>';
+                $html .= $photo
+                    ? '<img src="'.e($photo).'" alt="">'
+                    : $this->demoAvatar('child');
                 $html .= '<div class="fayno-crm-child__identity"><strong>'.e($childName).'</strong><small>'.e($age).'</small></div>';
                 $html .= '<div class="fayno-crm-child__price"><strong>'.e($price).'</strong>';
                 if ((float) $item->discount > 0) {
@@ -228,7 +230,9 @@ class Order extends Resource
         $html .= '<section class="fayno-crm-card fayno-crm-manager">'
             . '<span class="fayno-crm-eyebrow">'.e(__('nova::resources.Responsible manager')).'</span>'
             . '<div class="fayno-crm-person">';
-        $html .= $managerPhoto ? '<img src="'.e($managerPhoto).'" alt="">' : '<span class="fayno-crm-person__avatar">'.e(mb_substr($manager?->name ?: '—', 0, 1)).'</span>';
+        $html .= $managerPhoto
+            ? '<img src="'.e($managerPhoto).'" alt="">'
+            : $this->demoAvatar('manager');
         $html .= '<div><strong>'.e($manager?->name ?: '—').'</strong><small>'.e('Менеджер').'</small></div></div>'
             . '<div class="fayno-crm-manager__response"><span>'.e(__('nova::resources.Responded at')).'</span><strong>'.e($order->responded_at?->format('d.m.Y H:i') ?: '—').'</strong></div>'
             . '</section>';
@@ -276,6 +280,27 @@ class Order extends Resource
 
         $content = $paths[$name] ?? '<circle cx="12" cy="12" r="8"/>';
         return '<svg class="fayno-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'.$content.'</svg>';
+    }
+
+    protected function demoAvatar(string $type = 'child'): string
+    {
+        $palette = $type === 'manager'
+            ? ['#d9f2eb', '#21866c', '#155b50', '#f2bd91']
+            : ['#e2edff', '#3979c9', '#244f91', '#f0bd98'];
+
+        [$background, $shirt, $hair, $skin] = $palette;
+
+        return '<span class="fayno-demo-avatar fayno-demo-avatar--'.e($type).'" aria-hidden="true">'
+            . '<svg viewBox="0 0 64 64" role="presentation" focusable="false">'
+            . '<circle cx="32" cy="32" r="32" fill="'.$background.'"/>'
+            . '<path d="M10 64c2-13 10-20 22-20s20 7 22 20" fill="'.$shirt.'"/>'
+            . '<path d="M20 27c0-12 5-19 13-19 9 0 14 7 13 19l-3 9H23z" fill="'.$hair.'"/>'
+            . '<path d="M23 25c0-8 4-13 9-13s9 5 9 13v8c0 8-4 13-9 13s-9-5-9-13z" fill="'.$skin.'"/>'
+            . '<path d="M22 25c1-10 5-16 12-16 7 0 11 5 12 14-4-1-8-4-10-8-3 5-8 8-14 10z" fill="'.$hair.'"/>'
+            . '<circle cx="29" cy="31" r="1.2" fill="#35445b"/>'
+            . '<circle cx="37" cy="31" r="1.2" fill="#35445b"/>'
+            . '<path d="M29 38c2 2 4 2 6 0" fill="none" stroke="#a76e5c" stroke-width="1.4" stroke-linecap="round"/>'
+            . '</svg></span>';
     }
 
     protected function cardHeading(string $icon, string $title, string $right = ''): string
