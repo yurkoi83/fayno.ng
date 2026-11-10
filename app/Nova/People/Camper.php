@@ -101,13 +101,14 @@ class Camper extends Resource
             ? '<img src="'.e($photo).'" alt="">'
             : '<span>'.e($this->initials($camper->first_name, $camper->last_name)).'</span>';
         $html .= '</div><div class="fayno-camper__identity">'
-            . '<div class="fayno-camper__name-row"><h1>'.e($fullName).'</h1>'
-            . ($age !== null ? '<span class="fayno-camper__age">'.e($age.' '.($age === 1 ? 'рік' : ($age >= 2 && $age <= 4 ? 'роки' : 'років'))).'</span>' : '')
-            . '</div><p>Учасник табору <span>·</span> ID '.$camper->getKey().'</p>';
+            . '<div class="fayno-camper__name-row"><h1>'.e($fullName).'</h1></div>'
+            . '<p>Учасник табору <span>·</span> ID '.$camper->getKey().'</p>';
         if ($customer) {
             $html .= '<a class="fayno-camper__parent-link" href="'.e($parentUrl).'">'.$this->iconSvg('users-round').' Батьки: '.e($parentName).'</a>';
         }
-        $html .= '</div><a class="fayno-camper__edit" href="'.$editUrl.'">'.$this->iconSvg('pencil').' Редагувати</a></div></header>';
+        $html .= '</div><a class="fayno-camper__edit" href="'.$editUrl.'">'.$this->iconSvg('pencil').' Редагувати</a>'
+            . ($age !== null ? '<span class="fayno-camper__age">'.$this->iconSvg('cake').'<strong>'.e($age.' '.($age === 1 ? 'рік' : ($age >= 2 && $age <= 4 ? 'роки' : 'років'))).'</strong></span>' : '')
+            . '</div></header>';
 
         $html .= '<div class="fayno-camper__grid">';
         $html .= '<section class="fayno-camper-card">'
@@ -123,7 +124,7 @@ class Camper extends Resource
         $html .= '</section>';
 
         $html .= '<section class="fayno-camper-card">'
-            . $this->cardHeading('users-round', 'Контактні дані батьків');
+            . $this->cardHeading('users-round', 'Батьки та контакти');
         if ($customer) {
             $html .= '<a class="fayno-camper__parent-name" href="'.e($parentUrl).'">'.e($parentName).'</a>'
                 . '<div class="fayno-camper__details">'
