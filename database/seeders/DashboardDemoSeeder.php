@@ -36,7 +36,7 @@ class DashboardDemoSeeder extends Seeder
                 [
                     'name' => 'Fayno Camp — демо',
                     'country' => 'Україна',
-                    'city' => 'Карпаты',
+                    'city' => 'Карпати',
                     'address' => 'Демо-адреса',
                     'min_age' => 7,
                     'max_age' => 17,
@@ -45,9 +45,9 @@ class DashboardDemoSeeder extends Seeder
             );
 
             $firstShift = CampShift::updateOrCreate(
-                ['camp_id' => $camp->getKey(), 'name' => 'Демо — літня зміна №1'],
+                ['camp_id' => $camp->getKey(), 'starts_at' => now()->addMonths(7)->startOfMonth()->toDateString()],
                 [
-                    'starts_at' => now()->addMonths(7)->startOfMonth()->toDateString(),
+                    'name' => 'Демо — літня зміна №1',
                     'ends_at' => now()->addMonths(7)->startOfMonth()->addDays(13)->toDateString(),
                     'capacity' => 35,
                     'regular_price' => 590,
@@ -59,9 +59,9 @@ class DashboardDemoSeeder extends Seeder
             );
 
             $secondShift = CampShift::updateOrCreate(
-                ['camp_id' => $camp->getKey(), 'name' => 'Демо — літня зміна №2'],
+                ['camp_id' => $camp->getKey(), 'starts_at' => now()->addMonths(8)->startOfMonth()->toDateString()],
                 [
-                    'starts_at' => now()->addMonths(8)->startOfMonth()->toDateString(),
+                    'name' => 'Демо — літня зміна №2',
                     'ends_at' => now()->addMonths(8)->startOfMonth()->addDays(13)->toDateString(),
                     'capacity' => 45,
                     'regular_price' => 620,
