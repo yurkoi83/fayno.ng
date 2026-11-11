@@ -1031,3 +1031,2485 @@ button[class*="bg-primary"]:hover {
         font-size: 22px;
     }
 }
+
+
+/* CRM detail — payment progress and status history */
+[dusk="orders-detail-component"] .fayno-payment-progress {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+}
+[dusk="orders-detail-component"] .fayno-payment-progress__track {
+    flex: 1 1 auto;
+    height: 9px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: #dce4f0;
+}
+[dusk="orders-detail-component"] .fayno-payment-progress__track span {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: #15965a;
+}
+[dusk="orders-detail-component"] .fayno-payment-progress strong {
+    flex: 0 0 auto;
+    color: #10284b;
+    font-size: 12px;
+    font-weight: 800;
+}
+[dusk="orders-detail-component"] [dusk="fayno-order-history-panel"] table tbody tr {
+    background: #fff;
+}
+[dusk="orders-detail-component"] [dusk="fayno-order-history-panel"] table tbody td {
+    padding-top: 9px;
+    padding-bottom: 9px;
+}
+
+
+/* CRM detail — compact reference timeline and payment list */
+[dusk="orders-detail-component"] .fayno-order-timeline {
+    display: flex;
+    flex-direction: column;
+    padding: 4px 0;
+}
+[dusk="orders-detail-component"] .fayno-order-timeline__item {
+    position: relative;
+    display: flex;
+    gap: 13px;
+    min-height: 44px;
+    padding: 5px 0 12px;
+}
+[dusk="orders-detail-component"] .fayno-order-timeline__item:not(:last-child)::before {
+    position: absolute;
+    top: 17px;
+    bottom: -1px;
+    left: 6px;
+    width: 2px;
+    background: #dce9e2;
+    content: "";
+}
+[dusk="orders-detail-component"] .fayno-order-timeline__dot {
+    z-index: 1;
+    width: 14px;
+    height: 14px;
+    flex: 0 0 14px;
+    margin-top: 2px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    background: #269760;
+    box-shadow: 0 0 0 1px #269760;
+}
+[dusk="orders-detail-component"] .fayno-order-timeline__body {
+    display: grid;
+    grid-template-columns: 112px minmax(0, 1fr);
+    align-items: baseline;
+    gap: 3px 12px;
+    min-width: 0;
+}
+[dusk="orders-detail-component"] .fayno-order-timeline__body time {
+    color: #71829c;
+    font-size: 11px;
+    white-space: nowrap;
+}
+[dusk="orders-detail-component"] .fayno-order-timeline__body strong {
+    color: #183354;
+    font-size: 12px;
+    font-weight: 800;
+}
+[dusk="orders-detail-component"] .fayno-order-timeline__body small {
+    grid-column: 2;
+    color: #8190a5;
+    font-size: 10px;
+}
+[dusk="orders-detail-component"] .fayno-order-timeline__body p {
+    grid-column: 2;
+    margin: 2px 0 0;
+    color: #61738e;
+    font-size: 11px;
+}
+[dusk="orders-detail-component"] .fayno-payment-list {
+    display: flex;
+    flex-direction: column;
+}
+[dusk="orders-detail-component"] .fayno-payment-item {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 10px 0;
+    border-bottom: 1px solid #edf1f5;
+}
+[dusk="orders-detail-component"] .fayno-payment-item:last-child {
+    border-bottom: 0;
+}
+[dusk="orders-detail-component"] .fayno-payment-item__icon {
+    display: grid;
+    width: 22px;
+    height: 22px;
+    flex: 0 0 22px;
+    place-items: center;
+    border-radius: 50%;
+    background: #e8f7ed;
+    color: #18834d;
+    font-size: 12px;
+    font-weight: 800;
+}
+[dusk="orders-detail-component"] .fayno-payment-item__icon.is-pending {
+    background: #f0f3f8;
+    color: #8190a5;
+}
+[dusk="orders-detail-component"] .fayno-payment-item__details {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+[dusk="orders-detail-component"] .fayno-payment-item__details strong {
+    color: #183354;
+    font-size: 11px;
+    font-weight: 700;
+}
+[dusk="orders-detail-component"] .fayno-payment-item__details small {
+    color: #8190a5;
+    font-size: 10px;
+}
+[dusk="orders-detail-component"] .fayno-payment-item > b {
+    flex: 0 0 auto;
+    color: #183354;
+    font-size: 11px;
+    white-space: nowrap;
+}
+[dusk="orders-detail-component"] .fayno-order-empty {
+    margin: 0;
+    padding: 12px 0;
+    color: #8190a5;
+    font-size: 12px;
+}
+@media (max-width: 700px) {
+    [dusk="orders-detail-component"] .fayno-order-timeline__body {
+        grid-template-columns: 1fr;
+        gap: 3px;
+    }
+    [dusk="orders-detail-component"] .fayno-order-timeline__body small,
+    [dusk="orders-detail-component"] .fayno-order-timeline__body p {
+        grid-column: 1;
+    }
+}
+
+
+/* --------------------------------------------------------------------------
+   Fayno CRM order detail — self-contained reference layout
+   -------------------------------------------------------------------------- */
+
+[dusk="orders-detail-component"] {
+    display: block !important;
+    max-width: none !important;
+}
+
+[dusk="orders-detail-component"] [dusk="fayno-crm-layout-panel"] {
+    width: 100%;
+    margin: 0 !important;
+}
+
+[dusk="orders-detail-component"] [dusk="fayno-crm-layout-panel"] > .flex.items-center {
+    display: none !important;
+}
+
+[dusk="orders-detail-component"] [dusk="fayno-crm-layout-panel"] > .mt-3.py-2.px-6 {
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+[dusk="orders-detail-component"] [dusk="fayno-crm-layout-panel"] .py-4 {
+    padding: 0 !important;
+    border: 0 !important;
+}
+
+[dusk="orders-detail-component"] [dusk="fayno-crm-layout-panel"] .py-4 > div:first-child {
+    display: none !important;
+}
+
+[dusk="orders-detail-component"] [dusk="fayno-crm-layout-panel"] .py-4 > div:last-child {
+    width: 100% !important;
+    max-width: none !important;
+    padding: 0 !important;
+}
+
+.fayno-crm {
+    display: grid;
+    grid-template-columns: minmax(0, 1.9fr) minmax(290px, .9fr);
+    align-items: start;
+    gap: 16px;
+    width: 100%;
+    color: #10284b;
+}
+
+.fayno-crm__main,
+.fayno-crm__aside {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.fayno-crm-card {
+    position: relative;
+    min-width: 0;
+    padding: 18px;
+    border: 1px solid #e1e8f2;
+    border-radius: 13px;
+    background: #fff;
+    box-shadow: 0 2px 9px rgba(25, 55, 90, .045);
+}
+
+.fayno-crm-card__heading {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 28px;
+    margin-bottom: 14px;
+}
+
+.fayno-crm-card__heading h2 {
+    margin: 0;
+    color: #10284b;
+    font-size: 15px;
+    font-weight: 800;
+    line-height: 1.3;
+}
+
+.fayno-crm-card__heading > a,
+.fayno-crm-card__heading > .fayno-crm-count {
+    margin-left: auto;
+    color: #246dc5;
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.fayno-crm-card__icon {
+    display: grid;
+    width: 34px;
+    height: 34px;
+    flex: 0 0 34px;
+    place-items: center;
+    border-radius: 50%;
+    background: #e8f2ff;
+    color: #246dc5;
+    font-size: 17px;
+    font-weight: 800;
+}
+
+.fayno-crm-card h3 {
+    margin: 0 0 12px;
+    color: #10284b;
+    font-size: 17px;
+    font-weight: 800;
+    line-height: 1.3;
+}
+
+.fayno-crm-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.fayno-crm-line {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    min-width: 0;
+}
+
+.fayno-crm-line > span {
+    width: 17px;
+    flex: 0 0 17px;
+    color: #71829c;
+    text-align: center;
+}
+
+.fayno-crm-line p {
+    min-width: 0;
+    margin: 0;
+    color: #263e60;
+    font-size: 13px;
+    line-height: 1.45;
+    overflow-wrap: anywhere;
+}
+
+.fayno-crm-camp {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.fayno-crm-camp > .fayno-crm-card__heading {
+    position: absolute;
+    top: 18px;
+    left: 18px;
+}
+
+.fayno-crm-camp__image {
+    order: 2;
+    width: 35%;
+    min-width: 125px;
+    max-width: 210px;
+    height: 145px;
+    margin: 38px 0 0 auto;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.fayno-crm-camp__copy {
+    min-width: 0;
+    flex: 1 1 auto;
+    padding-top: 39px;
+}
+
+.fayno-crm-camp__copy h3 {
+    margin-bottom: 4px;
+}
+
+.fayno-crm-camp__copy > p {
+    margin: 0 0 14px;
+    color: #526783;
+    font-size: 13px;
+}
+
+.fayno-crm-camp__copy .fayno-crm-lines {
+    gap: 7px;
+}
+
+.fayno-crm-child-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.fayno-crm-child {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-width: 0;
+    padding: 12px;
+    border-radius: 11px;
+    background: #f3f7fd;
+}
+
+.fayno-crm-child > img,
+.fayno-crm-child > .fayno-demo-avatar {
+    display: grid;
+    width: 58px;
+    height: 58px;
+    flex: 0 0 58px;
+    place-items: center;
+    border-radius: 50%;
+    background: #dce9f8;
+    color: #246dc5;
+    font-size: 20px;
+    font-weight: 800;
+    object-fit: cover;
+}
+
+.fayno-crm-child__identity {
+    display: flex;
+    min-width: 0;
+    flex: 1 1 auto;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.fayno-crm-child__identity strong {
+    color: #10284b;
+    font-size: 13px;
+    font-weight: 800;
+    overflow-wrap: anywhere;
+}
+
+.fayno-crm-child__identity small,
+.fayno-crm-child__price small {
+    color: #71829c;
+    font-size: 11px;
+}
+
+.fayno-crm-child__price {
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 5px;
+    text-align: right;
+}
+
+.fayno-crm-child__price strong {
+    color: #10284b;
+    font-size: 14px;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.fayno-crm-comment {
+    background: #edf4ff;
+    border-color: #dce8fb;
+}
+
+.fayno-crm-comment > p {
+    margin: 0;
+    color: #263e60;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.fayno-crm-status {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    min-height: 102px;
+    border-color: #bde7cc;
+    background: #e5f7eb;
+}
+
+.fayno-crm-status__icon {
+    display: grid;
+    width: 44px;
+    height: 44px;
+    flex: 0 0 44px;
+    place-items: center;
+    border-radius: 50%;
+    background: #15965a;
+    color: #fff;
+    font-size: 23px;
+    font-weight: 800;
+}
+
+.fayno-crm-status strong {
+    display: block;
+    color: #125b3a;
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.fayno-crm-status p {
+    margin: 4px 0 0;
+    color: #39745a;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.fayno-crm-status.is-danger {
+    border-color: #f2c8c5;
+    background: #fff0ef;
+}
+
+.fayno-crm-status.is-danger .fayno-crm-status__icon {
+    background: #c94f49;
+}
+
+.fayno-crm-status.is-danger strong { color: #9e3430; }
+.fayno-crm-status.is-danger p { color: #a85c57; }
+
+.fayno-crm-status.is-warning {
+    border-color: #f3dfb8;
+    background: #fff8e9;
+}
+
+.fayno-crm-status.is-warning .fayno-crm-status__icon {
+    background: #d58a1b;
+}
+
+.fayno-crm-status.is-warning strong { color: #936015; }
+.fayno-crm-status.is-warning p { color: #987641; }
+
+.fayno-crm-finance .fayno-crm-card__heading {
+    margin-bottom: 18px;
+}
+
+.fayno-crm-money-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    margin: 13px 0;
+}
+
+.fayno-crm-money-row span {
+    color: #263e60;
+    font-size: 12px;
+}
+
+.fayno-crm-money-row strong {
+    color: #10284b;
+    font-size: 17px;
+    font-weight: 800;
+    text-align: right;
+    white-space: nowrap;
+}
+
+.fayno-crm-money-row strong.is-paid { color: #15965a; }
+.fayno-crm-money-row strong.is-balance { color: #e47725; }
+
+.fayno-crm-progress {
+    height: 9px;
+    margin-top: 20px;
+    overflow: hidden;
+    border-radius: 20px;
+    background: #dce4f0;
+}
+
+.fayno-crm-progress span {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: #15965a;
+}
+
+.fayno-crm-progress-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 7px;
+}
+
+.fayno-crm-progress-label strong {
+    color: #10284b;
+    font-size: 12px;
+}
+
+.fayno-crm-progress-label span {
+    color: #71829c;
+    font-size: 11px;
+}
+
+.fayno-crm-link {
+    display: block;
+    margin-top: 18px;
+    padding: 11px 14px;
+    border-radius: 8px;
+    background: #2167d5;
+    color: #fff !important;
+    font-size: 12px;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none !important;
+}
+
+.fayno-crm-link:hover { background: #1858bd; }
+
+.fayno-crm-eyebrow {
+    display: block;
+    margin-bottom: 13px;
+    color: #526783;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.fayno-crm-person {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+}
+
+.fayno-crm-person > img,
+.fayno-crm-person > .fayno-demo-avatar {
+    display: grid;
+    width: 46px;
+    height: 46px;
+    flex: 0 0 46px;
+    place-items: center;
+    border-radius: 50%;
+    background: #e3eee7;
+    color: #16834b;
+    font-size: 17px;
+    font-weight: 800;
+    object-fit: cover;
+}
+
+.fayno-crm-person strong,
+.fayno-crm-person small {
+    display: block;
+}
+
+.fayno-crm-person strong {
+    color: #10284b;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.fayno-crm-person small {
+    margin-top: 3px;
+    color: #71829c;
+    font-size: 11px;
+}
+
+.fayno-crm-manager__response {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid #edf1f5;
+    font-size: 11px;
+}
+
+.fayno-crm-manager__response span { color: #71829c; }
+.fayno-crm-manager__response strong { color: #263e60; }
+
+.fayno-crm-payment {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 11px 0;
+    border-bottom: 1px solid #edf1f5;
+}
+
+.fayno-crm-payment:last-child { border-bottom: 0; }
+
+.fayno-crm-payment__icon {
+    display: grid;
+    width: 25px;
+    height: 25px;
+    flex: 0 0 25px;
+    place-items: center;
+    border-radius: 50%;
+    background: #eef2f7;
+    color: #8190a5;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.fayno-crm-payment__icon.is-paid {
+    background: #e8f7ed;
+    color: #18834d;
+}
+
+.fayno-crm-payment > div {
+    display: flex;
+    min-width: 0;
+    flex: 1 1 auto;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.fayno-crm-payment strong {
+    color: #183354;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.fayno-crm-payment small {
+    color: #8190a5;
+    font-size: 10px;
+}
+
+.fayno-crm-payment > b {
+    flex: 0 0 auto;
+    color: #183354;
+    font-size: 11px;
+    white-space: nowrap;
+}
+
+.fayno-crm-timeline {
+    display: flex;
+    flex-direction: column;
+}
+
+.fayno-crm-timeline__item {
+    position: relative;
+    display: grid;
+    grid-template-columns: 110px 14px minmax(0, 1fr);
+    align-items: start;
+    gap: 10px;
+    padding: 8px 0;
+}
+
+.fayno-crm-timeline__item time {
+    padding-top: 1px;
+    color: #71829c;
+    font-size: 11px;
+    white-space: nowrap;
+}
+
+.fayno-crm-timeline__dot {
+    position: relative;
+    z-index: 1;
+    width: 11px;
+    height: 11px;
+    margin-top: 3px;
+    border-radius: 50%;
+    background: #269760;
+    box-shadow: 0 0 0 3px #e7f5ed;
+}
+
+.fayno-crm-timeline__item:not(:last-child) .fayno-crm-timeline__dot::after {
+    position: absolute;
+    top: 11px;
+    left: 4px;
+    width: 2px;
+    height: 35px;
+    background: #dce9e2;
+    content: "";
+}
+
+.fayno-crm-timeline__item strong,
+.fayno-crm-timeline__item small {
+    display: block;
+}
+
+.fayno-crm-timeline__item strong {
+    color: #183354;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.fayno-crm-timeline__item small {
+    margin-top: 3px;
+    color: #8190a5;
+    font-size: 10px;
+}
+
+.fayno-crm-muted {
+    margin: 0;
+    color: #8190a5;
+    font-size: 12px;
+}
+
+@media (max-width: 1050px) {
+    .fayno-crm { grid-template-columns: minmax(0, 1fr) minmax(270px, .8fr); }
+    .fayno-crm-child-grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: 760px) {
+    .fayno-crm { grid-template-columns: minmax(0, 1fr); }
+    .fayno-crm-child-grid { grid-template-columns: minmax(0, 1fr); }
+    .fayno-crm-camp__image { width: 32%; min-width: 100px; height: 120px; }
+}
+
+@media (max-width: 480px) {
+    .fayno-crm-card { padding: 14px; }
+    .fayno-crm-camp { flex-direction: column; }
+    .fayno-crm-camp__image { order: 0; width: 100%; max-width: none; height: 150px; margin: 44px 0 0; }
+    .fayno-crm-camp__copy { padding-top: 0; }
+    .fayno-crm-timeline__item { grid-template-columns: 1fr 14px; }
+    .fayno-crm-timeline__item time { grid-column: 1 / -1; }
+    .fayno-crm-timeline__dot { grid-column: 2; grid-row: 2; }
+    .fayno-crm-timeline__item > div { grid-column: 1; grid-row: 2; }
+}
+
+
+/* Fix Nova's default computed-field label/value columns around the CRM markup. */
+[dusk="orders-detail-component"] [dusk="fayno-crm-layout-panel"] [dusk="ComputedField"] > div:first-child {
+    display: none !important;
+}
+
+[dusk="orders-detail-component"] [dusk="fayno-crm-layout-panel"] [dusk="ComputedField"] > div:last-child {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 1 1 100% !important;
+    padding: 0 !important;
+}
+
+[dusk="orders-detail-component"] [dusk="fayno-crm-layout-panel"] [dusk="ComputedField"] > div:last-child > div {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+}
+
+[dusk="orders-detail-component"] [dusk="fayno-crm-layout-panel"] h1[dusk$="-detail-heading"] {
+    display: none !important;
+}
+
+[dusk="orders-detail-component"] [dusk="fayno-crm-layout-panel"] > div:first-child {
+    justify-content: flex-end !important;
+    min-height: 24px;
+    margin-bottom: 8px !important;
+}
+
+.fayno-crm {
+    grid-template-columns: minmax(0, 1.9fr) minmax(290px, .9fr);
+}
+
+.fayno-crm__heading {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    min-width: 0;
+    margin: 0 0 2px;
+}
+
+.fayno-crm__heading h1 {
+    margin: 0;
+    color: #10284b;
+    font-size: 25px;
+    font-weight: 800;
+    line-height: 1.25;
+}
+
+.fayno-crm__heading p {
+    margin: 5px 0 0;
+    color: #71829c;
+    font-size: 12px;
+}
+
+.fayno-crm-order-status {
+    flex: 0 0 auto;
+    padding: 7px 12px;
+    border-radius: 999px;
+    background: #e5f7eb;
+    color: #16834b;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.fayno-crm-order-status.is-danger {
+    background: #fff0ef;
+    color: #b3433d;
+}
+
+.fayno-crm-order-status.is-warning {
+    background: #fff8e9;
+    color: #a16b16;
+}
+
+.fayno-crm__main {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    gap: 16px;
+}
+
+.fayno-crm-children,
+.fayno-crm-comment,
+.fayno-crm-history {
+    grid-column: 1 / -1;
+}
+
+@media (max-width: 1050px) {
+    .fayno-crm { grid-template-columns: minmax(0, 1fr) minmax(260px, .85fr); }
+    .fayno-crm__main { grid-template-columns: minmax(0, 1fr); }
+    .fayno-crm-children,
+    .fayno-crm-comment,
+    .fayno-crm-history { grid-column: 1; }
+}
+
+@media (max-width: 760px) {
+    .fayno-crm { grid-template-columns: minmax(0, 1fr); }
+    .fayno-crm__heading { align-items: flex-start; flex-direction: column; }
+    .fayno-crm__heading h1 { font-size: 21px; }
+    .fayno-crm__main { grid-template-columns: minmax(0, 1fr); }
+}
+
+
+/* Fix Nova ComputedField wrapper around Fayno CRM */
+[dusk="orders-detail-component"] [dusk="ComputedField"]:has(.fayno-crm) {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+[dusk="orders-detail-component"] [dusk="ComputedField"]:has(.fayno-crm) > div:first-child {
+    display: none !important;
+}
+
+[dusk="orders-detail-component"] [dusk="ComputedField"]:has(.fayno-crm) > div:last-child {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 1 1 100% !important;
+    padding: 0 !important;
+}
+
+[dusk="orders-detail-component"] [dusk="ComputedField"]:has(.fayno-crm) > div:last-child > div {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+}
+
+/* CRM must occupy the available content width */
+.fayno-crm {
+    width: 100% !important;
+    min-width: 0 !important;
+}
+
+/* One child should use the full available card width */
+.fayno-crm-child-grid {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)) !important;
+}
+
+
+/* CRM detail: reference-style header and consistent Lucide-like SVG icons */
+.fayno-crm__heading {
+    display: flex !important;
+    align-items: flex-end !important;
+    justify-content: space-between !important;
+    gap: 24px !important;
+    padding: 4px 0 20px !important;
+    margin: 0 0 2px !important;
+    border-bottom: 1px solid #e7edf4;
+}
+.fayno-crm__heading-main { min-width: 0; flex: 1 1 auto; }
+.fayno-crm__breadcrumbs {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    color: #8291a6;
+    font-size: 11px;
+    font-weight: 700;
+}
+.fayno-crm__breadcrumbs a {
+    color: #287a55;
+    text-decoration: none;
+}
+.fayno-crm__breadcrumbs a:hover { text-decoration: underline; }
+.fayno-crm__title-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px 20px;
+}
+.fayno-crm__title-row > div { min-width: 0; }
+.fayno-crm__heading h1 {
+    margin: 0;
+    color: #10284b;
+    font-size: 27px;
+    font-weight: 800;
+    line-height: 1.2;
+}
+.fayno-crm__heading p {
+    margin: 6px 0 0;
+    color: #71829c;
+    font-size: 12px;
+}
+.fayno-crm__actions {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 9px;
+}
+.fayno-crm-action {
+    display: inline-flex;
+    min-height: 38px;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 13px;
+    border: 1px solid transparent;
+    border-radius: 9px;
+    font-size: 12px;
+    font-weight: 800;
+    text-decoration: none !important;
+    white-space: nowrap;
+}
+.fayno-crm-action--secondary {
+    border-color: #dfe7ef;
+    background: #fff;
+    color: #526783 !important;
+}
+.fayno-crm-action--secondary:hover {
+    border-color: #cbd8e5;
+    background: #f7f9fc;
+}
+.fayno-crm-action--primary {
+    background: #287a55;
+    color: #fff !important;
+}
+.fayno-crm-action--primary:hover {
+    background: #206344;
+}
+.fayno-icon {
+    display: block;
+    width: 17px;
+    height: 17px;
+    flex: 0 0 17px;
+}
+.fayno-crm-card__icon {
+    display: inline-flex;
+    width: 34px;
+    height: 34px;
+    flex: 0 0 34px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: #edf5f0;
+    color: #287a55;
+}
+.fayno-crm-card__icon .fayno-icon { width: 18px; height: 18px; }
+.fayno-crm-line__icon {
+    display: inline-flex;
+    width: 18px;
+    height: 18px;
+    flex: 0 0 18px;
+    align-items: center;
+    justify-content: center;
+    color: #7a8ba1;
+}
+.fayno-crm-line__icon .fayno-icon { width: 16px; height: 16px; }
+.fayno-crm-status__icon .fayno-icon { width: 23px; height: 23px; }
+.fayno-crm-payment__icon .fayno-icon { width: 14px; height: 14px; }
+.fayno-crm-payment__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+@media (max-width: 760px) {
+    .fayno-crm__heading {
+        align-items: flex-start !important;
+        flex-direction: column !important;
+        gap: 15px !important;
+    }
+    .fayno-crm__actions { width: 100%; }
+    .fayno-crm-action { flex: 1 1 auto; }
+    .fayno-crm__heading h1 { font-size: 22px; }
+}
+
+
+/* Match the reference: Nova's duplicate resource title must not compete with CRM title */
+[dusk="orders-detail-component"] h1[dusk$="-detail-heading"] {
+    display: none !important;
+}
+
+/* Remove the extra Nova panel shell around the custom CRM screen */
+[dusk="orders-detail-component"] [dusk$="-panel"]:has(.fayno-crm) .relative.overflow-hidden.bg-white {
+    overflow: visible !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+[dusk="orders-detail-component"] [dusk$="-panel"]:has(.fayno-crm) .relative.overflow-hidden.bg-white > .mt-3.py-2.px-6 {
+    padding: 0 !important;
+}
+
+/* Reference palette: each CRM section has its own meaningful icon color */
+.fayno-crm-parent .fayno-crm-card__icon {
+    background: #2875d0;
+    color: #fff;
+}
+.fayno-crm-camp .fayno-crm-card__icon {
+    background: #7256cf;
+    color: #fff;
+}
+.fayno-crm-children .fayno-crm-card__icon {
+    background: #159b63;
+    color: #fff;
+}
+.fayno-crm-comment .fayno-crm-card__icon {
+    background: #3478d4;
+    color: #fff;
+}
+.fayno-crm-history .fayno-crm-card__icon,
+.fayno-crm-finance .fayno-crm-card__icon,
+.fayno-crm-payments .fayno-crm-card__icon {
+    background: #526783;
+    color: #fff;
+}
+
+/* Illustrated demo portraits are used only when no real photo is uploaded. */
+.fayno-demo-avatar {
+    display: block;
+    width: 58px;
+    height: 58px;
+    flex: 0 0 58px;
+    overflow: hidden;
+    border-radius: 50%;
+    background: #e2edff;
+}
+.fayno-demo-avatar svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.fayno-crm-person .fayno-demo-avatar {
+    width: 46px;
+    height: 46px;
+    flex-basis: 46px;
+}
+.fayno-crm-status__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.fayno-crm__heading {
+    border-bottom: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 22px !important;
+}
+
+
+/* Fayno Nova shell: target the real Nova sidebar wrapper, not the CRM aside. */
+#nova [dusk="content"] > div[class*="lg:absolute"][class*="w-60"] {
+    position: fixed !important;
+    z-index: 30;
+    top: 56px !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    width: 240px !important;
+    min-height: calc(100vh - 56px);
+    overflow-y: auto;
+    padding: 28px 12px 32px !important;
+    border-right: 1px solid rgba(255, 255, 255, .08);
+    background: #17243b !important;
+    color: #d8e1ee !important;
+}
+
+#nova [dusk="sidebar-menu"] {
+    width: 100% !important;
+    color: #c3cfdf !important;
+}
+
+#nova [dusk="sidebar-menu"] a,
+#nova [dusk="sidebar-menu"] button,
+#nova [dusk="sidebar-menu"] [role="button"] {
+    color: #c3cfdf !important;
+    border-radius: 9px;
+    transition: background-color .18s ease, color .18s ease;
+}
+
+#nova [dusk="sidebar-menu"] a:hover,
+#nova [dusk="sidebar-menu"] button:hover,
+#nova [dusk="sidebar-menu"] [role="button"]:hover {
+    color: #fff !important;
+    background: rgba(255, 255, 255, .08) !important;
+}
+
+#nova [dusk="sidebar-menu"] a[aria-current="page"],
+#nova [dusk="sidebar-menu"] a.router-link-exact-active,
+#nova [dusk="sidebar-menu"] a.router-link-active {
+    color: #fff !important;
+    background: #287a55 !important;
+    font-weight: 800;
+}
+
+#nova [dusk="sidebar-menu"] svg {
+    color: currentColor !important;
+}
+
+/* Fayno branded top navigation. Keep Nova controls and interactions intact. */
+#nova header {
+    position: relative;
+    z-index: 40;
+    height: 56px;
+    border-bottom: 1px solid rgba(255, 255, 255, .08);
+    background: #17243b !important;
+    color: #fff !important;
+    box-shadow: 0 2px 10px rgba(16, 40, 75, .12);
+}
+
+#nova header a,
+#nova header button {
+    color: #e5edf7 !important;
+}
+
+#nova header a:hover,
+#nova header button:hover {
+    color: #fff !important;
+}
+
+#nova header a.text-red-500 {
+    display: none !important;
+}
+
+#nova header input {
+    border-color: rgba(255, 255, 255, .16) !important;
+    background: rgba(255, 255, 255, .09) !important;
+    color: #fff !important;
+}
+
+#nova header input::placeholder {
+    color: #b8c5d7 !important;
+}
+
+#nova header svg {
+    color: currentColor;
+}
+
+@media (max-width: 1023px) {
+    #nova [dusk="content"] > div[class*="lg:absolute"][class*="w-60"] {
+        position: static !important;
+        display: none !important;
+    }
+}
+
+/*
+|--------------------------------------------------------------------------
+| Fayno Camp — Compact Nova shell and CRM spacing
+|--------------------------------------------------------------------------
+*/
+
+/* Nova reserves 48px on both sides of the content area by default. */
+#nova [dusk="content"] > div > div[class*="lg:ml-60"] {
+    padding: 18px 24px !important;
+    row-gap: 16px !important;
+}
+
+/* Remove the extra 24px inset from Nova's computed-field wrapper. */
+#nova [dusk="orders-detail-component"] [dusk="ComputedField"]:has(.fayno-crm) {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+/* Make the topbar controls align with the tighter content grid. */
+#nova header > div[class*="flex-1"][class*="lg:px-12"] {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+}
+
+/* Replace Nova's default logo with a clean Fayno wordmark in the brand slot. */
+#nova header > div:nth-child(2) {
+    justify-content: center;
+}
+#nova header > div:nth-child(2) > a {
+    display: none !important;
+}
+#nova header > div:nth-child(2)::before {
+    content: "FAYNO CAMP";
+    color: #ffffff;
+    font-family: 'Nunito', sans-serif;
+    font-size: 17px;
+    font-weight: 900;
+    letter-spacing: .08em;
+}
+
+/* Tighten the order heading without changing the card layout. */
+.fayno-crm__heading {
+    padding-bottom: 12px !important;
+    gap: 16px !important;
+}
+.fayno-crm__breadcrumbs {
+    margin-bottom: 8px !important;
+}
+
+@media (max-width: 1023px) {
+    #nova [dusk="content"] > div > div[class*="lg:ml-60"] {
+        padding: 16px !important;
+    }
+    #nova header > div:nth-child(2)::before {
+        font-size: 15px;
+    }
+}
+
+/* Order detail: reduce the centered content inset from ~72px to 24px. */
+@media (min-width: 1024px) {
+    #nova [dusk="orders-detail-component"] .fayno-crm {
+        width: calc(100% + 96px) !important;
+        max-width: none !important;
+        margin-left: -48px !important;
+        margin-right: -48px !important;
+    }
+}
+
+/* The CRM has its own action buttons; hide Nova's native action toolbar.
+   Target the actual direct toolbar child of the panel containing the CRM. */
+#nova [dusk="orders-detail-component"] [dusk$="-panel"]:has(.fayno-crm) > div[class~="md:flex"][class~="items-center"][class~="mb-3"] {
+    display: none !important;
+}
+
+/* Order detail: keep Nova action buttons, but collapse the empty spacing around its toolbar. */
+#nova [dusk="orders-detail-component"] [dusk$="-panel"]:has(.fayno-crm) > div.md\\:flex.items-center.mb-3 {
+    margin-bottom: 0 !important;
+}
+
+#nova [dusk="orders-detail-component"] [dusk$="-panel"]:has(.fayno-crm) > .relative.overflow-hidden.bg-white {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+/* Use class-token selectors because Nova's toolbar includes a colon in md:flex. */
+#nova [dusk="orders-detail-component"] [dusk$="-panel"]:has(.fayno-crm) > div[class~="md:flex"][class~="items-center"][class~="mb-3"] {
+    margin-bottom: 0 !important;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Fayno Camp — Camper profile
+|--------------------------------------------------------------------------
+*/
+
+/* Hide Nova's duplicate detail title/actions and the default fields panel.
+   The custom Fayno camper card contains the complete read-only presentation. */
+[dusk="campers-detail-component"] > .mb-8:has(.fayno-camper) > div:first-child,
+[dusk="campers-detail-component"] > [dusk="ucasnik-panel"] {
+    display: none !important;
+}
+
+[dusk="campers-detail-component"] [dusk="ComputedField"]:has(.fayno-camper) {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+[dusk="campers-detail-component"] [dusk="ComputedField"]:has(.fayno-camper) > div:first-child {
+    display: none !important;
+}
+
+[dusk="campers-detail-component"] [dusk="ComputedField"]:has(.fayno-camper) > div:last-child,
+[dusk="campers-detail-component"] [dusk="ComputedField"]:has(.fayno-camper) > div:last-child > div {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+}
+
+.fayno-camper {
+    display: flex;
+    width: 100%;
+    min-width: 0;
+    flex-direction: column;
+    gap: 18px;
+    color: #10284b;
+}
+
+.fayno-camper__header {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 16px;
+    padding: 2px 0 4px;
+}
+
+.fayno-camper__breadcrumbs {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 9px;
+    color: #8190a5;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.fayno-camper__breadcrumbs a {
+    color: #2875d0;
+    text-decoration: none;
+}
+
+.fayno-camper__breadcrumbs a:hover {
+    color: #185cae;
+}
+
+.fayno-camper__profile {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    min-width: 0;
+}
+
+.fayno-camper__avatar {
+    display: grid;
+    width: 76px;
+    height: 76px;
+    flex: 0 0 76px;
+    place-items: center;
+    overflow: hidden;
+    border: 4px solid #fff;
+    border-radius: 50%;
+    background: #e5efff;
+    box-shadow: 0 2px 12px rgba(25, 55, 90, .12);
+    color: #2867b1;
+    font-size: 23px;
+    font-weight: 900;
+}
+
+.fayno-camper__avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.fayno-camper__identity {
+    min-width: 0;
+    flex: 1 1 auto;
+}
+
+.fayno-camper__name-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+
+.fayno-camper__name-row h1 {
+    margin: 0;
+    color: #10284b;
+    font-size: 25px;
+    font-weight: 850;
+    line-height: 1.25;
+}
+
+.fayno-camper__age {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 10px;
+    border-radius: 999px;
+    background: #e5f7eb;
+    color: #16834b;
+    font-size: 11px;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.fayno-camper__identity > p {
+    margin: 5px 0 7px;
+    color: #8190a5;
+    font-size: 12px;
+}
+
+.fayno-camper__identity > p span {
+    padding: 0 4px;
+}
+
+.fayno-camper__parent-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #2875d0;
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.fayno-camper__parent-link:hover {
+    color: #185cae;
+}
+
+.fayno-camper__icon {
+    display: block;
+    width: 17px;
+    height: 17px;
+    flex: 0 0 17px;
+}
+
+.fayno-camper__edit {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border: 1px solid #dce6f2;
+    border-radius: 9px;
+    background: #fff;
+    color: #246dc5;
+    font-size: 12px;
+    font-weight: 800;
+    text-decoration: none;
+    box-shadow: 0 2px 8px rgba(25, 55, 90, .04);
+}
+
+.fayno-camper__edit:hover {
+    border-color: #b8d1ef;
+    background: #f6f9fe;
+}
+
+.fayno-camper__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    gap: 16px;
+}
+
+.fayno-camper-card {
+    min-width: 0;
+    padding: 19px;
+    border: 1px solid #e1e8f2;
+    border-radius: 13px;
+    background: #fff;
+    box-shadow: 0 2px 9px rgba(25, 55, 90, .045);
+}
+
+.fayno-camper-card--history {
+    grid-column: 1 / -1;
+}
+
+.fayno-camper-card__heading {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 17px;
+}
+
+.fayno-camper-card__heading > span:first-child {
+    display: grid;
+    width: 35px;
+    height: 35px;
+    flex: 0 0 35px;
+    place-items: center;
+    border-radius: 11px;
+    background: #e8f2ff;
+    color: #246dc5;
+}
+
+.fayno-camper-card__heading h2 {
+    margin: 0;
+    color: #10284b;
+    font-size: 15px;
+    font-weight: 850;
+}
+
+.fayno-camper__count {
+    display: inline-flex;
+    min-width: 26px;
+    height: 26px;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    padding: 0 8px;
+    border-radius: 999px;
+    background: #e8f2ff;
+    color: #246dc5;
+    font-size: 11px;
+    font-weight: 850;
+}
+
+.fayno-camper__details {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.fayno-camper__detail {
+    display: flex;
+    align-items: flex-start;
+    gap: 11px;
+    min-width: 0;
+}
+
+.fayno-camper__detail-icon {
+    display: grid;
+    width: 34px;
+    height: 34px;
+    flex: 0 0 34px;
+    place-items: center;
+    border-radius: 10px;
+    background: #f2f6fc;
+    color: #71829c;
+}
+
+.fayno-camper__detail > div {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 3px;
+    padding-top: 1px;
+}
+
+.fayno-camper__detail small {
+    color: #8190a5;
+    font-size: 11px;
+}
+
+.fayno-camper__detail strong {
+    color: #263e60;
+    font-size: 13px;
+    font-weight: 750;
+    overflow-wrap: anywhere;
+}
+
+.fayno-camper__parent-name {
+    display: inline-block;
+    margin: -2px 0 16px;
+    color: #246dc5;
+    font-size: 14px;
+    font-weight: 850;
+    text-decoration: none;
+}
+
+.fayno-camper__notes {
+    margin-top: 17px;
+    padding: 13px 14px;
+    border-radius: 10px;
+    background: #f5f8fc;
+}
+
+.fayno-camper__notes strong {
+    color: #526783;
+    font-size: 11px;
+    font-weight: 850;
+}
+
+.fayno-camper__notes p {
+    margin: 5px 0 0;
+    color: #263e60;
+    font-size: 12px;
+    line-height: 1.55;
+}
+
+.fayno-camper__empty {
+    margin: 0;
+    padding: 12px 0 3px;
+    color: #8190a5;
+    font-size: 13px;
+}
+
+.fayno-camper__table-wrap {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.fayno-camper__table {
+    width: 100%;
+    min-width: 680px;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.fayno-camper__table thead th {
+    padding: 11px 12px;
+    background: #f6f8fc;
+    color: #8190a5;
+    font-size: 10px;
+    font-weight: 850;
+    letter-spacing: .045em;
+    text-align: left;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.fayno-camper__table thead th:first-child {
+    border-radius: 8px 0 0 8px;
+}
+
+.fayno-camper__table thead th:last-child {
+    border-radius: 0 8px 8px 0;
+}
+
+.fayno-camper__table tbody td {
+    padding: 13px 12px;
+    border-bottom: 1px solid #edf1f6;
+    color: #526783;
+    font-size: 12px;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.fayno-camper__table tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+.fayno-camper__table tbody td:first-child a {
+    color: #246dc5;
+    font-weight: 850;
+    text-decoration: none;
+}
+
+.fayno-camper__table tbody td strong {
+    display: block;
+    color: #263e60;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.fayno-camper__table tbody td small {
+    display: block;
+    margin-top: 4px;
+    color: #8190a5;
+    font-size: 10px;
+}
+
+.fayno-camper__status {
+    display: inline-flex;
+    padding: 5px 9px;
+    border-radius: 999px;
+    background: #edf2f8;
+    color: #526783;
+    font-size: 10px;
+    font-weight: 850;
+}
+
+@media (max-width: 900px) {
+    .fayno-camper__grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .fayno-camper-card--history {
+        grid-column: 1;
+    }
+}
+
+@media (max-width: 600px) {
+    .fayno-camper__profile {
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 13px;
+    }
+
+    .fayno-camper__avatar {
+        width: 62px;
+        height: 62px;
+        flex-basis: 62px;
+    }
+
+    .fayno-camper__name-row h1 {
+        font-size: 20px;
+    }
+
+    .fayno-camper__edit {
+        margin-left: 75px;
+    }
+
+    .fayno-camper-card {
+        padding: 16px;
+    }
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Fayno Camp — Camper profile: reference visual pass
+|--------------------------------------------------------------------------
+*/
+
+/* The reference separates the breadcrumb from a prominent profile card. */
+.fayno-camper {
+    gap: 20px;
+    color: #172b4d;
+    font-family: 'Nunito', sans-serif;
+}
+
+.fayno-camper__header {
+    gap: 10px;
+    padding: 0;
+}
+
+.fayno-camper__breadcrumbs {
+    gap: 10px;
+    margin: 0 0 2px;
+    color: #7b8ba5;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.fayno-camper__breadcrumbs a {
+    color: #286fc7;
+    font-weight: 800;
+}
+
+.fayno-camper__profile {
+    position: relative;
+    min-height: 148px;
+    gap: 22px;
+    padding: 20px 22px;
+    border: 1px solid #e3eaf5;
+    border-radius: 14px;
+    background: linear-gradient(110deg, #fff 0%, #fbfcff 100%);
+    box-shadow: 0 3px 12px rgba(28, 53, 91, .045);
+}
+
+.fayno-camper__avatar {
+    position: relative;
+    width: 112px;
+    height: 112px;
+    flex-basis: 112px;
+    border: 0;
+    background: #dceaff;
+    box-shadow: none;
+    color: #286fc7;
+    font-size: 30px;
+}
+
+.fayno-camper__avatar::after {
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+    width: 13px;
+    height: 13px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    background: #20b477;
+    content: "";
+}
+
+.fayno-camper__identity {
+    align-self: center;
+}
+
+.fayno-camper__name-row {
+    gap: 12px;
+}
+
+.fayno-camper__name-row h1 {
+    color: #142b50;
+    font-size: 29px;
+    font-weight: 900;
+    letter-spacing: -.025em;
+    line-height: 1.18;
+}
+
+.fayno-camper__age {
+    min-height: 34px;
+    padding: 7px 13px;
+    background: #e3f7ec;
+    color: #15965b;
+    font-size: 12px;
+    font-weight: 900;
+}
+
+.fayno-camper__identity > p {
+    display: table;
+    margin: 8px 0 8px;
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: #e3f7ec;
+    color: #15965b;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.fayno-camper__identity > p span {
+    padding: 0 3px;
+}
+
+.fayno-camper__parent-link {
+    gap: 8px;
+    color: #286fc7;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.fayno-camper__parent-link .fayno-camper__icon {
+    width: 18px;
+    height: 18px;
+}
+
+.fayno-camper__edit {
+    align-self: center;
+    padding: 10px 15px;
+    border-color: #dce6f4;
+    color: #286fc7;
+    font-size: 12px;
+    font-weight: 900;
+}
+
+.fayno-camper__grid {
+    gap: 16px;
+}
+
+.fayno-camper-card {
+    padding: 18px 20px 20px;
+    border-color: #e2e9f4;
+    border-radius: 13px;
+    box-shadow: 0 2px 9px rgba(28, 53, 91, .035);
+}
+
+.fayno-camper-card__heading {
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.fayno-camper-card__heading > span:first-child {
+    width: 42px;
+    height: 42px;
+    flex-basis: 42px;
+    border-radius: 11px;
+    background: #2878df;
+    color: #fff;
+}
+
+.fayno-camper-card__heading > span:first-child .fayno-camper__icon {
+    width: 21px;
+    height: 21px;
+    stroke-width: 2.1;
+}
+
+.fayno-camper-card__heading h2 {
+    color: #172e53;
+    font-size: 17px;
+    font-weight: 900;
+    letter-spacing: -.01em;
+}
+
+/* Give each section the same semantic accent colors as the reference. */
+.fayno-camper__grid > .fayno-camper-card:nth-child(2) .fayno-camper-card__heading > span:first-child {
+    background: #20a66b;
+}
+
+.fayno-camper-card--history .fayno-camper-card__heading > span:first-child {
+    background: #9652d7;
+}
+
+.fayno-camper-card--history .fayno-camper__count {
+    background: #eee5ff;
+    color: #8050c9;
+}
+
+/* Reference uses compact standalone line icons, not icon tiles per row. */
+.fayno-camper__details {
+    gap: 12px;
+}
+
+.fayno-camper__detail {
+    align-items: center;
+    gap: 11px;
+}
+
+.fayno-camper__detail-icon {
+    width: 19px;
+    height: 22px;
+    flex-basis: 19px;
+    border-radius: 0;
+    background: transparent;
+    color: #607b9f;
+}
+
+.fayno-camper__detail-icon .fayno-camper__icon {
+    width: 17px;
+    height: 17px;
+    stroke-width: 2;
+}
+
+.fayno-camper__detail > div {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 8px;
+    padding: 0;
+}
+
+.fayno-camper__detail small {
+    min-width: 126px;
+    color: #71839f;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.fayno-camper__detail strong {
+    color: #1d3458;
+    font-size: 13px;
+    font-weight: 850;
+}
+
+.fayno-camper__parent-name {
+    margin: -2px 0 12px;
+    color: #172e53;
+    font-size: 15px;
+    font-weight: 900;
+}
+
+.fayno-camper__table thead th {
+    padding: 11px 13px;
+    background: #f1f4fa;
+    color: #71839f;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0;
+    text-transform: none;
+}
+
+.fayno-camper__table tbody td {
+    padding: 13px;
+    color: #526783;
+    font-size: 12px;
+}
+
+.fayno-camper__table tbody td strong,
+.fayno-camper__table tbody td:first-child a {
+    color: #1e3a63;
+    font-size: 13px;
+    font-weight: 900;
+}
+
+.fayno-camper__status {
+    background: #dff5e9;
+    color: #168b56;
+    font-size: 11px;
+    font-weight: 900;
+}
+
+@media (max-width: 760px) {
+    .fayno-camper__profile {
+        align-items: flex-start;
+        flex-wrap: wrap;
+        padding: 17px;
+    }
+
+    .fayno-camper__avatar {
+        width: 82px;
+        height: 82px;
+        flex-basis: 82px;
+    }
+
+    .fayno-camper__name-row h1 {
+        font-size: 23px;
+    }
+
+    .fayno-camper__edit {
+        margin-left: 104px;
+    }
+
+    .fayno-camper__detail small {
+        min-width: 112px;
+    }
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Camper detail — match reference geometry, surfaces and icon treatment
+|--------------------------------------------------------------------------
+*/
+
+/* Only the camper detail workspace gets the cool blue-gray canvas. */
+#nova [dusk="content"] > div > div[class*="lg:ml-60"]:has([dusk="campers-detail-component"]) {
+    background: #f3f5ff !important;
+}
+
+#nova [dusk="campers-detail-component"]:has(.fayno-camper) {
+    width: 100%;
+    max-width: 100%;
+}
+
+.fayno-camper {
+    gap: 19px !important;
+    color: #172b4d !important;
+}
+
+/* Breadcrumb sits directly on the page canvas, not inside a card. */
+.fayno-camper__header {
+    gap: 10px !important;
+}
+
+/* Wide, shallow profile card as in the reference. */
+.fayno-camper__profile {
+    min-height: 148px !important;
+    padding: 16px 20px !important;
+    gap: 20px !important;
+    border: 1px solid #e5eaf7 !important;
+    border-radius: 13px !important;
+    background: #fff !important;
+    box-shadow: 0 2px 8px rgba(39, 59, 105, .035) !important;
+}
+
+.fayno-camper__avatar {
+    width: 112px !important;
+    height: 112px !important;
+    flex-basis: 112px !important;
+    border-radius: 50% !important;
+    background: #bcd8ff !important;
+    box-shadow: none !important;
+}
+
+.fayno-camper__identity {
+    align-self: center !important;
+}
+
+.fayno-camper__name-row h1 {
+    font-size: 28px !important;
+    line-height: 1.15 !important;
+    letter-spacing: -.035em !important;
+}
+
+.fayno-camper__identity > p {
+    width: fit-content;
+    margin: 7px 0 7px !important;
+    padding: 5px 12px !important;
+    border-radius: 999px !important;
+    background: #def5e9 !important;
+    color: #168c59 !important;
+    font-size: 12px !important;
+    font-weight: 800 !important;
+}
+
+/* Two equal compact information cards, aligned to the same height. */
+.fayno-camper__grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.12fr) !important;
+    align-items: stretch !important;
+    gap: 12px !important;
+}
+
+.fayno-camper-card {
+    min-height: 199px !important;
+    padding: 11px 18px 15px !important;
+    border: 1px solid #e4e9f5 !important;
+    border-radius: 11px !important;
+    background: #fff !important;
+    box-shadow: 0 2px 7px rgba(39, 59, 105, .035) !important;
+}
+
+.fayno-camper-card__heading {
+    gap: 11px !important;
+    margin-bottom: 12px !important;
+}
+
+.fayno-camper-card__heading > span:first-child {
+    width: 42px !important;
+    height: 42px !important;
+    flex: 0 0 42px !important;
+    border-radius: 10px !important;
+    background: #2878e8 !important;
+    color: #fff !important;
+}
+
+.fayno-camper-card__heading > span:first-child .fayno-camper__icon {
+    width: 22px !important;
+    height: 22px !important;
+    stroke-width: 2.25 !important;
+}
+
+.fayno-camper-card__heading h2 {
+    font-size: 17px !important;
+    font-weight: 900 !important;
+    color: #172e53 !important;
+}
+
+/* Section icon colors: blue / green / purple. */
+.fayno-camper__grid > .fayno-camper-card:nth-child(2) .fayno-camper-card__heading > span:first-child {
+    background: #21a66b !important;
+}
+
+.fayno-camper-card--history .fayno-camper-card__heading > span:first-child {
+    background: #9652d7 !important;
+}
+
+/* Small line icons and tight rows — no pale 34px icon backgrounds. */
+.fayno-camper__details {
+    gap: 10px !important;
+}
+
+.fayno-camper__detail {
+    align-items: center !important;
+    gap: 10px !important;
+}
+
+.fayno-camper__detail-icon {
+    display: inline-flex !important;
+    width: 19px !important;
+    height: 20px !important;
+    flex: 0 0 19px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    color: #58769f !important;
+}
+
+.fayno-camper__detail-icon .fayno-camper__icon {
+    width: 17px !important;
+    height: 17px !important;
+    stroke-width: 2 !important;
+}
+
+.fayno-camper__detail > div {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: baseline !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    padding: 0 !important;
+}
+
+.fayno-camper__detail small {
+    min-width: 132px !important;
+    color: #71839f !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+}
+
+.fayno-camper__detail strong {
+    color: #1c3459 !important;
+    font-size: 13px !important;
+    font-weight: 850 !important;
+}
+
+/* Parent contacts should remain compact and visually balanced. */
+.fayno-camper__parent-name {
+    margin: -1px 0 10px !important;
+    color: #172e53 !important;
+    font-size: 15px !important;
+    font-weight: 900 !important;
+}
+
+/* History is a full-width card below both information cards. */
+.fayno-camper-card--history {
+    grid-column: 1 / -1 !important;
+    min-height: 174px !important;
+    padding: 13px 12px 12px !important;
+}
+
+.fayno-camper-card--history .fayno-camper-card__heading {
+    padding: 0 0 0 2px;
+    margin-bottom: 10px !important;
+}
+
+.fayno-camper-card--history .fayno-camper__count {
+    background: #eee5ff !important;
+    color: #8050c9 !important;
+}
+
+.fayno-camper__table {
+    min-width: 680px !important;
+}
+
+.fayno-camper__table thead th {
+    padding: 9px 12px !important;
+    background: #f1f4fa !important;
+    color: #71839f !important;
+    font-size: 10px !important;
+    font-weight: 900 !important;
+    letter-spacing: 0 !important;
+    text-transform: none !important;
+}
+
+.fayno-camper__table tbody td {
+    padding: 10px 12px !important;
+    font-size: 12px !important;
+}
+
+.fayno-camper__status {
+    padding: 5px 9px !important;
+    background: #dff5e9 !important;
+    color: #168b56 !important;
+    font-size: 10px !important;
+    font-weight: 900 !important;
+}
+
+@media (max-width: 900px) {
+    .fayno-camper__grid {
+        grid-template-columns: minmax(0, 1fr) !important;
+    }
+
+    .fayno-camper-card--history {
+        grid-column: 1 !important;
+    }
+}
+
+@media (max-width: 600px) {
+    .fayno-camper__profile {
+        padding: 14px !important;
+    }
+
+    .fayno-camper__avatar {
+        width: 82px !important;
+        height: 82px !important;
+        flex-basis: 82px !important;
+    }
+
+    .fayno-camper__name-row h1 {
+        font-size: 22px !important;
+    }
+
+    .fayno-camper-card {
+        padding: 14px !important;
+    }
+
+    .fayno-camper__detail small {
+        min-width: 108px !important;
+    }
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Camper detail — reference alignment pass (img_18)
+|--------------------------------------------------------------------------
+*/
+
+/* Apply the lavender CRM canvas to the actual Nova content column. */
+#nova [dusk="content"] div[class*="lg:ml-60"]:has([dusk="campers-detail-component"]) {
+    background: #f4f5ff !important;
+}
+
+#nova [dusk="campers-detail-component"] [dusk="ComputedField"]:has(.fayno-camper) {
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+}
+
+.fayno-camper {
+    gap: 20px !important;
+    font-family: "Nunito", sans-serif !important;
+    color: #172e53 !important;
+}
+
+/* The profile is a single white surface; the age chip sits in its top-right corner. */
+.fayno-camper__profile {
+    position: relative !important;
+    min-height: 148px !important;
+    padding: 18px 150px 18px 18px !important;
+    border: 1px solid #e6eaf5 !important;
+    border-radius: 12px !important;
+    background: #fff !important;
+    box-shadow: 0 2px 8px rgba(34, 54, 96, .035) !important;
+}
+
+.fayno-camper__age {
+    position: absolute !important;
+    top: 16px !important;
+    right: 16px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    min-height: 38px !important;
+    padding: 7px 14px !important;
+    border: 0 !important;
+    border-radius: 999px !important;
+    background: #e1f7eb !important;
+    color: #15965b !important;
+    font-size: 13px !important;
+    font-weight: 900 !important;
+    white-space: nowrap !important;
+}
+
+.fayno-camper__age .fayno-camper__icon {
+    width: 17px !important;
+    height: 17px !important;
+    stroke-width: 2.4 !important;
+}
+
+.fayno-camper__age strong {
+    font-weight: 900 !important;
+}
+
+.fayno-camper__edit {
+    position: absolute !important;
+    right: 17px !important;
+    bottom: 14px !important;
+    padding: 7px 10px !important;
+    font-size: 11px !important;
+}
+
+/* Reference cards: tighter gutters, matching two-column proportions and dimensions. */
+.fayno-camper__grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.12fr) !important;
+    gap: 12px !important;
+}
+
+.fayno-camper-card {
+    min-height: 199px !important;
+    padding: 11px 18px 15px !important;
+    border: 1px solid #e6eaf5 !important;
+    border-radius: 11px !important;
+    background: #fff !important;
+    box-shadow: 0 2px 8px rgba(34, 54, 96, .03) !important;
+}
+
+.fayno-camper-card__heading {
+    gap: 11px !important;
+    margin-bottom: 13px !important;
+}
+
+.fayno-camper-card__heading > span:first-child {
+    width: 42px !important;
+    height: 42px !important;
+    flex-basis: 42px !important;
+    border-radius: 10px !important;
+    background: #2878e8 !important;
+    color: #fff !important;
+}
+
+.fayno-camper-card__heading > span:first-child .fayno-camper__icon {
+    width: 22px !important;
+    height: 22px !important;
+    stroke-width: 2.4 !important;
+}
+
+.fayno-camper__grid > .fayno-camper-card:nth-child(2) .fayno-camper-card__heading > span:first-child {
+    background: #20a66b !important;
+}
+
+.fayno-camper-card--history .fayno-camper-card__heading > span:first-child {
+    background: #9652d7 !important;
+}
+
+.fayno-camper-card__heading h2 {
+    color: #172e53 !important;
+    font-size: 17px !important;
+    font-weight: 900 !important;
+}
+
+.fayno-camper__details {
+    gap: 10px !important;
+}
+
+.fayno-camper__detail {
+    align-items: center !important;
+    gap: 10px !important;
+}
+
+.fayno-camper__detail-icon {
+    width: 19px !important;
+    height: 20px !important;
+    flex-basis: 19px !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    color: #58769f !important;
+}
+
+.fayno-camper__detail-icon .fayno-camper__icon {
+    width: 17px !important;
+    height: 17px !important;
+    stroke-width: 2.1 !important;
+}
+
+.fayno-camper__detail > div {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: baseline !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    padding: 0 !important;
+}
+
+.fayno-camper__detail small {
+    min-width: 126px !important;
+    color: #71839f !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+}
+
+.fayno-camper__detail strong {
+    color: #1c3459 !important;
+    font-size: 13px !important;
+    font-weight: 850 !important;
+}
+
+.fayno-camper-card--history {
+    grid-column: 1 / -1 !important;
+    min-height: 174px !important;
+    padding: 13px 12px 12px !important;
+}
+
+.fayno-camper-card--history .fayno-camper-card__heading {
+    margin-bottom: 10px !important;
+}
+
+.fayno-camper__table thead th {
+    padding: 9px 12px !important;
+    background: #f1f4fa !important;
+    color: #71839f !important;
+    font-size: 10px !important;
+    font-weight: 900 !important;
+    text-transform: none !important;
+}
+
+.fayno-camper__table tbody td {
+    padding: 10px 12px !important;
+    font-size: 12px !important;
+}
+
+@media (max-width: 760px) {
+    .fayno-camper__profile {
+        padding: 60px 16px 16px !important;
+    }
+
+    .fayno-camper__age {
+        top: 12px !important;
+        right: 12px !important;
+    }
+
+    .fayno-camper__edit {
+        position: static !important;
+        margin: 12px 0 0 0 !important;
+    }
+}

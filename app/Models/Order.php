@@ -7,30 +7,16 @@ use App\Models\Traits\Common\AppendsTrait;
 use App\Observers\OrderObserver;
 use Illuminate\Database\Eloquent\Relations\{BelongsTo, BelongsToMany, HasMany, HasManyThrough};
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+
 #[ObservedBy([OrderObserver::class])]
 class Order extends BaseModel
 {
     use AppendsTrait;
 
-    /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
     protected $table = 'orders';
 
-    /**
-     * The attributes that aren't mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $guarded = ['id'];
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'number',
         'customer_id',
@@ -44,11 +30,6 @@ class Order extends BaseModel
         'responded_at',
     ];
 
-    /*
-    |--------------------------------------------------------------------------
-    | FUNCTIONS
-    |--------------------------------------------------------------------------
-    */
     protected function casts(): array
     {
         return [
@@ -58,12 +39,6 @@ class Order extends BaseModel
         ];
     }
 
-
-    /*
-    |--------------------------------------------------------------------------
-    | RELATIONS
-    |--------------------------------------------------------------------------
-    */
     public function customer(): BelongsTo
     {
         return $this->belongsTo(Customer::class);
@@ -84,6 +59,11 @@ class Order extends BaseModel
         return $this->hasMany(OrderCamper::class);
     }
 
+    public function statusHistories(): HasMany
+    {
+        return $this->hasMany(OrderStatusHistory::class)->latest();
+    }
+
     public function campers(): BelongsToMany
     {
         return $this->belongsToMany(Camper::class, 'order_campers')->withPivot(['id', 'price', 'discount', 'currency'])->withTimestamps();
@@ -93,25 +73,4 @@ class Order extends BaseModel
     {
         return $this->hasManyThrough(Booking::class, OrderCamper::class, 'order_id', 'order_camper_id', 'id', 'id');
     }
-
-    /*
-    |--------------------------------------------------------------------------
-    | SCOPES
-    |--------------------------------------------------------------------------
-    */
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | ACCESSORS | MUTATORS
-    |--------------------------------------------------------------------------
-    */
-
-    /*
-    |--------------------------------------------------------------------------
-    | OTHER PRIVATE METHODS
-    |--------------------------------------------------------------------------
-    */
-
-
 }

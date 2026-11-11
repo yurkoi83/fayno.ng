@@ -5,16 +5,18 @@ namespace App\Nova\Bookings;
 use App\Enums\OrderStatus;
 use App\Enums\PaymentStatus;
 use App\Models\Payment;
-use App\Nova\Camps\CampShift;
-use App\Nova\People\Customer;
+use App\Nova\Camps\CampShift as CampShiftResource;
+use App\Nova\People\Customer as CustomerResource;
 use App\Nova\Resource;
-use App\Nova\Users\User;
+use App\Nova\Users\User as UserResource;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Nova\Fields\Badge;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Panel;
@@ -26,125 +28,380 @@ class Order extends Resource
     public static $search = ['id', 'number', 'status'];
     public static $group = 'Бронювання';
 
-    public static function label(): string { return __('nova::navigation.bookings'); }
-    public static function singularLabel(): string { return __('nova::resources.Order'); }
+    public static function label(): string
+    {
+        return __('nova::navigation.bookings');
+    }
+
+    public static function singularLabel(): string
+    {
+        return __('nova::resources.Order');
+    }
+
+    public static function indexQuery(\Laravel\Nova\Http\Requests\NovaRequest $request, \Illuminate\Contracts\Database\Eloquent\Builder $query): \Illuminate\Contracts\Database\Eloquent\Builder
+    {
+        return $query->with([
+            'customer',
+            'campShift.camp',
+            'orderCampers.camper',
+            'bookings',
+        ]);
+    }
 
     public function fields(Request $request): array
     {
         return [
-            ID::make()->sortable()->hideFromDetail(),
+            ID::make()->sortable()->hideFromDetail()->hideFromIndex(),
 
-            Panel::make('Заявка № '.$this->number, [
-                Badge::make(__('nova::resources.Status'), 'status')
-                    ->labels([
-                        OrderStatus::NEW->value => __('nova::resources.New'),
-                        OrderStatus::PROCESSING->value => __('nova::resources.In progress'),
-                        OrderStatus::WAITING_CUSTOMER->value => __('nova::resources.Waiting for customer'),
-                        OrderStatus::CONTRACT_SENT->value => __('nova::resources.Contract sent'),
-                        OrderStatus::AWAITING_PAYMENT->value => __('nova::resources.Awaiting payment'),
-                        OrderStatus::CONFIRMED->value => __('nova::resources.Confirmed'),
-                        OrderStatus::REJECTED->value => __('nova::resources.Rejected'),
-                    ])
-                    ->map([
-                        OrderStatus::NEW->value => 'warning',
-                        OrderStatus::PROCESSING->value => 'success',
-                        OrderStatus::WAITING_CUSTOMER->value => 'info',
-                        OrderStatus::CONTRACT_SENT->value => 'info',
-                        OrderStatus::AWAITING_PAYMENT->value => 'warning',
-                        OrderStatus::CONFIRMED->value => 'success',
-                        OrderStatus::REJECTED->value => 'danger',
-                    ])
-                    ->withIcons(),
-                Text::make(__('nova::resources.Created at'), fn () => $this->created_at?->format('d.m.Y H:i')),
-            ])->withAttribute('fayno-order-header')->withToolbar(),
+            Text::make('Номер заявки', 'number')
+                ->sortable()
+                ->copyable()
+                ->onlyOnIndex(),
 
-            Panel::make(__('nova::resources.Parent details'), [
-                BelongsTo::make(__('nova::resources.Parent'), 'customer', Customer::class)->searchable(),
-                Text::make(__('nova::resources.Parent phone'), fn () => $this->customer?->phone)->onlyOnDetail(),
-                Text::make(__('nova::resources.Parent email'), fn () => $this->customer?->email)->onlyOnDetail(),
-                Text::make(__('nova::resources.Parent address'), fn () => $this->customer
-                    ? trim(implode(', ', array_filter([$this->customer->city, $this->customer->address])))
-                    : null)->onlyOnDetail(),
-            ])->withAttribute('fayno-order-parent'),
+            Text::make('Батьки', function () {
+                $customer = $this->customer;
 
-            Panel::make(__('nova::resources.Camp and shift'), [
-                BelongsTo::make(__('nova::resources.Camp shift'), 'campShift', CampShift::class)->searchable(),
-                Text::make(__('nova::resources.Camp'), fn () => $this->campShift?->camp?->name)->onlyOnDetail(),
-                Text::make(__('nova::resources.Shift dates'), fn () => $this->campShift
-                    ? $this->campShift->starts_at?->format('d.m.Y').' — '.$this->campShift->ends_at?->format('d.m.Y')
-                    : null)->onlyOnDetail(),
-                Text::make(__('nova::resources.Duration'), fn () => $this->campShift
-                    ? $this->campShift->starts_at?->diffInDays($this->campShift->ends_at).' '.__('nova::resources.Days')
-                    : null)->onlyOnDetail(),
-            ])->withAttribute('fayno-order-camp'),
+                return $customer
+                    ? trim(implode(' ', array_filter([
+                        $customer->last_name,
+                        $customer->first_name,
+                        $customer->middle_name,
+                    ])))
+                    : '—';
+            })->onlyOnIndex(),
 
-            Panel::make(__('nova::resources.Children'), [
-                HasMany::make(__('nova::resources.Children'), 'orderCampers', OrderCamper::class),
-            ])->withAttribute('fayno-order-children'),
+            Text::make('Учасники', function () {
+                return $this->orderCampers
+                    ->map(function ($item) {
+                        $camper = $item->camper;
 
-            Panel::make(__('nova::resources.Application status'), [
-                Badge::make(__('nova::resources.Status'), 'status')
-                    ->labels([
-                        OrderStatus::NEW->value => __('nova::resources.New'),
-                        OrderStatus::PROCESSING->value => __('nova::resources.In progress'),
-                        OrderStatus::WAITING_CUSTOMER->value => __('nova::resources.Waiting for customer'),
-                        OrderStatus::CONTRACT_SENT->value => __('nova::resources.Contract sent'),
-                        OrderStatus::AWAITING_PAYMENT->value => __('nova::resources.Awaiting payment'),
-                        OrderStatus::CONFIRMED->value => __('nova::resources.Confirmed'),
-                        OrderStatus::REJECTED->value => __('nova::resources.Rejected'),
-                    ])
-                    ->map([
-                        OrderStatus::NEW->value => 'success',
-                        OrderStatus::PROCESSING->value => 'success',
-                        OrderStatus::WAITING_CUSTOMER->value => 'warning',
-                        OrderStatus::CONTRACT_SENT->value => 'info',
-                        OrderStatus::AWAITING_PAYMENT->value => 'warning',
-                        OrderStatus::CONFIRMED->value => 'success',
-                        OrderStatus::REJECTED->value => 'danger',
-                    ])
-                    ->withIcons(),
-                Text::make(__('nova::resources.Status description'), fn () => $this->statusDescription())->onlyOnDetail(),
-            ])->withAttribute('fayno-order-status'),
+                        return $camper
+                            ? trim(implode(' ', array_filter([
+                                $camper->last_name,
+                                $camper->first_name,
+                                $camper->middle_name,
+                            ])))
+                            : null;
+                    })
+                    ->filter()
+                    ->implode(', ') ?: '—';
+            })->onlyOnIndex(),
 
-            Panel::make(__('nova::resources.Financial information'), [
-                Text::make(__('nova::resources.Total amount'), fn () => $this->money($this->totalAmount()))->onlyOnDetail(),
-                Text::make(__('nova::resources.Paid'), fn () => $this->money($this->paidAmount()))->onlyOnDetail(),
-                Text::make(__('nova::resources.Balance'), fn () => $this->money(max(0, $this->totalAmount() - $this->paidAmount())))->onlyOnDetail(),
-                Text::make(__('nova::resources.Payment progress'), fn () => $this->paymentProgress().'%')->onlyOnDetail(),
-            ])->withAttribute('fayno-order-finance'),
+            Text::make('Табір / зміна', function () {
+                $camp = $this->campShift?->camp?->name;
+                $shift = $this->campShift?->name;
 
-            Panel::make(__('nova::resources.Parent comment'), [
-                Textarea::make(__('nova::resources.Comment'), 'comment')->alwaysShow()->hideFromIndex(),
-            ])->withAttribute('fayno-order-comment'),
+                return collect([$camp, $shift])->filter()->implode(' / ') ?: '—';
+            })->onlyOnIndex(),
 
-            Panel::make(__('nova::resources.Responsible manager'), [
-                BelongsTo::make(__('nova::resources.Assigned to'), 'assignedTo', User::class)->nullable()->searchable(),
-                DateTime::make(__('nova::resources.Responded at'), 'responded_at')->nullable(),
-            ])->withAttribute('fayno-order-manager'),
+            Badge::make('Статус', 'status')
+                ->map([
+                    OrderStatus::NEW->value => 'info',
+                    OrderStatus::PROCESSING->value => 'info',
+                    OrderStatus::WAITING_CUSTOMER->value => 'warning',
+                    OrderStatus::CONTRACT_SENT->value => 'warning',
+                    OrderStatus::AWAITING_PAYMENT->value => 'warning',
+                    OrderStatus::CONFIRMED->value => 'success',
+                    OrderStatus::REJECTED->value => 'danger',
+                ])
+                ->labels([
+                    OrderStatus::NEW->value => 'Нова',
+                    OrderStatus::PROCESSING->value => 'В обробці',
+                    OrderStatus::WAITING_CUSTOMER->value => 'Очікує відповіді',
+                    OrderStatus::CONTRACT_SENT->value => 'Договір надіслано',
+                    OrderStatus::AWAITING_PAYMENT->value => 'Очікує оплати',
+                    OrderStatus::CONFIRMED->value => 'Підтверджена',
+                    OrderStatus::REJECTED->value => 'Відхилена',
+                ])
+                ->sortable()
+                ->onlyOnIndex(),
 
-            Panel::make(__('nova::resources.Application timeline'), [
-                Text::make(__('nova::resources.Created at'), fn () => $this->created_at?->format('d.m.Y H:i'))->onlyOnDetail(),
-                Text::make(__('nova::resources.Last updated'), fn () => $this->updated_at?->format('d.m.Y H:i'))->onlyOnDetail(),
-                Text::make(__('nova::resources.Response provided'), fn () => $this->responded_at?->format('d.m.Y H:i') ?: '—')->onlyOnDetail(),
-            ])->withAttribute('fayno-order-history')->collapsable(),
+            Text::make('Сума', function () {
+                $booking = $this->bookings->first();
+                $amount = (float) $this->bookings->sum('total_amount');
+                $currency = $booking?->currency ?: 'UAH';
 
-            Panel::make(__('nova::resources.Payments'), [
-                Text::make(__('nova::resources.Paid'), fn () => $this->money($this->paidAmount()))->onlyOnDetail(),
-                Text::make(__('nova::resources.Awaiting payment'), fn () => $this->money($this->pendingAmount()))->onlyOnDetail(),
-                Text::make(__('nova::resources.Last payment'), fn () => $this->lastPaymentLabel())->onlyOnDetail(),
-            ])->withAttribute('fayno-order-payments'),
+                return number_format($amount, 0, ',', ' ').' '.$currency;
+            })->onlyOnIndex(),
 
-            Panel::make(__('nova::resources.Internal information'), [
-                Text::make(__('nova::resources.Source'), 'source')->hideFromIndex(),
-                Text::make(__('nova::resources.Departure city'), 'departure_city')->hideFromIndex(),
-                Textarea::make(__('nova::resources.Admin notes'), 'admin_notes')->alwaysShow()->hideFromIndex(),
-            ])->withAttribute('fayno-order-internal')->collapsedByDefault(),
+            DateTime::make('Дата заявки', 'created_at')
+                ->sortable()
+                ->onlyOnIndex(),
+
+            Panel::make('', [
+                Text::make(' ', fn () => $this->detailHtml())
+                    ->asHtml()
+                    ->onlyOnDetail(),
+            ]),
+
+            Panel::make('Деталі заявки', [
+                BelongsTo::make(__('nova::resources.Parent'), 'customer', CustomerResource::class)
+                    ->searchable()
+                    ->onlyOnForms(),
+                BelongsTo::make(__('nova::resources.Camp shift'), 'campShift', CampShiftResource::class)
+                    ->searchable()
+                    ->onlyOnForms(),
+                Select::make(__('nova::resources.Status'), 'status')
+                    ->options(collect(OrderStatus::cases())->mapWithKeys(fn ($status) => [
+                        $status->value => __('nova::resources.'.match ($status) {
+                            OrderStatus::NEW => 'New',
+                            OrderStatus::PROCESSING => 'In progress',
+                            OrderStatus::WAITING_CUSTOMER => 'Waiting for customer',
+                            OrderStatus::CONTRACT_SENT => 'Contract sent',
+                            OrderStatus::AWAITING_PAYMENT => 'Awaiting payment',
+                            OrderStatus::CONFIRMED => 'Confirmed',
+                            OrderStatus::REJECTED => 'Rejected',
+                        }),
+                    ])->all())
+                    ->onlyOnForms(),
+                BelongsTo::make(__('nova::resources.Assigned to'), 'assignedTo', UserResource::class)
+                    ->nullable()
+                    ->searchable()
+                    ->onlyOnForms(),
+                DateTime::make(__('nova::resources.Responded at'), 'responded_at')
+                    ->nullable()
+                    ->onlyOnForms(),
+                Textarea::make(__('nova::resources.Comment'), 'comment')
+                    ->alwaysShow()
+                    ->onlyOnForms(),
+                Text::make(__('nova::resources.Source'), 'source')->onlyOnForms(),
+                Text::make(__('nova::resources.Departure city'), 'departure_city')->onlyOnForms(),
+                Textarea::make(__('nova::resources.Admin notes'), 'admin_notes')->alwaysShow()->onlyOnForms(),
+                HasMany::make(__('nova::resources.Children'), 'orderCampers', OrderCamper::class)->onlyOnForms(),
+            ]),
         ];
     }
 
-    protected function statusLabel(): string
+    protected function detailHtml(): string
     {
-        return match ($this->status) {
+        $order = $this->resource;
+        $customer = $order->customer;
+        $shift = $order->campShift;
+        $camp = $shift?->camp;
+        $manager = $order->assignedTo;
+        $children = $order->orderCampers()->with('camper', 'booking')->get();
+
+        $total = (float) $order->bookings()->sum('total_amount');
+        $paymentsQuery = Payment::query()
+            ->whereHas('booking.orderCamper', fn ($query) => $query->where('order_id', $order->getKey()));
+        $paid = (float) (clone $paymentsQuery)->where('status', PaymentStatus::PAID->value)->sum('amount');
+        $payments = (clone $paymentsQuery)->with('booking')->latest('created_at')->limit(5)->get();
+        $balance = max(0, $total - $paid);
+        $progress = $total > 0 ? min(100, (int) round($paid / $total * 100)) : 0;
+        $currency = $children->first()?->currency ?: 'UAH';
+
+        $parentName = $customer
+            ? trim(implode(' ', array_filter([$customer->last_name, $customer->first_name, $customer->middle_name])))
+            : '—';
+        $parentAddress = $customer
+            ? trim(implode(', ', array_filter([$customer->city, $customer->address])))
+            : '';
+        $campPhoto = $camp?->photo_path
+            ? Storage::disk('public')->url($camp->photo_path)
+            : (str_contains(mb_strtolower((string) $camp?->name), 'zakopane')
+                ? 'https://fayno.camp/wp-content/uploads/9-3-300x200.jpg'
+                : null);
+        $managerPhoto = $manager?->avatar_path ? Storage::disk('public')->url($manager->avatar_path) : null;
+        $statusLabel = $this->statusLabel((string) $order->status);
+        $statusDescription = $this->statusDescription((string) $order->status);
+        $statusClass = $this->statusClass((string) $order->status);
+
+        $editUrl = url('/nova/resources/orders/'.$order->getKey().'/edit');
+        $indexUrl = url('/nova/resources/orders');
+        $html = '<div class="fayno-crm">';
+        $html .= '<div class="fayno-crm__heading">'
+            . '<div class="fayno-crm__heading-main">'
+            . '<nav class="fayno-crm__breadcrumbs"><a href="'.$indexUrl.'">Заявки</a><span>/</span><span>'.e($order->number ?: $order->getKey()).'</span></nav>'
+            . '<div class="fayno-crm__title-row"><div><h1>Заявка № '.e($order->number ?: $order->getKey()).'</h1><p>Створено '.e($order->created_at?->format('d.m.Y H:i') ?: '—').'</p></div>'
+            . '<span class="fayno-crm-order-status is-'.e($statusClass).'">'.e($statusLabel).'</span></div>'
+            . '</div><div class="fayno-crm__actions">'
+            . ($customer?->email ? '<a class="fayno-crm-action fayno-crm-action--secondary" href="mailto:'.e($customer->email).'">'.$this->iconSvg('message-square').' Повідомлення</a>' : '')
+            . '<a class="fayno-crm-action fayno-crm-action--primary" href="'.$editUrl.'">'.$this->iconSvg('pencil').' Редагувати</a>'
+            . '</div></div>';
+        $html .= '<div class="fayno-crm__main">';
+
+        $html .= '<section class="fayno-crm-card fayno-crm-parent">'
+            . $this->cardHeading('users-round', __('nova::resources.Parent details'))
+            . '<h3>'.e($parentName).'</h3>'
+            . '<div class="fayno-crm-lines">'
+            . $this->detailLine('phone', $customer?->phone ?: '—')
+            . $this->detailLine('mail', $customer?->email ?: '—')
+            . ($parentAddress !== '' ? $this->detailLine('map-pin', $parentAddress) : '')
+            . '</div></section>';
+
+        $html .= '<section class="fayno-crm-card fayno-crm-camp">'
+            . $this->cardHeading('mountain', __('nova::resources.Camp and shift'));
+        if ($campPhoto) {
+            $html .= '<img class="fayno-crm-camp__image" src="'.e($campPhoto).'" alt="">';
+        }
+        $html .= '<div class="fayno-crm-camp__copy">'
+            . '<h3>'.e($camp?->name ?: '—').'</h3>'
+            . '<p>'.e($shift?->name ?: '—').'</p>'
+            . '<div class="fayno-crm-lines">'
+            . $this->detailLine('calendar-days', $shift ? $shift->starts_at?->format('d.m.Y').' — '.$shift->ends_at?->format('d.m.Y') : '—')
+            . $this->detailLine('clock-3', $shift ? (string) $shift->starts_at?->diffInDays($shift->ends_at).' '.__('nova::resources.Days') : '—')
+            . '</div></div></section>';
+
+        $html .= '<section class="fayno-crm-card fayno-crm-children">'
+            . $this->cardHeading('users-round', __('nova::resources.Children'), '<span class="fayno-crm-count">'.$children->count().' '.__('nova::resources.Children').'</span>');
+        if ($children->isEmpty()) {
+            $html .= '<p class="fayno-crm-muted">'.e('Дітей ще не додано').'</p>';
+        } else {
+            $html .= '<div class="fayno-crm-child-grid">';
+            foreach ($children as $item) {
+                $camper = $item->camper;
+                $childName = $camper
+                    ? trim(implode(' ', array_filter([$camper->last_name, $camper->first_name, $camper->middle_name])))
+                    : '—';
+                $photo = $camper?->photo_path ? Storage::disk('public')->url($camper->photo_path) : null;
+                $age = $camper?->birth_date ? $camper->birth_date->age.' '.__('nova::resources.Years') : '—';
+                $price = number_format((float) $item->price, 0, ',', ' ').' '.($item->currency ?: $currency);
+                $html .= '<article class="fayno-crm-child">';
+                $html .= $photo
+                    ? '<img src="'.e($photo).'" alt="">'
+                    : $this->demoAvatar('child');
+                $html .= '<div class="fayno-crm-child__identity"><strong>'.e($childName).'</strong><small>'.e($age).'</small></div>';
+                $html .= '<div class="fayno-crm-child__price"><strong>'.e($price).'</strong>';
+                if ((float) $item->discount > 0) {
+                    $html .= '<small>'.e(__('nova::resources.Discount')).': '.e(number_format((float) $item->discount, 0, ',', ' ').' '.($item->currency ?: $currency)).'</small>';
+                }
+                $html .= '</div></article>';
+            }
+            $html .= '</div>';
+        }
+        $html .= '</section>';
+
+        if ($order->comment) {
+            $html .= '<section class="fayno-crm-card fayno-crm-comment">'
+                . $this->cardHeading('message-square', __('nova::resources.Parent comment'))
+                . '<p>'.nl2br(e($order->comment)).'</p></section>';
+        }
+
+        $history = $order->statusHistories()->with('changedBy')->latest()->limit(8)->get();
+        $html .= '<section class="fayno-crm-card fayno-crm-history">'
+            . $this->cardHeading('history', __('nova::resources.Application timeline'));
+        if ($history->isEmpty()) {
+            $html .= '<p class="fayno-crm-muted">'.e(__('nova::resources.No status changes yet')).'</p>';
+        } else {
+            $html .= '<div class="fayno-crm-timeline">';
+            foreach ($history->reverse() as $entry) {
+                $label = $entry->from_status
+                    ? __('nova::resources.Status changed to').' '.$this->statusLabel((string) $entry->to_status)
+                    : __('nova::resources.Application created').' — '.$this->statusLabel((string) $entry->to_status);
+                $html .= '<div class="fayno-crm-timeline__item">'
+                    . '<time>'.e($entry->created_at?->format('d.m.Y H:i') ?: '').'</time>'
+                    . '<span class="fayno-crm-timeline__dot"></span>'
+                    . '<div><strong>'.e($label).'</strong><small>'.e($entry->changedBy?->name ?: __('nova::resources.System')).'</small></div>'
+                    . '</div>';
+            }
+            $html .= '</div>';
+        }
+        $html .= '</section>';
+        $html .= '</div>';
+
+        $html .= '<aside class="fayno-crm__aside">';
+        $html .= '<section class="fayno-crm-card fayno-crm-status is-'.e($statusClass).'">'
+            . '<div class="fayno-crm-status__icon">'.$this->iconSvg('check').'</div><div><strong>'.e($statusLabel).'</strong><p>'.e($statusDescription).'</p></div></section>';
+
+        $html .= '<section class="fayno-crm-card fayno-crm-finance">'
+            . $this->cardHeading('wallet', __('nova::resources.Financial information'))
+            . '<div class="fayno-crm-money-row"><span>'.e(__('nova::resources.Total amount')).'</span><strong>'.e($this->money($total, $currency)).'</strong></div>'
+            . '<div class="fayno-crm-money-row"><span>'.e(__('nova::resources.Paid')).'</span><strong class="is-paid">'.e($this->money($paid, $currency)).'</strong></div>'
+            . '<div class="fayno-crm-money-row"><span>'.e(__('nova::resources.Balance')).'</span><strong class="is-balance">'.e($this->money($balance, $currency)).'</strong></div>'
+            . '<div class="fayno-crm-progress"><span style="width:'.$progress.'%"></span></div>'
+            . '<div class="fayno-crm-progress-label"><strong>'.$progress.'%</strong><span>'.e(__('nova::resources.Payment progress')).'</span></div>'
+            . '<a class="fayno-crm-link" href="/nova/resources/payments">'.e('Перейти до оплат').' →</a>'
+            . '</section>';
+
+        $html .= '<section class="fayno-crm-card fayno-crm-manager">'
+            . '<span class="fayno-crm-eyebrow">'.e(__('nova::resources.Responsible manager')).'</span>'
+            . '<div class="fayno-crm-person">';
+        $html .= $managerPhoto
+            ? '<img src="'.e($managerPhoto).'" alt="">'
+            : $this->demoAvatar('manager');
+        $html .= '<div><strong>'.e($manager?->name ?: '—').'</strong><small>'.e('Менеджер').'</small></div></div>'
+            . '<div class="fayno-crm-manager__response"><span>'.e(__('nova::resources.Responded at')).'</span><strong>'.e($order->responded_at?->format('d.m.Y H:i') ?: '—').'</strong></div>'
+            . '</section>';
+
+        $html .= '<section class="fayno-crm-card fayno-crm-payments">'
+            . $this->cardHeading('credit-card', __('nova::resources.Payments'), '<a href="/nova/resources/payments">'.e('Усі платежі').' →</a>');
+        if ($payments->isEmpty()) {
+            $html .= '<p class="fayno-crm-muted">'.e(__('nova::resources.No payments yet')).'</p>';
+        } else {
+            foreach ($payments as $payment) {
+                $isPaid = $payment->status === PaymentStatus::PAID->value;
+                $paymentStatus = $isPaid ? __('nova::resources.Paid') : (string) $payment->status;
+                $html .= '<div class="fayno-crm-payment"><span class="fayno-crm-payment__icon '.($isPaid ? 'is-paid' : '').'">'.$this->iconSvg($isPaid ? 'check' : 'clock-3').'</span>'
+                    . '<div><strong>'.e($payment->payment_method ?: __('nova::resources.Payment')).'</strong><small>'.e(($payment->paid_at ?? $payment->created_at)?->format('d.m.Y, H:i') ?: '').' · '.e($paymentStatus).'</small></div>'
+                    . '<b>'.e($this->money((float) $payment->amount, $payment->currency ?: $currency)).'</b></div>';
+            }
+        }
+        $html .= '</section>';
+        $html .= '</aside></div>';
+
+        return $html;
+    }
+
+    protected function iconSvg(string $name): string
+    {
+        $paths = [
+            'user-round' => '<circle cx="12" cy="8" r="4"/><path d="M5 21a7 7 0 0 1 14 0"/>',
+            'phone' => '<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.2 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72l.45 3.1a2 2 0 0 1-.57 1.7L7.1 10.4a16 16 0 0 0 6 6l1.88-1.89a2 2 0 0 1 1.7-.57l3.1.45a2 2 0 0 1 1.72 2.53z"/>',
+            'mountain' => '<path d="m3 20 7-13 4 7 2-3 5 9H3Z"/><path d="m8 11 2 2 2-2"/>',
+            'message-square' => '<path d="M21 11.5a8.5 8.5 0 0 1-9 8.5 9 9 0 0 1-4-.9L3 21l1.9-4.5A8.5 8.5 0 1 1 21 11.5Z"/><path d="M8 11h8M8 15h5"/>',
+            'mail' => '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>',
+            'map-pin' => '<path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/>',
+            'tent' => '<path d="m3 21 9-18 9 18M3 21h18M12 3l-3 18m6 0-3-18"/>',
+            'calendar-days' => '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18M8 15h.01M12 15h.01M16 15h.01M8 18h.01M12 18h.01"/>',
+            'clock-3' => '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+            'message-square' => '<path d="M21 11.5a8.5 8.5 0 0 1-9 8.5 9 9 0 0 1-4-.9L3 21l1.9-4.5A8.5 8.5 0 1 1 21 11.5Z"/><path d="M8 11h8M8 15h5"/>',
+            'users-round' => '<path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M20 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>',
+            'history' => '<path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5M12 7v5l3 2"/>',
+            'wallet' => '<rect x="3" y="5" width="18" height="15" rx="2"/><path d="M3 8h18M16 14h.01"/>',
+            'credit-card' => '<rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h3"/>',
+            'check' => '<path d="m5 12 4 4L19 6"/>',
+            'pencil' => '<path d="m16 4 4 4L8 20H4v-4L16 4Z"/><path d="m14 6 4 4"/>',
+            'arrow-left' => '<path d="m12 19-7-7 7-7M5 12h14"/>',
+        ];
+
+        $content = $paths[$name] ?? '<circle cx="12" cy="12" r="8"/>';
+        return '<svg class="fayno-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'.$content.'</svg>';
+    }
+
+    protected function demoAvatar(string $type = 'child'): string
+    {
+        $palette = $type === 'manager'
+            ? ['#d9f2eb', '#21866c', '#155b50', '#f2bd91']
+            : ['#e2edff', '#3979c9', '#244f91', '#f0bd98'];
+
+        [$background, $shirt, $hair, $skin] = $palette;
+
+        return '<span class="fayno-demo-avatar fayno-demo-avatar--'.e($type).'" aria-hidden="true">'
+            . '<svg viewBox="0 0 64 64" role="presentation" focusable="false">'
+            . '<circle cx="32" cy="32" r="32" fill="'.$background.'"/>'
+            . '<path d="M10 64c2-13 10-20 22-20s20 7 22 20" fill="'.$shirt.'"/>'
+            . '<path d="M20 27c0-12 5-19 13-19 9 0 14 7 13 19l-3 9H23z" fill="'.$hair.'"/>'
+            . '<path d="M23 25c0-8 4-13 9-13s9 5 9 13v8c0 8-4 13-9 13s-9-5-9-13z" fill="'.$skin.'"/>'
+            . '<path d="M22 25c1-10 5-16 12-16 7 0 11 5 12 14-4-1-8-4-10-8-3 5-8 8-14 10z" fill="'.$hair.'"/>'
+            . '<circle cx="29" cy="31" r="1.2" fill="#35445b"/>'
+            . '<circle cx="37" cy="31" r="1.2" fill="#35445b"/>'
+            . '<path d="M29 38c2 2 4 2 6 0" fill="none" stroke="#a76e5c" stroke-width="1.4" stroke-linecap="round"/>'
+            . '</svg></span>';
+    }
+
+    protected function cardHeading(string $icon, string $title, string $right = ''): string
+    {
+        return '<div class="fayno-crm-card__heading"><span class="fayno-crm-card__icon">'.$this->iconSvg($icon).'</span><h2>'.e($title).'</h2>'.$right.'</div>';
+    }
+
+    protected function detailLine(string $icon, string $value): string
+    {
+        return '<div class="fayno-crm-line"><span class="fayno-crm-line__icon">'.$this->iconSvg($icon).'</span><p>'.e($value).'</p></div>';
+    }
+
+    protected function statusLabel(string $status): string
+    {
+        return match ($status) {
             OrderStatus::NEW->value => __('nova::resources.New'),
             OrderStatus::PROCESSING->value => __('nova::resources.In progress'),
             OrderStatus::WAITING_CUSTOMER->value => __('nova::resources.Waiting for customer'),
@@ -152,13 +409,13 @@ class Order extends Resource
             OrderStatus::AWAITING_PAYMENT->value => __('nova::resources.Awaiting payment'),
             OrderStatus::CONFIRMED->value => __('nova::resources.Confirmed'),
             OrderStatus::REJECTED->value => __('nova::resources.Rejected'),
-            default => (string) $this->status,
+            default => $status,
         };
     }
 
-    protected function statusDescription(): string
+    protected function statusDescription(string $status): string
     {
-        return match ($this->status) {
+        return match ($status) {
             OrderStatus::NEW->value => __('nova::resources.New application awaiting review'),
             OrderStatus::PROCESSING->value => __('nova::resources.Application is being processed'),
             OrderStatus::WAITING_CUSTOMER->value => __('nova::resources.Waiting for parent response'),
@@ -170,52 +427,18 @@ class Order extends Resource
         };
     }
 
-    protected function paymentProgress(): int
+    protected function statusClass(string $status): string
     {
-        $total = $this->totalAmount();
-
-        return $total > 0 ? min(100, (int) round($this->paidAmount() / $total * 100)) : 0;
+        return match ($status) {
+            OrderStatus::CONFIRMED->value, OrderStatus::PROCESSING->value => 'success',
+            OrderStatus::REJECTED->value => 'danger',
+            OrderStatus::WAITING_CUSTOMER->value, OrderStatus::AWAITING_PAYMENT->value => 'warning',
+            default => 'info',
+        };
     }
 
-    protected function totalAmount(): float
+    protected function money(float $amount, string $currency = 'UAH'): string
     {
-        return (float) $this->resource->bookings()->sum('total_amount');
-    }
-
-    protected function paidAmount(): float
-    {
-        return (float) Payment::query()
-            ->whereHas('booking.orderCamper', fn ($query) => $query->where('order_id', $this->resource->getKey()))
-            ->where('status', PaymentStatus::PAID->value)
-            ->sum('amount');
-    }
-
-    protected function pendingAmount(): float
-    {
-        return (float) Payment::query()
-            ->whereHas('booking.orderCamper', fn ($query) => $query->where('order_id', $this->resource->getKey()))
-            ->where('status', PaymentStatus::PENDING->value)
-            ->sum('amount');
-    }
-
-    protected function lastPaymentLabel(): string
-    {
-        $payment = Payment::query()
-            ->whereHas('booking.orderCamper', fn ($query) => $query->where('order_id', $this->resource->getKey()))
-            ->latest('paid_at')
-            ->first();
-
-        if (! $payment) {
-            return '—';
-        }
-
-        return trim(($payment->paid_at?->format('d.m.Y H:i') ?? '').' '.$payment->payment_method);
-    }
-
-    protected function money(float $amount): string
-    {
-        $currency = $this->resource->orderCampers()->value('currency') ?: 'UAH';
-
-        return number_format($amount, 2, ',', ' ').' '.$currency;
+        return number_format($amount, 0, ',', ' ').' '.$currency;
     }
 }

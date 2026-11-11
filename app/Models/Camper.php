@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Relations\{BelongsTo, BelongsToMany, HasMany};
 
 class Camper extends BaseModel
 {
-    protected $fillable = ['customer_id', 'first_name', 'last_name', 'middle_name', 'birth_date', 'gender_id', 'notes'];
+    protected $fillable = ['customer_id', 'first_name', 'last_name', 'middle_name', 'birth_date', 'gender_id', 'photo_path', 'notes'];
 
     protected function casts(): array
     {

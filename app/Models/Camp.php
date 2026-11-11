@@ -29,6 +29,7 @@ class Camp extends BaseModel
         'city',
         'address',
         'description',
+        'photo_path',
         'min_age',
         'max_age',
         'active',
