@@ -27,3 +27,7 @@ Homestead.json
 Homestead.yaml
 Thumbs.db
 /docker/mysql/datadir
+/docker/redis/data
+/public/.tmb
+/public/js
+/public/vendor
