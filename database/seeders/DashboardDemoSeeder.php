@@ -31,13 +31,26 @@ class DashboardDemoSeeder extends Seeder
     public function run(): void
     {
         DB::transaction(function () {
-            $camp = Camp::updateOrCreate(
-                ['slug' => 'FC-fayno-camp'],
+            $camp0 = Camp::updateOrCreate(
+                ['slug' => 'zyma-zakopane'],
                 [
-                    'name' => 'Fayno Camp — демо',
+                    'name' => 'Гірськолижний дитячий табір FaynoCamp Zakopane',
                     'country' => 'Україна',
                     'city' => 'Карпати',
-                    'address' => 'Демо-адреса',
+                    'address' => 'Amsterdam Демо-адреса',
+                    'min_age' => 7,
+                    'max_age' => 17,
+                    'active' => true,
+                ]
+            );
+
+            $camp = Camp::updateOrCreate(
+                ['slug' => 'ayno-camp-netherlands-teen-trip'],
+                [
+                    'name' => 'FAYNO CAMP: NETHERLANDS TEEN TRIP 6 DAYS. 4 CITIES. 1000 IMPRESSIONS',
+                    'country' => 'Україна',
+                    'city' => 'Карпати',
+                    'address' => 'Amsterdam Демо-адреса',
                     'min_age' => 7,
                     'max_age' => 17,
                     'active' => true,
@@ -47,7 +60,7 @@ class DashboardDemoSeeder extends Seeder
             $firstShift = CampShift::updateOrCreate(
                 ['camp_id' => $camp->getKey(), 'starts_at' => now()->addMonths(7)->startOfMonth()->toDateString()],
                 [
-                    'name' => 'Демо — літня зміна №1',
+                    'name' => 'Зміна №1',
                     'ends_at' => now()->addMonths(7)->startOfMonth()->addDays(13)->toDateString(),
                     'capacity' => 35,
                     'regular_price' => 590,
@@ -61,7 +74,7 @@ class DashboardDemoSeeder extends Seeder
             $secondShift = CampShift::updateOrCreate(
                 ['camp_id' => $camp->getKey(), 'starts_at' => now()->addMonths(8)->startOfMonth()->toDateString()],
                 [
-                    'name' => 'Демо — літня зміна №2',
+                    'name' => 'Зміна №2',
                     'ends_at' => now()->addMonths(8)->startOfMonth()->addDays(13)->toDateString(),
                     'capacity' => 45,
                     'regular_price' => 620,

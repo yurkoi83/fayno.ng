@@ -29,5 +29,5 @@ Thumbs.db
 /docker/mysql/datadir
 /docker/redis/data
 /public/.tmb
-/public/js
+/public/js/*
 /public/vendor
