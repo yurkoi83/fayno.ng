@@ -4437,3 +4437,77 @@ button[class*="bg-primary"]:hover {
         grid-column: auto !important;
     }
 }
+
+
+/* Order detail page shell follows the light Fayno CRM reference, without
+   changing the shared dark shell on other Nova resources. */
+#nova:has([dusk="orders-detail-component"] ) header:not(.fayno-crm__heading) {
+    background: #fff !important;
+    color: #344267 !important;
+    border-bottom: 1px solid #ebeaf5 !important;
+    box-shadow: 0 2px 8px rgba(47, 55, 95, .035) !important;
+}
+#nova:has([dusk="orders-detail-component"] ) header:not(.fayno-crm__heading) a,
+#nova:has([dusk="orders-detail-component"] ) header:not(.fayno-crm__heading) button {
+    color: #566487 !important;
+}
+#nova:has([dusk="orders-detail-component"] ) header:not(.fayno-crm__heading) input {
+    color: #536184 !important;
+    background: #f7f7fc !important;
+    border-color: #e7e7f2 !important;
+}
+#nova:has([dusk="orders-detail-component"] ) header:not(.fayno-crm__heading) input::placeholder {
+    color: #9aa1bb !important;
+}
+#nova:has([dusk="orders-detail-component"] ) [dusk="content"] > div[class*="lg:absolute"][class*="w-60"] {
+    background: #fff !important;
+    color: #6f789b !important;
+    border-right: 1px solid #ecebf5 !important;
+    box-shadow: 2px 0 10px rgba(47, 55, 95, .025) !important;
+}
+#nova:has([dusk="orders-detail-component"] ) [dusk="sidebar-menu"] {
+    color: #727b9d !important;
+}
+#nova:has([dusk="orders-detail-component"] ) [dusk="sidebar-menu"] a,
+#nova:has([dusk="orders-detail-component"] ) [dusk="sidebar-menu"] button,
+#nova:has([dusk="orders-detail-component"] ) [dusk="sidebar-menu"] [role="button"] {
+    color: #687493 !important;
+}
+#nova:has([dusk="orders-detail-component"] ) [dusk="sidebar-menu"] a:hover,
+#nova:has([dusk="orders-detail-component"] ) [dusk="sidebar-menu"] button:hover,
+#nova:has([dusk="orders-detail-component"] ) [dusk="sidebar-menu"] [role="button"]:hover {
+    color: #6551bd !important;
+    background: #f3f0ff !important;
+}
+#nova:has([dusk="orders-detail-component"] ) [dusk="sidebar-menu"] a[aria-current="page"],
+#nova:has([dusk="orders-detail-component"] ) [dusk="sidebar-menu"] a.router-link-exact-active,
+#nova:has([dusk="orders-detail-component"] ) [dusk="sidebar-menu"] a.router-link-active {
+    color: #6c50ca !important;
+    background: #eee9ff !important;
+}
+#nova:has([dusk="orders-detail-component"] ) .fayno-crm {
+    color: #303d64 !important;
+}
+#nova [dusk="orders-detail-component"] .fayno-crm__heading h1 {
+    font-size: 26px !important;
+}
+#nova [dusk="orders-detail-component"] .fayno-crm__title-icon {
+    width: 44px !important;
+    height: 44px !important;
+}
+#nova [dusk="orders-detail-component"] .fayno-crm-card__icon {
+    width: 38px !important;
+    height: 38px !important;
+    flex-basis: 38px !important;
+}
+#nova [dusk="orders-detail-component"] .fayno-crm-card__heading h2 {
+    font-size: 14px !important;
+}
+#nova [dusk="orders-detail-component"] .fayno-crm-parent h3,
+#nova [dusk="orders-detail-component"] .fayno-crm-camp h3 {
+    font-size: 12px !important;
+}
+#nova [dusk="orders-detail-component"] .fayno-crm-line p,
+#nova [dusk="orders-detail-component"] .fayno-crm-summary-person strong {
+    font-size: 11px !important;
+}
