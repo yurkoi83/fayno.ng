@@ -4292,3 +4292,148 @@ button[class*="bg-primary"]:hover {
 #nova [dusk="orders-detail-component"] .fayno-crm-camp__copy h3 {
     overflow-wrap: anywhere;
 }
+
+
+/* Final alignment with the approved order-detail reference (img_7).
+   The global Nova topbar rules also target the CRM header's second child. */
+#nova [dusk="orders-detail-component"] .fayno-crm__actions::before,
+#nova [dusk="orders-detail-component"] .fayno-crm__actions::after {
+    content: none !important;
+    display: none !important;
+}
+#nova [dusk="orders-detail-component"] .fayno-crm__actions {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    flex: 0 0 auto !important;
+    gap: 8px !important;
+}
+#nova [dusk="orders-detail-component"] .fayno-crm__actions > a,
+#nova [dusk="orders-detail-component"] .fayno-crm__actions > button {
+    display: inline-flex !important;
+    visibility: visible !important;
+    color: #53658a !important;
+}
+#nova [dusk="orders-detail-component"] .fayno-crm__actions > .fayno-crm-action--primary {
+    color: #fff !important;
+}
+#nova [dusk="orders-detail-component"] .fayno-crm-camp > .fayno-crm-card__heading {
+    position: static !important;
+    inset: auto !important;
+    width: auto !important;
+    margin: 0 0 10px !important;
+    transform: none !important;
+}
+#nova [dusk="orders-detail-component"] .fayno-crm-camp .fayno-crm-card__heading h2 {
+    flex: 1 1 auto !important;
+    white-space: normal !important;
+    overflow: visible !important;
+    font-size: 12.5px !important;
+    line-height: 1.25 !important;
+}
+#nova [dusk="orders-detail-component"] .fayno-crm__content {
+    min-width: 0 !important;
+    width: 100% !important;
+}
+#nova [dusk="orders-detail-component"] .fayno-crm__top {
+    grid-template-columns: minmax(0, 1.08fr) minmax(0, .94fr) minmax(0, 1.12fr) !important;
+    gap: 10px !important;
+}
+#nova [dusk="orders-detail-component"] .fayno-crm-card {
+    padding: 14px !important;
+    border: 1px solid #e8e7f2 !important;
+    border-radius: 12px !important;
+    background: #fff !important;
+    box-shadow: 0 2px 9px rgba(47, 55, 95, .045) !important;
+}
+#nova [dusk="orders-detail-component"] .fayno-crm-card__heading {
+    position: static !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 9px !important;
+    min-height: 34px !important;
+    margin: 0 0 10px !important;
+}
+#nova [dusk="orders-detail-component"] .fayno-crm-card__heading h2 {
+    color: #26345b !important;
+    font-size: 13px !important;
+    font-weight: 800 !important;
+    line-height: 1.25 !important;
+}
+#nova [dusk="orders-detail-component"] .fayno-crm-parent h3,
+#nova [dusk="orders-detail-component"] .fayno-crm-camp h3 {
+    color: #26345b !important;
+    font-size: 11px !important;
+    line-height: 1.4 !important;
+}
+#nova [dusk="orders-detail-component"] .fayno-crm-line p,
+#nova [dusk="orders-detail-component"] .fayno-crm-summary-person strong {
+    color: #536184 !important;
+    font-size: 10px !important;
+}
+#nova [dusk="orders-detail-component"] .fayno-crm-summary-person small,
+#nova [dusk="orders-detail-component"] .fayno-crm-camp__copy > p {
+    font-size: 9px !important;
+}
+#nova [dusk="orders-detail-component"] .fayno-crm-details__grid {
+    column-gap: 24px !important;
+    row-gap: 13px !important;
+}
+#nova [dusk="orders-detail-component"] .fayno-crm-detail-value {
+    font-size: 10px !important;
+    gap: 9px !important;
+}
+#nova [dusk="orders-detail-component"] .fayno-crm-detail-value > span {
+    color: #8992b2 !important;
+}
+#nova [dusk="orders-detail-component"] .fayno-crm-detail-value > strong {
+    color: #35436b !important;
+    font-size: 10px !important;
+}
+#nova [dusk="orders-detail-component"] .fayno-crm-participant {
+    background: #f5f2ff !important;
+    border: 1px solid #eee9fb !important;
+}
+#nova [dusk="orders-detail-component"] .fayno-crm-participant__identity strong,
+#nova [dusk="orders-detail-component"] .fayno-crm-participant__price {
+    color: #26345b !important;
+}
+#nova [dusk="orders-detail-component"] .fayno-crm-table th {
+    color: #7883a7 !important;
+    font-size: 9px !important;
+}
+#nova [dusk="orders-detail-component"] .fayno-crm-table td {
+    color: #536184 !important;
+    font-size: 10px !important;
+}
+#nova [dusk="orders-detail-component"] .fayno-crm-status {
+    min-height: 104px !important;
+    align-items: flex-start !important;
+    padding: 14px !important;
+}
+#nova [dusk="orders-detail-component"] .fayno-crm-finance__total > strong {
+    font-size: 19px !important;
+}
+#nova [dusk="orders-detail-component"] .fayno-crm-person strong {
+    font-size: 10px !important;
+}
+#nova [dusk="orders-detail-component"] .fayno-crm-promo {
+    min-height: 145px !important;
+    background: linear-gradient(145deg, #eeeaff 0%, #e7e2ff 100%) !important;
+}
+@media (max-width: 1050px) {
+    #nova [dusk="orders-detail-component"] .fayno-crm__top {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+    #nova [dusk="orders-detail-component"] .fayno-crm-camp {
+        grid-column: 1 / -1 !important;
+    }
+}
+@media (max-width: 760px) {
+    #nova [dusk="orders-detail-component"] .fayno-crm__top {
+        grid-template-columns: minmax(0, 1fr) !important;
+    }
+    #nova [dusk="orders-detail-component"] .fayno-crm-camp {
+        grid-column: auto !important;
+    }
+}
