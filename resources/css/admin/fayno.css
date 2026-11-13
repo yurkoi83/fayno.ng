@@ -3518,3 +3518,9 @@ button[class*="bg-primary"]:hover {
 #nova [class*="lg:top-[56px]"] {
     top: 56px !important;
 }
+
+
+/* The Nova header scrolls away; reclaim its space once the page is scrolled. */
+#nova [class*="lg:top-[56px]"].fayno-sidebar--scrolled {
+    top: 0 !important;
+}
