@@ -2149,7 +2149,6 @@ button[class*="bg-primary"]:hover {
 #nova [dusk="content"] > div[class*="lg:absolute"][class*="w-60"] {
     position: fixed !important;
     z-index: 30;
-    top: 56px !important;
     bottom: 0 !important;
     left: 0 !important;
     width: 240px !important;
