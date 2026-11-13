@@ -5140,3 +5140,19 @@ button[class*="bg-primary"]:hover {
         padding-bottom: 258px !important;
     }
 }
+
+
+/* Fine-tune reference crops to preserve the portrait banner proportions. */
+@media (min-width: 1024px) {
+    #nova:has([dusk="orders-detail-component"]) .fayno-sidebar-promo {
+        width: 123px !important;
+        min-width: 123px !important;
+        max-width: 123px !important;
+        height: 185px !important;
+        min-height: 185px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        background-size: 1111% 415% !important;
+        background-position: 19.8% 82.3% !important;
+    }
+}
