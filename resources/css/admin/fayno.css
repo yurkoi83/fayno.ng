@@ -5070,3 +5070,18 @@ button[class*="bg-primary"]:hover {
         flex: 0 0 auto !important;
     }
 }
+
+
+/* Fine-tune the search width to match the compact reference control. */
+@media (min-width: 1024px) {
+    #nova:has([dusk="orders-detail-component"]) header > div.flex.flex-1 > div.flex.items-center.w-full.max-w-xs {
+        width: 240px !important;
+        max-width: 240px !important;
+        flex-basis: 240px !important;
+    }
+
+    /* The tiny decorative sun previously overlapped the wordmark; keep the mark clean. */
+    #nova:has([dusk="orders-detail-component"]) [dusk="content"] > div[class*="lg:absolute"][class*="w-60"]::before {
+        background-image: none !important;
+    }
+}
