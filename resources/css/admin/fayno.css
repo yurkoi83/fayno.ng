@@ -3929,3 +3929,93 @@ button[class*="bg-primary"]:hover {
 #nova [dusk="orders-detail-component"] .fayno-crm-status.is-warning p {
     color: #a77c49;
 }
+
+
+/* Order detail — full-width lower section from the approved CRM reference. */
+#nova [dusk="orders-detail-component"] .fayno-crm {
+    grid-template-columns: minmax(0, 1.9fr) minmax(290px, .9fr);
+    column-gap: 18px;
+    row-gap: 18px;
+    align-items: start;
+}
+#nova [dusk="orders-detail-component"] .fayno-crm__heading { grid-column: 1 / -1; }
+#nova [dusk="orders-detail-component"] .fayno-crm__main {
+    grid-column: 1;
+    gap: 16px;
+    min-width: 0;
+}
+#nova [dusk="orders-detail-component"] .fayno-crm__aside {
+    grid-column: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-width: 0;
+}
+#nova [dusk="orders-detail-component"] .fayno-crm__footer {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: 16px;
+    align-items: stretch;
+    min-width: 0;
+}
+#nova [dusk="orders-detail-component"] .fayno-crm__footer .fayno-crm-comment,
+#nova [dusk="orders-detail-component"] .fayno-crm__footer .fayno-crm-history {
+    grid-column: auto;
+    min-width: 0;
+    margin: 0;
+}
+#nova [dusk="orders-detail-component"] .fayno-crm-comment {
+    background: linear-gradient(135deg, #f7f3ff 0%, #fff 100%);
+    border-color: #e8e0fb;
+}
+#nova [dusk="orders-detail-component"] .fayno-crm-comment > p {
+    margin: 0;
+    color: #4e5a80;
+    font-size: 13px;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+}
+#nova [dusk="orders-detail-component"] .fayno-crm-history { background: #fff; }
+#nova [dusk="orders-detail-component"] .fayno-crm-history .fayno-crm-card__heading { margin-bottom: 18px; }
+#nova [dusk="orders-detail-component"] .fayno-crm-manager,
+#nova [dusk="orders-detail-component"] .fayno-crm-payments { padding: 17px; }
+#nova [dusk="orders-detail-component"] .fayno-crm-payments > .fayno-crm-muted {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 58px;
+    margin: 0;
+    padding: 12px 14px;
+    border: 1px dashed #ded9f1;
+    border-radius: 11px;
+    background: #faf9ff;
+    color: #7d83a4;
+    font-size: 12px;
+}
+#nova [dusk="orders-detail-component"] .fayno-crm-payments > .fayno-crm-muted::before {
+    content: "₴";
+    display: grid;
+    width: 34px;
+    height: 34px;
+    flex: 0 0 34px;
+    place-items: center;
+    border-radius: 10px;
+    background: #eee8ff;
+    color: #7951d2;
+    font-size: 17px;
+    font-weight: 800;
+}
+@media (max-width: 1050px) {
+    #nova [dusk="orders-detail-component"] .fayno-crm { grid-template-columns: minmax(0, 1fr) minmax(250px, .78fr); }
+    #nova [dusk="orders-detail-component"] .fayno-crm__footer { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 760px) {
+    #nova [dusk="orders-detail-component"] .fayno-crm { grid-template-columns: minmax(0, 1fr); }
+    #nova [dusk="orders-detail-component"] .fayno-crm__heading,
+    #nova [dusk="orders-detail-component"] .fayno-crm__main,
+    #nova [dusk="orders-detail-component"] .fayno-crm__aside,
+    #nova [dusk="orders-detail-component"] .fayno-crm__footer { grid-column: 1; }
+    #nova [dusk="orders-detail-component"] .fayno-crm__main { grid-template-columns: minmax(0, 1fr); }
+    #nova [dusk="orders-detail-component"] .fayno-crm__footer { grid-template-columns: minmax(0, 1fr); }
+}
