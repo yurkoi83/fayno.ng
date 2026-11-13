@@ -5336,3 +5336,60 @@ button[class*="bg-primary"]:hover {
     color: #9a9fb5;
     font-size: 9px;
 }
+
+
+/* Fix order-detail sidebar labels: allow long navigation items to wrap instead of clipping. */
+@media (min-width: 1024px) {
+    #nova:has([dusk="orders-detail-component"]) [dusk="sidebar-menu"] a,
+    #nova:has([dusk="orders-detail-component"]) [dusk="sidebar-menu"] button,
+    #nova:has([dusk="orders-detail-component"]) [dusk="sidebar-menu"] [role="button"] {
+        height: auto !important;
+        min-height: 36px !important;
+        align-items: center !important;
+        padding-top: 6px !important;
+        padding-bottom: 6px !important;
+        line-height: 1.25 !important;
+    }
+
+    #nova:has([dusk="orders-detail-component"]) [dusk="sidebar-menu"] a span:not(.fayno-nav-icon),
+    #nova:has([dusk="orders-detail-component"]) [dusk="sidebar-menu"] button span:not(.fayno-nav-icon),
+    #nova:has([dusk="orders-detail-component"]) [dusk="sidebar-menu"] [role="button"] span:not(.fayno-nav-icon) {
+        min-width: 0 !important;
+        flex: 1 1 auto !important;
+        white-space: normal !important;
+        overflow: visible !important;
+        text-overflow: clip !important;
+        overflow-wrap: break-word !important;
+        line-height: 1.25 !important;
+    }
+
+    #nova:has([dusk="orders-detail-component"]) [dusk="sidebar-menu"] .fayno-nav-icon {
+        flex-shrink: 0 !important;
+    }
+}
+
+/* Ensure the finance action keeps a readable white label on its purple background. */
+#nova [dusk="orders-detail-component"] a.fayno-crm-link {
+    display: flex !important;
+    min-height: 36px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 9px 12px !important;
+    background: #7654d2 !important;
+    border: 1px solid #7654d2 !important;
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+    font-family: 'Nunito', sans-serif !important;
+    font-size: 11px !important;
+    font-weight: 800 !important;
+    line-height: 1.25 !important;
+    opacity: 1 !important;
+    text-decoration: none !important;
+}
+
+#nova [dusk="orders-detail-component"] a.fayno-crm-link:hover {
+    background: #6544c0 !important;
+    border-color: #6544c0 !important;
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+}
