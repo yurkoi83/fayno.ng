@@ -4670,3 +4670,51 @@ button[class*="bg-primary"]:hover {
         display: none !important;
     }
 }
+
+
+#nova:has([dusk="orders-detail-component"]) .fayno-sidebar-promo {
+    position: absolute !important;
+    left: 12px !important;
+    bottom: 78px !important;
+    display: flex !important;
+    width: calc(100% - 24px) !important;
+    height: 170px !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: flex-end !important;
+    gap: 8px !important;
+    overflow: hidden !important;
+    padding: 13px !important;
+    border: 1px solid rgba(255,255,255,.55) !important;
+    border-radius: 12px !important;
+    background:
+        linear-gradient(180deg, rgba(17, 39, 47, .02) 15%, rgba(12, 33, 39, .76) 100%),
+        url("https://fayno.camp/wp-content/uploads/9-3-300x200.jpg") center / cover no-repeat !important;
+    color: #fff !important;
+    text-decoration: none !important;
+    box-shadow: 0 5px 15px rgba(39, 54, 86, .12) !important;
+}
+#nova:has([dusk="orders-detail-component"]) .fayno-sidebar-promo span {
+    color: #fff !important;
+    font-size: 15px !important;
+    font-style: italic !important;
+    font-weight: 900 !important;
+    line-height: 1.12 !important;
+    text-shadow: 0 1px 4px rgba(0,0,0,.3) !important;
+}
+#nova:has([dusk="orders-detail-component"]) .fayno-sidebar-promo i {
+    display: grid !important;
+    width: 28px !important;
+    height: 28px !important;
+    place-items: center !important;
+    border-radius: 50% !important;
+    background: #fff !important;
+    color: #7257ce !important;
+    font-size: 17px !important;
+    font-style: normal !important;
+}
+@media (max-width: 1023px) {
+    #nova:has([dusk="orders-detail-component"]) .fayno-sidebar-promo {
+        display: none !important;
+    }
+}
