@@ -185,7 +185,7 @@ class Order extends Resource
         $paymentsQuery = Payment::query()
             ->whereHas('booking.orderCamper', fn ($query) => $query->where('order_id', $order->getKey()));
         $paid = (float) (clone $paymentsQuery)->where('status', PaymentStatus::PAID->value)->sum('amount');
-        $payments = (clone $paymentsQuery)->with('booking')->latest('created_at')->limit(5)->get();
+        $payments = (clone $paymentsQuery)->with('booking')->latest('created_at')->limit(8)->get();
         $balance = max(0, $total - $paid);
         $progress = $total > 0 ? min(100, (int) round($paid / $total * 100)) : 0;
         $currency = $children->first()?->currency ?: 'UAH';
@@ -193,9 +193,6 @@ class Order extends Resource
         $parentName = $customer
             ? trim(implode(' ', array_filter([$customer->last_name, $customer->first_name, $customer->middle_name])))
             : '—';
-        $parentAddress = $customer
-            ? trim(implode(', ', array_filter([$customer->city, $customer->address])))
-            : '';
         $campPhoto = $camp?->photo_path
             ? Storage::disk('public')->url($camp->photo_path)
             : (str_contains(mb_strtolower((string) $camp?->name), 'zakopane')
@@ -205,49 +202,67 @@ class Order extends Resource
         $statusLabel = $this->statusLabel((string) $order->status);
         $statusDescription = $this->statusDescription((string) $order->status);
         $statusClass = $this->statusClass((string) $order->status);
-
         $editUrl = url('/nova/resources/orders/'.$order->getKey().'/edit');
         $indexUrl = url('/nova/resources/orders');
+
         $html = '<div class="fayno-crm">';
-        $html .= '<div class="fayno-crm__heading">'
+        $html .= '<header class="fayno-crm__heading">'
             . '<div class="fayno-crm__heading-main">'
-            . '<nav class="fayno-crm__breadcrumbs"><a href="'.$indexUrl.'">Заявки</a><span>/</span><span>'.e($order->number ?: $order->getKey()).'</span></nav>'
-            . '<div class="fayno-crm__title-row"><div><h1>Заявка № '.e($order->number ?: $order->getKey()).'</h1><p>Створено '.e($order->created_at?->format('d.m.Y H:i') ?: '—').'</p></div>'
-            . '<span class="fayno-crm-order-status is-'.e($statusClass).'">'.e($statusLabel).'</span></div>'
+            . '<nav class="fayno-crm__breadcrumbs"><a href="'.$indexUrl.'">⌂</a><span>›</span><a href="'.$indexUrl.'">Заявки</a><span>›</span><strong>'.e($order->number ?: '#'.$order->getKey()).'</strong></nav>'
+            . '<div class="fayno-crm__title-row"><span class="fayno-crm__title-icon">'.$this->iconSvg('file-text').'</span><div><h1>Заявка #'.e($order->number ?: $order->getKey()).'</h1><p>Створена '.e($order->created_at?->format('d.m.Y, H:i') ?: '—').'</p></div></div>'
             . '</div><div class="fayno-crm__actions">'
             . ($customer?->email ? '<a class="fayno-crm-action fayno-crm-action--secondary" href="mailto:'.e($customer->email).'">'.$this->iconSvg('message-square').' Повідомлення</a>' : '')
             . '<a class="fayno-crm-action fayno-crm-action--primary" href="'.$editUrl.'">'.$this->iconSvg('pencil').' Редагувати</a>'
-            . '</div></div>';
-        $html .= '<div class="fayno-crm__main">';
+            . '</div></header>';
+
+        $html .= '<div class="fayno-crm__content">';
+        $html .= '<div class="fayno-crm__top">';
 
         $html .= '<section class="fayno-crm-card fayno-crm-parent">'
-            . $this->cardHeading('users-round', __('nova::resources.Parent details'))
-            . '<h3>'.e($parentName).'</h3>'
-            . '<div class="fayno-crm-lines">'
+            . $this->cardHeading('users-round', 'Батьки')
+            . '<h3>'.e($parentName).'</h3><div class="fayno-crm-lines">'
             . $this->detailLine('phone', $customer?->phone ?: '—')
             . $this->detailLine('mail', $customer?->email ?: '—')
-            . ($parentAddress !== '' ? $this->detailLine('map-pin', $parentAddress) : '')
             . '</div></section>';
 
+        $firstChild = $children->first()?->camper;
+        $firstChildName = $firstChild
+            ? trim(implode(' ', array_filter([$firstChild->last_name, $firstChild->first_name, $firstChild->middle_name])))
+            : '—';
+        $firstChildAge = $firstChild?->birth_date ? $firstChild->birth_date->age.' '.__('nova::resources.Years') : '—';
+        $html .= '<section class="fayno-crm-card fayno-crm-child-summary">'
+            . $this->cardHeading('user-round', 'Дитина')
+            . '<div class="fayno-crm-summary-person">'.$this->demoAvatar('child')
+            . '<div><strong>'.e($firstChildName).'</strong><small>'.e($firstChildAge).'</small></div></div></section>';
+
         $html .= '<section class="fayno-crm-card fayno-crm-camp">'
-            . $this->cardHeading('mountain', __('nova::resources.Camp and shift'));
+            . $this->cardHeading('tent', 'Табір та зміна');
         if ($campPhoto) {
             $html .= '<img class="fayno-crm-camp__image" src="'.e($campPhoto).'" alt="">';
         }
-        $html .= '<div class="fayno-crm-camp__copy">'
-            . '<h3>'.e($camp?->name ?: '—').'</h3>'
-            . '<p>'.e($shift?->name ?: '—').'</p>'
-            . '<div class="fayno-crm-lines">'
-            . $this->detailLine('calendar-days', $shift ? $shift->starts_at?->format('d.m.Y').' — '.$shift->ends_at?->format('d.m.Y') : '—')
-            . $this->detailLine('clock-3', $shift ? (string) $shift->starts_at?->diffInDays($shift->ends_at).' '.__('nova::resources.Days') : '—')
+        $html .= '<div class="fayno-crm-camp__copy"><h3>'.e($camp?->name ?: '—').'</h3>'
+            . '<p>'.e($shift?->name ?: '—').'</p><div class="fayno-crm-lines">'
+            . $this->detailLine('calendar-days', $shift ? $shift->starts_at?->format('d.m').' — '.$shift->ends_at?->format('d.m.Y') : '—')
             . '</div></div></section>';
+        $html .= '</div>';
+
+        $html .= '<section class="fayno-crm-card fayno-crm-details">'
+            . $this->cardHeading('list-details', 'Дані заявки')
+            . '<div class="fayno-crm-details__grid">'
+            . $this->detailValue('Кількість дітей', (string) $children->count())
+            . $this->detailValue('Знижка', $children->sum('discount') > 0 ? $this->money((float) $children->sum('discount'), $currency) : '—')
+            . $this->detailValue('Коментар батьків', $order->comment ?: '—')
+            . $this->detailValue('Промокод', '—')
+            . $this->detailValue('Джерело', $order->source ?: '—')
+            . $this->detailValue('Місто виїзду', $order->departure_city ?: '—')
+            . '</div></section>';
 
         $html .= '<section class="fayno-crm-card fayno-crm-children">'
-            . $this->cardHeading('users-round', __('nova::resources.Children'), '<span class="fayno-crm-count">'.$children->count().' '.__('nova::resources.Children').'</span>');
+            . $this->cardHeading('users-round', 'Дитина / Учасник', '<span class="fayno-crm-count">'.$children->count().' '.e('учасн.').'</span>');
         if ($children->isEmpty()) {
-            $html .= '<p class="fayno-crm-muted">'.e('Дітей ще не додано').'</p>';
+            $html .= '<p class="fayno-crm-muted">Дітей ще не додано</p>';
         } else {
-            $html .= '<div class="fayno-crm-child-grid">';
+            $html .= '<div class="fayno-crm-participants">';
             foreach ($children as $item) {
                 $camper = $item->camper;
                 $childName = $camper
@@ -256,94 +271,94 @@ class Order extends Resource
                 $photo = $camper?->photo_path ? Storage::disk('public')->url($camper->photo_path) : null;
                 $age = $camper?->birth_date ? $camper->birth_date->age.' '.__('nova::resources.Years') : '—';
                 $price = number_format((float) $item->price, 0, ',', ' ').' '.($item->currency ?: $currency);
-                $html .= '<article class="fayno-crm-child">';
+                $html .= '<article class="fayno-crm-participant">';
                 $html .= $photo
                     ? '<img src="'.e($photo).'" alt="">'
                     : $this->demoAvatar('child');
-                $html .= '<div class="fayno-crm-child__identity"><strong>'.e($childName).'</strong><small>'.e($age).'</small></div>';
-                $html .= '<div class="fayno-crm-child__price"><strong>'.e($price).'</strong>';
-                if ((float) $item->discount > 0) {
-                    $html .= '<small>'.e(__('nova::resources.Discount')).': '.e(number_format((float) $item->discount, 0, ',', ' ').' '.($item->currency ?: $currency)).'</small>';
-                }
-                $html .= '</div></article>';
+                $html .= '<div class="fayno-crm-participant__identity"><strong>'.e($childName).'</strong><small>'.e($age).'</small></div>'
+                    . '<span class="fayno-crm-pill">Основний учасник</span>'
+                    . '<span class="fayno-crm-health">'.$this->iconSvg('check').' Учасник</span>'
+                    . '<strong class="fayno-crm-participant__price">'.e($price).'</strong>'
+                    . '</article>';
             }
             $html .= '</div>';
         }
         $html .= '</section>';
 
-        $html .= '</div>';
-
-        $html .= '<aside class="fayno-crm__aside">';
-        $html .= '<section class="fayno-crm-card fayno-crm-status is-'.e($statusClass).'">'
-            . '<div class="fayno-crm-status__icon">'.$this->iconSvg('check').'</div><div><strong>'.e($statusLabel).'</strong><p>'.e($statusDescription).'</p></div></section>';
-
-        $html .= '<section class="fayno-crm-card fayno-crm-finance">'
-            . $this->cardHeading('wallet', __('nova::resources.Financial information'))
-            . '<div class="fayno-crm-money-row"><span>'.e(__('nova::resources.Total amount')).'</span><strong>'.e($this->money($total, $currency)).'</strong></div>'
-            . '<div class="fayno-crm-money-row"><span>'.e(__('nova::resources.Paid')).'</span><strong class="is-paid">'.e($this->money($paid, $currency)).'</strong></div>'
-            . '<div class="fayno-crm-money-row"><span>'.e(__('nova::resources.Balance')).'</span><strong class="is-balance">'.e($this->money($balance, $currency)).'</strong></div>'
-            . '<div class="fayno-crm-progress"><span style="width:'.$progress.'%"></span></div>'
-            . '<div class="fayno-crm-progress-label"><strong>'.$progress.'%</strong><span>'.e(__('nova::resources.Payment progress')).'</span></div>'
-            . '<a class="fayno-crm-link" href="/nova/resources/payments">'.e('Перейти до оплат').' →</a>'
-            . '</section>';
-
-        $html .= '<section class="fayno-crm-card fayno-crm-manager">'
-            . '<span class="fayno-crm-eyebrow">'.e(__('nova::resources.Responsible manager')).'</span>'
-            . '<div class="fayno-crm-person">';
-        $html .= $managerPhoto
-            ? '<img src="'.e($managerPhoto).'" alt="">'
-            : $this->demoAvatar('manager');
-        $html .= '<div><strong>'.e($manager?->name ?: '—').'</strong><small>'.e('Менеджер').'</small></div></div>'
-            . '<div class="fayno-crm-manager__response"><span>'.e(__('nova::resources.Responded at')).'</span><strong>'.e($order->responded_at?->format('d.m.Y H:i') ?: '—').'</strong></div>'
-            . '</section>';
-
         $html .= '<section class="fayno-crm-card fayno-crm-payments">'
-            . $this->cardHeading('credit-card', __('nova::resources.Payments'), '<a href="/nova/resources/payments">'.e('Усі платежі').' →</a>');
+            . $this->cardHeading('credit-card', 'Платежі', '<a href="/nova/resources/payments">Усі платежі →</a>');
         if ($payments->isEmpty()) {
-            $html .= '<p class="fayno-crm-muted">'.e(__('nova::resources.No payments yet')).'</p>';
+            $html .= '<p class="fayno-crm-muted">Платежів ще немає</p>';
         } else {
+            $html .= '<div class="fayno-crm-table-wrap"><table class="fayno-crm-table"><thead><tr><th>Дата</th><th>Опис</th><th>Сума</th><th>Статус</th><th></th></tr></thead><tbody>';
             foreach ($payments as $payment) {
                 $isPaid = $payment->status === PaymentStatus::PAID->value;
-                $paymentStatus = $isPaid ? __('nova::resources.Paid') : (string) $payment->status;
-                $html .= '<div class="fayno-crm-payment"><span class="fayno-crm-payment__icon '.($isPaid ? 'is-paid' : '').'">'.$this->iconSvg($isPaid ? 'check' : 'clock-3').'</span>'
-                    . '<div><strong>'.e($payment->payment_method ?: __('nova::resources.Payment')).'</strong><small>'.e(($payment->paid_at ?? $payment->created_at)?->format('d.m.Y, H:i') ?: '').' · '.e($paymentStatus).'</small></div>'
-                    . '<b>'.e($this->money((float) $payment->amount, $payment->currency ?: $currency)).'</b></div>';
+                $paymentStatus = $isPaid ? 'Оплачено' : (string) $payment->status;
+                $html .= '<tr><td>'.e(($payment->paid_at ?? $payment->created_at)?->format('d.m.Y H:i') ?: '—').'</td>'
+                    . '<td>'.e($payment->payment_method ?: 'Оплата заявки').'</td>'
+                    . '<td><strong>'.e($this->money((float) $payment->amount, $payment->currency ?: $currency)).'</strong></td>'
+                    . '<td><span class="fayno-crm-payment-status '.($isPaid ? 'is-paid' : 'is-pending').'">'.$this->iconSvg($isPaid ? 'check' : 'clock-3').e($paymentStatus).'</span></td>'
+                    . '<td>↓</td></tr>';
             }
+            $html .= '</tbody></table></div>';
         }
         $html .= '</section>';
-        $html .= '</aside>';
-        $html .= '<div class="fayno-crm__footer">';
+
         if ($order->comment) {
             $html .= '<section class="fayno-crm-card fayno-crm-comment">'
-                . $this->cardHeading('message-square', __('nova::resources.Parent comment'))
+                . $this->cardHeading('message-square', 'Коментар батьків')
                 . '<p>'.nl2br(e($order->comment)).'</p></section>';
         }
 
         $history = $order->statusHistories()->with('changedBy')->latest()->limit(8)->get();
         $html .= '<section class="fayno-crm-card fayno-crm-history">'
-            . $this->cardHeading('history', __('nova::resources.Application timeline'));
+            . $this->cardHeading('history', 'Хронологія заявки');
         if ($history->isEmpty()) {
-            $html .= '<p class="fayno-crm-muted">'.e(__('nova::resources.No status changes yet')).'</p>';
+            $html .= '<p class="fayno-crm-muted">Історії змін поки немає</p>';
         } else {
             $html .= '<div class="fayno-crm-timeline">';
             foreach ($history->reverse() as $entry) {
                 $label = $entry->from_status
-                    ? __('nova::resources.Status changed to').' '.$this->statusLabel((string) $entry->to_status)
-                    : __('nova::resources.Application created').' — '.$this->statusLabel((string) $entry->to_status);
-                $html .= '<div class="fayno-crm-timeline__item">'
-                    . '<time>'.e($entry->created_at?->format('d.m.Y H:i') ?: '').'</time>'
-                    . '<span class="fayno-crm-timeline__dot"></span>'
-                    . '<div><strong>'.e($label).'</strong><small>'.e($entry->changedBy?->name ?: __('nova::resources.System')).'</small></div>'
-                    . '</div>';
+                    ? 'Статус змінено на '.$this->statusLabel((string) $entry->to_status)
+                    : 'Заявку створено — '.$this->statusLabel((string) $entry->to_status);
+                $html .= '<div class="fayno-crm-timeline__item"><time>'.e($entry->created_at?->format('d.m.Y H:i') ?: '').'</time>'
+                    . '<span class="fayno-crm-timeline__dot"></span><div><strong>'.e($label).'</strong><small>'.e($entry->changedBy?->name ?: 'Система').'</small></div></div>';
             }
             $html .= '</div>';
         }
-        $html .= '</section>';
-        $html .= '</div>';
+        $html .= '</section></div>';
 
-        $html .= '</div>';
+        $html .= '<aside class="fayno-crm__aside">';
+        $html .= '<section class="fayno-crm-card fayno-crm-status is-'.e($statusClass).'">'
+            . '<div class="fayno-crm-status__icon">'.$this->iconSvg('clock-3').'</div><div><strong>'.e($statusLabel).'</strong><p>'.e($statusDescription).'</p></div></section>';
+        $html .= '<section class="fayno-crm-card fayno-crm-finance">'
+            . $this->cardHeading('wallet', 'Фінанси')
+            . '<div class="fayno-crm-finance__total"><strong>'.e($this->money($total, $currency)).'</strong><span class="fayno-crm-payment-status '.($balance <= 0 && $total > 0 ? 'is-paid' : 'is-pending').'">'.($balance <= 0 && $total > 0 ? '✓ Оплачено' : 'Очікує оплати').'</span></div>'
+            . '<div class="fayno-crm-money-row"><span>До сплати</span><strong>'.e($this->money($balance, $currency)).'</strong></div>'
+            . '<div class="fayno-crm-progress"><span style="width:'.$progress.'%"></span></div>'
+            . '<a class="fayno-crm-link" href="/nova/resources/payments">Деталі платежів →</a></section>';
+
+        $html .= '<section class="fayno-crm-card fayno-crm-manager">'
+            . $this->cardHeading('user-round', 'Менеджер')
+            . '<div class="fayno-crm-person">';
+        $html .= $managerPhoto
+            ? '<img src="'.e($managerPhoto).'" alt="">'
+            : $this->demoAvatar('manager');
+        $html .= '<div><strong>'.e($manager?->name ?: 'Не призначений').'</strong><small>Менеджер з бронювання</small></div></div>'
+            . ($manager?->email ? '<a class="fayno-crm-manager__message" href="mailto:'.e($manager->email).'">'.$this->iconSvg('mail').' Написати</a>' : '')
+            . '</section>';
+
+        $html .= '<section class="fayno-crm-promo"><div class="fayno-crm-promo__art">'.$this->iconSvg('tent').'</div>'
+            . '<strong>Fayno Camp</strong><span>Більше, ніж табір</span>'
+            . '<a href="https://fayno.camp/" target="_blank" rel="noopener">Перейти на сайт →</a></section>';
+        $html .= '</aside></div></div>';
 
         return $html;
+    }
+
+    protected function detailValue(string $label, string $value): string
+    {
+        return '<div class="fayno-crm-detail-value"><span>'.e($label).'</span><strong>'.e($value).'</strong></div>';
     }
 
     protected function iconSvg(string $name): string
