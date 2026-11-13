@@ -230,9 +230,13 @@ class Order extends Resource
             ? trim(implode(' ', array_filter([$firstChild->last_name, $firstChild->first_name, $firstChild->middle_name])))
             : '—';
         $firstChildAge = $firstChild?->birth_date ? $firstChild->birth_date->age.' '.__('nova::resources.Years') : '—';
+        $firstChildPhoto = $firstChild?->photo_path ? Storage::disk('public')->url($firstChild->photo_path) : null;
+        $firstChildAvatar = $firstChildPhoto
+            ? '<img src="'.e($firstChildPhoto).'" alt="">'
+            : $this->demoAvatar('child');
         $html .= '<section class="fayno-crm-card fayno-crm-child-summary">'
             . $this->cardHeading('user-round', 'Дитина')
-            . '<div class="fayno-crm-summary-person">'.$this->demoAvatar('child')
+            . '<div class="fayno-crm-summary-person">'.$firstChildAvatar
             . '<div><strong>'.e($firstChildName).'</strong><small>'.e($firstChildAge).'</small></div></div></section>';
 
         $html .= '<section class="fayno-crm-card fayno-crm-camp">'
@@ -303,12 +307,6 @@ class Order extends Resource
             $html .= '</tbody></table></div>';
         }
         $html .= '</section>';
-
-        if ($order->comment) {
-            $html .= '<section class="fayno-crm-card fayno-crm-comment">'
-                . $this->cardHeading('message-square', 'Коментар батьків')
-                . '<p>'.nl2br(e($order->comment)).'</p></section>';
-        }
 
         $history = $order->statusHistories()->with('changedBy')->latest()->limit(8)->get();
         $html .= '<section class="fayno-crm-card fayno-crm-history">'
