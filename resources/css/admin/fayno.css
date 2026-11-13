@@ -5168,3 +5168,24 @@ button[class*="bg-primary"]:hover {
         overscroll-behavior: contain !important;
     }
 }
+
+
+/* Order-detail sidebar without the promotional banner: restore full menu height. */
+@media (min-width: 1024px) {
+    #nova:has([dusk="orders-detail-component"]) .fayno-sidebar-promo {
+        display: none !important;
+    }
+
+    #nova:has([dusk="orders-detail-component"]) [dusk="content"] > div[class*="lg:absolute"][class*="w-60"] {
+        padding-bottom: 24px !important;
+        overflow: visible !important;
+    }
+
+    #nova:has([dusk="orders-detail-component"]) [dusk="sidebar-menu"] {
+        max-height: calc(100vh - 180px) !important;
+        min-height: 0 !important;
+        overflow-x: hidden !important;
+        overflow-y: auto !important;
+        overscroll-behavior: contain !important;
+    }
+}
