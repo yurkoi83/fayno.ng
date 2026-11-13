@@ -4019,3 +4019,211 @@ button[class*="bg-primary"]:hover {
     #nova [dusk="orders-detail-component"] .fayno-crm__main { grid-template-columns: minmax(0, 1fr); }
     #nova [dusk="orders-detail-component"] .fayno-crm__footer { grid-template-columns: minmax(0, 1fr); }
 }
+
+
+/* --------------------------------------------------------------------------
+   Fayno Camp order detail — reference layout (img_7)
+   -------------------------------------------------------------------------- */
+[dusk="orders-detail-component"] .fayno-crm {
+    display: grid !important;
+    grid-template-columns: minmax(0, 2.8fr) minmax(198px, 1fr) !important;
+    align-items: start;
+    gap: 12px !important;
+    width: 100% !important;
+    color: #26345a;
+}
+[dusk="orders-detail-component"] .fayno-crm__heading {
+    grid-column: 1 / -1;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 16px !important;
+    padding: 0 0 8px !important;
+    margin: 0 !important;
+    border: 0 !important;
+}
+.fayno-crm__heading-main { min-width: 0; flex: 1; }
+.fayno-crm__breadcrumbs {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin: 0 0 15px;
+    color: #8b91b2;
+    font-size: 10px;
+}
+.fayno-crm__breadcrumbs a { color: #7774ba; text-decoration: none; }
+.fayno-crm__breadcrumbs strong { color: #333b62; font-weight: 700; }
+.fayno-crm__title-row { display: flex; align-items: center; gap: 12px; }
+.fayno-crm__title-icon {
+    display: grid;
+    width: 42px;
+    height: 42px;
+    flex: 0 0 42px;
+    place-items: center;
+    border-radius: 12px;
+    background: #eee9ff;
+    color: #7358d3;
+}
+.fayno-crm__title-icon .fayno-icon { width: 21px; height: 21px; }
+.fayno-crm__heading h1 {
+    margin: 0;
+    color: #252d55;
+    font-size: 25px;
+    font-weight: 800;
+    line-height: 1.2;
+}
+.fayno-crm__heading p { margin: 3px 0 0; color: #8b91b2; font-size: 10px; }
+.fayno-crm__actions { display: flex; align-items: center; gap: 8px; }
+.fayno-crm-action {
+    display: inline-flex;
+    min-height: 34px;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 0 12px;
+    border: 1px solid #e4e2f4;
+    border-radius: 9px;
+    background: #fff;
+    color: #66658f !important;
+    font-size: 10px;
+    font-weight: 700;
+    text-decoration: none !important;
+    white-space: nowrap;
+}
+.fayno-crm-action--primary { background: #7257ce; border-color: #7257ce; color: #fff !important; }
+.fayno-crm-action .fayno-icon { width: 14px; height: 14px; }
+.fayno-crm__content { display: flex; min-width: 0; flex-direction: column; gap: 12px; }
+.fayno-crm__aside { display: flex; min-width: 0; flex-direction: column; gap: 12px; }
+.fayno-crm__top {
+    display: grid;
+    grid-template-columns: 1.12fr .94fr 1.18fr;
+    align-items: stretch;
+    gap: 10px;
+}
+[dusk="orders-detail-component"] .fayno-crm-card {
+    min-width: 0;
+    padding: 12px;
+    border: 1px solid #e9e7f7;
+    border-radius: 11px;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(77, 69, 130, .045);
+}
+.fayno-crm-card__heading { display: flex; align-items: center; gap: 8px; min-height: 24px; margin: 0 0 10px; }
+.fayno-crm-card__heading h2 { margin: 0; color: #34395f; font-size: 12px; font-weight: 800; line-height: 1.25; }
+.fayno-crm-card__heading > a,
+.fayno-crm-card__heading > .fayno-crm-count { margin-left: auto; color: #6c62bd; font-size: 9px; font-weight: 700; white-space: nowrap; }
+.fayno-crm-card__icon {
+    display: grid;
+    width: 34px;
+    height: 34px;
+    flex: 0 0 34px;
+    place-items: center;
+    border-radius: 10px;
+    background: #eee9ff;
+    color: #795bd7;
+}
+.fayno-crm-card__icon .fayno-icon { width: 18px; height: 18px; }
+.fayno-crm-parent .fayno-crm-card__icon { background: #eee4ff; color: #8651d8; }
+.fayno-crm-child-summary .fayno-crm-card__icon { background: #e2f7e9; color: #28a35c; }
+.fayno-crm-camp .fayno-crm-card__icon { background: #e3efff; color: #347be0; }
+.fayno-crm-details .fayno-crm-card__icon { background: #eee9ff; color: #7657d3; }
+.fayno-crm-children .fayno-crm-card__icon { background: #eee4ff; color: #8651d8; }
+.fayno-crm-payments .fayno-crm-card__icon { background: #eee9ff; color: #7657d3; }
+.fayno-crm-parent h3,
+.fayno-crm-camp h3 { margin: 0 0 7px; color: #34395f; font-size: 10px; font-weight: 800; line-height: 1.35; }
+.fayno-crm-lines { display: flex; flex-direction: column; gap: 5px; }
+.fayno-crm-line { display: flex; align-items: flex-start; gap: 6px; min-width: 0; }
+.fayno-crm-line > span { display: inline-flex; width: 13px; flex: 0 0 13px; align-items: center; justify-content: center; color: #9295b5; }
+.fayno-crm-line__icon .fayno-icon { width: 12px; height: 12px; }
+.fayno-crm-line p { min-width: 0; margin: 0; color: #666d91; font-size: 9px; line-height: 1.4; overflow-wrap: anywhere; }
+.fayno-crm-summary-person { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.fayno-crm-summary-person > .fayno-demo-avatar,
+.fayno-crm-summary-person > img { width: 40px; height: 40px; flex: 0 0 40px; border-radius: 50%; object-fit: cover; }
+.fayno-crm-summary-person strong,
+.fayno-crm-summary-person small { display: block; }
+.fayno-crm-summary-person strong { color: #34395f; font-size: 9px; font-weight: 800; line-height: 1.35; }
+.fayno-crm-summary-person small { margin-top: 4px; color: #9295b5; font-size: 9px; }
+.fayno-crm-camp { display: block; }
+.fayno-crm-camp__image { display: none !important; }
+.fayno-crm-camp__copy { padding: 0 !important; }
+.fayno-crm-camp__copy > p { margin: 0 0 8px; color: #777d9d; font-size: 9px; }
+.fayno-crm-camp__copy .fayno-crm-line p { font-size: 9px; }
+.fayno-crm-details__grid { display: grid; grid-template-columns: 1fr 1fr; column-gap: 18px; row-gap: 11px; }
+.fayno-crm-detail-value { display: flex; align-items: baseline; gap: 7px; min-width: 0; font-size: 9px; }
+.fayno-crm-detail-value > span { flex: 0 0 auto; color: #858bad; }
+.fayno-crm-detail-value > strong { min-width: 0; color: #444b70; font-weight: 700; overflow-wrap: anywhere; }
+.fayno-crm-participants { display: flex; flex-direction: column; gap: 8px; }
+.fayno-crm-participant {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+    padding: 9px 12px;
+    border-radius: 10px;
+    background: #f5f2ff;
+}
+.fayno-crm-participant > img,
+.fayno-crm-participant > .fayno-demo-avatar { width: 44px; height: 44px; flex: 0 0 44px; border-radius: 50%; object-fit: cover; }
+.fayno-crm-participant__identity { display: flex; min-width: 0; flex: 1; flex-direction: column; gap: 4px; }
+.fayno-crm-participant__identity strong { color: #34395f; font-size: 10px; font-weight: 800; }
+.fayno-crm-participant__identity small { color: #858bad; font-size: 9px; }
+.fayno-crm-pill,
+.fayno-crm-health,
+.fayno-crm-payment-status { display: inline-flex; align-items: center; justify-content: center; gap: 4px; padding: 5px 8px; border-radius: 99px; font-size: 8px; font-weight: 700; white-space: nowrap; }
+.fayno-crm-pill { background: #eee7ff; color: #7958c9; }
+.fayno-crm-health { background: #e3f8e9; color: #239653; }
+.fayno-crm-health .fayno-icon,
+.fayno-crm-payment-status .fayno-icon { width: 10px; height: 10px; }
+.fayno-crm-participant__price { margin-left: auto; color: #34395f; font-size: 11px; white-space: nowrap; }
+.fayno-crm-table-wrap { width: 100%; overflow-x: auto; }
+.fayno-crm-table { width: 100%; border-collapse: collapse; text-align: left; }
+.fayno-crm-table th { padding: 8px 7px; color: #858bad; font-size: 8px; font-weight: 700; white-space: nowrap; }
+.fayno-crm-table td { padding: 9px 7px; border-top: 1px solid #f0eff8; color: #565d80; font-size: 9px; white-space: nowrap; }
+.fayno-crm-table td strong { color: #34395f; font-weight: 800; }
+.fayno-crm-payment-status.is-paid { background: #e2f7e8; color: #249755; }
+.fayno-crm-payment-status.is-pending { background: #e8f1ff; color: #367bd4; }
+.fayno-crm-status { display: flex; align-items: center; gap: 10px; min-height: 78px; padding: 12px !important; border-color: #f3dfbd !important; background: #fff2dc !important; }
+.fayno-crm-status__icon { display: grid; width: 32px; height: 32px; flex: 0 0 32px; place-items: center; border-radius: 50%; background: #f3a33d !important; color: #fff; }
+.fayno-crm-status__icon .fayno-icon { width: 16px; height: 16px; }
+.fayno-crm-status strong { display: block; color: #9b641e !important; font-size: 10px; font-weight: 800; }
+.fayno-crm-status p { margin: 4px 0 0; color: #a27b48 !important; font-size: 8px; line-height: 1.35; }
+.fayno-crm-finance .fayno-crm-card__heading { margin-bottom: 9px; }
+.fayno-crm-finance__total { display: flex; align-items: center; justify-content: space-between; gap: 6px; }
+.fayno-crm-finance__total > strong { color: #34395f; font-size: 17px; font-weight: 800; white-space: nowrap; }
+.fayno-crm-money-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin: 10px 0 0; }
+.fayno-crm-money-row span { color: #858bad; font-size: 9px; }
+.fayno-crm-money-row strong { color: #34395f; font-size: 10px; font-weight: 800; }
+.fayno-crm-progress { height: 6px; margin-top: 12px; overflow: hidden; border-radius: 10px; background: #eeeafa; }
+.fayno-crm-progress span { display: block; height: 100%; border-radius: inherit; background: #7658d2; }
+.fayno-crm-link { display: block; margin-top: 12px; padding: 8px; border-radius: 8px; background: #f7f5ff; color: #6e58bf !important; font-size: 9px; font-weight: 700; text-align: center; text-decoration: none !important; }
+.fayno-crm-person { display: flex; align-items: center; gap: 8px; }
+.fayno-crm-person > img,
+.fayno-crm-person > .fayno-demo-avatar { width: 40px; height: 40px; flex: 0 0 40px; border-radius: 50%; object-fit: cover; }
+.fayno-crm-person strong { display: block; color: #34395f; font-size: 9px; font-weight: 800; }
+.fayno-crm-person small { display: block; margin-top: 3px; color: #858bad; font-size: 8px; }
+.fayno-crm-manager__message { display: flex; align-items: center; justify-content: center; gap: 6px; margin: 9px 0 0 48px; padding: 6px; border: 1px solid #e9e7f7; border-radius: 7px; color: #6e64ad !important; font-size: 9px; text-decoration: none !important; }
+.fayno-crm-manager__message .fayno-icon { width: 12px; height: 12px; }
+.fayno-crm-promo { display: flex; min-height: 122px; flex-direction: column; align-items: center; justify-content: center; padding: 12px; border-radius: 11px; background: linear-gradient(145deg, #eeeaff, #e4defd); text-align: center; }
+.fayno-crm-promo__art { display: grid; width: 38px; height: 34px; place-items: center; color: #8b7bd0; }
+.fayno-crm-promo__art .fayno-icon { width: 30px; height: 30px; }
+.fayno-crm-promo > strong { margin-top: 4px; color: #464071; font-size: 10px; font-weight: 800; }
+.fayno-crm-promo > span { margin-top: 2px; color: #77709e; font-size: 8px; }
+.fayno-crm-promo > a { margin-top: 9px; padding: 6px 12px; border-radius: 99px; background: #7861cf; color: #fff !important; font-size: 8px; font-weight: 700; text-decoration: none !important; }
+.fayno-crm-comment,
+.fayno-crm-history { width: 100%; }
+@media (max-width: 1050px) {
+    [dusk="orders-detail-component"] .fayno-crm { grid-template-columns: minmax(0, 1fr) 220px !important; }
+    .fayno-crm__top { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .fayno-crm-camp { grid-column: 1 / -1; }
+}
+@media (max-width: 760px) {
+    [dusk="orders-detail-component"] .fayno-crm { grid-template-columns: minmax(0, 1fr) !important; }
+    .fayno-crm__heading { align-items: flex-start !important; flex-direction: column !important; }
+    .fayno-crm__actions { width: 100%; }
+    .fayno-crm-action { flex: 1; }
+    .fayno-crm__top { grid-template-columns: minmax(0, 1fr); }
+    .fayno-crm-camp { grid-column: auto; }
+    .fayno-crm-details__grid { grid-template-columns: minmax(0, 1fr); }
+    .fayno-crm-participant { flex-wrap: wrap; }
+    .fayno-crm-participant__price { margin-left: auto; }
+}
