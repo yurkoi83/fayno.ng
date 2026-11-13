@@ -271,6 +271,8 @@ class Order extends Resource
         }
         $html .= '</section>';
 
+        $html .= '</div>';
+
         $html .= '<aside class="fayno-crm__aside">';
         $html .= '<section class="fayno-crm-card fayno-crm-status is-'.e($statusClass).'">'
             . '<div class="fayno-crm-status__icon">'.$this->iconSvg('check').'</div><div><strong>'.e($statusLabel).'</strong><p>'.e($statusDescription).'</p></div></section>';
@@ -339,7 +341,7 @@ class Order extends Resource
         $html .= '</section>';
         $html .= '</div>';
 
-        $html .= '</div></div>';
+        $html .= '</div>';
 
         return $html;
     }
