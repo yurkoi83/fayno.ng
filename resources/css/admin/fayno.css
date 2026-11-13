@@ -3515,7 +3515,7 @@ button[class*="bg-primary"]:hover {
 }
 
 
-/* Keep the Nova sidebar flush with the viewport after the top bar scrolls away. */
-#nova [dusk="content"] > div[class*="lg:top-[56px]"] {
+/* The sidebar is a sibling of [dusk="content"], not its child. */
+#nova [class*="lg:top-[56px]"] {
     top: 0 !important;
 }
