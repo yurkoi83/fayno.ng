@@ -212,6 +212,7 @@ class Order extends Resource
             . '<div class="fayno-crm__title-row"><span class="fayno-crm__title-icon">'.$this->iconSvg('file-text').'</span><div><h1>Заявка #'.e($order->number ?: $order->getKey()).'</h1><p>Створена '.e($order->created_at?->format('d.m.Y, H:i') ?: '—').'</p></div></div>'
             . '</div><div class="fayno-crm__actions">'
             . ($customer?->email ? '<a class="fayno-crm-action fayno-crm-action--secondary" href="mailto:'.e($customer->email).'">'.$this->iconSvg('message-square').' Повідомлення</a>' : '')
+            . '<a class="fayno-crm-action" href="#" onclick="window.print(); return false;">'.$this->iconSvg('printer').' Друк</a>'
             . '<a class="fayno-crm-action fayno-crm-action--primary" href="'.$editUrl.'">'.$this->iconSvg('pencil').' Редагувати</a>'
             . '</div></header>';
 
@@ -328,7 +329,7 @@ class Order extends Resource
 
         $html .= '<aside class="fayno-crm__aside">';
         $html .= '<section class="fayno-crm-card fayno-crm-status is-'.e($statusClass).'">'
-            . '<div class="fayno-crm-status__icon">'.$this->iconSvg($statusClass === 'danger' ? 'check' : 'clock-3').'</div><div><strong>'.e($statusLabel).'</strong><p>'.e($statusDescription).'</p><small class="fayno-crm-status__registered">Зареєстровано '.e($order->created_at?->format('d.m.Y, H:i') ?: '—').'</small></div></section>';
+            . '<div class="fayno-crm-status__icon">'.$this->iconSvg($statusClass === 'danger' ? 'x' : ($statusClass === 'success' ? 'check' : 'clock-3')).'</div><div><strong>'.e($statusLabel).'</strong><p>'.e($statusDescription).'</p><small class="fayno-crm-status__registered">Зареєстровано '.e($order->created_at?->format('d.m.Y, H:i') ?: '—').'</small></div></section>';
         $html .= '<section class="fayno-crm-card fayno-crm-finance">'
             . $this->cardHeading('wallet', 'Фінанси')
             . '<div class="fayno-crm-finance__total"><strong>'.e($this->money($total, $currency)).'</strong><span class="fayno-crm-payment-status '.($balance <= 0 && $total > 0 ? 'is-paid' : 'is-pending').'">'.($balance <= 0 && $total > 0 ? '✓ Оплачено' : 'Очікує оплати').'</span></div>'
@@ -377,6 +378,8 @@ class Order extends Resource
             'wallet' => '<rect x="3" y="5" width="18" height="15" rx="2"/><path d="M3 8h18M16 14h.01"/>',
             'credit-card' => '<rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h3"/>',
             'check' => '<path d="m5 12 4 4L19 6"/>',
+            'x' => '<path d="m18 6-12 12M6 6l12 12"/>',
+            'printer' => '<path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v8H6z"/>',
             'pencil' => '<path d="m16 4 4 4L8 20H4v-4L16 4Z"/><path d="m14 6 4 4"/>',
             'file-text' => '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h8"/>',
             'list-details' => '<path d="M13 5h8M13 12h8M13 19h8"/><path d="M3 5h.01M3 12h.01M3 19h.01"/>',
