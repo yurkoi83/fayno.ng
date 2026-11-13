@@ -328,7 +328,7 @@ class Order extends Resource
 
         $html .= '<aside class="fayno-crm__aside">';
         $html .= '<section class="fayno-crm-card fayno-crm-status is-'.e($statusClass).'">'
-            . '<div class="fayno-crm-status__icon">'.$this->iconSvg('clock-3').'</div><div><strong>'.e($statusLabel).'</strong><p>'.e($statusDescription).'</p></div></section>';
+            . '<div class="fayno-crm-status__icon">'.$this->iconSvg($statusClass === 'danger' ? 'check' : 'clock-3').'</div><div><strong>'.e($statusLabel).'</strong><p>'.e($statusDescription).'</p></div></section>';
         $html .= '<section class="fayno-crm-card fayno-crm-finance">'
             . $this->cardHeading('wallet', 'Фінанси')
             . '<div class="fayno-crm-finance__total"><strong>'.e($this->money($total, $currency)).'</strong><span class="fayno-crm-payment-status '.($balance <= 0 && $total > 0 ? 'is-paid' : 'is-pending').'">'.($balance <= 0 && $total > 0 ? '✓ Оплачено' : 'Очікує оплати').'</span></div>'
