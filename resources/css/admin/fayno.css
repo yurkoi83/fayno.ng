@@ -5085,3 +5085,58 @@ button[class*="bg-primary"]:hover {
         background-image: none !important;
     }
 }
+
+
+/* Temporary brand assets cropped from the approved reference screenshot (img_7). */
+@media (min-width: 1024px) {
+    #nova:has([dusk="orders-detail-component"]) [dusk="content"] > div[class*="lg:absolute"][class*="w-60"]::before {
+        content: "" !important;
+        position: absolute !important;
+        top: 20px !important;
+        left: 18px !important;
+        z-index: 3 !important;
+        display: block !important;
+        width: 100px !important;
+        height: 40px !important;
+        padding: 0 !important;
+        background-image: url("/screen/img_7.png") !important;
+        background-size: 1366% 1920% !important;
+        background-position: 20.3% 15.1% !important;
+        background-repeat: no-repeat !important;
+        color: transparent !important;
+        font-size: 0 !important;
+        letter-spacing: 0 !important;
+        text-shadow: none !important;
+    }
+
+    #nova:has([dusk="orders-detail-component"]) [dusk="content"] > div[class*="lg:absolute"][class*="w-60"]::after {
+        content: none !important;
+        display: none !important;
+    }
+
+    /* The reference contains a portrait lake-and-forest photo with its own lettering. */
+    #nova:has([dusk="orders-detail-component"]) .fayno-sidebar-promo {
+        height: 210px !important;
+        padding: 0 !important;
+        border: 0 !important;
+        border-radius: 12px !important;
+        background-image: url("/screen/img_7.png") !important;
+        background-size: 1110% 452% !important;
+        background-position: 19.9% 80.2% !important;
+        background-repeat: no-repeat !important;
+        box-shadow: 0 5px 15px rgba(39, 54, 86, .12) !important;
+    }
+
+    #nova:has([dusk="orders-detail-component"]) .fayno-sidebar-promo span,
+    #nova:has([dusk="orders-detail-component"]) .fayno-sidebar-promo i {
+        display: none !important;
+    }
+
+    #nova:has([dusk="orders-detail-component"]) [dusk="sidebar-menu"] {
+        max-height: calc(100vh - 350px) !important;
+    }
+
+    #nova:has([dusk="orders-detail-component"]) [dusk="content"] > div[class*="lg:absolute"][class*="w-60"] {
+        padding-bottom: 258px !important;
+    }
+}
