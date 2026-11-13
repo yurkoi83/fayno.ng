@@ -4227,3 +4227,13 @@ button[class*="bg-primary"]:hover {
     .fayno-crm-participant { flex-wrap: wrap; }
     .fayno-crm-participant__price { margin-left: auto; }
 }
+
+/* Status colors stay semantic when the order is not awaiting confirmation. */
+.fayno-crm-status.is-danger { border-color: #f2c8c5 !important; background: #fff0ef !important; }
+.fayno-crm-status.is-danger .fayno-crm-status__icon { background: #d94e54 !important; }
+.fayno-crm-status.is-danger strong { color: #a8323a !important; }
+.fayno-crm-status.is-danger p { color: #a85c62 !important; }
+.fayno-crm-status.is-success { border-color: #bfe9cd !important; background: #e8f8ed !important; }
+.fayno-crm-status.is-success .fayno-crm-status__icon { background: #26a45b !important; }
+.fayno-crm-status.is-success strong { color: #187044 !important; }
+.fayno-crm-status.is-success p { color: #4d8966 !important; }
