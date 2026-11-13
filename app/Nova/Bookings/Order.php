@@ -380,6 +380,8 @@ class Order extends Resource
             'credit-card' => '<rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h3"/>',
             'check' => '<path d="m5 12 4 4L19 6"/>',
             'pencil' => '<path d="m16 4 4 4L8 20H4v-4L16 4Z"/><path d="m14 6 4 4"/>',
+            'file-text' => '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h8"/>',
+            'list-details' => '<path d="M13 5h8M13 12h8M13 19h8"/><path d="M3 5h.01M3 12h.01M3 19h.01"/>',
             'arrow-left' => '<path d="m12 19-7-7 7-7M5 12h14"/>',
         ];
 
