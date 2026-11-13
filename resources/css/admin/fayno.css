@@ -4511,3 +4511,162 @@ button[class*="bg-primary"]:hover {
 #nova [dusk="orders-detail-component"] .fayno-crm-summary-person strong {
     font-size: 11px !important;
 }
+
+
+/* --------------------------------------------------------------------------
+   Order detail: match the full Fayno reference shell, not only the CRM cards.
+   All changes below are scoped to the order detail route.
+   -------------------------------------------------------------------------- */
+@media (min-width: 1024px) {
+    #nova:has([dusk="orders-detail-component"]) [dusk="content"] > div[class*="lg:absolute"][class*="w-60"] {
+        width: 210px !important;
+        min-width: 210px !important;
+        padding: 88px 12px 218px !important;
+        overflow: hidden !important;
+        background: #fff !important;
+        border-right: 1px solid #eeedf7 !important;
+        box-shadow: 2px 0 12px rgba(45, 52, 91, .025) !important;
+    }
+
+    #nova:has([dusk="orders-detail-component"]) [dusk="content"] > div > div[class*="lg:ml-60"] {
+        margin-left: 210px !important;
+        padding: 18px 20px !important;
+    }
+
+    /* Fayno logo area above the Nova navigation. */
+    #nova:has([dusk="orders-detail-component"]) [dusk="content"] > div[class*="lg:absolute"][class*="w-60"]::before {
+        content: "FAYNO\\A CAMP";
+        white-space: pre;
+        position: absolute;
+        top: 22px;
+        left: 49px;
+        z-index: 2;
+        color: #26345b;
+        font-family: 'Nunito', sans-serif;
+        font-size: 15px;
+        font-weight: 900;
+        line-height: 1.05;
+        letter-spacing: .035em;
+        padding-left: 2px;
+    }
+
+    #nova:has([dusk="orders-detail-component"]) [dusk="content"] > div[class*="lg:absolute"][class*="w-60"] {
+        background-image:
+            linear-gradient(135deg, transparent 0 100%);
+    }
+
+    /* Small mountain mark beside the Fayno wordmark. */
+    #nova:has([dusk="orders-detail-component"]) [dusk="content"] > div[class*="lg:absolute"][class*="w-60"]::after {
+        content: "▲";
+        position: absolute;
+        top: 24px;
+        left: 19px;
+        z-index: 2;
+        color: #7257ce;
+        font-size: 30px;
+        line-height: 1;
+        text-shadow: 8px 5px 0 #a7a0ec;
+    }
+
+    #nova:has([dusk="orders-detail-component"]) [dusk="sidebar-menu"] {
+        padding-bottom: 0 !important;
+    }
+
+    #nova:has([dusk="orders-detail-component"]) [dusk="sidebar-menu"] a,
+    #nova:has([dusk="orders-detail-component"]) [dusk="sidebar-menu"] button,
+    #nova:has([dusk="orders-detail-component"]) [dusk="sidebar-menu"] [role="button"] {
+        min-height: 36px !important;
+        padding: 7px 9px !important;
+        border-radius: 9px !important;
+        color: #7881a2 !important;
+        font-size: 12px !important;
+        font-weight: 600 !important;
+        gap: 9px !important;
+    }
+
+    #nova:has([dusk="orders-detail-component"]) [dusk="sidebar-menu"] svg {
+        width: 15px !important;
+        height: 15px !important;
+        color: #8992b2 !important;
+    }
+
+    #nova:has([dusk="orders-detail-component"]) [dusk="sidebar-menu"] a:hover,
+    #nova:has([dusk="orders-detail-component"]) [dusk="sidebar-menu"] button:hover,
+    #nova:has([dusk="orders-detail-component"]) [dusk="sidebar-menu"] [role="button"]:hover {
+        color: #6d55c7 !important;
+        background: #f5f2ff !important;
+    }
+
+    #nova:has([dusk="orders-detail-component"]) [dusk="sidebar-menu"] a[aria-current="page"],
+    #nova:has([dusk="orders-detail-component"]) [dusk="sidebar-menu"] a.router-link-exact-active,
+    #nova:has([dusk="orders-detail-component"]) [dusk="sidebar-menu"] a.router-link-active {
+        color: #6b50c8 !important;
+        background: #eee9ff !important;
+        font-weight: 800 !important;
+    }
+
+    /* The reference places the search and account controls on a clean white bar. */
+    #nova:has([dusk="orders-detail-component"]) header > div:nth-child(2)::before {
+        content: none !important;
+        display: none !important;
+    }
+
+    #nova:has([dusk="orders-detail-component"]) header > div:nth-child(2) {
+        justify-content: flex-end !important;
+    }
+}
+
+/* Promo photo in the lower sidebar, above the user/account footer. */
+#nova:has([dusk="orders-detail-component"]) [dusk="content"] > div[class*="lg:absolute"][class*="w-60"] {
+    position: fixed !important;
+}
+#nova:has([dusk="orders-detail-component"]) [dusk="content"] > div[class*="lg:absolute"][class*="w-60"] .fayno-sidebar-promo {
+    display: none !important;
+}
+@media (min-width: 1024px) {
+    #nova:has([dusk="orders-detail-component"]) [dusk="content"] > div[class*="lg:absolute"][class*="w-60"] {
+        --fayno-sidebar-promo-image: url("https://fayno.camp/wp-content/uploads/9-3-300x200.jpg");
+    }
+}
+
+/* Bring the content cards closer to the airy, softly tinted mockup. */
+#nova [dusk="orders-detail-component"] .fayno-crm-card {
+    border-color: #e9e7f5 !important;
+    border-radius: 12px !important;
+    box-shadow: 0 3px 12px rgba(58, 55, 105, .045) !important;
+}
+#nova [dusk="orders-detail-component"] .fayno-crm__content,
+#nova [dusk="orders-detail-component"] .fayno-crm__aside {
+    gap: 12px !important;
+}
+#nova [dusk="orders-detail-component"] .fayno-crm__top {
+    gap: 10px !important;
+}
+#nova [dusk="orders-detail-component"] .fayno-crm-details__grid {
+    row-gap: 14px !important;
+}
+#nova [dusk="orders-detail-component"] .fayno-crm-detail-value > span {
+    color: #8992b0 !important;
+    font-size: 10px !important;
+}
+#nova [dusk="orders-detail-component"] .fayno-crm-detail-value > strong {
+    color: #344267 !important;
+    font-size: 11px !important;
+    font-weight: 800 !important;
+}
+#nova [dusk="orders-detail-component"] .fayno-crm-participant {
+    border-color: #eee9fb !important;
+    background: #f7f4ff !important;
+}
+#nova [dusk="orders-detail-component"] .fayno-crm-promo {
+    border: 1px solid #e8e1ff !important;
+    border-radius: 13px !important;
+    background: linear-gradient(145deg, #eeeaff 0%, #e5e0ff 100%) !important;
+    box-shadow: 0 3px 12px rgba(85, 67, 155, .07) !important;
+}
+@media print {
+    #nova [dusk="orders-detail-component"] .fayno-crm__actions,
+    #nova [dusk="content"] > div[class*="lg:absolute"][class*="w-60"] {
+        display: none !important;
+    }
+}
