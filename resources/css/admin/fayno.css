@@ -3513,3 +3513,9 @@ button[class*="bg-primary"]:hover {
         margin: 12px 0 0 0 !important;
     }
 }
+
+
+/* Keep the Nova sidebar flush with the viewport after the top bar scrolls away. */
+#nova [dusk="content"] > div[class*="lg:top-[56px]"] {
+    top: 0 !important;
+}
