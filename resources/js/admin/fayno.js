@@ -23,3 +23,28 @@ const syncSidebarOffset = () => {
 
 window.addEventListener('scroll', syncSidebarOffset, { passive: true });
 syncSidebarOffset();
+
+
+// Add the Fayno Camp promotional tile to the order-detail sidebar.
+// Nova renders its sidebar independently, so keep this safe across SPA navigation.
+const syncFaynoOrderSidebar = () => {
+    const orderDetail = document.querySelector('#nova [dusk="orders-detail-component"]');
+    const sidebar = document.querySelector('#nova [dusk="content"] > div[class*="lg:absolute"][class*="w-60"]');
+
+    if (!orderDetail || !sidebar || sidebar.querySelector('.fayno-sidebar-promo')) {
+        return;
+    }
+
+    const promo = document.createElement('a');
+    promo.className = 'fayno-sidebar-promo';
+    promo.href = 'https://fayno.camp/';
+    promo.target = '_blank';
+    promo.rel = 'noopener';
+    promo.innerHTML = '<span>Разом<br>до пригод!</span><i aria-hidden="true">→</i>';
+    sidebar.appendChild(promo);
+};
+
+syncFaynoOrderSidebar();
+
+const faynoSidebarObserver = new MutationObserver(syncFaynoOrderSidebar);
+faynoSidebarObserver.observe(document.body, { childList: true, subtree: true });
