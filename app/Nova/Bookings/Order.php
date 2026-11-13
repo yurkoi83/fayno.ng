@@ -271,34 +271,6 @@ class Order extends Resource
         }
         $html .= '</section>';
 
-        if ($order->comment) {
-            $html .= '<section class="fayno-crm-card fayno-crm-comment">'
-                . $this->cardHeading('message-square', __('nova::resources.Parent comment'))
-                . '<p>'.nl2br(e($order->comment)).'</p></section>';
-        }
-
-        $history = $order->statusHistories()->with('changedBy')->latest()->limit(8)->get();
-        $html .= '<section class="fayno-crm-card fayno-crm-history">'
-            . $this->cardHeading('history', __('nova::resources.Application timeline'));
-        if ($history->isEmpty()) {
-            $html .= '<p class="fayno-crm-muted">'.e(__('nova::resources.No status changes yet')).'</p>';
-        } else {
-            $html .= '<div class="fayno-crm-timeline">';
-            foreach ($history->reverse() as $entry) {
-                $label = $entry->from_status
-                    ? __('nova::resources.Status changed to').' '.$this->statusLabel((string) $entry->to_status)
-                    : __('nova::resources.Application created').' — '.$this->statusLabel((string) $entry->to_status);
-                $html .= '<div class="fayno-crm-timeline__item">'
-                    . '<time>'.e($entry->created_at?->format('d.m.Y H:i') ?: '').'</time>'
-                    . '<span class="fayno-crm-timeline__dot"></span>'
-                    . '<div><strong>'.e($label).'</strong><small>'.e($entry->changedBy?->name ?: __('nova::resources.System')).'</small></div>'
-                    . '</div>';
-            }
-            $html .= '</div>';
-        }
-        $html .= '</section>';
-        $html .= '</div>';
-
         $html .= '<aside class="fayno-crm__aside">';
         $html .= '<section class="fayno-crm-card fayno-crm-status is-'.e($statusClass).'">'
             . '<div class="fayno-crm-status__icon">'.$this->iconSvg('check').'</div><div><strong>'.e($statusLabel).'</strong><p>'.e($statusDescription).'</p></div></section>';
@@ -337,7 +309,37 @@ class Order extends Resource
             }
         }
         $html .= '</section>';
-        $html .= '</aside></div>';
+        $html .= '</aside>';
+        $html .= '<div class="fayno-crm__footer">';
+        if ($order->comment) {
+            $html .= '<section class="fayno-crm-card fayno-crm-comment">'
+                . $this->cardHeading('message-square', __('nova::resources.Parent comment'))
+                . '<p>'.nl2br(e($order->comment)).'</p></section>';
+        }
+
+        $history = $order->statusHistories()->with('changedBy')->latest()->limit(8)->get();
+        $html .= '<section class="fayno-crm-card fayno-crm-history">'
+            . $this->cardHeading('history', __('nova::resources.Application timeline'));
+        if ($history->isEmpty()) {
+            $html .= '<p class="fayno-crm-muted">'.e(__('nova::resources.No status changes yet')).'</p>';
+        } else {
+            $html .= '<div class="fayno-crm-timeline">';
+            foreach ($history->reverse() as $entry) {
+                $label = $entry->from_status
+                    ? __('nova::resources.Status changed to').' '.$this->statusLabel((string) $entry->to_status)
+                    : __('nova::resources.Application created').' — '.$this->statusLabel((string) $entry->to_status);
+                $html .= '<div class="fayno-crm-timeline__item">'
+                    . '<time>'.e($entry->created_at?->format('d.m.Y H:i') ?: '').'</time>'
+                    . '<span class="fayno-crm-timeline__dot"></span>'
+                    . '<div><strong>'.e($label).'</strong><small>'.e($entry->changedBy?->name ?: __('nova::resources.System')).'</small></div>'
+                    . '</div>';
+            }
+            $html .= '</div>';
+        }
+        $html .= '</section>';
+        $html .= '</div>';
+
+        $html .= '</div></div>';
 
         return $html;
     }
