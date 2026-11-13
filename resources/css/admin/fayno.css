@@ -3893,3 +3893,39 @@ button[class*="bg-primary"]:hover {
         flex: 1 1 auto;
     }
 }
+
+
+/* Order detail — keep the status card color consistent with its actual state. */
+#nova [dusk="orders-detail-component"] .fayno-crm-status.is-danger {
+    border-color: #f3cece;
+    background: #fff0f0;
+}
+
+#nova [dusk="orders-detail-component"] .fayno-crm-status.is-danger .fayno-crm-status__icon {
+    background: #d94f50;
+}
+
+#nova [dusk="orders-detail-component"] .fayno-crm-status.is-danger strong {
+    color: #a9343c;
+}
+
+#nova [dusk="orders-detail-component"] .fayno-crm-status.is-danger p {
+    color: #ad666b;
+}
+
+#nova [dusk="orders-detail-component"] .fayno-crm-status.is-warning {
+    border-color: #f3dfbd;
+    background: #fff6e9;
+}
+
+#nova [dusk="orders-detail-component"] .fayno-crm-status.is-warning .fayno-crm-status__icon {
+    background: #e38a22;
+}
+
+#nova [dusk="orders-detail-component"] .fayno-crm-status.is-warning strong {
+    color: #965b16;
+}
+
+#nova [dusk="orders-detail-component"] .fayno-crm-status.is-warning p {
+    color: #a77c49;
+}
