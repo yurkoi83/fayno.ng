@@ -5156,3 +5156,15 @@ button[class*="bg-primary"]:hover {
         background-position: 19.8% 82.3% !important;
     }
 }
+
+
+/* Keep the navigation entirely above the fixed portrait promo tile. */
+@media (min-width: 1024px) {
+    #nova:has([dusk="orders-detail-component"]) [dusk="sidebar-menu"] {
+        max-height: max(120px, calc(100vh - 556px)) !important;
+        min-height: 0 !important;
+        overflow-x: hidden !important;
+        overflow-y: auto !important;
+        overscroll-behavior: contain !important;
+    }
+}
