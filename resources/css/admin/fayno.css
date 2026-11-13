@@ -4718,3 +4718,24 @@ button[class*="bg-primary"]:hover {
         display: none !important;
     }
 }
+
+
+#nova [dusk="orders-detail-component"] .fayno-crm-status__registered {
+    display: block !important;
+    margin-top: 7px !important;
+    color: #8b91b2 !important;
+    font-size: 9px !important;
+    line-height: 1.35 !important;
+}
+#nova [dusk="orders-detail-component"] .fayno-crm-status.is-danger .fayno-crm-status__icon {
+    background: #e6535b !important;
+    color: #fff !important;
+}
+#nova [dusk="orders-detail-component"] .fayno-crm-status.is-warning .fayno-crm-status__icon {
+    background: #ffefd9 !important;
+    color: #e99a3b !important;
+}
+#nova [dusk="orders-detail-component"] .fayno-crm-status.is-success .fayno-crm-status__icon {
+    background: #ddf6e6 !important;
+    color: #2aa45f !important;
+}
