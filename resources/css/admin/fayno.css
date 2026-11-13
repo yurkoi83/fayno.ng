@@ -4237,3 +4237,58 @@ button[class*="bg-primary"]:hover {
 .fayno-crm-status.is-success .fayno-crm-status__icon { background: #26a45b !important; }
 .fayno-crm-status.is-success strong { color: #187044 !important; }
 .fayno-crm-status.is-success p { color: #4d8966 !important; }
+
+
+/* Fix: Nova's global header branding rules must not style the CRM page header. */
+#nova [dusk="orders-detail-component"] header.fayno-crm__heading {
+    position: static !important;
+    display: flex !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 0 0 8px !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    color: #26345a !important;
+    box-shadow: none !important;
+}
+#nova [dusk="orders-detail-component"] header.fayno-crm__heading::before,
+#nova [dusk="orders-detail-component"] header.fayno-crm__heading::after {
+    content: none !important;
+    display: none !important;
+}
+#nova [dusk="orders-detail-component"] header.fayno-crm__heading h1 {
+    color: #252d55 !important;
+    font-size: 25px !important;
+    line-height: 1.2 !important;
+}
+#nova [dusk="orders-detail-component"] header.fayno-crm__heading p {
+    color: #8b91b2 !important;
+}
+#nova [dusk="orders-detail-component"] header.fayno-crm__heading a,
+#nova [dusk="orders-detail-component"] header.fayno-crm__heading button {
+    color: inherit !important;
+}
+#nova [dusk="orders-detail-component"] .fayno-crm__top {
+    grid-template-columns: minmax(0, 1.12fr) minmax(0, .94fr) minmax(0, 1.18fr) !important;
+    align-items: stretch !important;
+}
+#nova [dusk="orders-detail-component"] .fayno-crm__top > .fayno-crm-card {
+    min-width: 0 !important;
+    overflow: hidden;
+}
+#nova [dusk="orders-detail-component"] .fayno-crm-camp .fayno-crm-card__heading {
+    align-items: flex-start !important;
+}
+#nova [dusk="orders-detail-component"] .fayno-crm-camp .fayno-crm-card__heading h2 {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+#nova [dusk="orders-detail-component"] .fayno-crm-camp__copy h3 {
+    overflow-wrap: anywhere;
+}
