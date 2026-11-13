@@ -5048,3 +5048,25 @@ button[class*="bg-primary"]:hover {
         letter-spacing: .025em !important;
     }
 }
+
+
+/* Align Nova global search immediately before the right-side account controls. */
+@media (min-width: 1024px) {
+    #nova:has([dusk="orders-detail-component"]) header > div.flex.flex-1 {
+        display: flex !important;
+        align-items: center !important;
+    }
+
+    #nova:has([dusk="orders-detail-component"]) header > div.flex.flex-1 > div.flex.items-center.w-full.max-w-xs {
+        width: 320px !important;
+        max-width: 320px !important;
+        margin-left: auto !important;
+        margin-right: 18px !important;
+        flex: 0 0 320px !important;
+    }
+
+    #nova:has([dusk="orders-detail-component"]) header > div.flex.flex-1 > div.isolate.relative.flex.items-center {
+        margin-left: 0 !important;
+        flex: 0 0 auto !important;
+    }
+}
