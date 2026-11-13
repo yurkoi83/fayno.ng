@@ -4995,3 +4995,56 @@ button[class*="bg-primary"]:hover {
         background-position: 62px 0;
     }
 }
+
+
+/* Reserve a real footer zone for the sidebar promo; navigation scrolls above it. */
+@media (min-width: 1024px) {
+    #nova:has([dusk="orders-detail-component"]) [dusk="content"] > div[class*="lg:absolute"][class*="w-60"] {
+        overflow: hidden !important;
+        padding-bottom: 218px !important;
+    }
+
+    #nova:has([dusk="orders-detail-component"]) [dusk="sidebar-menu"] {
+        max-height: calc(100vh - 310px) !important;
+        overflow-x: hidden !important;
+        overflow-y: auto !important;
+        padding-bottom: 12px !important;
+        scrollbar-width: thin;
+        scrollbar-color: #ddd7f4 transparent;
+    }
+
+    #nova:has([dusk="orders-detail-component"]) [dusk="sidebar-menu"]::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    #nova:has([dusk="orders-detail-component"]) [dusk="sidebar-menu"]::-webkit-scrollbar-thumb {
+        border-radius: 4px;
+        background: #ddd7f4;
+    }
+
+    #nova:has([dusk="orders-detail-component"]) .fayno-sidebar-promo {
+        z-index: 5 !important;
+        bottom: 78px !important;
+    }
+
+    /* Separate the small mountain mark visually from the wordmark. */
+    #nova:has([dusk="orders-detail-component"]) [dusk="content"] > div[class*="lg:absolute"][class*="w-60"]::after {
+        content: "" !important;
+        top: 25px !important;
+        left: 19px !important;
+        width: 27px !important;
+        height: 22px !important;
+        background: linear-gradient(135deg, #8e79df 0 48%, #6450c4 49% 100%) !important;
+        clip-path: polygon(0 100%, 43% 8%, 68% 54%, 82% 32%, 100% 100%) !important;
+        text-shadow: none !important;
+    }
+
+    #nova:has([dusk="orders-detail-component"]) [dusk="content"] > div[class*="lg:absolute"][class*="w-60"]::before {
+        content: "FAYNO CAMP" !important;
+        white-space: nowrap !important;
+        left: 52px !important;
+        top: 29px !important;
+        font-size: 14px !important;
+        letter-spacing: .025em !important;
+    }
+}
