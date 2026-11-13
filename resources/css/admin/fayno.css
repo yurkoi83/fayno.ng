@@ -4973,3 +4973,25 @@ button[class*="bg-primary"]:hover {
 #nova:has([dusk="orders-detail-component"]) [dusk="sidebar-menu"] .fayno-nav-reference-active .fayno-nav-icon {
     color: #7455d2 !important;
 }
+
+
+/* Final order-detail sidebar fixes: keep the promo visible above the account footer. */
+@media (min-width: 1024px) {
+    #nova:has([dusk="orders-detail-component"]) [dusk="content"] > div[class*="lg:absolute"][class*="w-60"] .fayno-sidebar-promo {
+        display: flex !important;
+        position: absolute !important;
+        left: 12px !important;
+        right: 12px !important;
+        bottom: 78px !important;
+        width: auto !important;
+        height: 170px !important;
+    }
+
+    /* Add the warm sun detail from the Fayno Camp mark without replacing its wordmark. */
+    #nova:has([dusk="orders-detail-component"]) [dusk="content"] > div[class*="lg:absolute"][class*="w-60"]::before {
+        background-image: radial-gradient(circle, #ffb52f 0 3px, transparent 3.6px);
+        background-size: 8px 8px;
+        background-repeat: no-repeat;
+        background-position: 62px 0;
+    }
+}
