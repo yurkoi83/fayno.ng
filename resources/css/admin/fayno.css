@@ -4739,3 +4739,214 @@ button[class*="bg-primary"]:hover {
     background: #ddf6e6 !important;
     color: #2aa45f !important;
 }
+
+
+/* ==========================================================================
+   Order detail — final visual alignment pass against reference img_7.
+   Keep every adjustment isolated to the order detail route.
+   ========================================================================== */
+
+@media (min-width: 1024px) {
+    /* The reference navigation is compact: one consistent 34px row rhythm. */
+    #nova:has([dusk="orders-detail-component"]) [dusk="sidebar-menu"] {
+        padding: 0 10px !important;
+        margin: 0 !important;
+    }
+
+    #nova:has([dusk="orders-detail-component"]) [dusk="sidebar-menu"] > div,
+    #nova:has([dusk="orders-detail-component"]) [dusk="sidebar-menu"] > ul,
+    #nova:has([dusk="orders-detail-component"]) [dusk="sidebar-menu"] nav {
+        gap: 5px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    #nova:has([dusk="orders-detail-component"]) [dusk="sidebar-menu"] a,
+    #nova:has([dusk="orders-detail-component"]) [dusk="sidebar-menu"] button,
+    #nova:has([dusk="orders-detail-component"]) [dusk="sidebar-menu"] [role="button"] {
+        display: flex !important;
+        min-height: 34px !important;
+        height: 34px !important;
+        align-items: center !important;
+        gap: 9px !important;
+        margin: 0 0 3px !important;
+        padding: 0 10px !important;
+        border-radius: 9px !important;
+        line-height: 1 !important;
+        font-size: 12px !important;
+        font-weight: 700 !important;
+    }
+
+    #nova:has([dusk="orders-detail-component"]) [dusk="sidebar-menu"] a svg,
+    #nova:has([dusk="orders-detail-component"]) [dusk="sidebar-menu"] button svg,
+    #nova:has([dusk="orders-detail-component"]) [dusk="sidebar-menu"] [role="button"] svg {
+        display: block !important;
+        width: 15px !important;
+        height: 15px !important;
+        flex: 0 0 15px !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+
+    #nova:has([dusk="orders-detail-component"]) [dusk="sidebar-menu"] a span,
+    #nova:has([dusk="orders-detail-component"]) [dusk="sidebar-menu"] button span {
+        line-height: 1.2 !important;
+    }
+
+    /* Remove excess spacing inherited from Nova's nested menu groups. */
+    #nova:has([dusk="orders-detail-component"]) [dusk="sidebar-menu"] [class*="space-y-"],
+    #nova:has([dusk="orders-detail-component"]) [dusk="sidebar-menu"] [class*="gap-y-"] {
+        row-gap: 5px !important;
+    }
+
+    #nova:has([dusk="orders-detail-component"]) [dusk="sidebar-menu"] [class*="mb-"],
+    #nova:has([dusk="orders-detail-component"]) [dusk="sidebar-menu"] [class*="my-"] {
+        margin-bottom: 4px !important;
+        margin-top: 0 !important;
+    }
+
+    /* Keep the logo zone compact and aligned with the reference's top margin. */
+    #nova:has([dusk="orders-detail-component"]) [dusk="content"] > div[class*="lg:absolute"][class*="w-60"] {
+        padding-top: 84px !important;
+    }
+
+    /* Move Nova's search field to the right side of the white topbar. */
+    #nova:has([dusk="orders-detail-component"]) header:not(.fayno-crm__heading) input {
+        margin-left: auto !important;
+    }
+
+    #nova:has([dusk="orders-detail-component"]) header:not(.fayno-crm__heading) [class*="search"],
+    #nova:has([dusk="orders-detail-component"]) header:not(.fayno-crm__heading) [role="search"] {
+        margin-left: auto !important;
+    }
+}
+
+/* Reference palette: cool lavender canvas, deep indigo text, purple actions. */
+#nova:has([dusk="orders-detail-component"]) [dusk="content"] div[class*="lg:ml-60"]:has([dusk="orders-detail-component"]) {
+    background: #f4f3ff !important;
+}
+
+#nova [dusk="orders-detail-component"] .fayno-crm {
+    color: #30385f !important;
+}
+
+#nova [dusk="orders-detail-component"] .fayno-crm__title-icon {
+    background: #eee8ff !important;
+    color: #7555d2 !important;
+}
+
+#nova [dusk="orders-detail-component"] .fayno-crm-action--primary,
+#nova [dusk="orders-detail-component"] .fayno-crm-link {
+    background: #7654d2 !important;
+    border-color: #7654d2 !important;
+}
+
+#nova [dusk="orders-detail-component"] .fayno-crm-action--primary:hover,
+#nova [dusk="orders-detail-component"] .fayno-crm-link:hover {
+    background: #6544c0 !important;
+}
+
+#nova [dusk="orders-detail-component"] .fayno-crm-parent .fayno-crm-card__icon,
+#nova [dusk="orders-detail-component"] .fayno-crm-children .fayno-crm-card__icon {
+    background: #eee7ff !important;
+    color: #8055d8 !important;
+}
+
+#nova [dusk="orders-detail-component"] .fayno-crm-child-summary .fayno-crm-card__icon {
+    background: #e5f7ec !important;
+    color: #26985a !important;
+}
+
+#nova [dusk="orders-detail-component"] .fayno-crm-details .fayno-crm-card__icon {
+    background: #eee8ff !important;
+    color: #7957d4 !important;
+}
+
+#nova [dusk="orders-detail-component"] .fayno-crm-payments .fayno-crm-card__icon {
+    background: #e8efff !important;
+    color: #3978d5 !important;
+}
+
+/* Reference cards are softly outlined, with consistent spacing and hierarchy. */
+#nova [dusk="orders-detail-component"] .fayno-crm-card {
+    border: 1px solid #e9e7f6 !important;
+    border-radius: 13px !important;
+    box-shadow: 0 3px 12px rgba(54, 49, 110, .045) !important;
+}
+
+#nova [dusk="orders-detail-component"] .fayno-crm-details,
+#nova [dusk="orders-detail-component"] .fayno-crm-children,
+#nova [dusk="orders-detail-component"] .fayno-crm-payments {
+    padding: 15px !important;
+}
+
+#nova [dusk="orders-detail-component"] .fayno-crm-card__heading {
+    margin-bottom: 12px !important;
+}
+
+#nova [dusk="orders-detail-component"] .fayno-crm-card__heading h2 {
+    color: #30385f !important;
+    font-size: 14px !important;
+    font-weight: 800 !important;
+}
+
+#nova [dusk="orders-detail-component"] .fayno-crm-parent h3,
+#nova [dusk="orders-detail-component"] .fayno-crm-camp h3,
+#nova [dusk="orders-detail-component"] .fayno-crm-participant__identity strong {
+    color: #30385f !important;
+    font-size: 12px !important;
+    font-weight: 800 !important;
+}
+
+#nova [dusk="orders-detail-component"] .fayno-crm-line p,
+#nova [dusk="orders-detail-component"] .fayno-crm-detail-value,
+#nova [dusk="orders-detail-component"] .fayno-crm-table td {
+    color: #566184 !important;
+    font-size: 11px !important;
+}
+
+#nova [dusk="orders-detail-component"] .fayno-crm-detail-value > span {
+    color: #8b91b0 !important;
+}
+
+#nova [dusk="orders-detail-component"] .fayno-crm-detail-value > strong {
+    color: #35416a !important;
+    font-size: 11px !important;
+    font-weight: 800 !important;
+}
+
+#nova [dusk="orders-detail-component"] .fayno-crm-participant {
+    border-color: #eee9fb !important;
+    border-radius: 12px !important;
+    background: #f5f2ff !important;
+}
+
+#nova [dusk="orders-detail-component"] .fayno-crm-pill {
+    background: #eee7ff !important;
+    color: #7453c7 !important;
+}
+
+#nova [dusk="orders-detail-component"] .fayno-crm-health {
+    background: #e6f7ec !important;
+    color: #229353 !important;
+}
+
+#nova [dusk="orders-detail-component"] .fayno-crm-table thead th {
+    background: #faf9ff !important;
+    color: #7c85a7 !important;
+}
+
+#nova [dusk="orders-detail-component"] .fayno-crm-status {
+    border-radius: 13px !important;
+}
+
+#nova [dusk="orders-detail-component"] .fayno-crm-finance__total > strong {
+    color: #28345d !important;
+    font-size: 20px !important;
+}
+
+#nova [dusk="orders-detail-component"] .fayno-crm-promo {
+    background: linear-gradient(145deg, #eeeaff 0%, #e5e0ff 100%) !important;
+    border: 1px solid #e8e1ff !important;
+    border-radius: 13px !important;
+}
