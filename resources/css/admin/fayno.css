@@ -4950,3 +4950,26 @@ button[class*="bg-primary"]:hover {
     border: 1px solid #e8e1ff !important;
     border-radius: 13px !important;
 }
+
+
+/* Navigation icons are inserted by fayno.js for Nova's native resource links. */
+#nova:has([dusk="orders-detail-component"]) [dusk="sidebar-menu"] .fayno-nav-icon {
+    display: block !important;
+    width: 16px !important;
+    height: 16px !important;
+    min-width: 16px !important;
+    flex: 0 0 16px !important;
+    margin-right: 1px !important;
+    color: #8791b1 !important;
+    opacity: 1 !important;
+}
+
+#nova:has([dusk="orders-detail-component"]) [dusk="sidebar-menu"] .fayno-nav-reference-active {
+    color: #6b50c8 !important;
+    background: #eee9ff !important;
+    font-weight: 800 !important;
+}
+
+#nova:has([dusk="orders-detail-component"]) [dusk="sidebar-menu"] .fayno-nav-reference-active .fayno-nav-icon {
+    color: #7455d2 !important;
+}
