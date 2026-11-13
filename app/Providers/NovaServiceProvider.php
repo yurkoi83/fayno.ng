@@ -40,8 +40,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             \App\Nova\Bookings\Booking::class,
             \App\Nova\Bookings\OrderCamper::class,
             \App\Nova\Bookings\OrderStatusHistory::class,
-            \App\Nova\People\Camper::class,
-            \App\Nova\People\Customer::class,
+            \App\Nova\Campers\Camper::class,
+            \App\Nova\Campers\Customer::class,
             \App\Nova\Finance\Payment::class,
             \App\Nova\Settings\Setting::class,
         ]);
@@ -51,8 +51,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 MenuItem::dashboard(\App\Nova\Dashboards\Main::class)->name(__('nova::navigation.overview')),
                 MenuItem::resource(\App\Nova\Camps\Camp::class)->name(__('nova::navigation.camps')),
                 MenuItem::resource(\App\Nova\Bookings\Order::class)->name(__('nova::navigation.bookings')),
-                MenuItem::resource(\App\Nova\People\Camper::class)->name(__('nova::navigation.campers')),
-                MenuItem::resource(\App\Nova\People\Customer::class)->name(__('nova::navigation.parents')),
+                MenuItem::resource(\App\Nova\Campers\Camper::class)->name(__('nova::navigation.campers')),
+                MenuItem::resource(\App\Nova\Campers\Customer::class)->name(__('nova::navigation.parents')),
                 MenuItem::resource(\App\Nova\Finance\Payment::class)->name(__('nova::navigation.payments')),
                 MenuSection::make(__('nova::navigation.content'), [
                     MenuItem::resource(\App\Nova\Page::class)->name(__('nova::resources.Pages')),

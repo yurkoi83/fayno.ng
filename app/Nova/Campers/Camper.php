@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Nova\People;
+namespace App\Nova\Campers;
 
 use App\Nova\Resource;
 use Illuminate\Http\Request;
@@ -19,7 +19,7 @@ class Camper extends Resource
     public static $model = \App\Models\Camper::class;
     public static $title = 'last_name';
     public static $search = ['id', 'first_name', 'last_name'];
-    public static $group = 'Учасники';
+    public static $group = 'Кемпери';
 
     public static function label(): string { return __('nova::navigation.campers'); }
     public static function singularLabel(): string { return __('nova::resources.Camper'); }
@@ -94,7 +94,9 @@ class Camper extends Resource
 
         $html = '<div class="fayno-camper">';
         $html .= '<div class="fayno-camper__header">'
-            . '<nav class="fayno-camper__breadcrumbs"><a href="'.$indexUrl.'">Учасники</a><span>/</span><span>'.e($fullName).'</span></nav>'
+            . '<nav class="fayno-camper__breadcrumbs"><a href="'.$indexUrl.'">'
+            .__('nova::navigation.campers')
+            . '</a><span>/</span><span>'.e($fullName).'</span></nav>'
             . '<div class="fayno-camper__profile">'
             . '<div class="fayno-camper__avatar">';
         $html .= $photo

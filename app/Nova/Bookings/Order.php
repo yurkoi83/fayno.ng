@@ -6,7 +6,7 @@ use App\Enums\OrderStatus;
 use App\Enums\PaymentStatus;
 use App\Models\Payment;
 use App\Nova\Camps\CampShift as CampShiftResource;
-use App\Nova\People\Customer as CustomerResource;
+use App\Nova\Campers\Customer as CustomerResource;
 use App\Nova\Resource;
 use App\Nova\Users\User as UserResource;
 use Illuminate\Http\Request;

@@ -32,7 +32,7 @@ class OrderCamper extends Resource
             ID::make()->sortable(),
 
             Panel::make(__('nova::resources.Child details'), [
-                BelongsTo::make(__('nova::resources.Camper'), 'camper', \App\Nova\People\Camper::class)->searchable(),
+                BelongsTo::make(__('nova::resources.Camper'), 'camper', \App\Nova\Campers\Camper::class)->searchable(),
                 Image::make(__('nova::resources.Photo'), fn () => $this->camper?->photo_path)->disk('public')->maxWidth(56),
                 Text::make(__('nova::resources.Child full name'), fn () => $this->camper
                     ? trim(implode(' ', array_filter([

@@ -6,7 +6,7 @@ return [
     'overview' => 'Огляд',
     'camps' => 'Табори',
     'bookings' => 'Бронювання',
-    'campers' => 'Учасники',
+    'campers' => 'Кемпери',
     'parents' => 'Батьки',
     'payments' => 'Платежі',
     'transfers' => 'Трансфери',

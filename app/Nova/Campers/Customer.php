@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Nova\People;
+namespace App\Nova\Campers;
 
 use App\Nova\Resource;
 use Illuminate\Http\Request;
