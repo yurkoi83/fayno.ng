@@ -3514,7 +3514,7 @@ button[class*="bg-primary"]:hover {
 }
 
 
-/* The sidebar is a sibling of [dusk="content"], not its child. */
+/* Keep the fixed sidebar below the 56px Nova header. */
 #nova [class*="lg:top-[56px]"] {
-    top: 0 !important;
+    top: 56px !important;
 }
