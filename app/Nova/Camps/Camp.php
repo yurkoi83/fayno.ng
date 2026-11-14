@@ -11,7 +11,6 @@ use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
-use Laravel\Nova\Panel;
 
 class Camp extends Resource
 {
@@ -36,19 +35,17 @@ class Camp extends Resource
             Text::make(__('nova::resources.City'), 'city')->sortable()->onlyOnIndex(),
             Boolean::make(__('nova::resources.Active'), 'active')->onlyOnIndex(),
 
-            Panel::make('Основна інформація', [
-                ID::make()->sortable(),
-                Text::make(__('nova::resources.Camp name'), 'name')->sortable()->rules('required', 'max:255'),
-                Text::make(__('nova::resources.Slug'), 'slug')->hideFromIndex(),
-                Image::make(__('nova::resources.Photo'), 'photo_path')->disk('public')->path('camps')->prunable()->hideFromIndex(),
-                Text::make(__('nova::resources.Country'), 'country'),
-                Text::make(__('nova::resources.City'), 'city')->sortable(),
-                Text::make(__('nova::resources.Address'), 'address')->hideFromIndex(),
-                Number::make(__('nova::resources.Min age'), 'min_age')->min(0)->max(18),
-                Number::make(__('nova::resources.Max age'), 'max_age')->min(0)->max(18),
-                Boolean::make(__('nova::resources.Active'), 'active'),
-                Textarea::make(__('nova::resources.Description'), 'description')->alwaysShow()->hideFromIndex(),
-            ])->onlyOnForms(),
+            ID::make()->sortable()->onlyOnForms(),
+            Text::make(__('nova::resources.Camp name'), 'name')->sortable()->rules('required', 'max:255')->onlyOnForms(),
+            Text::make(__('nova::resources.Slug'), 'slug')->onlyOnForms(),
+            Image::make(__('nova::resources.Photo'), 'photo_path')->disk('public')->path('camps')->prunable()->onlyOnForms(),
+            Text::make(__('nova::resources.Country'), 'country')->onlyOnForms(),
+            Text::make(__('nova::resources.City'), 'city')->sortable()->onlyOnForms(),
+            Text::make(__('nova::resources.Address'), 'address')->onlyOnForms(),
+            Number::make(__('nova::resources.Min age'), 'min_age')->min(0)->max(18)->onlyOnForms(),
+            Number::make(__('nova::resources.Max age'), 'max_age')->min(0)->max(18)->onlyOnForms(),
+            Boolean::make(__('nova::resources.Active'), 'active')->onlyOnForms(),
+            Textarea::make(__('nova::resources.Description'), 'description')->alwaysShow()->onlyOnForms(),,
         ];
     }
 
