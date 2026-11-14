@@ -6204,9 +6204,6 @@ button[class*="bg-primary"]:hover {
     flex: 1 1 100% !important;
     padding: 0 !important;
 }
-#nova [dusk$="-detail-component"] h1[dusk$="-detail-heading"]:has(+ *) {
-    /* Kept intentionally empty: title visibility is scoped below to the camp page. */
-}
 #nova [dusk$="-detail-component"]:has(.fayno-camp-detail) h1[dusk$="-detail-heading"] {
     display: none !important;
 }
