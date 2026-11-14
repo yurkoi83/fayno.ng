@@ -6122,3 +6122,65 @@ button[class*="bg-primary"]:hover {
     border-color: var(--fayno-primary) !important;
     box-shadow: 0 0 0 3px rgba(118, 84, 210, .12) !important;
 }
+
+
+/*
+|--------------------------------------------------------------------------
+| Fayno reference refinement — shared Nova typography and CRM card icons
+|--------------------------------------------------------------------------
+*/
+
+/* Nova/Tailwind sometimes applies font-sans directly to nested elements.
+   Force the same Nunito family throughout the complete admin interface. */
+#nova,
+#nova *:not(svg):not(svg *) {
+    font-family: var(--fayno-font-family, 'Nunito', sans-serif) !important;
+    font-synthesis: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Match the larger, more legible icon tiles from the approved detail reference. */
+#nova .fayno-crm-card__heading {
+    gap: 9px;
+    min-height: 42px;
+    margin-bottom: 10px;
+}
+#nova .fayno-crm-card__icon {
+    width: 42px;
+    height: 42px;
+    flex-basis: 42px;
+    border-radius: 11px;
+}
+#nova .fayno-crm-card__icon .fayno-icon {
+    width: 23px;
+    height: 23px;
+    stroke-width: 1.9;
+}
+
+/* The three summary-card titles share one size, weight and baseline. */
+#nova .fayno-crm-card__heading h2 {
+    margin: 0;
+    font-family: var(--fayno-font-family, 'Nunito', sans-serif) !important;
+    font-size: 13px !important;
+    font-weight: 800 !important;
+    line-height: 1.25 !important;
+    letter-spacing: -0.01em;
+}
+#nova .fayno-crm-parent h3,
+#nova .fayno-crm-camp h3 {
+    font-size: 12px !important;
+    font-weight: 800 !important;
+    line-height: 1.35 !important;
+}
+#nova .fayno-crm-summary-person strong {
+    font-size: 11px !important;
+    font-weight: 800 !important;
+    line-height: 1.35 !important;
+}
+#nova .fayno-crm-line p,
+#nova .fayno-crm-summary-person small,
+#nova .fayno-crm-camp__copy > p {
+    font-size: 10px !important;
+    line-height: 1.45 !important;
+}
