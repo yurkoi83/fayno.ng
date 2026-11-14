@@ -45,7 +45,7 @@ class Camp extends Resource
             Number::make(__('nova::resources.Min age'), 'min_age')->min(0)->max(18)->onlyOnForms(),
             Number::make(__('nova::resources.Max age'), 'max_age')->min(0)->max(18)->onlyOnForms(),
             Boolean::make(__('nova::resources.Active'), 'active')->onlyOnForms(),
-            Textarea::make(__('nova::resources.Description'), 'description')->alwaysShow()->onlyOnForms(),,
+            Textarea::make(__('nova::resources.Description'), 'description')->alwaysShow()->onlyOnForms(),
         ];
     }
 
