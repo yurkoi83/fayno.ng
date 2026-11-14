@@ -6628,3 +6628,46 @@ button[class*="bg-primary"]:hover {
 #nova [dusk$="-detail-component"] .fayno-crm__title-row > div {
     text-align: left !important;
 }
+
+
+/*
+|--------------------------------------------------------------------------
+| Fayno detail title — proportions matched to reference img_7
+|--------------------------------------------------------------------------
+*/
+#nova [dusk$="-detail-component"] .fayno-crm__title-row {
+    align-items: center !important;
+    gap: 10px !important;
+}
+
+#nova [dusk$="-detail-component"] .fayno-crm__title-icon {
+    width: 40px !important;
+    height: 40px !important;
+    flex: 0 0 40px !important;
+    border-radius: 11px !important;
+}
+
+#nova [dusk$="-detail-component"] .fayno-crm__title-icon .fayno-icon {
+    width: 20px !important;
+    height: 20px !important;
+}
+
+#nova [dusk$="-detail-component"] .fayno-crm__title-row h1 {
+    margin: 0 !important;
+    font-size: 25px !important;
+    font-weight: 800 !important;
+    line-height: 1.2 !important;
+    letter-spacing: -.025em !important;
+}
+
+#nova [dusk$="-detail-component"] .fayno-crm__title-row p {
+    margin-top: 3px !important;
+    font-size: 11px !important;
+    line-height: 1.35 !important;
+}
+
+/* The custom Fayno header replaces Nova's duplicate detail toolbar. */
+#nova [dusk$="-detail-component"]:has(.fayno-crm) [dusk="resource-detail-header"],
+#nova [dusk$="-detail-component"]:has(.fayno-crm) h1[dusk$="-detail-heading"] {
+    display: none !important;
+}
