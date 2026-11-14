@@ -207,15 +207,19 @@ class Order extends Resource
         $indexUrl = url('/nova/resources/orders');
 
         $html = '<div class="fayno-crm">';
-        $html .= '<header class="fayno-crm__heading">'
-            . '<div class="fayno-crm__heading-main">'
-            . FaynoBreadcrumbs::render('Заявки', $indexUrl, (string) ($order->number ?: '#'.$order->getKey()))
-            . '<div class="fayno-crm__title-row"><span class="fayno-crm__title-icon">'.$this->iconSvg('file-text').'</span><div><h1>Заявка #'.e($order->number ?: $order->getKey()).'</h1><p>Створена '.e($order->created_at?->format('d.m.Y, H:i') ?: '—').'</p></div></div>'
-            . '</div><div class="fayno-crm__actions">'
-            . ($customer?->email ? '<a class="fayno-crm-action fayno-crm-action--secondary" href="mailto:'.e($customer->email).'">'.$this->iconSvg('message-square').' Повідомлення</a>' : '')
+        $orderTitle = 'Заявка #'.($order->number ?: $order->getKey());
+        $orderActions = ($customer?->email ? '<a class="fayno-crm-action fayno-crm-action--secondary" href="mailto:'.e($customer->email).'">'.$this->iconSvg('message-square').' Повідомлення</a>' : '')
             . '<a class="fayno-crm-action" href="#" onclick="window.print(); return false;">'.$this->iconSvg('printer').' Друк</a>'
-            . '<a class="fayno-crm-action fayno-crm-action--primary" href="'.$editUrl.'">'.$this->iconSvg('pencil').' Редагувати</a>'
-            . '</div></header>';
+            . '<a class="fayno-crm-action fayno-crm-action--primary" href="'.$editUrl.'">'.$this->iconSvg('pencil').' Редагувати</a>';
+        $html .= FaynoDetailHeader::render(
+            'Заявки',
+            $indexUrl,
+            (string) ($order->number ?: '#'.$order->getKey()),
+            $this->iconSvg('file-text'),
+            $orderTitle,
+            'Створена '.($order->created_at?->format('d.m.Y, H:i') ?: '—'),
+            $orderActions
+        );
 
         $html .= '<div class="fayno-crm__content">';
         $html .= '<div class="fayno-crm__top">';
