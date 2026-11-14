@@ -5464,10 +5464,10 @@ button[class*="bg-primary"]:hover {
 #nova h3 { font-size: 14px; font-weight: 800; line-height: 1.35; }
 
 /* Replace Nova's dark shell with the reference's white navigation and topbar. */
-#nova .bg-gray-900,
-#nova .bg-gray-800,
-#nova [class*="bg-gray-900"],
-#nova [class*="bg-gray-800"] {
+#nova [class*="h-14"].bg-gray-900,
+#nova [class*="h-14"].bg-gray-800,
+#nova [dusk="topbar"],
+#nova [class*="topbar"] {
     background-color: #fff !important;
     color: var(--fayno-text) !important;
 }
