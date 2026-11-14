@@ -5969,3 +5969,156 @@ button[class*="bg-primary"]:hover {
 #nova .fayno-dashboard__shift {
     font-size: 12px;
 }
+
+
+/*
+|--------------------------------------------------------------------------
+| Fayno Camp — Global design tokens and typography scale (all Nova screens)
+|--------------------------------------------------------------------------
+*/
+
+:root {
+    --fayno-font-family: 'Nunito', sans-serif;
+    --fayno-font-size-xs: 11px;
+    --fayno-font-size-sm: 12px;
+    --fayno-font-size-base: 14px;
+    --fayno-font-size-md: 15px;
+    --fayno-font-size-lg: 18px;
+    --fayno-font-size-xl: 24px;
+    --fayno-line-height: 1.45;
+    --fayno-heading-line-height: 1.25;
+}
+
+/* One font and base rhythm for every Nova resource, dashboard, tool and detail view. */
+#nova,
+#nova body,
+#nova button,
+#nova input,
+#nova select,
+#nova textarea,
+#nova table,
+#nova [role="button"],
+#nova [role="menu"],
+#nova [role="menuitem"] {
+    font-family: var(--fayno-font-family) !important;
+}
+
+#nova {
+    font-size: var(--fayno-font-size-base) !important;
+    line-height: var(--fayno-line-height);
+    color: var(--fayno-text);
+}
+
+#nova p,
+#nova label,
+#nova td,
+#nova th,
+#nova li,
+#nova dt,
+#nova dd {
+    font-family: var(--fayno-font-family) !important;
+    line-height: var(--fayno-line-height);
+}
+
+#nova h1,
+#nova h2,
+#nova h3,
+#nova h4,
+#nova h5,
+#nova h6 {
+    font-family: var(--fayno-font-family) !important;
+    color: var(--fayno-text);
+    line-height: var(--fayno-heading-line-height);
+}
+
+#nova h1 { font-size: 26px !important; font-weight: 800 !important; }
+#nova h2 { font-size: 20px !important; font-weight: 800 !important; }
+#nova h3 { font-size: 17px !important; font-weight: 800 !important; }
+#nova h4 { font-size: 15px !important; font-weight: 800 !important; }
+#nova p { font-size: var(--fayno-font-size-base); }
+
+#nova button,
+#nova [role="button"],
+#nova input,
+#nova select,
+#nova textarea {
+    font-size: var(--fayno-font-size-sm);
+    line-height: 1.35;
+}
+
+#nova table th {
+    font-size: var(--fayno-font-size-xs);
+    font-weight: 800;
+    line-height: 1.35;
+}
+
+#nova table td {
+    font-size: var(--fayno-font-size-sm);
+    line-height: var(--fayno-line-height);
+}
+
+/* Normalize Nova utility typography so resource pages don't fall back to tiny defaults. */
+#nova .text-xs { font-size: var(--fayno-font-size-xs) !important; line-height: 1.4 !important; }
+#nova .text-sm { font-size: var(--fayno-font-size-sm) !important; line-height: 1.45 !important; }
+#nova .text-base { font-size: var(--fayno-font-size-base) !important; line-height: 1.45 !important; }
+#nova .text-lg { font-size: var(--fayno-font-size-lg) !important; line-height: 1.35 !important; }
+#nova .text-xl { font-size: var(--fayno-font-size-xl) !important; line-height: 1.25 !important; }
+
+/* Shared CRM components use the same type scale regardless of the resource route. */
+#nova .fayno-crm {
+    font-family: var(--fayno-font-family) !important;
+    font-size: var(--fayno-font-size-sm);
+    line-height: var(--fayno-line-height);
+}
+#nova .fayno-crm__heading h1 { font-size: 26px !important; line-height: 1.2 !important; }
+#nova .fayno-crm-card__heading h2 { font-size: 15px !important; line-height: 1.3 !important; }
+#nova .fayno-crm-card h3 { font-size: 14px !important; }
+#nova .fayno-crm table th { font-size: var(--fayno-font-size-xs) !important; }
+#nova .fayno-crm table td { font-size: var(--fayno-font-size-sm) !important; }
+
+/* Dashboard keeps its own layout, but typography and colors come from shared tokens. */
+#nova .fayno-dashboard,
+#nova .fayno-dashboard * {
+    font-family: var(--fayno-font-family) !important;
+}
+#nova .fayno-dashboard { color: var(--fayno-text); font-size: var(--fayno-font-size-base); }
+#nova .fayno-dashboard__intro h1 { color: var(--fayno-text) !important; font-size: 26px !important; }
+#nova .fayno-panel__heading h2 { color: var(--fayno-text) !important; font-size: 17px !important; }
+#nova .fayno-dashboard__stat-label,
+#nova .fayno-dashboard__intro p,
+#nova .fayno-panel__heading span,
+#nova .fayno-chart__labels,
+#nova .fayno-dashboard__shift-top small,
+#nova .fayno-dashboard__table td small,
+#nova .fayno-dashboard__alert small { color: var(--fayno-text-secondary) !important; font-size: var(--fayno-font-size-sm) !important; }
+#nova .fayno-dashboard__stat strong { color: var(--fayno-text) !important; font-size: 25px !important; }
+#nova .fayno-dashboard__shift-top strong,
+#nova .fayno-dashboard__table td strong,
+#nova .fayno-dashboard__alert strong { color: var(--fayno-text) !important; font-size: var(--fayno-font-size-sm) !important; }
+#nova .fayno-dashboard__table th { font-size: var(--fayno-font-size-xs) !important; }
+#nova .fayno-dashboard__table td { font-size: var(--fayno-font-size-sm) !important; }
+
+/* Shared resource surfaces, fields and interactive states. */
+#nova .bg-white.rounded,
+#nova .bg-white.rounded-lg,
+#nova .bg-white.rounded-xl,
+#nova .fayno-panel,
+#nova .fayno-dashboard__stat {
+    border-color: var(--fayno-border);
+    border-radius: var(--fayno-radius);
+    box-shadow: var(--fayno-shadow);
+}
+#nova input:not([type="checkbox"]):not([type="radio"]),
+#nova select,
+#nova textarea {
+    color: var(--fayno-text) !important;
+    border-color: var(--fayno-border-strong) !important;
+    border-radius: var(--fayno-radius-sm) !important;
+    font-family: var(--fayno-font-family) !important;
+}
+#nova input:focus,
+#nova select:focus,
+#nova textarea:focus {
+    border-color: var(--fayno-primary) !important;
+    box-shadow: 0 0 0 3px rgba(118, 84, 210, .12) !important;
+}
