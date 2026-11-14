@@ -6373,3 +6373,145 @@ button[class*="bg-primary"]:hover {
 #nova .fayno-camp-detail .fayno-crm__aside .fayno-camp-summary {
     height: 100%;
 }
+
+
+/*
+|---------------------------------------------------------------------------
+| Camp detail header — reuse the exact CRM header structure used by orders
+|---------------------------------------------------------------------------
+*/
+
+/* Remove Nova's own detail toolbar/title: the CRM header below replaces it. */
+#nova [dusk$="-detail-component"]:has(.fayno-camp-detail) h1[dusk$="-detail-heading"],
+#nova [dusk$="-detail-component"]:has(.fayno-camp-detail) [dusk="resource-detail-header"] {
+    display: none !important;
+}
+
+/* Remove the default Nova panel frame around the custom camp detail content. */
+#nova [dusk$="-detail-component"] [dusk$="-panel"]:has(.fayno-camp-detail) .relative.overflow-hidden.bg-white {
+    overflow: visible !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+#nova [dusk$="-detail-component"] [dusk$="-panel"]:has(.fayno-camp-detail) .relative.overflow-hidden.bg-white > .mt-3.py-2.px-6 {
+    padding: 0 !important;
+}
+
+/* Keep breadcrumbs, title and actions in one shared header row. */
+#nova .fayno-camp-detail > .fayno-crm__heading {
+    display: flex !important;
+    align-items: flex-end !important;
+    justify-content: space-between !important;
+    gap: 24px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    padding: 2px 0 20px !important;
+    margin: 0 0 2px !important;
+    border: 0 !important;
+    border-bottom: 1px solid #e7e5f3 !important;
+    background: transparent !important;
+}
+#nova .fayno-camp-detail .fayno-crm__heading-main {
+    display: block !important;
+    min-width: 0 !important;
+    flex: 1 1 auto !important;
+}
+#nova .fayno-camp-detail .fayno-crm__breadcrumbs {
+    display: flex !important;
+    align-items: center !important;
+    gap: 9px !important;
+    margin: 0 0 10px !important;
+    color: #8b91b2 !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    line-height: 1.4 !important;
+}
+#nova .fayno-camp-detail .fayno-crm__breadcrumbs a {
+    color: #7774ba !important;
+    text-decoration: none !important;
+}
+#nova .fayno-camp-detail .fayno-crm__breadcrumbs strong {
+    color: #333b62 !important;
+    font-weight: 800 !important;
+}
+#nova .fayno-camp-detail .fayno-crm__title-row {
+    display: flex !important;
+    align-items: center !important;
+    flex-wrap: nowrap !important;
+    gap: 12px !important;
+}
+#nova .fayno-camp-detail .fayno-crm__title-icon {
+    display: grid !important;
+    width: 42px !important;
+    height: 42px !important;
+    flex: 0 0 42px !important;
+    place-items: center !important;
+    border-radius: 12px !important;
+    background: #eee9ff !important;
+    color: #7358d3 !important;
+}
+#nova .fayno-camp-detail .fayno-crm__title-icon .fayno-icon {
+    width: 21px !important;
+    height: 21px !important;
+}
+#nova .fayno-camp-detail .fayno-crm__heading h1 {
+    margin: 0 !important;
+    color: #18234b !important;
+    font-size: 27px !important;
+    font-weight: 900 !important;
+    letter-spacing: -.035em !important;
+    line-height: 1.2 !important;
+}
+#nova .fayno-camp-detail .fayno-crm__heading p {
+    margin: 5px 0 0 !important;
+    color: #858bad !important;
+    font-size: 12px !important;
+    line-height: 1.4 !important;
+}
+#nova .fayno-camp-detail .fayno-crm__actions {
+    display: flex !important;
+    flex: 0 0 auto !important;
+    align-items: center !important;
+    gap: 9px !important;
+    margin: 0 !important;
+}
+#nova .fayno-camp-detail .fayno-crm-action {
+    display: inline-flex !important;
+    min-height: 38px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    padding: 0 13px !important;
+    border: 1px solid #e4e2f1 !important;
+    border-radius: 10px !important;
+    background: #fff !important;
+    color: #4c5277 !important;
+    font-size: 11px !important;
+    font-weight: 800 !important;
+    text-decoration: none !important;
+    white-space: nowrap !important;
+}
+#nova .fayno-camp-detail .fayno-crm-action--primary {
+    border-color: #7654d2 !important;
+    background: #7654d2 !important;
+    color: #fff !important;
+}
+#nova .fayno-camp-detail .fayno-crm-action--primary:hover {
+    border-color: #6544c2 !important;
+    background: #6544c2 !important;
+}
+@media (max-width: 760px) {
+    #nova .fayno-camp-detail > .fayno-crm__heading {
+        align-items: flex-start !important;
+        flex-direction: column !important;
+        gap: 14px !important;
+    }
+    #nova .fayno-camp-detail .fayno-crm__actions {
+        width: 100% !important;
+    }
+    #nova .fayno-camp-detail .fayno-crm-action {
+        flex: 1 1 auto !important;
+    }
+}
