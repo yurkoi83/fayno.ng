@@ -37,7 +37,10 @@ class Camper extends Resource
     public function fields(Request $request): array
     {
         return [
-            ID::make()->sortable()->hideFromDetail()->hideFromIndex(),
+            ID::make()->sortable()->hideFromDetail()->onlyOnIndex(),
+            Text::make('ПІБ', fn () => $this->title())->onlyOnIndex(),
+            Date::make(__('nova::resources.Birth date'), 'birth_date')->onlyOnIndex(),
+            BelongsTo::make(__('nova::resources.Parent'), 'customer', Customer::class)->onlyOnIndex(),
 
             Panel::make('', [
                 Text::make(' ', fn () => $this->detailHtml())
