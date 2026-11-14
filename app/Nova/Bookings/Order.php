@@ -8,6 +8,7 @@ use App\Models\Payment;
 use App\Nova\Camps\CampShift as CampShiftResource;
 use App\Nova\Campers\Customer as CustomerResource;
 use App\Nova\Resource;
+use App\Nova\Support\FaynoBreadcrumbs;
 use App\Nova\Users\User as UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -208,7 +209,7 @@ class Order extends Resource
         $html = '<div class="fayno-crm">';
         $html .= '<header class="fayno-crm__heading">'
             . '<div class="fayno-crm__heading-main">'
-            . '<nav class="fayno-crm__breadcrumbs"><a href="'.$indexUrl.'">⌂</a><span>›</span><a href="'.$indexUrl.'">Заявки</a><span>›</span><strong>'.e($order->number ?: '#'.$order->getKey()).'</strong></nav>'
+            . FaynoBreadcrumbs::render('Заявки', $indexUrl, (string) ($order->number ?: '#'.$order->getKey()))
             . '<div class="fayno-crm__title-row"><span class="fayno-crm__title-icon">'.$this->iconSvg('file-text').'</span><div><h1>Заявка #'.e($order->number ?: $order->getKey()).'</h1><p>Створена '.e($order->created_at?->format('d.m.Y, H:i') ?: '—').'</p></div></div>'
             . '</div><div class="fayno-crm__actions">'
             . ($customer?->email ? '<a class="fayno-crm-action fayno-crm-action--secondary" href="mailto:'.e($customer->email).'">'.$this->iconSvg('message-square').' Повідомлення</a>' : '')
