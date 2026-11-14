@@ -8,7 +8,7 @@ use App\Nova\Support\FaynoBreadcrumbs;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Panel;
+use Laravel\Nova\Panel;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 
