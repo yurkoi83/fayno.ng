@@ -120,6 +120,11 @@ class Camp extends Resource
         return $html;
     }
 
+    protected function cardHeading(string $icon, string $title, string $right = ''): string
+    {
+        return '<div class="fayno-crm-card__heading"><span class="fayno-crm-card__icon">'.$this->iconSvg($icon).'</span><h2>'.e($title).'</h2>'.$right.'</div>';
+    }
+
     protected function detailValue(string $label, string $value): string
     {
         return '<div class="fayno-crm-detail-value"><span>'.e($label).'</span><strong>'.e($value).'</strong></div>';
