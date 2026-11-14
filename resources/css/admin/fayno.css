@@ -6209,31 +6209,27 @@ button[class*="bg-primary"]:hover {
 }
 #nova .fayno-camp-detail {
     display: grid !important;
-    grid-template-columns: minmax(0, 1.9fr) minmax(280px, .9fr) !important;
+    grid-template-columns: minmax(0, 1fr) !important;
     gap: 14px !important;
     width: 100% !important;
     max-width: 100% !important;
     min-width: 0 !important;
 }
-#nova .fayno-camp-detail > .fayno-crm__heading {
-    grid-column: 1 / -1 !important;
-}
-#nova .fayno-camp-detail > .fayno-crm__content {
+#nova .fayno-camp-detail > .fayno-crm__heading,
+#nova .fayno-camp-detail > .fayno-crm__content,
+#nova .fayno-camp-detail > .fayno-crm__aside {
     grid-column: 1 !important;
     min-width: 0 !important;
 }
 #nova .fayno-camp-detail > .fayno-crm__aside {
-    grid-column: 2 !important;
-    min-width: 0 !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr) !important;
+    gap: 14px !important;
+    align-items: stretch !important;
 }
-@media (max-width: 900px) {
-    #nova .fayno-camp-detail {
-        grid-template-columns: minmax(0, 1fr) !important;
-    }
-    #nova .fayno-camp-detail > .fayno-crm__heading,
-    #nova .fayno-camp-detail > .fayno-crm__content,
+@media (max-width: 700px) {
     #nova .fayno-camp-detail > .fayno-crm__aside {
-        grid-column: 1 !important;
+        grid-template-columns: minmax(0, 1fr) !important;
     }
 }
 
@@ -6356,4 +6352,24 @@ button[class*="bg-primary"]:hover {
 }
 @media (max-width: 700px) {
     #nova .fayno-camp-detail .fayno-crm__top { grid-template-columns: minmax(0,1fr); }
+}
+
+
+/* Camp detail: use the full content width for the information and shifts sections. */
+#nova .fayno-camp-detail .fayno-camp-about,
+#nova .fayno-camp-detail .fayno-camp-description,
+#nova .fayno-camp-detail .fayno-camp-shifts {
+    width: 100%;
+    min-width: 0;
+}
+#nova .fayno-camp-detail .fayno-camp-description-text {
+    margin: 0;
+    color: #444b70;
+    font-size: 12px;
+    line-height: 1.7;
+    white-space: normal;
+}
+#nova .fayno-camp-detail .fayno-crm__aside .fayno-camp-status,
+#nova .fayno-camp-detail .fayno-crm__aside .fayno-camp-summary {
+    height: 100%;
 }
