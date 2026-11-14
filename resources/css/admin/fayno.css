@@ -7354,3 +7354,136 @@ button[class*="bg-primary"]:hover {
     max-width: none !important;
     align-self: stretch !important;
 }
+
+
+/* Customer detail: keep the shared Blade header visually identical to the
+   approved CRM header. Nova's global header/nav rules must not turn its
+   breadcrumb row into a pill or hide the action area. */
+#nova [dusk="customers-detail-component"] header.fayno-crm__heading {
+    position: static !important;
+    display: flex !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 16px !important;
+    padding: 0 0 8px !important;
+    margin: 0 0 2px !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    color: #344267 !important;
+    box-shadow: none !important;
+}
+#nova [dusk="customers-detail-component"] header.fayno-crm__heading::before,
+#nova [dusk="customers-detail-component"] header.fayno-crm__heading::after {
+    content: none !important;
+    display: none !important;
+}
+#nova [dusk="customers-detail-component"] .fayno-crm__heading-main {
+    min-width: 0 !important;
+    flex: 1 1 auto !important;
+}
+#nova [dusk="customers-detail-component"] .fayno-crm__breadcrumbs {
+    display: flex !important;
+    width: auto !important;
+    min-height: 0 !important;
+    align-items: center !important;
+    gap: 9px !important;
+    margin: 0 0 12px !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    color: #8b91b2 !important;
+    font-size: 10px !important;
+}
+#nova [dusk="customers-detail-component"] .fayno-crm__breadcrumbs a {
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    color: #7774ba !important;
+    box-shadow: none !important;
+    text-decoration: none !important;
+}
+#nova [dusk="customers-detail-component"] .fayno-crm__breadcrumbs .fayno-crm__breadcrumb-current {
+    color: #333b62 !important;
+    font-weight: 800 !important;
+}
+#nova [dusk="customers-detail-component"] .fayno-crm__title-row {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+}
+#nova [dusk="customers-detail-component"] .fayno-crm__title-icon {
+    display: grid !important;
+    width: 42px !important;
+    height: 42px !important;
+    flex: 0 0 42px !important;
+    place-items: center !important;
+    border-radius: 12px !important;
+    background: #eeeaff !important;
+    color: #7358d3 !important;
+}
+#nova [dusk="customers-detail-component"] .fayno-crm__title-icon .fayno-icon {
+    width: 21px !important;
+    height: 21px !important;
+}
+#nova [dusk="customers-detail-component"] header.fayno-crm__heading h1 {
+    margin: 0 !important;
+    color: #252d55 !important;
+    font-size: 25px !important;
+    font-weight: 800 !important;
+    line-height: 1.2 !important;
+}
+#nova [dusk="customers-detail-component"] header.fayno-crm__heading p {
+    margin: 3px 0 0 !important;
+    color: #8b91b2 !important;
+    font-size: 10px !important;
+}
+#nova [dusk="customers-detail-component"] .fayno-crm__actions {
+    position: static !important;
+    display: flex !important;
+    width: auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+    flex: 0 0 auto !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 8px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    transform: none !important;
+}
+#nova [dusk="customers-detail-component"] .fayno-crm__actions::before,
+#nova [dusk="customers-detail-component"] .fayno-crm__actions::after {
+    content: none !important;
+    display: none !important;
+}
+#nova [dusk="customers-detail-component"] .fayno-crm__actions > .fayno-crm-action {
+    display: inline-flex !important;
+    min-height: 34px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+#nova [dusk="customers-detail-component"] .fayno-crm__actions > .fayno-crm-action--primary {
+    background: #7654d2 !important;
+    color: #fff !important;
+}
+@media (max-width: 760px) {
+    #nova [dusk="customers-detail-component"] header.fayno-crm__heading {
+        align-items: flex-start !important;
+        flex-direction: column !important;
+    }
+    #nova [dusk="customers-detail-component"] .fayno-crm__actions {
+        width: 100% !important;
+        justify-content: flex-start !important;
+        flex-wrap: wrap !important;
+    }
+}
