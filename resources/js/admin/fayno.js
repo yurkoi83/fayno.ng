@@ -28,10 +28,9 @@ syncSidebarOffset();
 // Bring Nova's native navigation closer to the Fayno reference:
 // consistent line icons and the lavender active overview item.
 const syncFaynoOrderNavigation = () => {
-    const orderDetail = document.querySelector('#nova [dusk="orders-detail-component"]');
     const menu = document.querySelector('#nova [dusk="sidebar-menu"]');
 
-    if (!orderDetail || !menu) {
+    if (!menu) {
         return;
     }
 
