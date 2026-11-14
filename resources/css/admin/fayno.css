@@ -6186,6 +6186,60 @@ button[class*="bg-primary"]:hover {
 }
 
 
+/* Camp detail: remove Nova's narrow field label/value column so the CRM uses
+   the complete resource content width, just like the approved order detail. */
+#nova [dusk$="-detail-component"] [dusk="ComputedField"]:has(.fayno-camp-detail) {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+}
+#nova [dusk$="-detail-component"] [dusk="ComputedField"]:has(.fayno-camp-detail) > div:first-child {
+    display: none !important;
+}
+#nova [dusk$="-detail-component"] [dusk="ComputedField"]:has(.fayno-camp-detail) > div:last-child,
+#nova [dusk$="-detail-component"] [dusk="ComputedField"]:has(.fayno-camp-detail) > div:last-child > div {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 1 1 100% !important;
+    padding: 0 !important;
+}
+#nova [dusk$="-detail-component"] h1[dusk$="-detail-heading"]:has(+ *) {
+    /* Kept intentionally empty: title visibility is scoped below to the camp page. */
+}
+#nova [dusk$="-detail-component"]:has(.fayno-camp-detail) h1[dusk$="-detail-heading"] {
+    display: none !important;
+}
+#nova .fayno-camp-detail {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1.9fr) minmax(280px, .9fr) !important;
+    gap: 14px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+}
+#nova .fayno-camp-detail > .fayno-crm__heading {
+    grid-column: 1 / -1 !important;
+}
+#nova .fayno-camp-detail > .fayno-crm__content {
+    grid-column: 1 !important;
+    min-width: 0 !important;
+}
+#nova .fayno-camp-detail > .fayno-crm__aside {
+    grid-column: 2 !important;
+    min-width: 0 !important;
+}
+@media (max-width: 900px) {
+    #nova .fayno-camp-detail {
+        grid-template-columns: minmax(0, 1fr) !important;
+    }
+    #nova .fayno-camp-detail > .fayno-crm__heading,
+    #nova .fayno-camp-detail > .fayno-crm__content,
+    #nova .fayno-camp-detail > .fayno-crm__aside {
+        grid-column: 1 !important;
+    }
+}
+
 /* Camp detail — shared Fayno CRM shell with camp-specific content blocks. */
 #nova .fayno-camp-detail .fayno-crm__content { gap: 14px; }
 #nova .fayno-camp-detail .fayno-crm__top {
