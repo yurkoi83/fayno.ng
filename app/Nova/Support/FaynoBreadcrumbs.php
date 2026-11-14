@@ -1,6 +1,6 @@
 <?php
 
-namespace App\\Nova\\Support;
+namespace App\Nova\Support;
 
 class FaynoBreadcrumbs
 {
