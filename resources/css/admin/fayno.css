@@ -6801,3 +6801,222 @@ button[class*="bg-primary"]:hover {
     background: #e3f7ec !important;
     color: #15965b !important;
 }
+
+
+/*
+|--------------------------------------------------------------------------
+| Camper profile — final typography and surface alignment with img_7
+|--------------------------------------------------------------------------
+*/
+#nova [dusk="campers-detail-component"] .fayno-camper {
+    gap: 12px !important;
+    font-family: 'Nunito', sans-serif !important;
+    color: #343653 !important;
+}
+
+#nova [dusk="campers-detail-component"] .fayno-camper__profile {
+    min-height: 100px !important;
+    gap: 14px !important;
+    padding: 13px 16px !important;
+    border: 1px solid #ece9f7 !important;
+    border-radius: 12px !important;
+    background: #fff !important;
+    box-shadow: 0 1px 5px rgba(48, 42, 89, .035) !important;
+}
+
+#nova [dusk="campers-detail-component"] .fayno-camper__avatar {
+    width: 72px !important;
+    height: 72px !important;
+    flex-basis: 72px !important;
+    font-size: 23px !important;
+}
+
+#nova [dusk="campers-detail-component"] .fayno-camper__name-row h1 {
+    font-size: 24px !important;
+    line-height: 1.2 !important;
+    font-weight: 800 !important;
+    letter-spacing: -.025em !important;
+}
+
+#nova [dusk="campers-detail-component"] .fayno-camper__identity > p {
+    margin: 5px 0 6px !important;
+    padding: 4px 9px !important;
+    font-size: 10px !important;
+    font-weight: 700 !important;
+}
+
+#nova [dusk="campers-detail-component"] .fayno-camper__parent-link {
+    font-size: 11px !important;
+    font-weight: 700 !important;
+}
+
+#nova [dusk="campers-detail-component"] .fayno-camper__age {
+    min-height: 29px !important;
+    padding: 5px 10px !important;
+    font-size: 11px !important;
+    font-weight: 800 !important;
+}
+
+#nova [dusk="campers-detail-component"] .fayno-camper__edit {
+    padding: 8px 12px !important;
+    border-radius: 9px !important;
+    font-size: 11px !important;
+    font-weight: 800 !important;
+}
+
+#nova [dusk="campers-detail-component"] .fayno-camper__grid {
+    gap: 14px !important;
+}
+
+#nova [dusk="campers-detail-component"] .fayno-camper-card {
+    padding: 15px 16px 16px !important;
+    border: 1px solid #ece9f7 !important;
+    border-radius: 12px !important;
+    background: #fff !important;
+    box-shadow: 0 1px 5px rgba(48, 42, 89, .035) !important;
+}
+
+#nova [dusk="campers-detail-component"] .fayno-camper-card__heading {
+    gap: 8px !important;
+    margin-bottom: 12px !important;
+}
+
+#nova [dusk="campers-detail-component"] .fayno-camper-card__heading > span:first-child {
+    width: 36px !important;
+    height: 36px !important;
+    flex-basis: 36px !important;
+    border-radius: 10px !important;
+    background: #eeeaff !important;
+    color: #7956d8 !important;
+}
+
+#nova [dusk="campers-detail-component"] .fayno-camper-card__heading > span:first-child .fayno-camper__icon {
+    width: 18px !important;
+    height: 18px !important;
+}
+
+#nova [dusk="campers-detail-component"] .fayno-camper-card__heading h2 {
+    font-size: 14px !important;
+    line-height: 1.25 !important;
+    font-weight: 800 !important;
+    letter-spacing: -.01em !important;
+}
+
+#nova [dusk="campers-detail-component"] .fayno-camper__details {
+    gap: 12px !important;
+}
+
+#nova [dusk="campers-detail-component"] .fayno-camper__detail {
+    gap: 9px !important;
+}
+
+#nova [dusk="campers-detail-component"] .fayno-camper__detail-icon {
+    width: 29px !important;
+    height: 29px !important;
+    flex-basis: 29px !important;
+    border-radius: 8px !important;
+    background: #f4f2fb !important;
+    color: #8179b5 !important;
+}
+
+#nova [dusk="campers-detail-component"] .fayno-camper__detail-icon .fayno-camper__icon {
+    width: 15px !important;
+    height: 15px !important;
+}
+
+#nova [dusk="campers-detail-component"] .fayno-camper__detail small {
+    font-size: 10px !important;
+    line-height: 1.3 !important;
+    font-weight: 600 !important;
+    color: #8589a8 !important;
+}
+
+#nova [dusk="campers-detail-component"] .fayno-camper__detail strong {
+    font-size: 12px !important;
+    line-height: 1.35 !important;
+    font-weight: 700 !important;
+    color: #343653 !important;
+}
+
+#nova [dusk="campers-detail-component"] .fayno-camper__parent-name {
+    margin-bottom: 12px !important;
+    font-size: 13px !important;
+    font-weight: 800 !important;
+}
+
+#nova [dusk="campers-detail-component"] .fayno-camper__table thead th {
+    padding: 9px 10px !important;
+    background: #f4f2fb !important;
+    color: #8589a8 !important;
+    font-size: 9px !important;
+    font-weight: 800 !important;
+    letter-spacing: .035em !important;
+}
+
+#nova [dusk="campers-detail-component"] .fayno-camper__table tbody td {
+    padding: 10px !important;
+    font-size: 11px !important;
+    line-height: 1.35 !important;
+    color: #666b89 !important;
+}
+
+#nova [dusk="campers-detail-component"] .fayno-camper__table tbody td strong,
+#nova [dusk="campers-detail-component"] .fayno-camper__table tbody td:first-child a {
+    font-size: 11px !important;
+    font-weight: 800 !important;
+}
+
+#nova [dusk="campers-detail-component"] .fayno-camper__table tbody td small {
+    font-size: 9px !important;
+    color: #9296b0 !important;
+}
+
+#nova [dusk="campers-detail-component"] .fayno-camper__status {
+    padding: 4px 8px !important;
+    font-size: 9px !important;
+    font-weight: 800 !important;
+}
+
+#nova [dusk="campers-detail-component"] .fayno-camper__count {
+    min-width: 23px !important;
+    height: 23px !important;
+    font-size: 10px !important;
+}
+
+#nova [dusk="campers-detail-component"] .fayno-camper__notes {
+    margin-top: 13px !important;
+    padding: 11px 12px !important;
+    background: #f6f4fc !important;
+}
+
+#nova [dusk="campers-detail-component"] .fayno-camper__notes strong {
+    font-size: 10px !important;
+}
+
+#nova [dusk="campers-detail-component"] .fayno-camper__notes p,
+#nova [dusk="campers-detail-component"] .fayno-camper__empty {
+    font-size: 11px !important;
+}
+
+/* Let the page sit directly on Nova's shared lavender canvas. */
+#nova [dusk="campers-detail-component"] .fayno-camper {
+    max-width: none !important;
+}
+#nova [dusk="campers-detail-component"] .fayno-camper__profile,
+#nova [dusk="campers-detail-component"] .fayno-camper-card {
+    box-shadow: 0 1px 5px rgba(48, 42, 89, .035) !important;
+}
+
+@media (max-width: 600px) {
+    #nova [dusk="campers-detail-component"] .fayno-camper__profile {
+        padding: 12px !important;
+    }
+    #nova [dusk="campers-detail-component"] .fayno-camper__avatar {
+        width: 60px !important;
+        height: 60px !important;
+        flex-basis: 60px !important;
+    }
+    #nova [dusk="campers-detail-component"] .fayno-camper__name-row h1 {
+        font-size: 20px !important;
+    }
+}
