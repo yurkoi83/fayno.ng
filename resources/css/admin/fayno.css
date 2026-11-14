@@ -5763,3 +5763,90 @@ button[class*="bg-primary"]:hover {
 #nova [dusk="content"] > div[class*="lg:absolute"][class*="w-60"] > div:first-child {
     color: var(--fayno-text) !important;
 }
+
+
+/* Shared sidebar brand and navigation layout on every Nova screen. */
+@media (min-width: 1024px) {
+    #nova [dusk="content"] > div[class*="lg:absolute"][class*="w-60"],
+    #nova [dusk="content"] > div[class*="lg:fixed"][class*="w-60"] {
+        position: relative;
+        padding-top: 84px !important;
+        overflow: hidden !important;
+    }
+
+    #nova [dusk="content"] > div[class*="lg:absolute"][class*="w-60"]::before,
+    #nova [dusk="content"] > div[class*="lg:fixed"][class*="w-60"]::before {
+        content: "" !important;
+        position: absolute !important;
+        top: 20px !important;
+        left: 18px !important;
+        z-index: 5 !important;
+        display: block !important;
+        width: 100px !important;
+        height: 40px !important;
+        background-image: url("/screen/img_7.png") !important;
+        background-size: 1366% 1920% !important;
+        background-position: 20.3% 15.1% !important;
+        background-repeat: no-repeat !important;
+        pointer-events: none;
+    }
+
+    #nova [dusk="sidebar-menu"] {
+        max-height: calc(100vh - 104px) !important;
+        overflow-x: hidden !important;
+        overflow-y: auto !important;
+        overscroll-behavior: contain;
+        scrollbar-width: none !important;
+        padding: 12px 12px 20px !important;
+    }
+
+    #nova [dusk="sidebar-menu"]::-webkit-scrollbar {
+        width: 0 !important;
+        height: 0 !important;
+        display: none !important;
+    }
+
+    #nova [dusk="sidebar-menu"] > div,
+    #nova [dusk="sidebar-menu"] > ul,
+    #nova [dusk="sidebar-menu"] nav {
+        row-gap: 5px !important;
+    }
+
+    #nova [dusk="sidebar-menu"] [class*="space-y-"],
+    #nova [dusk="sidebar-menu"] [class*="gap-y-"] {
+        row-gap: 5px !important;
+    }
+
+    #nova [dusk="sidebar-menu"] [class*="mb-"],
+    #nova [dusk="sidebar-menu"] [class*="my-"] {
+        margin-top: 0 !important;
+        margin-bottom: 4px !important;
+    }
+
+    #nova [dusk="sidebar-menu"] a,
+    #nova [dusk="sidebar-menu"] button,
+    #nova [dusk="sidebar-menu"] [role="button"] {
+        min-height: 36px !important;
+        margin: 1px 0 !important;
+        padding: 7px 10px !important;
+    }
+
+    #nova [dusk="sidebar-menu"] a span,
+    #nova [dusk="sidebar-menu"] button span,
+    #nova [dusk="sidebar-menu"] [role="button"] span {
+        line-height: 1.25 !important;
+    }
+}
+
+/* Keep the global search control aligned to the account/actions edge. */
+#nova header:not(.fayno-crm__heading) {
+    display: flex !important;
+    align-items: center !important;
+}
+
+#nova header:not(.fayno-crm__heading) form,
+#nova header:not(.fayno-crm__heading) [role="search"],
+#nova header:not(.fayno-crm__heading) [class*="search"] {
+    margin-left: auto !important;
+    margin-right: 16px !important;
+}
