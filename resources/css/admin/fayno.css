@@ -7020,3 +7020,51 @@ button[class*="bg-primary"]:hover {
         font-size: 20px !important;
     }
 }
+
+
+/* Order detail: keep action buttons in the header flow, beside the title. */
+#nova [dusk="orders-detail-component"] .fayno-crm__heading {
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 20px !important;
+    min-height: 0 !important;
+}
+
+#nova [dusk="orders-detail-component"] .fayno-crm__heading-main {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+}
+
+#nova [dusk="orders-detail-component"] .fayno-crm__actions {
+    position: static !important;
+    inset: auto !important;
+    display: flex !important;
+    flex: 0 0 auto !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    flex-wrap: nowrap !important;
+    width: auto !important;
+    margin: 0 !important;
+    transform: none !important;
+}
+
+#nova [dusk="orders-detail-component"] .fayno-crm-action {
+    flex: 0 0 auto !important;
+    white-space: nowrap !important;
+}
+
+@media (max-width: 760px) {
+    #nova [dusk="orders-detail-component"] .fayno-crm__heading {
+        align-items: flex-start !important;
+        flex-direction: column !important;
+    }
+
+    #nova [dusk="orders-detail-component"] .fayno-crm__actions {
+        position: static !important;
+        width: 100% !important;
+        justify-content: flex-start !important;
+        flex-wrap: wrap !important;
+    }
+}
