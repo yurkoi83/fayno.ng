@@ -5393,3 +5393,295 @@ button[class*="bg-primary"]:hover {
     color: #ffffff !important;
     -webkit-text-fill-color: #ffffff !important;
 }
+
+
+/*
+|--------------------------------------------------------------------------
+| Fayno Camp — Unified Nova design system
+| Shared by dashboards, resources, detail pages and forms.
+|--------------------------------------------------------------------------
+*/
+
+:root {
+    --fayno-primary: #7654d2;
+    --fayno-primary-hover: #6544c0;
+    --fayno-primary-light: #f0ebff;
+    --fayno-primary-soft: #f7f4ff;
+
+    --fayno-background: #f5f3ff;
+    --fayno-surface: #ffffff;
+    --fayno-surface-secondary: #fbfaff;
+
+    --fayno-text: #26345b;
+    --fayno-text-secondary: #687394;
+    --fayno-text-muted: #929bb5;
+
+    --fayno-border: #e9e5f4;
+    --fayno-border-strong: #dcd5ee;
+
+    --fayno-radius-sm: 9px;
+    --fayno-radius: 13px;
+    --fayno-radius-lg: 17px;
+
+    --fayno-shadow: 0 3px 12px rgba(45, 42, 91, .045);
+    --fayno-shadow-hover: 0 7px 20px rgba(45, 42, 91, .085);
+}
+
+/* Base typography and application canvas */
+#nova,
+#nova body,
+#nova button,
+#nova input,
+#nova select,
+#nova textarea {
+    font-family: 'Nunito', sans-serif !important;
+}
+
+#nova {
+    color: var(--fayno-text);
+    background: var(--fayno-background);
+    font-size: 13px;
+}
+
+#nova [dusk="content"],
+#nova main,
+#nova [role="main"] {
+    background-color: var(--fayno-background);
+    color: var(--fayno-text);
+}
+
+#nova h1,
+#nova h2,
+#nova h3,
+#nova h4 {
+    color: var(--fayno-text);
+    font-family: 'Nunito', sans-serif !important;
+    letter-spacing: -.015em;
+}
+
+#nova h1 { font-size: 26px; font-weight: 800; line-height: 1.2; }
+#nova h2 { font-size: 16px; font-weight: 800; line-height: 1.3; }
+#nova h3 { font-size: 14px; font-weight: 800; line-height: 1.35; }
+
+/* Replace Nova's dark shell with the reference's white navigation and topbar. */
+#nova .bg-gray-900,
+#nova .bg-gray-800,
+#nova [class*="bg-gray-900"],
+#nova [class*="bg-gray-800"] {
+    background-color: #fff !important;
+    color: var(--fayno-text) !important;
+}
+
+#nova [dusk="content"] > div[class*="lg:absolute"][class*="w-60"],
+#nova [dusk="content"] > div[class*="lg:fixed"][class*="w-60"] {
+    background: #fff !important;
+    border-right: 1px solid var(--fayno-border) !important;
+    box-shadow: none !important;
+}
+
+#nova [dusk="sidebar-menu"] {
+    padding: 16px 12px !important;
+}
+
+#nova [dusk="sidebar-menu"] a,
+#nova [dusk="sidebar-menu"] button,
+#nova [dusk="sidebar-menu"] [role="button"] {
+    min-height: 38px;
+    height: auto;
+    border-radius: 10px !important;
+    color: var(--fayno-text-secondary) !important;
+    font-family: 'Nunito', sans-serif !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    line-height: 1.3 !important;
+    transition: background-color .18s ease, color .18s ease;
+}
+
+#nova [dusk="sidebar-menu"] a:hover,
+#nova [dusk="sidebar-menu"] button:hover,
+#nova [dusk="sidebar-menu"] [role="button"]:hover {
+    background: var(--fayno-primary-soft) !important;
+    color: var(--fayno-primary) !important;
+}
+
+#nova [dusk="sidebar-menu"] a[aria-current="page"],
+#nova [dusk="sidebar-menu"] a.router-link-active,
+#nova [dusk="sidebar-menu"] .fayno-nav-reference-active {
+    background: var(--fayno-primary-light) !important;
+    color: var(--fayno-primary) !important;
+    font-weight: 800 !important;
+}
+
+#nova [dusk="sidebar-menu"] svg {
+    flex-shrink: 0;
+}
+
+#nova [dusk="sidebar-menu"] .text-xs,
+#nova [dusk="sidebar-menu"] .uppercase {
+    color: var(--fayno-text-muted) !important;
+    font-weight: 800 !important;
+    letter-spacing: .045em;
+}
+
+/* Top navigation */
+#nova header,
+#nova nav[aria-label],
+#nova [dusk="topbar"],
+#nova [class*="topbar"] {
+    background: #fff !important;
+    color: var(--fayno-text) !important;
+    border-bottom: 1px solid var(--fayno-border) !important;
+    box-shadow: none !important;
+}
+
+#nova header a,
+#nova header button,
+#nova nav[aria-label] a,
+#nova nav[aria-label] button {
+    color: var(--fayno-text-secondary);
+}
+
+#nova input:not([type="checkbox"]):not([type="radio"]),
+#nova select,
+#nova textarea {
+    border-color: var(--fayno-border-strong);
+    border-radius: var(--fayno-radius-sm);
+    color: var(--fayno-text);
+    font-family: 'Nunito', sans-serif !important;
+}
+
+#nova input:focus,
+#nova select:focus,
+#nova textarea:focus {
+    border-color: var(--fayno-primary) !important;
+    box-shadow: 0 0 0 3px rgba(118, 84, 210, .12) !important;
+}
+
+#nova .bg-primary,
+#nova .bg-primary-500,
+#nova .bg-primary-600,
+#nova button[class*="bg-primary"] {
+    background-color: var(--fayno-primary) !important;
+    border-color: var(--fayno-primary) !important;
+}
+
+#nova .text-primary,
+#nova .text-primary-500,
+#nova .text-primary-600 {
+    color: var(--fayno-primary) !important;
+}
+
+#nova .border-gray-100,
+#nova .border-gray-200 {
+    border-color: var(--fayno-border) !important;
+}
+
+/* Dashboard: keep its own information architecture, share the CRM visual language. */
+#nova .fayno-dashboard {
+    gap: 16px;
+    padding: 24px;
+    color: var(--fayno-text);
+    font-family: 'Nunito', sans-serif;
+}
+
+#nova .fayno-dashboard__intro h1,
+#nova .fayno-panel__heading h2 {
+    color: var(--fayno-text);
+    font-family: 'Nunito', sans-serif;
+}
+
+#nova .fayno-dashboard__intro p,
+#nova .fayno-panel__heading span,
+#nova .fayno-dashboard__stat-label,
+#nova .fayno-chart__labels {
+    color: var(--fayno-text-secondary);
+}
+
+#nova .fayno-dashboard__stat,
+#nova .fayno-panel {
+    border: 1px solid var(--fayno-border);
+    border-radius: var(--fayno-radius);
+    background: var(--fayno-surface);
+    box-shadow: var(--fayno-shadow);
+}
+
+#nova .fayno-dashboard__stat strong,
+#nova .fayno-dashboard__shift-top b,
+#nova .fayno-dashboard__shift-top strong,
+#nova .fayno-dashboard__table td strong,
+#nova .fayno-dashboard__alert strong {
+    color: var(--fayno-text);
+    font-family: 'Nunito', sans-serif;
+}
+
+#nova .fayno-dashboard__stat-icon.is-purple {
+    background: #f0ebff;
+    color: #7654d2;
+}
+
+#nova .fayno-dashboard__stat-icon.is-blue {
+    background: #eaf2ff;
+    color: #5683d5;
+}
+
+#nova .fayno-dashboard__stat-icon.is-orange {
+    background: #fff2e2;
+    color: #d18b35;
+}
+
+#nova .fayno-dashboard__stat-icon:not(.is-blue):not(.is-purple):not(.is-orange) {
+    background: #e8f6ef;
+    color: #299766;
+}
+
+#nova .fayno-dashboard__table th {
+    background: #faf9fe;
+    color: var(--fayno-text-secondary);
+    font-family: 'Nunito', sans-serif;
+}
+
+#nova .fayno-dashboard__table td {
+    border-color: var(--fayno-border);
+    color: var(--fayno-text-secondary);
+    font-family: 'Nunito', sans-serif;
+}
+
+#nova .fayno-dashboard__shift,
+#nova .fayno-dashboard__alert {
+    border-color: var(--fayno-border);
+}
+
+#nova .fayno-dashboard__banner {
+    border-radius: var(--fayno-radius);
+}
+
+/* The custom order CRM uses exactly the same shared tokens. */
+#nova .fayno-crm {
+    color: var(--fayno-text);
+    font-family: 'Nunito', sans-serif;
+}
+
+#nova .fayno-crm-card {
+    border-color: var(--fayno-border);
+    border-radius: var(--fayno-radius);
+    box-shadow: var(--fayno-shadow);
+}
+
+#nova .fayno-crm-card__heading h2,
+#nova .fayno-crm-card h3,
+#nova .fayno-crm-detail-value strong,
+#nova .fayno-crm-participant__identity strong {
+    color: var(--fayno-text);
+    font-family: 'Nunito', sans-serif;
+}
+
+#nova .fayno-crm-card__icon {
+    background: var(--fayno-primary-light);
+    color: var(--fayno-primary);
+}
+
+@media (max-width: 700px) {
+    #nova .fayno-dashboard {
+        padding: 14px;
+    }
+}
