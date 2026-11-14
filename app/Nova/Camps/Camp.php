@@ -30,6 +30,12 @@ class Camp extends Resource
                 ->asHtml()
                 ->onlyOnDetail(),
 
+            ID::make()->sortable()->onlyOnIndex(),
+            Text::make(__('nova::resources.Camp name'), 'name')->sortable()->onlyOnIndex(),
+            Text::make(__('nova::resources.Country'), 'country')->onlyOnIndex(),
+            Text::make(__('nova::resources.City'), 'city')->sortable()->onlyOnIndex(),
+            Boolean::make(__('nova::resources.Active'), 'active')->onlyOnIndex(),
+
             Panel::make('Основна інформація', [
                 ID::make()->sortable(),
                 Text::make(__('nova::resources.Camp name'), 'name')->sortable()->rules('required', 'max:255'),
