@@ -14,7 +14,7 @@ use Laravel\Nova\Panel;
 
 class Payment extends Resource
 {
-    public static $model = \\App\\Models\\Payment::class;
+    public static $model = \App\Models\Payment::class;
     public static $title = 'id';
     public static $search = ['id', 'transaction_id', 'status'];
     public static $group = 'Платежі';
@@ -32,13 +32,13 @@ class Payment extends Resource
             ]),
 
             ID::make()->sortable()->onlyOnIndex(),
-            BelongsTo::make(__('nova::resources.Bookings'), 'booking', \\App\\Nova\\Bookings\\Booking::class)->searchable()->onlyOnIndex(),
+            BelongsTo::make(__('nova::resources.Bookings'), 'booking', \App\Nova\Bookings\Booking::class)->searchable()->onlyOnIndex(),
             Number::make(__('nova::resources.Amount'), 'amount')->step(0.01)->sortable()->onlyOnIndex(),
             Text::make(__('nova::resources.Currency'), 'currency')->onlyOnIndex(),
             Text::make(__('nova::resources.Status'), 'status')->sortable()->onlyOnIndex(),
 
             ID::make()->sortable()->onlyOnForms(),
-            BelongsTo::make(__('nova::resources.Bookings'), 'booking', \\App\\Nova\\Bookings\\Booking::class)->searchable()->onlyOnForms(),
+            BelongsTo::make(__('nova::resources.Bookings'), 'booking', \App\Nova\Bookings\Booking::class)->searchable()->onlyOnForms(),
             Number::make(__('nova::resources.Amount'), 'amount')->step(0.01)->rules('required', 'numeric', 'min:0')->onlyOnForms(),
             Text::make(__('nova::resources.Currency'), 'currency')->rules('required', 'size:3')->onlyOnForms(),
             Text::make(__('nova::resources.Status'), 'status')->sortable()->onlyOnForms(),
