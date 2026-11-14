@@ -3,6 +3,7 @@
 namespace App\Nova\Campers;
 
 use App\Nova\Resource;
+use App\Nova\Support\FaynoBreadcrumbs;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Nova\Fields\BelongsTo;
@@ -94,9 +95,7 @@ class Camper extends Resource
 
         $html = '<div class="fayno-camper">';
         $html .= '<div class="fayno-camper__header">'
-            . '<nav class="fayno-camper__breadcrumbs"><a href="'.$indexUrl.'">'
-            .__('nova::navigation.campers')
-            . '</a><span>/</span><span>'.e($fullName).'</span></nav>'
+            . FaynoBreadcrumbs::render(__('nova::navigation.campers'), $indexUrl, $fullName)
             . '<div class="fayno-camper__profile">'
             . '<div class="fayno-camper__avatar">';
         $html .= $photo
