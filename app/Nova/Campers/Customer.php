@@ -4,7 +4,7 @@ namespace App\Nova\Campers;
 
 use App\Enums\OrderStatus;
 use App\Nova\Resource;
-use App\Nova\Support\FaynoBreadcrumbs;
+use App\Nova\Support\FaynoDetailHeader;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Nova\Fields\ID;
