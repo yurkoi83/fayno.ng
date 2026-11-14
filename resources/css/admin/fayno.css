@@ -7068,3 +7068,186 @@ button[class*="bg-primary"]:hover {
         flex-wrap: wrap !important;
     }
 }
+
+
+/*
+|--------------------------------------------------------------------------
+| Customer detail — parent profile with children and family orders
+|--------------------------------------------------------------------------
+*/
+#nova [dusk="customers-detail-component"] .fayno-customer {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 14px !important;
+    width: 100% !important;
+    max-width: none !important;
+    color: var(--fayno-text, #34395f) !important;
+    font-family: var(--fayno-font-family, 'Nunito', sans-serif) !important;
+}
+#nova [dusk="customers-detail-component"] .fayno-customer__profile {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-width: 0;
+    padding: 17px 19px;
+    border: 1px solid #ece9f7;
+    border-radius: 13px;
+    background: #fff;
+    box-shadow: 0 1px 5px rgba(48,42,89,.035);
+}
+#nova [dusk="customers-detail-component"] .fayno-customer__avatar {
+    display: flex;
+    width: 66px;
+    height: 66px;
+    flex: 0 0 66px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 18px;
+    background: #eeeaff;
+    color: #7654d2;
+    font-size: 21px;
+    font-weight: 900;
+}
+#nova [dusk="customers-detail-component"] .fayno-customer__identity { min-width: 0; flex: 1 1 auto; }
+#nova [dusk="customers-detail-component"] .fayno-customer__eyebrow {
+    display: block;
+    margin-bottom: 4px;
+    color: #9295b0;
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: .08em;
+}
+#nova [dusk="customers-detail-component"] .fayno-customer__identity h2 {
+    margin: 0;
+    color: #343653;
+    font-size: 19px;
+    font-weight: 900;
+    line-height: 1.25;
+}
+#nova [dusk="customers-detail-component"] .fayno-customer__quick,
+#nova [dusk="customers-detail-component"] .fayno-customer__profile-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 16px;
+    margin-top: 8px;
+}
+#nova [dusk="customers-detail-component"] .fayno-customer__quick a,
+#nova [dusk="customers-detail-component"] .fayno-customer__profile-meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #737997;
+    font-size: 11px;
+    font-weight: 700;
+    text-decoration: none;
+}
+#nova [dusk="customers-detail-component"] .fayno-customer__quick a:hover { color: #7654d2; }
+#nova [dusk="customers-detail-component"] .fayno-customer__quick .fayno-icon,
+#nova [dusk="customers-detail-component"] .fayno-customer__profile-meta .fayno-icon {
+    width: 14px; height: 14px; color: #8b82bd;
+}
+#nova [dusk="customers-detail-component"] .fayno-customer__profile-meta {
+    flex: 0 0 auto;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 7px;
+    margin: 0 0 0 auto;
+}
+#nova [dusk="customers-detail-component"] .fayno-customer__stats {
+    display: grid;
+    grid-template-columns: repeat(3,minmax(0,1fr));
+    gap: 13px;
+}
+#nova [dusk="customers-detail-component"] .fayno-customer-stat {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+    padding: 14px 16px;
+    border: 1px solid #ece9f7;
+    border-radius: 12px;
+    background: #fff;
+}
+#nova [dusk="customers-detail-component"] .fayno-customer-stat__icon {
+    display: flex; width: 39px; height: 39px; flex: 0 0 39px;
+    align-items: center; justify-content: center; border-radius: 11px;
+    background: #eeeaff; color: #7654d2;
+}
+#nova [dusk="customers-detail-component"] .fayno-customer-stat__icon .fayno-icon { width: 19px; height: 19px; }
+#nova [dusk="customers-detail-component"] .fayno-customer-stat > div { display: flex; min-width: 0; flex-direction: column; }
+#nova [dusk="customers-detail-component"] .fayno-customer-stat small { color: #8589a8; font-size: 10px; font-weight: 700; }
+#nova [dusk="customers-detail-component"] .fayno-customer-stat strong { color: #343653; font-size: 18px; font-weight: 900; line-height: 1.35; }
+#nova [dusk="customers-detail-component"] .fayno-customer-stat > div > span { color: #9699b2; font-size: 9px; }
+#nova [dusk="customers-detail-component"] .fayno-customer-stat.is-blue .fayno-customer-stat__icon { background: #eaf1ff; color: #5681ce; }
+#nova [dusk="customers-detail-component"] .fayno-customer-stat.is-green .fayno-customer-stat__icon { background: #e5f7ee; color: #25996b; }
+#nova [dusk="customers-detail-component"] .fayno-customer .fayno-crm-card { padding: 16px 18px !important; }
+#nova [dusk="customers-detail-component"] .fayno-customer__contact-grid {
+    display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 12px 18px;
+}
+#nova [dusk="customers-detail-component"] .fayno-customer__contact { display: flex; min-width: 0; flex-direction: column; gap: 4px; }
+#nova [dusk="customers-detail-component"] .fayno-customer__contact span { color: #9295ae; font-size: 10px; font-weight: 700; }
+#nova [dusk="customers-detail-component"] .fayno-customer__contact strong { overflow-wrap: anywhere; color: #343653; font-size: 12px; font-weight: 800; }
+#nova [dusk="customers-detail-component"] .fayno-customer__notes {
+    margin-top: 13px; padding: 10px 12px; border-radius: 9px; background: #f6f4fc;
+}
+#nova [dusk="customers-detail-component"] .fayno-customer__notes strong { color: #77749d; font-size: 10px; }
+#nova [dusk="customers-detail-component"] .fayno-customer__notes p { margin: 4px 0 0; color: #5f6585; font-size: 11px; }
+#nova [dusk="customers-detail-component"] .fayno-customer__children-list { display: flex; flex-direction: column; }
+#nova [dusk="customers-detail-component"] .fayno-customer__child {
+    display: flex; align-items: center; gap: 11px; min-width: 0; padding: 10px 2px;
+    border-bottom: 1px solid #efedf7; color: inherit; text-decoration: none;
+}
+#nova [dusk="customers-detail-component"] .fayno-customer__child:last-child { border-bottom: 0; padding-bottom: 0; }
+#nova [dusk="customers-detail-component"] .fayno-customer__child img,
+#nova [dusk="customers-detail-component"] .fayno-customer__child-avatar {
+    display: flex; width: 42px; height: 42px; flex: 0 0 42px; align-items: center; justify-content: center;
+    overflow: hidden; border-radius: 12px; background: #edf1ff; color: #7186c2; object-fit: cover;
+}
+#nova [dusk="customers-detail-component"] .fayno-customer__child-avatar .fayno-icon { width: 20px; height: 20px; }
+#nova [dusk="customers-detail-component"] .fayno-customer__child-main { display: flex; min-width: 0; flex: 1 1 auto; flex-direction: column; gap: 3px; }
+#nova [dusk="customers-detail-component"] .fayno-customer__child-main strong { overflow: hidden; color: #343653; font-size: 12px; font-weight: 800; text-overflow: ellipsis; white-space: nowrap; }
+#nova [dusk="customers-detail-component"] .fayno-customer__child-main small { color: #9296b0; font-size: 10px; }
+#nova [dusk="customers-detail-component"] .fayno-customer__child-orders { color: #8580b2; font-size: 10px; font-weight: 800; white-space: nowrap; }
+#nova [dusk="customers-detail-component"] .fayno-customer__arrow,
+#nova [dusk="customers-detail-component"] .fayno-customer__open { color: #a29bc9; font-size: 22px; line-height: 1; text-decoration: none; }
+#nova [dusk="customers-detail-component"] .fayno-customer__orders-table-wrap { width: 100%; overflow-x: auto; }
+#nova [dusk="customers-detail-component"] .fayno-customer__orders-table { width: 100%; border-collapse: collapse; min-width: 760px; }
+#nova [dusk="customers-detail-component"] .fayno-customer__orders-table th {
+    padding: 10px 11px; background: #f4f2fb; color: #8589a8; font-size: 9px; font-weight: 900;
+    letter-spacing: .035em; text-align: left; white-space: nowrap;
+}
+#nova [dusk="customers-detail-component"] .fayno-customer__orders-table td {
+    padding: 11px; border-bottom: 1px solid #efedf7; color: #666b89; font-size: 10px; vertical-align: middle;
+}
+#nova [dusk="customers-detail-component"] .fayno-customer__orders-table tbody tr:last-child td { border-bottom: 0; }
+#nova [dusk="customers-detail-component"] .fayno-customer__orders-table .is-amount { text-align: right; white-space: nowrap; }
+#nova [dusk="customers-detail-component"] .fayno-customer__orders-table .is-amount strong { color: #343653; font-size: 11px; font-weight: 900; }
+#nova [dusk="customers-detail-component"] .fayno-customer__order-number { color: #7654d2; font-size: 11px; font-weight: 900; text-decoration: none; white-space: nowrap; }
+#nova [dusk="customers-detail-component"] .fayno-customer__order-children { display: block; max-width: 170px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#nova [dusk="customers-detail-component"] .fayno-customer__status {
+    display: inline-flex; padding: 5px 8px; border-radius: 20px; background: #eeeaff; color: #7654d2;
+    font-size: 9px; font-weight: 900; white-space: nowrap;
+}
+#nova [dusk="customers-detail-component"] .fayno-customer__status.is-success { background: #e4f7ed; color: #209566; }
+#nova [dusk="customers-detail-component"] .fayno-customer__status.is-warning { background: #fff3df; color: #c18a32; }
+#nova [dusk="customers-detail-component"] .fayno-customer__status.is-danger { background: #ffe9eb; color: #d45b69; }
+#nova [dusk="customers-detail-component"] .fayno-customer__empty {
+    display: flex; min-height: 105px; flex-direction: column; align-items: center; justify-content: center; gap: 5px;
+    color: #9699b2; text-align: center;
+}
+#nova [dusk="customers-detail-component"] .fayno-customer__empty > .fayno-icon { width: 22px; height: 22px; margin-bottom: 3px; color: #aaa4d0; }
+#nova [dusk="customers-detail-component"] .fayno-customer__empty strong { color: #626887; font-size: 11px; font-weight: 800; }
+#nova [dusk="customers-detail-component"] .fayno-customer__empty span { max-width: 390px; font-size: 10px; }
+@media (max-width: 900px) {
+    #nova [dusk="customers-detail-component"] .fayno-customer__contact-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+}
+@media (max-width: 700px) {
+    #nova [dusk="customers-detail-component"] .fayno-customer__profile { align-items: flex-start; flex-wrap: wrap; }
+    #nova [dusk="customers-detail-component"] .fayno-customer__profile-meta { width: 100%; margin-left: 82px; }
+    #nova [dusk="customers-detail-component"] .fayno-customer__stats { grid-template-columns: 1fr; }
+    #nova [dusk="customers-detail-component"] .fayno-customer__contact-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 460px) {
+    #nova [dusk="customers-detail-component"] .fayno-customer__contact-grid { grid-template-columns: 1fr; }
+}
