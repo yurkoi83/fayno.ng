@@ -7318,3 +7318,39 @@ button[class*="bg-primary"]:hover {
     width: 100% !important;
     max-width: none !important;
 }
+
+
+/*
+|--------------------------------------------------------------------------
+| Customer detail — force the Nova field chain to use the available width
+|--------------------------------------------------------------------------
+*/
+#nova [dusk="customers-detail-component"] [dusk$="-panel"],
+#nova [dusk="customers-detail-component"] [dusk$="-panel"] > div,
+#nova [dusk="customers-detail-component"] [dusk$="-panel"] > div > div,
+#nova [dusk="customers-detail-component"] [dusk="ComputedField"],
+#nova [dusk="customers-detail-component"] [dusk="ComputedField"] > div,
+#nova [dusk="customers-detail-component"] [dusk="ComputedField"] > div > div,
+#nova [dusk="customers-detail-component"] .fayno-customer {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+}
+#nova [dusk="customers-detail-component"] [dusk$="-panel"],
+#nova [dusk="customers-detail-component"] [dusk="ComputedField"] {
+    flex: 1 1 100% !important;
+    align-self: stretch !important;
+}
+#nova [dusk="customers-detail-component"] .fayno-customer {
+    display: flex !important;
+    flex: 1 1 100% !important;
+    align-self: stretch !important;
+    align-items: stretch !important;
+}
+#nova [dusk="customers-detail-component"] .fayno-customer > * {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: none !important;
+    align-self: stretch !important;
+}
