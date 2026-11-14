@@ -6515,3 +6515,55 @@ button[class*="bg-primary"]:hover {
         flex: 1 1 auto !important;
     }
 }
+
+
+/*
+|--------------------------------------------------------------------------
+| Shared Fayno breadcrumbs — all Nova resource detail pages
+|--------------------------------------------------------------------------
+| Custom detail layouts render this reusable breadcrumb template. The same
+| visual rules also normalize Nova's native resource breadcrumb navigation.
+*/
+#nova [dusk$="-detail-component"] nav {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin: 0 0 10px;
+    color: #8b91b2;
+    font-family: var(--fayno-font-family, 'Nunito', sans-serif) !important;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+#nova [dusk$="-detail-component"] nav a {
+    color: #7774ba;
+    font-weight: 700;
+    text-decoration: none;
+    transition: color .15s ease;
+}
+#nova [dusk$="-detail-component"] nav a:hover {
+    color: #6544c2;
+}
+#nova [dusk$="-detail-component"] nav .fayno-crm__breadcrumb-home {
+    display: inline-flex;
+    width: 17px;
+    height: 17px;
+    align-items: center;
+    justify-content: center;
+    color: #7774ba;
+}
+#nova [dusk$="-detail-component"] nav .fayno-breadcrumbs__home-icon {
+    display: block;
+    width: 15px;
+    height: 15px;
+}
+#nova [dusk$="-detail-component"] nav .fayno-crm__breadcrumb-separator {
+    color: #c0bfd4;
+    font-size: 15px;
+    font-weight: 500;
+}
+#nova [dusk$="-detail-component"] nav .fayno-crm__breadcrumb-current {
+    color: #333b62;
+    font-weight: 800;
+}
