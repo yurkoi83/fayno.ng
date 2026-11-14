@@ -60,10 +60,15 @@ class Camp extends Resource
         $ageRange = trim(($camp->min_age !== null ? $camp->min_age : '—').'–'.($camp->max_age !== null ? $camp->max_age : '—'));
 
         $html = '<div class="fayno-crm fayno-entity-detail fayno-camp-detail">';
-        $html .= '<header class="fayno-crm__heading"><div class="fayno-crm__heading-main">'
-            . FaynoBreadcrumbs::render('Табори', $indexUrl, (string) $camp->name)
-            . '<div class="fayno-crm__title-row"><span class="fayno-crm__title-icon">'.$this->iconSvg('tent').'</span><div><h1>Табір: '.e($camp->name).'</h1><p>Інформація про табір та його зміни</p></div></div>'
-            . '</div><div class="fayno-crm__actions"><a class="fayno-crm-action fayno-crm-action--primary" href="'.$editUrl.'">'.$this->iconSvg('pencil').' Редагувати</a></div></header>';
+        $html .= FaynoDetailHeader::render(
+            'Табори',
+            $indexUrl,
+            (string) $camp->name,
+            $this->iconSvg('tent'),
+            'Табір: '.$camp->name,
+            'Інформація про табір та його зміни',
+            '<a class="fayno-crm-action fayno-crm-action--primary" href="'.$editUrl.'">'.$this->iconSvg('pencil').' Редагувати</a>'
+        );
 
         $html .= '<div class="fayno-crm__content"><div class="fayno-crm__top">';
         $html .= '<section class="fayno-crm-card fayno-camp-identity">'
