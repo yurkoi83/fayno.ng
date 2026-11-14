@@ -88,8 +88,11 @@ class Camp extends Resource
             . $this->detailValue('Місто', (string) ($camp->city ?: '—'))
             . $this->detailValue('Адреса', (string) ($camp->address ?: '—'))
             . $this->detailValue('Віковий діапазон', $ageRange.' років')
-            . '</div>'
-            . '<div class="fayno-camp-detail__description"><span>Опис табору</span><p>'.nl2br(e($camp->description ?: 'Опис поки не додано.')).'</p></div>'
+            . '</div></section>';
+
+        $html .= '<section class="fayno-crm-card fayno-camp-description">'
+            . $this->cardHeading('file-text', 'Опис табору')
+            . '<p class="fayno-camp-detail__description-text">'.nl2br(e($camp->description ?: 'Опис поки не додано.')).'</p>'
             . '</section>';
 
         $html .= '<section class="fayno-crm-card fayno-camp-shifts">'
