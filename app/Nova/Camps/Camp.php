@@ -3,6 +3,7 @@
 namespace App\Nova\Camps;
 
 use App\Nova\Resource;
+use App\Nova\Support\FaynoBreadcrumbs;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Nova\Fields\Boolean;
@@ -60,7 +61,7 @@ class Camp extends Resource
 
         $html = '<div class="fayno-crm fayno-entity-detail fayno-camp-detail">';
         $html .= '<header class="fayno-crm__heading"><div class="fayno-crm__heading-main">'
-            . '<nav class="fayno-crm__breadcrumbs"><a href="'.$indexUrl.'">⌂</a><span>›</span><a href="'.$indexUrl.'">Табори</a><span>›</span><strong>'.e($camp->name).'</strong></nav>'
+            . FaynoBreadcrumbs::render('Табори', $indexUrl, (string) $camp->name)
             . '<div class="fayno-crm__title-row"><span class="fayno-crm__title-icon">'.$this->iconSvg('tent').'</span><div><h1>Табір: '.e($camp->name).'</h1><p>Інформація про табір та його зміни</p></div></div>'
             . '</div><div class="fayno-crm__actions"><a class="fayno-crm-action fayno-crm-action--primary" href="'.$editUrl.'">'.$this->iconSvg('pencil').' Редагувати</a></div></header>';
 
