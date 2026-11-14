@@ -6617,3 +6617,14 @@ button[class*="bg-primary"]:hover {
         text-align: center !important;
     }
 }
+
+
+/* Reference alignment: the page title is left-aligned, not centered. */
+#nova [dusk$="-detail-component"] .fayno-crm__title-row {
+    justify-content: flex-start !important;
+    text-align: left !important;
+}
+
+#nova [dusk$="-detail-component"] .fayno-crm__title-row > div {
+    text-align: left !important;
+}
