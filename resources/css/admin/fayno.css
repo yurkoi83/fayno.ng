@@ -7674,3 +7674,59 @@ button[class*="bg-primary"]:hover {
     #nova [dusk="payments-detail-component"] .fayno-payment-section__grid .fayno-payment-item:nth-child(odd) { border-right: 0; }
     #nova [dusk="payments-detail-component"] .fayno-payment-section__grid .fayno-payment-item:nth-last-child(2):nth-child(odd) { border-bottom: 1px solid #efedf7; }
 }
+
+
+/* Payment detail: expanded financial, booking and participant information. */
+#nova [dusk="payments-detail-component"] .fayno-payment-summary {
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid #efedf7;
+}
+#nova [dusk="payments-detail-component"] .fayno-payment-summary > div {
+    display: flex; min-width: 0; flex-direction: column; gap: 5px; padding: 13px 24px;
+    border-right: 1px solid #efedf7;
+}
+#nova [dusk="payments-detail-component"] .fayno-payment-summary > div:last-child { border-right: 0; }
+#nova [dusk="payments-detail-component"] .fayno-payment-summary span { color: #9295ae; font-size: 10px; font-weight: 700; }
+#nova [dusk="payments-detail-component"] .fayno-payment-summary strong { color: #343653; font-size: 12px; font-weight: 800; }
+#nova [dusk="payments-detail-component"] .fayno-payment-section__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+#nova [dusk="payments-detail-component"] .fayno-payment-section__grid .fayno-payment-item { border-bottom: 1px solid #efedf7; }
+#nova [dusk="payments-detail-component"] .fayno-payment-section__grid .fayno-payment-item:nth-last-child(-n+2) { border-bottom: 0; }
+#nova [dusk="payments-detail-component"] .fayno-payment-print { display: none; }
+#nova [dusk="payments-detail-component"] .fayno-payment-print-button {
+    cursor: pointer; border: 1px solid #e5e0f4; background: #fff; color: #6650b7;
+}
+@media (max-width: 560px) {
+    #nova [dusk="payments-detail-component"] .fayno-payment-summary { grid-template-columns: 1fr; }
+    #nova [dusk="payments-detail-component"] .fayno-payment-summary > div { border-right: 0; border-bottom: 1px solid #efedf7; }
+    #nova [dusk="payments-detail-component"] .fayno-payment-summary > div:last-child { border-bottom: 0; }
+}
+@media print {
+    @page { size: A4; margin: 16mm; }
+    body:has(.fayno-payment-print) { background: #fff !important; }
+    body:has(.fayno-payment-print) * { visibility: hidden !important; }
+    body:has(.fayno-payment-print) .fayno-payment-print,
+    body:has(.fayno-payment-print) .fayno-payment-print * { visibility: visible !important; }
+    body:has(.fayno-payment-print) .fayno-payment-print {
+        display: block !important; position: absolute !important; inset: 0 auto auto 0 !important;
+        width: 100% !important; max-width: none !important; padding: 0 !important; margin: 0 !important;
+        color: #20243a !important; background: #fff !important; font-family: Arial, sans-serif !important;
+        font-size: 11pt !important; line-height: 1.45 !important;
+    }
+    .fayno-payment-print__brand { display: flex; flex-direction: column; gap: 2px; padding-bottom: 12px; border-bottom: 2px solid #7654d2; }
+    .fayno-payment-print__brand strong { color: #7654d2; font-size: 18pt; letter-spacing: .08em; }
+    .fayno-payment-print__brand span { color: #777; font-size: 9pt; }
+    .fayno-payment-print__title { margin: 24px 0 14px; text-align: center; }
+    .fayno-payment-print__title h1 { margin: 0; font-size: 18pt; letter-spacing: .08em; }
+    .fayno-payment-print__title p { margin: 4px 0 0; color: #666; }
+    .fayno-payment-print__number { display: flex; align-items: baseline; gap: 8px; margin-bottom: 14px; }
+    .fayno-payment-print__number strong { font-size: 14pt; }
+    .fayno-payment-print__number span:last-child { margin-left: auto; color: #666; }
+    .fayno-payment-print__amount { display: flex; align-items: center; gap: 12px; padding: 13px 15px; margin-bottom: 18px; border: 1px solid #ddd; border-radius: 6px; }
+    .fayno-payment-print__amount strong { margin-left: auto; font-size: 17pt; }
+    .fayno-payment-print__amount em { padding: 3px 8px; border: 1px solid #aaa; border-radius: 20px; font-size: 9pt; font-style: normal; }
+    .fayno-payment-print h2 { margin: 17px 0 6px; padding-bottom: 5px; border-bottom: 1px solid #ddd; font-size: 11pt; text-transform: uppercase; letter-spacing: .04em; }
+    .fayno-payment-print__row { display: flex; justify-content: space-between; gap: 16px; padding: 5px 0; border-bottom: 1px dotted #ddd; }
+    .fayno-payment-print__row span { color: #666; }
+    .fayno-payment-print__row strong { max-width: 65%; text-align: right; overflow-wrap: anywhere; }
+    .fayno-payment-print__signatures { display: flex; justify-content: space-between; gap: 24px; margin-top: 42px; padding-top: 12px; }
+    .fayno-payment-print footer { margin-top: 32px; padding-top: 8px; border-top: 1px solid #ddd; color: #777; font-size: 8pt; text-align: center; }
+}
