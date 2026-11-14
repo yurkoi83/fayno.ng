@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap');
+
 
 /*
 |--------------------------------------------------------------------------
@@ -5863,4 +5865,107 @@ button[class*="bg-primary"]:hover {
     color: currentColor !important;
     opacity: 1 !important;
     visibility: visible !important;
+}
+
+
+/* Typography scale aligned with the approved Fayno reference (img_25). */
+#nova [dusk="orders-detail-component"] .fayno-crm {
+    font-family: 'Nunito', sans-serif !important;
+    font-size: 12px;
+    line-height: 1.45;
+}
+
+#nova [dusk="orders-detail-component"] .fayno-crm__breadcrumbs {
+    font-size: 11px !important;
+}
+
+#nova [dusk="orders-detail-component"] .fayno-crm__heading p {
+    font-size: 12px !important;
+}
+
+#nova [dusk="orders-detail-component"] .fayno-crm-card__heading h2 {
+    font-size: 14px !important;
+    line-height: 1.3 !important;
+}
+
+#nova [dusk="orders-detail-component"] .fayno-crm-card__heading > a,
+#nova [dusk="orders-detail-component"] .fayno-crm-card__heading > .fayno-crm-count {
+    font-size: 10px !important;
+}
+
+#nova [dusk="orders-detail-component"] .fayno-crm-parent h3,
+#nova [dusk="orders-detail-component"] .fayno-crm-camp h3 {
+    font-size: 12px !important;
+    line-height: 1.4 !important;
+}
+
+#nova [dusk="orders-detail-component"] .fayno-crm-line p,
+#nova [dusk="orders-detail-component"] .fayno-crm-summary-person strong,
+#nova [dusk="orders-detail-component"] .fayno-crm-summary-person small,
+#nova [dusk="orders-detail-component"] .fayno-crm-camp__copy > p,
+#nova [dusk="orders-detail-component"] .fayno-crm-camp__copy .fayno-crm-line p,
+#nova [dusk="orders-detail-component"] .fayno-crm-detail-value {
+    font-size: 11px !important;
+    line-height: 1.5 !important;
+}
+
+#nova [dusk="orders-detail-component"] .fayno-crm-detail-value > span,
+#nova [dusk="orders-detail-component"] .fayno-crm-detail-value > strong {
+    font-size: 11px !important;
+}
+
+#nova [dusk="orders-detail-component"] .fayno-crm-participant__identity strong,
+#nova [dusk="orders-detail-component"] .fayno-crm-participant__identity small,
+#nova [dusk="orders-detail-component"] .fayno-crm-participant__price {
+    font-size: 12px !important;
+}
+
+#nova [dusk="orders-detail-component"] .fayno-crm-pill,
+#nova [dusk="orders-detail-component"] .fayno-crm-health,
+#nova [dusk="orders-detail-component"] .fayno-crm-payment-status {
+    font-size: 10px !important;
+}
+
+#nova [dusk="orders-detail-component"] .fayno-crm-table th {
+    font-size: 10px !important;
+}
+
+#nova [dusk="orders-detail-component"] .fayno-crm-table td {
+    font-size: 11px !important;
+}
+
+#nova [dusk="orders-detail-component"] .fayno-crm-status strong,
+#nova [dusk="orders-detail-component"] .fayno-crm-money-row strong,
+#nova [dusk="orders-detail-component"] .fayno-crm-person strong,
+#nova [dusk="orders-detail-component"] .fayno-crm-promo > strong {
+    font-size: 12px !important;
+}
+
+#nova [dusk="orders-detail-component"] .fayno-crm-status p,
+#nova [dusk="orders-detail-component"] .fayno-crm-money-row span,
+#nova [dusk="orders-detail-component"] .fayno-crm-person small,
+#nova [dusk="orders-detail-component"] .fayno-crm-manager__message,
+#nova [dusk="orders-detail-component"] .fayno-crm-promo > span {
+    font-size: 10px !important;
+}
+
+#nova [dusk="orders-detail-component"] .fayno-crm-link,
+#nova [dusk="orders-detail-component"] .fayno-crm-action,
+#nova [dusk="orders-detail-component"] .fayno-crm-promo > a {
+    font-size: 11px !important;
+}
+
+/* Keep the dashboard's labels and supporting copy on the same readable scale. */
+#nova .fayno-dashboard {
+    font-size: 13px;
+    line-height: 1.45;
+}
+
+#nova .fayno-dashboard__stat-label,
+#nova .fayno-panel__heading span,
+#nova .fayno-dashboard__table th,
+#nova .fayno-dashboard__table td,
+#nova .fayno-dashboard__alert,
+#nova .fayno-dashboard__shift {
+    font-size: 12px;
 }
