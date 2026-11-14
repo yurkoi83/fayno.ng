@@ -7251,3 +7251,70 @@ button[class*="bg-primary"]:hover {
 @media (max-width: 460px) {
     #nova [dusk="customers-detail-component"] .fayno-customer__contact-grid { grid-template-columns: 1fr; }
 }
+
+
+/*
+|--------------------------------------------------------------------------
+| Customer detail — remove Nova's narrow default panel constraints
+|--------------------------------------------------------------------------
+*/
+#nova [dusk="customers-detail-component"] {
+    display: block !important;
+    width: 100% !important;
+    max-width: none !important;
+}
+#nova [dusk="customers-detail-component"] [dusk$="-panel"]:has(.fayno-customer) {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+}
+#nova [dusk="customers-detail-component"] [dusk$="-panel"]:has(.fayno-customer) > .relative.overflow-hidden.bg-white {
+    width: 100% !important;
+    max-width: none !important;
+    overflow: visible !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+#nova [dusk="customers-detail-component"] [dusk$="-panel"]:has(.fayno-customer) > .relative.overflow-hidden.bg-white > .mt-3.py-2.px-6 {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+#nova [dusk="customers-detail-component"] [dusk$="-panel"]:has(.fayno-customer) .py-4 {
+    width: 100% !important;
+    max-width: none !important;
+    padding: 0 !important;
+    border: 0 !important;
+}
+#nova [dusk="customers-detail-component"] [dusk$="-panel"]:has(.fayno-customer) .py-4 > div:first-child {
+    display: none !important;
+}
+#nova [dusk="customers-detail-component"] [dusk="ComputedField"]:has(.fayno-customer) {
+    display: block !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+#nova [dusk="customers-detail-component"] [dusk="ComputedField"]:has(.fayno-customer) > div:first-child {
+    display: none !important;
+}
+#nova [dusk="customers-detail-component"] [dusk="ComputedField"]:has(.fayno-customer) > div:last-child,
+#nova [dusk="customers-detail-component"] [dusk="ComputedField"]:has(.fayno-customer) > div:last-child > div {
+    display: block !important;
+    width: 100% !important;
+    max-width: none !important;
+    flex: 1 1 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+#nova [dusk="customers-detail-component"] [dusk$="-panel"]:has(.fayno-customer) > div[class~="md:flex"][class~="items-center"][class~="mb-3"] {
+    display: none !important;
+}
+#nova [dusk="customers-detail-component"] .fayno-customer {
+    width: 100% !important;
+    max-width: none !important;
+}
