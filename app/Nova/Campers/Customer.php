@@ -14,7 +14,7 @@ use Laravel\Nova\Fields\Textarea;
 
 class Customer extends Resource
 {
-    public static $model = \\App\\Models\\Customer::class;
+    public static $model = \App\Models\Customer::class;
     public static $title = 'last_name';
     public static $search = ['id', 'first_name', 'last_name', 'phone', 'email'];
     public static $group = 'Батьки';
