@@ -2,6 +2,7 @@ import vue from '@vitejs/plugin-vue';
 import { defineConfig } from 'vite-plus';
 
 export default defineConfig({
+    publicDir: false,
     plugins: [vue()],
     define: {
         'process.env.NODE_ENV': JSON.stringify('production'),
