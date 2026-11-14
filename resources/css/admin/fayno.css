@@ -7487,3 +7487,149 @@ button[class*="bg-primary"]:hover {
         flex-wrap: wrap !important;
     }
 }
+
+
+/* Payment detail page — same shell and typography as the Parents resource. */
+#nova [dusk="payments-detail-component"] {
+    display: block !important;
+    width: 100% !important;
+    max-width: none !important;
+}
+#nova [dusk="payments-detail-component"] [dusk$="-panel"]:has(.fayno-payment) {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+}
+#nova [dusk="payments-detail-component"] [dusk$="-panel"]:has(.fayno-payment) > .relative.overflow-hidden.bg-white {
+    width: 100% !important;
+    max-width: none !important;
+    overflow: visible !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+#nova [dusk="payments-detail-component"] [dusk$="-panel"]:has(.fayno-payment) > .relative.overflow-hidden.bg-white > .mt-3.py-2.px-6 {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+#nova [dusk="payments-detail-component"] [dusk="ComputedField"]:has(.fayno-payment) {
+    display: block !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+#nova [dusk="payments-detail-component"] [dusk="ComputedField"]:has(.fayno-payment) > div:first-child,
+#nova [dusk="payments-detail-component"] [dusk$="-panel"]:has(.fayno-payment) .py-4 > div:first-child,
+#nova [dusk="payments-detail-component"] [dusk$="-panel"]:has(.fayno-payment) > div[class~="md:flex"][class~="items-center"][class~="mb-3"] {
+    display: none !important;
+}
+#nova [dusk="payments-detail-component"] [dusk="ComputedField"]:has(.fayno-payment) > div:last-child,
+#nova [dusk="payments-detail-component"] [dusk="ComputedField"]:has(.fayno-payment) > div:last-child > div {
+    display: block !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+#nova [dusk="payments-detail-component"] header.fayno-crm__heading {
+    position: static !important;
+    display: flex !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 16px !important;
+    padding: 0 0 8px !important;
+    margin: 0 0 2px !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+#nova [dusk="payments-detail-component"] header.fayno-crm__heading::before,
+#nova [dusk="payments-detail-component"] header.fayno-crm__heading::after { content: none !important; display: none !important; }
+#nova [dusk="payments-detail-component"] .fayno-crm__heading-main { min-width: 0 !important; flex: 1 1 auto !important; }
+#nova [dusk="payments-detail-component"] .fayno-crm__breadcrumbs {
+    display: flex !important;
+    align-items: center !important;
+    gap: 9px !important;
+    margin: 0 0 12px !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    color: #8b91b2 !important;
+    font-size: 10px !important;
+}
+#nova [dusk="payments-detail-component"] .fayno-crm__breadcrumbs a {
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    color: #7774ba !important;
+    text-decoration: none !important;
+}
+#nova [dusk="payments-detail-component"] .fayno-crm__title-row { display: flex !important; align-items: center !important; gap: 12px !important; }
+#nova [dusk="payments-detail-component"] .fayno-crm__title-icon {
+    display: grid !important; width: 42px !important; height: 42px !important; flex: 0 0 42px !important;
+    place-items: center !important; border-radius: 12px !important; background: #eeeaff !important; color: #7358d3 !important;
+}
+#nova [dusk="payments-detail-component"] .fayno-crm__title-icon .fayno-icon { width: 21px !important; height: 21px !important; }
+#nova [dusk="payments-detail-component"] header.fayno-crm__heading h1 {
+    margin: 0 !important; color: #252d55 !important; font-size: 25px !important; font-weight: 800 !important; line-height: 1.2 !important;
+}
+#nova [dusk="payments-detail-component"] header.fayno-crm__heading p { margin: 3px 0 0 !important; color: #8b91b2 !important; font-size: 10px !important; }
+#nova [dusk="payments-detail-component"] .fayno-crm__actions {
+    position: static !important; display: flex !important; width: auto !important; height: auto !important;
+    flex: 0 0 auto !important; align-items: center !important; justify-content: flex-end !important;
+    gap: 8px !important; margin: 0 !important; padding: 0 !important; visibility: visible !important; opacity: 1 !important; transform: none !important;
+}
+#nova [dusk="payments-detail-component"] .fayno-crm__actions > .fayno-crm-action {
+    display: inline-flex !important; min-height: 34px !important; align-items: center !important; justify-content: center !important; visibility: visible !important;
+}
+#nova [dusk="payments-detail-component"] .fayno-crm__actions > .fayno-crm-action--primary { background: #7654d2 !important; color: #fff !important; }
+#nova [dusk="payments-detail-component"] .fayno-payment { width: 100% !important; max-width: none !important; color: #343653; }
+#nova [dusk="payments-detail-component"] .fayno-payment-card {
+    overflow: hidden; border: 1px solid #ece9f7; border-radius: 14px; background: #fff;
+    box-shadow: 0 5px 18px rgba(57, 48, 104, .035);
+}
+#nova [dusk="payments-detail-component"] .fayno-payment-card__top {
+    display: flex; align-items: center; justify-content: space-between; gap: 18px;
+    padding: 22px 24px; border-bottom: 1px solid #efedf7; background: linear-gradient(110deg, #fff 0%, #faf9ff 100%);
+}
+#nova [dusk="payments-detail-component"] .fayno-payment-label {
+    display: block; margin-bottom: 7px; color: #9295b0; font-size: 10px; font-weight: 900; letter-spacing: .07em;
+}
+#nova [dusk="payments-detail-component"] .fayno-payment-amount { color: #343653; font-size: 27px; font-weight: 900; line-height: 1.2; }
+#nova [dusk="payments-detail-component"] .fayno-payment-amount small { color: #8589a8; font-size: 13px; font-weight: 800; }
+#nova [dusk="payments-detail-component"] .fayno-payment-status {
+    display: inline-flex; align-items: center; padding: 7px 12px; border-radius: 20px;
+    background: #f0edfa; color: #7654d2; font-size: 10px; font-weight: 900;
+}
+#nova [dusk="payments-detail-component"] .fayno-payment-status.is-success { background: #e4f7ed; color: #209566; }
+#nova [dusk="payments-detail-component"] .fayno-payment-status.is-warning { background: #fff3df; color: #c18a32; }
+#nova [dusk="payments-detail-component"] .fayno-payment-status.is-danger { background: #ffe9eb; color: #d45b69; }
+#nova [dusk="payments-detail-component"] .fayno-payment-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 0; }
+#nova [dusk="payments-detail-component"] .fayno-payment-item {
+    display: flex; min-width: 0; min-height: 68px; flex-direction: column; justify-content: center; gap: 6px;
+    padding: 14px 24px; border-bottom: 1px solid #efedf7;
+}
+#nova [dusk="payments-detail-component"] .fayno-payment-item:nth-child(odd) { border-right: 1px solid #efedf7; }
+#nova [dusk="payments-detail-component"] .fayno-payment-item:nth-last-child(-n+2) { border-bottom: 0; }
+#nova [dusk="payments-detail-component"] .fayno-payment-item > span { color: #9295ae; font-size: 10px; font-weight: 700; }
+#nova [dusk="payments-detail-component"] .fayno-payment-item > strong { overflow-wrap: anywhere; color: #343653; font-size: 12px; font-weight: 800; }
+#nova [dusk="payments-detail-component"] .fayno-payment-item > strong a { color: #7654d2; text-decoration: none; }
+#nova [dusk="payments-detail-component"] .fayno-payment-item > strong a:hover { text-decoration: underline; }
+@media (max-width: 760px) {
+    #nova [dusk="payments-detail-component"] header.fayno-crm__heading { align-items: flex-start !important; flex-direction: column !important; }
+    #nova [dusk="payments-detail-component"] .fayno-crm__actions { width: 100% !important; justify-content: flex-start !important; }
+    #nova [dusk="payments-detail-component"] .fayno-payment-grid { grid-template-columns: minmax(0,1fr); }
+    #nova [dusk="payments-detail-component"] .fayno-payment-item:nth-child(odd) { border-right: 0; }
+    #nova [dusk="payments-detail-component"] .fayno-payment-item:nth-last-child(2) { border-bottom: 1px solid #efedf7; }
+    #nova [dusk="payments-detail-component"] .fayno-payment-card__top { align-items: flex-start; flex-direction: column; }
+}
