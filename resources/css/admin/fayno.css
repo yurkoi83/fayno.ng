@@ -5685,3 +5685,81 @@ button[class*="bg-primary"]:hover {
         padding: 14px;
     }
 }
+
+
+/* Global Nova shell polish after applying the shared Fayno palette. */
+#nova header,
+#nova [dusk="topbar"] {
+    color: var(--fayno-text) !important;
+}
+
+#nova header .text-white,
+#nova header [class~="text-white"],
+#nova [dusk="topbar"] .text-white,
+#nova [dusk="topbar"] [class~="text-white"] {
+    color: var(--fayno-text) !important;
+    -webkit-text-fill-color: var(--fayno-text) !important;
+}
+
+#nova header form,
+#nova [dusk="topbar"] form {
+    margin-left: auto !important;
+}
+
+#nova header input,
+#nova [dusk="topbar"] input {
+    background: #f7f5fc !important;
+    border: 1px solid var(--fayno-border) !important;
+    color: var(--fayno-text) !important;
+}
+
+#nova header input::placeholder,
+#nova [dusk="topbar"] input::placeholder {
+    color: #9aa2ba !important;
+    opacity: 1;
+}
+
+/* Compact, calm navigation; remove the browser-like cyan focus frame. */
+#nova [dusk="sidebar-menu"] a,
+#nova [dusk="sidebar-menu"] button,
+#nova [dusk="sidebar-menu"] [role="button"] {
+    display: flex;
+    min-height: 36px !important;
+    align-items: center;
+    gap: 10px;
+    margin: 2px 0 !important;
+    padding: 7px 11px !important;
+    border: 1px solid transparent !important;
+    border-radius: 10px !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+    background-clip: padding-box;
+}
+
+#nova [dusk="sidebar-menu"] a:focus,
+#nova [dusk="sidebar-menu"] button:focus,
+#nova [dusk="sidebar-menu"] [role="button"]:focus {
+    outline: 0 !important;
+    box-shadow: none !important;
+}
+
+#nova [dusk="sidebar-menu"] a:focus-visible,
+#nova [dusk="sidebar-menu"] button:focus-visible,
+#nova [dusk="sidebar-menu"] [role="button"]:focus-visible {
+    outline: 2px solid rgba(118, 84, 210, .24) !important;
+    outline-offset: 1px;
+}
+
+#nova [dusk="sidebar-menu"] a[aria-current="page"],
+#nova [dusk="sidebar-menu"] a.router-link-active,
+#nova [dusk="sidebar-menu"] .fayno-nav-reference-active {
+    border-color: transparent !important;
+    background: #eee8ff !important;
+    color: #7654d2 !important;
+}
+
+/* Restore the brand area if Nova renders its wordmark with white text classes. */
+#nova [dusk="content"] > div[class*="lg:absolute"][class*="w-60"] > a,
+#nova [dusk="content"] > div[class*="lg:absolute"][class*="w-60"] > div:first-child {
+    color: var(--fayno-text) !important;
+}
