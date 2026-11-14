@@ -7633,3 +7633,44 @@ button[class*="bg-primary"]:hover {
     #nova [dusk="payments-detail-component"] .fayno-payment-item:nth-last-child(2) { border-bottom: 1px solid #efedf7; }
     #nova [dusk="payments-detail-component"] .fayno-payment-card__top { align-items: flex-start; flex-direction: column; }
 }
+
+
+/* Payment detail: split information into clear, independent detail blocks. */
+#nova [dusk="payments-detail-component"] .fayno-payment__sections {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 16px;
+}
+#nova [dusk="payments-detail-component"] .fayno-payment-section {
+    min-width: 0; overflow: hidden; border: 1px solid #ece9f7; border-radius: 14px; background: #fff;
+    box-shadow: 0 5px 18px rgba(57, 48, 104, .035);
+}
+#nova [dusk="payments-detail-component"] .fayno-payment-section__heading {
+    display: flex; align-items: center; gap: 11px; padding: 17px 20px; border-bottom: 1px solid #efedf7;
+    background: #fcfbff;
+}
+#nova [dusk="payments-detail-component"] .fayno-payment-section__icon {
+    display: grid; width: 34px; height: 34px; flex: 0 0 34px; place-items: center; border-radius: 10px;
+    background: #eeeaff; color: #7654d2; font-size: 17px; font-weight: 900;
+}
+#nova [dusk="payments-detail-component"] .fayno-payment-section__heading h2 {
+    margin: 0; color: #343653; font-size: 13px; font-weight: 900; line-height: 1.35;
+}
+#nova [dusk="payments-detail-component"] .fayno-payment-section__heading p {
+    margin: 2px 0 0; color: #9295ae; font-size: 10px;
+}
+#nova [dusk="payments-detail-component"] .fayno-payment-section__grid {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+#nova [dusk="payments-detail-component"] .fayno-payment-section__grid .fayno-payment-item {
+    min-height: 70px; padding: 14px 20px; border-bottom: 1px solid #efedf7;
+}
+#nova [dusk="payments-detail-component"] .fayno-payment-section__grid .fayno-payment-item:nth-child(odd) { border-right: 1px solid #efedf7; }
+#nova [dusk="payments-detail-component"] .fayno-payment-section__grid .fayno-payment-item:last-child,
+#nova [dusk="payments-detail-component"] .fayno-payment-section__grid .fayno-payment-item:nth-last-child(2):nth-child(odd) { border-bottom: 0; }
+@media (max-width: 900px) {
+    #nova [dusk="payments-detail-component"] .fayno-payment__sections { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 560px) {
+    #nova [dusk="payments-detail-component"] .fayno-payment-section__grid { grid-template-columns: minmax(0, 1fr); }
+    #nova [dusk="payments-detail-component"] .fayno-payment-section__grid .fayno-payment-item:nth-child(odd) { border-right: 0; }
+    #nova [dusk="payments-detail-component"] .fayno-payment-section__grid .fayno-payment-item:nth-last-child(2):nth-child(odd) { border-bottom: 1px solid #efedf7; }
+}
