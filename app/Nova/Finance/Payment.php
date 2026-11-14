@@ -79,14 +79,20 @@ class Payment extends Resource
         $html .= '<section class="fayno-payment-card">'
             . '<div class="fayno-payment-card__top"><div><span class="fayno-payment-label">СУМА ПЛАТЕЖУ</span><strong class="fayno-payment-amount">'.e($amount).' <small>'.e($payment->currency ?: '').'</small></strong></div>'
             . '<span class="fayno-payment-status is-'.e($statusClass).'">'.e($status).'</span></div>'
-            . '<div class="fayno-payment-grid">'
+            . '</section>'
+            . '<div class="fayno-payment__sections">'
+            . '<section class="fayno-payment-section"><div class="fayno-payment-section__heading"><span class="fayno-payment-section__icon">₴</span><div><h2>Деталі платежу</h2><p>Основна інформація про оплату</p></div></div>'
+            . '<div class="fayno-payment-section__grid">'
             . $this->detailItem('Ідентифікатор', '#'.$payment->getKey())
             . $this->detailItem('Бронювання', $booking ? '<a href="'.e($bookingUrl).'">№'.e($booking->getKey()).'</a>' : '—', true)
+            . $this->detailItem('Статус', e($status))
+            . '</div></section>'
+            . '<section class="fayno-payment-section"><div class="fayno-payment-section__heading"><span class="fayno-payment-section__icon">↗</span><div><h2>Дані транзакції</h2><p>Спосіб оплати та підтвердження платежу</p></div></div>'
+            . '<div class="fayno-payment-section__grid">'
             . $this->detailItem('Спосіб оплати', $payment->payment_method ?: 'Не вказано')
             . $this->detailItem('ID транзакції', $payment->transaction_id ?: '—')
-            . $this->detailItem('Статус', e($status))
             . $this->detailItem('Дата оплати', $payment->paid_at?->format('d.m.Y H:i') ?: '—')
-            . '</div></section></div>';
+            . '</div></section></div></div>';
 
         return $html;
     }
