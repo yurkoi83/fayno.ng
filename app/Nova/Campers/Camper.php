@@ -45,16 +45,14 @@ class Camper extends Resource
                     ->onlyOnDetail(),
             ]),
 
-            Panel::make(__('nova::resources.Camper'), [
-                BelongsTo::make(__('nova::resources.Parent'), 'customer', Customer::class)->searchable(),
-                Text::make(__('nova::resources.Last name'), 'last_name')->sortable()->rules('required'),
-                Text::make(__('nova::resources.First name'), 'first_name')->sortable()->rules('required'),
-                Text::make(__('nova::resources.Middle name'), 'middle_name')->nullable()->hideFromIndex(),
-                Date::make(__('nova::resources.Birth date'), 'birth_date')->sortable(),
-                Image::make(__('nova::resources.Photo'), 'photo_path')->disk('public')->path('campers')->prunable()->hideFromIndex(),
-                Number::make(__('nova::resources.Gender'), 'gender_id')->nullable()->hideFromIndex(),
-                Textarea::make(__('nova::resources.Notes'), 'notes')->alwaysShow()->hideFromIndex(),
-            ]),
+            BelongsTo::make(__('nova::resources.Parent'), 'customer', Customer::class)->searchable()->onlyOnForms(),
+            Text::make(__('nova::resources.Last name'), 'last_name')->sortable()->rules('required')->onlyOnForms(),
+            Text::make(__('nova::resources.First name'), 'first_name')->sortable()->rules('required')->onlyOnForms(),
+            Text::make(__('nova::resources.Middle name'), 'middle_name')->nullable()->hideFromIndex()->onlyOnForms(),
+            Date::make(__('nova::resources.Birth date'), 'birth_date')->sortable()->onlyOnForms(),
+            Image::make(__('nova::resources.Photo'), 'photo_path')->disk('public')->path('campers')->prunable()->hideFromIndex()->onlyOnForms(),
+            Number::make(__('nova::resources.Gender'), 'gender_id')->nullable()->hideFromIndex()->onlyOnForms(),
+            Textarea::make(__('nova::resources.Notes'), 'notes')->alwaysShow()->hideFromIndex()->onlyOnForms(),
 
         ];
     }
