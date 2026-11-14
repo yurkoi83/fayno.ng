@@ -6562,3 +6562,58 @@ button[class*="bg-primary"]:hover {
     color: #333b62;
     font-weight: 800;
 }
+
+
+/* Reference img_7: soft lavender breadcrumb chip and centered detail title. */
+#nova [dusk$="-detail-component"] .fayno-crm__breadcrumbs {
+    display: inline-flex !important;
+    width: fit-content !important;
+    max-width: 100% !important;
+    align-items: center !important;
+    gap: 9px !important;
+    padding: 7px 12px !important;
+    margin: 0 0 12px !important;
+    border: 1px solid #e9e5fb !important;
+    border-radius: 8px !important;
+    background: #f0edff !important;
+    color: #8580b2 !important;
+    line-height: 1.35 !important;
+}
+
+#nova [dusk$="-detail-component"] .fayno-crm__heading {
+    position: relative !important;
+}
+
+#nova [dusk$="-detail-component"] .fayno-crm__heading-main {
+    width: 100% !important;
+    min-width: 0 !important;
+}
+
+#nova [dusk$="-detail-component"] .fayno-crm__title-row {
+    display: flex !important;
+    justify-content: center !important;
+    text-align: center !important;
+}
+
+#nova [dusk$="-detail-component"] .fayno-crm__title-row > div {
+    text-align: center !important;
+}
+
+#nova [dusk$="-detail-component"] .fayno-crm__actions {
+    position: absolute !important;
+    right: 0 !important;
+    bottom: 8px !important;
+}
+
+@media (max-width: 760px) {
+    #nova [dusk$="-detail-component"] .fayno-crm__actions {
+        position: static !important;
+        width: 100% !important;
+        margin-top: 12px !important;
+    }
+
+    #nova [dusk$="-detail-component"] .fayno-crm__title-row {
+        justify-content: center !important;
+        text-align: center !important;
+    }
+}
