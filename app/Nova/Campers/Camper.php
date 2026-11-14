@@ -13,7 +13,6 @@ use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
-use Laravel\Nova\Panel;
 
 class Camper extends Resource
 {
@@ -39,11 +38,9 @@ class Camper extends Resource
         return [
             ID::make()->sortable()->hideFromDetail()->hideFromIndex(),
 
-            Panel::make('', [
-                Text::make(' ', fn () => $this->detailHtml())
-                    ->asHtml()
-                    ->onlyOnDetail(),
-            ]),
+            Text::make(' ', fn () => $this->detailHtml())
+                ->asHtml()
+                ->onlyOnDetail(),
 
             BelongsTo::make(__('nova::resources.Parent'), 'customer', Customer::class)->searchable()->onlyOnForms(),
             Text::make(__('nova::resources.Last name'), 'last_name')->sortable()->rules('required')->onlyOnForms(),
@@ -91,23 +88,26 @@ class Camper extends Resource
         $editUrl = url('/nova/resources/campers/'.$camper->getKey().'/edit');
         $parentUrl = $customer ? url('/nova/resources/customers/'.$customer->getKey()) : null;
 
-        $html = '<div class="fayno-camper">';
-        $html .= '<div class="fayno-camper__header">'
+        $html = '<div class="fayno-crm fayno-entity-detail fayno-camper">';
+        $html .= '<header class="fayno-crm__heading"><div class="fayno-crm__heading-main">'
             . FaynoBreadcrumbs::render(__('nova::navigation.campers'), $indexUrl, $fullName)
-            . '<div class="fayno-camper__profile">'
+            . '<div class="fayno-crm__title-row"><span class="fayno-crm__title-icon">'.$this->iconSvg('user-round').'</span><div><h1>Кемпер: '.e($fullName).'</h1><p>Профіль учасника · ID '.e((string) $camper->getKey()).'</p></div></div>'
+            . '</div><div class="fayno-crm__actions"><a class="fayno-crm-action fayno-crm-action--primary" href="'.$editUrl.'">'.$this->iconSvg('pencil').' Редагувати</a></div></header>';
+
+        $html .= '<section class="fayno-camper__profile">'
             . '<div class="fayno-camper__avatar">';
         $html .= $photo
             ? '<img src="'.e($photo).'" alt="">'
             : '<span>'.e($this->initials($camper->first_name, $camper->last_name)).'</span>';
         $html .= '</div><div class="fayno-camper__identity">'
-            . '<div class="fayno-camper__name-row"><h1>'.e($fullName).'</h1></div>'
-            . '<p>Учасник табору <span>·</span> ID '.$camper->getKey().'</p>';
+            . '<div class="fayno-camper__name-row"><h2>'.e($fullName).'</h2></div>'
+            . '<p>Учасник табору <span>·</span> ID '.e((string) $camper->getKey()).'</p>';
         if ($customer) {
             $html .= '<a class="fayno-camper__parent-link" href="'.e($parentUrl).'">'.$this->iconSvg('users-round').' Батьки: '.e($parentName).'</a>';
         }
-        $html .= '</div><a class="fayno-camper__edit" href="'.$editUrl.'">'.$this->iconSvg('pencil').' Редагувати</a>'
+        $html .= '</div>'
             . ($age !== null ? '<span class="fayno-camper__age">'.$this->iconSvg('cake').'<strong>'.e($age.' '.($age === 1 ? 'рік' : ($age >= 2 && $age <= 4 ? 'роки' : 'років'))).'</strong></span>' : '')
-            . '</div></header>';
+            . '</section>';
 
         $html .= '<div class="fayno-camper__grid">';
         $html .= '<section class="fayno-camper-card">'
