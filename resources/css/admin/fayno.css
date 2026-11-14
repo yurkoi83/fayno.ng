@@ -5850,3 +5850,17 @@ button[class*="bg-primary"]:hover {
     margin-left: auto !important;
     margin-right: 16px !important;
 }
+
+
+/* Sidebar icon dimensions apply globally, not only to the order detail view. */
+#nova [dusk="sidebar-menu"] .fayno-nav-icon {
+    display: block !important;
+    width: 18px !important;
+    height: 18px !important;
+    min-width: 18px !important;
+    flex: 0 0 18px !important;
+    margin-right: 9px !important;
+    color: currentColor !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
