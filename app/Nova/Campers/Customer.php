@@ -86,13 +86,15 @@ class Customer extends Resource
         $editUrl = url('/nova/resources/customers/'.$customer->getKey().'/edit');
 
         $html = '<div class="fayno-crm fayno-customer">';
-        $html .= '<header class="fayno-crm__heading">'
-            . '<div class="fayno-crm__heading-main">'
-            . FaynoBreadcrumbs::render(__('nova::navigation.parents'), $indexUrl, $fullName)
-            . '<div class="fayno-crm__title-row"><span class="fayno-crm__title-icon">'.$this->iconSvg('users-round').'</span><div><h1>'.e($fullName).'</h1><p>Картка батьків · ID '.$customer->getKey().'</p></div></div>'
-            . '</div><div class="fayno-crm__actions">'
-            . '<a class="fayno-crm-action fayno-crm-action--primary" href="'.$editUrl.'">'.$this->iconSvg('pencil').' Редагувати</a>'
-            . '</div></header>';
+        $html .= FaynoDetailHeader::render(
+            __('nova::navigation.parents'),
+            $indexUrl,
+            $fullName,
+            $this->iconSvg('users-round'),
+            $fullName,
+            'Картка батьків · ID '.$customer->getKey(),
+            '<a class="fayno-crm-action fayno-crm-action--primary" href="'.$editUrl.'">'.$this->iconSvg('pencil').' Редагувати</a>'
+        );
 
         $html .= '<div class="fayno-customer__profile">'
             . '<div class="fayno-customer__avatar">'.e($initials ?: 'FC').'</div>'
