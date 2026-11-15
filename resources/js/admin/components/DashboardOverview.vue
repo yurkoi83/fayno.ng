@@ -43,11 +43,11 @@
                         <thead><tr><th>{{ card.translations.camper }}</th><th>{{ card.translations.campShift }}</th><th>{{ card.translations.dates }}</th><th>{{ card.translations.status }}</th><th>{{ card.translations.amount }}</th></tr></thead>
                         <tbody>
                             <tr v-for="booking in card.bookingsList" :key="booking.id">
-                                <td><strong>{{ booking.camper }}</strong></td>
-                                <td><strong>{{ booking.camp }}</strong><small>{{ booking.shift }}</small></td>
-                                <td>{{ booking.dates }}</td>
-                                <td><span :class="['fayno-booking-status', 'is-' + booking.status]">{{ booking.statusLabel }}</span></td>
-                                <td>{{ money(booking.amount) }}<small>{{ card.translations.paid }}: {{ money(booking.paid) }}</small></td>
+                                <td class="fayno-dashboard__cell-camper"><strong>{{ booking.camper }}</strong></td>
+                                <td class="fayno-dashboard__cell-program"><strong>{{ booking.camp }}</strong><small>{{ booking.shift }}</small></td>
+                                <td class="fayno-dashboard__cell-dates">{{ booking.dates }}</td>
+                                <td class="fayno-dashboard__cell-status"><span :class="['fayno-booking-status', 'is-' + booking.status]">{{ booking.statusLabel }}</span></td>
+                                <td class="fayno-dashboard__cell-amount"><strong>{{ money(booking.amount) }}</strong><small>{{ card.translations.paid }}: {{ money(booking.paid) }}</small></td>
                             </tr>
                             <tr v-if="!card.bookingsList.length"><td colspan="5" class="fayno-dashboard__empty">{{ card.translations.noBookings }}</td></tr>
                         </tbody>
