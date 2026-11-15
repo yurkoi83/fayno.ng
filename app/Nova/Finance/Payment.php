@@ -4,6 +4,7 @@ namespace App\Nova\Finance;
 
 use App\Nova\Resource;
 use App\Nova\Support\FaynoDetailHeader;
+use App\Nova\Support\FaynoNovaUrl;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\DateTime;
@@ -59,9 +60,9 @@ class Payment extends Resource
         $shift = $order?->campShift;
         $camp = $shift?->camp;
 
-        $editUrl = url('/nova/resources/payments/'.$payment->getKey().'/edit');
-        $bookingUrl = $booking ? url('/nova/resources/bookings/'.$booking->getKey()) : null;
-        $orderUrl = $order ? url('/nova/resources/orders/'.$order->getKey()) : null;
+        $editUrl = FaynoNovaUrl::resource('payments', $payment->getKey(), 'edit');
+        $bookingUrl = $booking ? FaynoNovaUrl::resource('bookings', $booking->getKey()) : null;
+        $orderUrl = $order ? FaynoNovaUrl::resource('orders', $order->getKey()) : null;
         $status = (string) ($payment->status ?: '—');
         $statusLabel = match (strtolower($status)) {
             'paid', 'completed', 'success', 'succeeded' => 'Оплачено',
@@ -100,7 +101,7 @@ class Payment extends Resource
         $html = '<div class="fayno-payment">';
         $html .= FaynoDetailHeader::render(
             __('nova::navigation.payments'),
-            url('/nova/resources/payments'),
+            FaynoNovaUrl::resource('payments'),
             'Платіж №'.$payment->getKey(),
             $icon,
             'Деталі платежу №'.$payment->getKey(),
