@@ -3,6 +3,7 @@
 namespace App\Nova\Campers;
 
 use App\Nova\Resource;
+use App\Nova\Support\FaynoNovaUrl;
 use App\Nova\Support\FaynoBreadcrumbs;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -90,9 +91,9 @@ class Camper extends Resource
             ? Storage::disk('public')->url($camper->photo_path)
             : null;
 
-        $indexUrl = url('/nova/resources/campers');
-        $editUrl = url('/nova/resources/campers/'.$camper->getKey().'/edit');
-        $parentUrl = $customer ? url('/nova/resources/customers/'.$customer->getKey()) : null;
+        $indexUrl = FaynoNovaUrl::resource('campers');
+        $editUrl = FaynoNovaUrl::resource('campers', $camper->getKey(), 'edit');
+        $parentUrl = $customer ? FaynoNovaUrl::resource('customers', $customer->getKey()) : null;
 
         $html = '<div class="fayno-camper">';
         $html .= '<div class="fayno-camper__header">'
@@ -157,7 +158,7 @@ class Camper extends Resource
                 $amount = (float) $order->bookings->sum('total_amount');
                 $currency = $order->bookings->first()?->currency ?: 'UAH';
                 $status = $this->statusLabel((string) $order->status);
-                $html .= '<tr><td><a href="'.e(url('/nova/resources/orders/'.$order->getKey())).'">№ '.e($order->number ?: $order->getKey()).'</a>'
+                $html .= '<tr><td><a href="'.e(FaynoNovaUrl::resource('orders', $order->getKey())).'">№ '.e($order->number ?: $order->getKey()).'</a>'
                     . '<small>'.e($order->created_at?->format('d.m.Y') ?: '').'</small></td>'
                     . '<td><strong>'.e($campName).'</strong>'.($shiftName ? '<small>'.e($shiftName).'</small>' : '').'</td>'
                     . '<td>'.e($dates).'</td>'
