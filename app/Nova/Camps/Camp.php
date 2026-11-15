@@ -4,6 +4,7 @@ namespace App\Nova\Camps;
 
 use App\Nova\Resource;
 use App\Nova\Support\FaynoDetailHeader;
+use App\Nova\Support\FaynoNovaUrl;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Nova\Fields\Boolean;
@@ -55,9 +56,8 @@ class Camp extends Resource
         $camp = $this->resource;
         $shifts = $camp->shifts()->orderBy('starts_at')->get();
         $photo = $camp->photo_path ? Storage::disk('public')->url($camp->photo_path) : null;
-        $novaPath = trim((string) config('nova.path', '/nova'), '/');
-        $editUrl = url($novaPath.'/resources/camps/'.$camp->getKey().'/edit');
-        $indexUrl = url($novaPath.'/resources/camps');
+        $editUrl = FaynoNovaUrl::resource('camps', $camp->getKey(), 'edit');
+        $indexUrl = FaynoNovaUrl::resource('camps');
         $ageRange = trim(($camp->min_age !== null ? $camp->min_age : '—').'–'.($camp->max_age !== null ? $camp->max_age : '—'));
 
         $html = '<div class="fayno-crm fayno-entity-detail fayno-camp-detail">';
