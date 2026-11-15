@@ -7837,3 +7837,163 @@ button[class*="bg-primary"]:hover {
 .fayno-dashboard__banner { min-height:112px; border-radius:13px; box-shadow:0 5px 16px rgba(38,74,57,.09); }
 @media (max-width:1100px) { .fayno-dashboard__bottom { grid-template-columns:minmax(0,1fr); } }
 @media (max-width:700px) { .fayno-dashboard__table { min-width:580px; } .fayno-dashboard__table th,.fayno-dashboard__table td { padding-right:8px; padding-left:8px; } .fayno-dashboard__bottom > .fayno-panel > .fayno-panel__heading { padding-right:15px; padding-left:15px; } }
+
+ 
+/* Dashboard applications — make both columns read as complete cards */
+.fayno-applications {
+    align-items: stretch;
+    gap: 20px;
+    padding: 20px 24px 24px;
+}
+.fayno-applications__section {
+    min-width: 0;
+    padding: 20px;
+    border: 1px solid #e7e3f2;
+    border-radius: 15px;
+    background: #fff;
+    box-shadow: 0 4px 16px rgba(55, 45, 100, .055);
+}
+.fayno-applications__heading {
+    align-items: center;
+    gap: 12px;
+    min-height: 48px;
+    margin: 0 0 14px;
+    padding: 0 0 14px;
+    border-bottom: 1px solid #eeecf5;
+}
+.fayno-applications__heading h2 {
+    color: #303653;
+    font-family: 'Nunito', sans-serif;
+    font-size: 16px;
+    font-weight: 900;
+    letter-spacing: -.02em;
+    line-height: 1.25;
+}
+.fayno-applications__heading p {
+    margin-top: 5px;
+    color: #8b8ca7;
+    font-family: 'Nunito', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.4;
+}
+.fayno-applications__count {
+    flex: 0 0 auto;
+    min-width: 29px;
+    height: 29px;
+    border: 1px solid #e9e1ff;
+    background: #f2edff;
+    color: #7655d7;
+    font-size: 11px;
+    font-weight: 900;
+}
+.fayno-applications__count--warning {
+    border-color: #f8e6cb;
+    background: #fff5e8;
+    color: #c17b2d;
+}
+.fayno-applications__list {
+    gap: 8px;
+}
+.fayno-applications .fayno-application {
+    align-items: center;
+    min-width: 0;
+    gap: 12px;
+    padding: 12px;
+    border: 1px solid #efedf6;
+    border-radius: 10px;
+    background: #fcfbff;
+    transition: border-color .16s ease, background .16s ease, box-shadow .16s ease;
+}
+.fayno-applications .fayno-application:hover {
+    border-color: #dcd3f6;
+    background: #faf8ff;
+    box-shadow: 0 3px 10px rgba(85, 65, 145, .055);
+}
+.fayno-applications .fayno-application__title strong {
+    color: #4d4c75;
+    font-family: 'Nunito', sans-serif;
+    font-size: 11px;
+    font-weight: 900;
+}
+.fayno-applications .fayno-application__main p {
+    margin: 6px 0 3px;
+    color: #303653;
+    font-family: 'Nunito', sans-serif;
+    font-size: 12px;
+    font-weight: 900;
+}
+.fayno-applications .fayno-application__main small {
+    display: block;
+    overflow: hidden;
+    max-width: 100%;
+    color: #9695ad;
+    font-family: 'Nunito', sans-serif;
+    font-size: 10px;
+    font-weight: 650;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.fayno-applications .fayno-application time {
+    color: #9695ad;
+    font-family: 'Nunito', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+}
+.fayno-applications .fayno-status {
+    padding: 4px 8px;
+    border: 1px solid #ebe8f2;
+    border-radius: 999px;
+    background: #f3f2f8;
+    color: #77768f;
+    font-family: 'Nunito', sans-serif;
+    font-size: 9px;
+    font-weight: 900;
+    line-height: 1.2;
+}
+.fayno-applications .fayno-status--new,
+.fayno-applications .fayno-status--unanswered {
+    border-color: #f5e2c7;
+    background: #fff5e8;
+    color: #b8792d;
+}
+.fayno-applications .fayno-status--confirmed {
+    border-color: #d8eee2;
+    background: #eff9f3;
+    color: #34865f;
+}
+.fayno-applications .fayno-status--rejected {
+    border-color: #f2dadd;
+    background: #fff2f3;
+    color: #b75c68;
+}
+.fayno-applications__empty {
+    display: flex;
+    min-height: 174px;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 22px;
+    border: 1px dashed #e6e2f0;
+    border-radius: 11px;
+    background: #fcfbff;
+    color: #8586a2;
+    font-family: 'Nunito', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.5;
+    text-align: center;
+}
+.fayno-applications__section--unanswered .fayno-applications__empty {
+    border-color: #f0e8dc;
+    background: #fffdfa;
+}
+@media (max-width: 900px) {
+    .fayno-applications { gap: 14px; }
+}
+@media (max-width: 600px) {
+    .fayno-applications { padding: 14px; }
+    .fayno-applications__section { padding: 15px; }
+    .fayno-applications .fayno-application { align-items: flex-start; }
+    .fayno-applications .fayno-application time { max-width: 82px; text-align: right; white-space: normal; }
+}
