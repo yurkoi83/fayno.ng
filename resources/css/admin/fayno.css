@@ -7997,3 +7997,8 @@ button[class*="bg-primary"]:hover {
     .fayno-applications .fayno-application { align-items: flex-start; }
     .fayno-applications .fayno-application time { max-width: 82px; text-align: right; white-space: normal; }
 }
+
+
+/* Dashboard KPI icons — consistent outlined SVG set */
+.fayno-dashboard__stat-icon { display:grid; place-items:center; line-height:1; }
+.fayno-dashboard__stat-icon svg { display:block; width:21px; height:21px; flex:0 0 21px; stroke:currentColor; }
