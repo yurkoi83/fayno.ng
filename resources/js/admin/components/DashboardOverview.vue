@@ -7,7 +7,12 @@
 
         <section class="fayno-dashboard__stats">
             <article v-for="item in statItems" :key="item.key" class="fayno-dashboard__stat">
-                <span :class="['fayno-dashboard__stat-icon', 'is-' + item.tone]">{{ item.symbol }}</span>
+                <span :class="['fayno-dashboard__stat-icon', 'is-' + item.tone]" aria-hidden="true">
+                    <svg v-if="item.key === 'camps'" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.5 19.5 12 5l8.5 14.5h-17Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9.5 19.5v-5h5v5M12 5V2.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                    <svg v-else-if="item.key === 'bookings'" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3.5" y="5" width="17" height="16" rx="2.5" stroke="currentColor" stroke-width="1.8"/><path d="M7.5 3v4M16.5 3v4M3.5 9.5h17M8 13h3M8 16.5h3M14 13h2.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                    <svg v-else-if="item.key === 'campers'" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="9" cy="8" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M3.5 19v-1.2A4.8 4.8 0 0 1 8.3 13h1.4a4.8 4.8 0 0 1 4.8 4.8V19h-11Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M16 5.5a3 3 0 0 1 0 5.8M17 13.2a4.7 4.7 0 0 1 3.5 4.6V19h-3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                    <svg v-else viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="5.5" width="18" height="14" rx="2.5" stroke="currentColor" stroke-width="1.8"/><path d="M3 9.5h18M7 15h3M16 14.5h1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M16.5 3.5 19 5.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                </span>
                 <div><span class="fayno-dashboard__stat-label">{{ item.label }}</span><strong>{{ item.value }}</strong></div>
             </article>
         </section>
@@ -72,10 +77,10 @@ export default {
     computed: {
         statItems() {
             return [
-                { key: 'camps', label: this.card.translations.activeCamps, value: this.card.stats.camps, tone: 'green', symbol: '⌂' },
-                { key: 'bookings', label: this.card.translations.bookings, value: this.card.stats.bookings, tone: 'blue', symbol: '▣' },
-                { key: 'campers', label: this.card.translations.participants, value: this.card.stats.campers.toLocaleString('uk-UA'), tone: 'purple', symbol: '♧' },
-                { key: 'revenue', label: this.card.translations.receivedPayments, value: this.money(this.card.stats.revenue), tone: 'orange', symbol: '₴' },
+                { key: 'camps', label: this.card.translations.activeCamps, value: this.card.stats.camps, tone: 'green' },
+                { key: 'bookings', label: this.card.translations.bookings, value: this.card.stats.bookings, tone: 'blue' },
+                { key: 'campers', label: this.card.translations.participants, value: this.card.stats.campers.toLocaleString('uk-UA'), tone: 'purple' },
+                { key: 'revenue', label: this.card.translations.receivedPayments, value: this.money(this.card.stats.revenue), tone: 'orange' },
             ];
         },
         chartCoordinates() {
