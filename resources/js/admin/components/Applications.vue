@@ -81,7 +81,7 @@
                 <strong>{{ card.translations.noUnanswered }}</strong>
                 <small>Усі звернення під контролем</small>
             </div>
-            <a class="fayno-applications__footer-link" href="/nova/resources/orders?filters=W3siY2xhc3MiOiJBcHBcXE5vdmFcXEZpbHRlcnNcXE9yZGVyU3RhdHVzRmlsdGVyIiwiY29uZmlndXJhdGlvbiI6eyJzdGF0dXMiOiJuZXcifX1d">
+            <a class="fayno-applications__footer-link" href="/nova/resources/orders">
                 Переглянути заявки <span aria-hidden="true">→</span>
             </a>
         </section>
