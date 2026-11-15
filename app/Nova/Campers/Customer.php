@@ -5,6 +5,7 @@ namespace App\Nova\Campers;
 use App\Enums\OrderStatus;
 use App\Nova\Resource;
 use App\Nova\Support\FaynoDetailHeader;
+use App\Nova\Support\FaynoNovaUrl;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Nova\Fields\ID;
@@ -82,8 +83,8 @@ class Customer extends Resource
             . mb_substr((string) $customer->last_name, 0, 1)
         );
 
-        $indexUrl = url('/nova/resources/customers');
-        $editUrl = url('/nova/resources/customers/'.$customer->getKey().'/edit');
+        $indexUrl = FaynoNovaUrl::resource('customers');
+        $editUrl = FaynoNovaUrl::resource('customers', $customer->getKey(), 'edit');
 
         $html = '<div class="fayno-crm fayno-customer">';
         $html .= FaynoDetailHeader::render(
@@ -138,7 +139,7 @@ class Customer extends Resource
                     : '<span class="fayno-customer__child-avatar">'.$this->iconSvg('user-round').'</span>';
                 $age = $child->birth_date ? $child->birth_date->age.' р.' : 'Вік не вказано';
                 $childOrders = $child->orderCampers()->count();
-                $html .= '<a class="fayno-customer__child" href="'.url('/nova/resources/campers/'.$child->getKey()).'">'
+                $html .= '<a class="fayno-customer__child" href="'.FaynoNovaUrl::resource('campers', $child->getKey()).'">'
                     . $avatar.'<span class="fayno-customer__child-main"><strong>'.e($childName ?: 'Без імені').'</strong><small>'.e($age).'</small></span>'
                     . '<span class="fayno-customer__child-orders">'.$childOrders.' '.e($this->plural($childOrders, 'заявка', 'заявки', 'заявок')).'</span>'
                     . '<span class="fayno-customer__arrow">›</span></a>';
@@ -167,13 +168,13 @@ class Customer extends Resource
                 $statusClass = $this->statusClass((string) $order->status);
                 $orderNumber = $order->number ?: '#'.$order->getKey();
 
-                $html .= '<tr><td><a class="fayno-customer__order-number" href="'.url('/nova/resources/orders/'.$order->getKey()).'">'.e($orderNumber).'</a></td>'
+                $html .= '<tr><td><a class="fayno-customer__order-number" href="'.FaynoNovaUrl::resource('orders', $order->getKey()).'">'.e($orderNumber).'</a></td>'
                     . '<td><span class="fayno-customer__order-children">'.e($orderChildren->implode(', ') ?: '—').'</span></td>'
                     . '<td>'.e($campLabel).'</td>'
                     . '<td>'.e($order->created_at?->format('d.m.Y') ?: '—').'</td>'
                     . '<td><span class="fayno-customer__status is-'.e($statusClass).'">'.e($status).'</span></td>'
                     . '<td class="is-amount"><strong>'.e($this->money($amount, $currency)).'</strong></td>'
-                    . '<td><a class="fayno-customer__open" href="'.url('/nova/resources/orders/'.$order->getKey()).'" aria-label="Відкрити заявку">›</a></td></tr>';
+                    . '<td><a class="fayno-customer__open" href="'.FaynoNovaUrl::resource('orders', $order->getKey()).'" aria-label="Відкрити заявку">›</a></td></tr>';
             }
             $html .= '</tbody></table></div>';
         }
