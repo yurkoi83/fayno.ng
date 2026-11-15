@@ -2,7 +2,8 @@
     <div class="fayno-applications">
         <section class="fayno-applications__section">
             <div class="fayno-applications__heading">
-                <div>
+                <div class="fayno-applications__heading-copy">
+                    <span class="fayno-applications__eyebrow">CRM · INBOX</span>
                     <h2>{{ card.translations.recentTitle }}</h2>
                     <p>{{ card.translations.recentDescription }}</p>
                 </div>
@@ -10,9 +11,10 @@
             </div>
 
             <div v-if="card.recentOrders.length" class="fayno-applications__list">
-                <article
+                <a
                     v-for="order in card.recentOrders"
                     :key="order.id"
+                    :href="`/nova/resources/orders/${order.id}`"
                     class="fayno-application"
                 >
                     <div class="fayno-application__main">
@@ -25,15 +27,26 @@
                         <p>{{ order.customer || card.translations.noCustomer }}</p>
                         <small>{{ [order.camp, order.shift].filter(Boolean).join(' · ') }}</small>
                     </div>
-                    <time>{{ order.createdAt }}</time>
-                </article>
+                    <div class="fayno-application__meta">
+                        <time>{{ order.createdAt }}</time>
+                        <span class="fayno-application__open" aria-hidden="true">↗</span>
+                    </div>
+                </a>
             </div>
-            <p v-else class="fayno-applications__empty">{{ card.translations.noApplications }}</p>
+            <div v-else class="fayno-applications__empty-state">
+                <span class="fayno-applications__empty-icon">✓</span>
+                <strong>{{ card.translations.noApplications }}</strong>
+                <small>Нові заявки від батьків з’являться тут</small>
+            </div>
+            <a class="fayno-applications__footer-link" href="/nova/resources/orders">
+                Усі заявки <span aria-hidden="true">→</span>
+            </a>
         </section>
 
         <section class="fayno-applications__section fayno-applications__section--unanswered">
             <div class="fayno-applications__heading">
-                <div>
+                <div class="fayno-applications__heading-copy">
+                    <span class="fayno-applications__eyebrow">ПІД КОНТРОЛЕМ</span>
                     <h2>{{ card.translations.unansweredTitle }}</h2>
                     <p>{{ card.translations.unansweredDescription }}</p>
                 </div>
@@ -43,9 +56,10 @@
             </div>
 
             <div v-if="card.unansweredOrders.length" class="fayno-applications__list">
-                <article
+                <a
                     v-for="order in card.unansweredOrders"
                     :key="order.id"
+                    :href="`/nova/resources/orders/${order.id}`"
                     class="fayno-application"
                 >
                     <div class="fayno-application__main">
@@ -60,9 +74,16 @@
                         <time>{{ order.createdAt }}</time>
                         <strong>{{ order.waiting }}</strong>
                     </div>
-                </article>
+                </a>
             </div>
-            <p v-else class="fayno-applications__empty">{{ card.translations.noUnanswered }}</p>
+            <div v-else class="fayno-applications__empty-state fayno-applications__empty-state--success">
+                <span class="fayno-applications__empty-icon">✓</span>
+                <strong>{{ card.translations.noUnanswered }}</strong>
+                <small>Усі звернення під контролем</small>
+            </div>
+            <a class="fayno-applications__footer-link" href="/nova/resources/orders?filters=W3siY2xhc3MiOiJBcHBcXE5vdmFcXEZpbHRlcnNcXE9yZGVyU3RhdHVzRmlsdGVyIiwiY29uZmlndXJhdGlvbiI6eyJzdGF0dXMiOiJuZXcifX1d">
+                Переглянути заявки <span aria-hidden="true">→</span>
+            </a>
         </section>
     </div>
 </template>
