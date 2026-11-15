@@ -9,6 +9,7 @@ use App\Nova\Camps\CampShift as CampShiftResource;
 use App\Nova\Campers\Customer as CustomerResource;
 use App\Nova\Resource;
 use App\Nova\Support\FaynoDetailHeader;
+use App\Nova\Support\FaynoNovaUrl;
 use App\Nova\Users\User as UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -203,8 +204,8 @@ class Order extends Resource
         $statusLabel = $this->statusLabel((string) $order->status);
         $statusDescription = $this->statusDescription((string) $order->status);
         $statusClass = $this->statusClass((string) $order->status);
-        $editUrl = url('/nova/resources/orders/'.$order->getKey().'/edit');
-        $indexUrl = url('/nova/resources/orders');
+        $editUrl = FaynoNovaUrl::resource('orders', $order->getKey(), 'edit');
+        $indexUrl = FaynoNovaUrl::resource('orders');
 
         $html = '<div class="fayno-crm">';
         $orderTitle = 'Заявка #'.($order->number ?: $order->getKey());
@@ -296,7 +297,7 @@ class Order extends Resource
         $html .= '</section>';
 
         $html .= '<section class="fayno-crm-card fayno-crm-payments">'
-            . $this->cardHeading('credit-card', 'Платежі', '<a href="/nova/resources/payments">Усі платежі →</a>');
+            . $this->cardHeading('credit-card', 'Платежі', '<a href="'.e(FaynoNovaUrl::resource('payments')).'">Усі платежі →</a>');
         if ($payments->isEmpty()) {
             $html .= '<p class="fayno-crm-muted">Платежів ще немає</p>';
         } else {
@@ -340,7 +341,7 @@ class Order extends Resource
             . '<div class="fayno-crm-finance__total"><strong>'.e($this->money($total, $currency)).'</strong><span class="fayno-crm-payment-status '.($balance <= 0 && $total > 0 ? 'is-paid' : 'is-pending').'">'.($balance <= 0 && $total > 0 ? '✓ Оплачено' : 'Очікує оплати').'</span></div>'
             . '<div class="fayno-crm-money-row"><span>До сплати</span><strong>'.e($this->money($balance, $currency)).'</strong></div>'
             . '<div class="fayno-crm-progress"><span style="width:'.$progress.'%"></span></div>'
-            . '<a class="fayno-crm-link" href="/nova/resources/payments">Деталі платежів →</a></section>';
+            . '<a class="fayno-crm-link" href="'.e(FaynoNovaUrl::resource('payments')).'">Деталі платежів →</a></section>';
 
         $html .= '<section class="fayno-crm-card fayno-crm-manager">'
             . $this->cardHeading('user-round', 'Менеджер')
