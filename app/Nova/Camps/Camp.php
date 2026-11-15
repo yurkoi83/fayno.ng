@@ -55,8 +55,9 @@ class Camp extends Resource
         $camp = $this->resource;
         $shifts = $camp->shifts()->orderBy('starts_at')->get();
         $photo = $camp->photo_path ? Storage::disk('public')->url($camp->photo_path) : null;
-        $editUrl = url('/nova/resources/camps/'.$camp->getKey().'/edit');
-        $indexUrl = url('/nova/resources/camps');
+        $novaPath = trim((string) config('nova.path', '/nova'), '/');
+        $editUrl = url($novaPath.'/resources/camps/'.$camp->getKey().'/edit');
+        $indexUrl = url($novaPath.'/resources/camps');
         $ageRange = trim(($camp->min_age !== null ? $camp->min_age : '—').'–'.($camp->max_age !== null ? $camp->max_age : '—'));
 
         $html = '<div class="fayno-crm fayno-entity-detail fayno-camp-detail">';
